@@ -1,0 +1,39 @@
+$screen-md: 1200px;
+$screen-sm: 992px;
+$screen-xs: 768px;
+
+$dark_color: #212121;
+$blue_green_color: #126585;
+$beige_color: #fafafa;
+
+.dark-color {
+    color: $dark_color;
+}
+
+.dark-color-background {
+    background-color: $dark_color;
+}
+
+.blue-green-color {
+    color: $blue_green_color;
+}
+
+.blue-green-color-background {
+    background-color: $blue_green_color;
+}
+
+.beige-color {
+    color: $beige_color;
+}
+
+.beige-background {
+    background-color: $beige_color;
+}
+
+.white-color {
+    color: white;
+}
+
+.white-color-background {
+    background-color: white;
+}

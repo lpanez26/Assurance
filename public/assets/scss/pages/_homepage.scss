@@ -1,0 +1,181 @@
+.intro-section {
+    position: relative;
+    .absolute-container {
+        @include vertical-horizontal-align(absolute);
+        picture {
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.easy-fast-efficient-section {
+    .line {
+        width: 2px;
+        height: 100%;
+        background-color: black;
+        position: absolute;
+        top: 0;
+        right: 0;
+        .bullet {
+            width: 15px;
+            height: 15px;
+            border: 2px solid white;
+            background-color: black;
+            @include vertical-horizontal-align(absolute);
+            @include rounded(50%);
+        }
+    }
+}
+
+.dentist-or-patient-section {
+    .inline-block-top {
+        picture {
+            img {
+                width: 100%;
+            }
+        }
+        &:hover {
+            .hidden-container {
+                opacity: 1;
+            }
+        }
+        .hidden-container {
+            position: absolute;
+            display: block;
+            background-color: rgba(18,101,133, 0.7);
+            width: calc(100% - 15px);
+            top: 0;
+            height: 100%;
+            opacity: 0;
+            overflow: hidden;
+            @include simple_transition(.3s);
+            a {
+                @include vertical-horizontal-align(absolute);
+            }
+        }
+        &.right {
+            .hidden-container {
+                right: 0;
+                @include rounded(4px 0 0 4px);
+            }
+        }
+        &.left {
+            .hidden-container {
+                left: 0;
+                @include rounded(0 4px 4px 0);
+            }
+        }
+    }
+}
+
+.section-with-background-shield {
+    background-image: url(/assets/uploads/shield-background.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    .custom-container {
+        figure {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            width: calc(50% - 30px);
+        }
+        .line-and-bullet {
+            width: 60px;
+            .line {
+                width: 2px;
+                margin: 0 auto;
+                height: 100%;
+                background-color: black;
+                position: relative;
+                .bullet {
+                    width: 15px;
+                    height: 15px;
+                    border: 2px solid white;
+                    background-color: black;
+                    @include vertical-horizontal-align(absolute);
+                    @include rounded(50%);
+                }
+            }
+        }
+        .content {
+            width: calc(50% - 30px);
+            position: relative;
+            .wrapper {
+                width: 80%;
+                @include vertical-horizontal-align(absolute);
+            }
+        }
+    }
+}
+
+.testimonials-section {
+    picture {
+        &:after {
+            content: url(/assets/uploads/quote-bg.svg);
+            position: absolute;
+            top: 20%;
+            left: 100%;
+            width: 150px;
+        }
+    }
+    .testimonials-slider {
+        .single-testimonial {
+            padding: 0 15px;
+            height: auto;
+            .description {
+                font-size: 20px;
+                color: #3e3e3e;
+                font-style: italic;
+                padding-bottom: 25px;
+            }
+            .img-title-job {
+                min-height: 70px;
+                figure {
+                    border: 2px solid #000;
+                    width: 65px;
+                    height: 65px;
+                    overflow: hidden;
+                    position: relative;
+                    @include rounded(50%);
+                    img {
+                        @include vertical-horizontal-align(absolute);
+                    }
+                }
+                .title-job {
+                    width: calc(100% - 65px);
+                    padding-left: 10px;
+                    .title {
+                        font-size: 25px;
+                        font-family: 'Calibri-Bold';
+                    }
+                    .job {
+                        color: #777777;
+                        font-size: 16px;
+                        font-family: 'Calibri Light';
+                    }
+                }
+            }
+        }
+    }
+}
+
+.start-smart-today-section {
+    form {
+        .form-row {
+            padding-bottom: 15px;
+            input, select {
+                display: block;
+                padding: 0 10px;
+                font-size: 18px;
+                border: 1px solid #ccc;
+                width: calc(100% - 10px);
+                margin-left: 5px;
+                margin-right: 5px;
+                height: 40px;
+                max-width: none;
+                @include rounded(4px);
+            }
+        }
+    }
+}

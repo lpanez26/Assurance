@@ -1,0 +1,24 @@
+footer {
+    hr {
+        border-width: 2px;
+        border-color: #e4e4e4;
+        margin-top: 60px;
+        margin-bottom: 60px;
+    }
+    nav {
+        text-align: center;
+        ul {
+            li {
+                img {
+                    display: block;
+                    margin: 0 auto;
+                }
+            }
+        }
+    }
+    .bottom-text {
+        a {
+            text-decoration: underline;
+        }
+    }
+}
