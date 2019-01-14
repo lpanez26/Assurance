@@ -42,9 +42,9 @@
             </figure>
             <nav class="col-xs-9 inline-block">
                 <ul itemscope="" itemtype="http://schema.org/SiteNavigationElement">
-                    <li class="inline-block @if(!empty(Route::current())) @if(Route::current()->getName() == "patients") active @endif @endif"><a href="" itemprop="url"><span itemprop="name">For Patients</span></a></li>
+                    <li class="inline-block @if(!empty(Route::current())) @if(Route::current()->getName() == "home") active @endif @endif"><a href="{{route('home')}}" itemprop="url"><span itemprop="name">Dentists</span></a></li>
                     <li class="inline-block">|</li>
-                    <li class="inline-block @if(!empty(Route::current())) @if(Route::current()->getName() == "home") active @endif @endif"><a href="" itemprop="url"><span itemprop="name">For Dentists</span></a></li>
+                    <li class="inline-block @if(!empty(Route::current())) @if(Route::current()->getName() == "patients") active @endif @endif"><a href="{{route('patients')}}" itemprop="url"><span itemprop="name">Patients</span></a></li>
                     <li class="inline-block">
                         <a href="" itemprop="url" class="blue-green-white-btn sign-in"><span itemprop="name">SIGN IN</span></a>
                     </li>
@@ -89,6 +89,14 @@
         </div>
     </div>
 </footer>
+{{--//Show the sticky calculate button only for dentists--}}
+@if(!empty(Route::current()) && Route::current()->getName() == 'home')
+    <figure class="fixed-calculate-button" itemscope="" itemtype="http://schema.org/ImageObject">
+        <a href="javascript:void(0);" class="open-calculator">
+            <img alt="Sticky calculator button" itemprop="contentUrl" src="/assets/uploads/sticky-calculator-button.png"/>
+        </a>
+    </figure>
+@endif
 <script src="/assets/js/basic.js"></script>
 <script src="/dist/js/front-libs-script.js?v=1.0.14"></script>
 @yield("script_block")

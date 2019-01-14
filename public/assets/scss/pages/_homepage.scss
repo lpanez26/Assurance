@@ -1,111 +1,20 @@
-.intro-section {
-    position: relative;
-    .absolute-container {
-        @include vertical-horizontal-align(absolute);
-        picture {
-            img {
-                width: 100%;
-            }
-        }
-    }
-}
-
-.easy-fast-efficient-section {
-    .line {
-        width: 2px;
-        height: 100%;
-        background-color: black;
-        position: absolute;
-        top: 0;
-        right: 0;
-        .bullet {
-            width: 15px;
-            height: 15px;
-            border: 2px solid white;
-            background-color: black;
-            @include vertical-horizontal-align(absolute);
-            @include rounded(50%);
-        }
-    }
-}
-
-.dentist-or-patient-section {
-    .inline-block-top {
-        picture {
-            img {
-                width: 100%;
-            }
-        }
-        &:hover {
+body.home {
+    .dentist-or-patient-section {
+        .inline-block-top.left {
             .hidden-container {
                 opacity: 1;
-            }
-        }
-        .hidden-container {
-            position: absolute;
-            display: block;
-            background-color: rgba(18,101,133, 0.7);
-            width: calc(100% - 15px);
-            top: 0;
-            height: 100%;
-            opacity: 0;
-            overflow: hidden;
-            @include simple_transition(.3s);
-            a {
-                @include vertical-horizontal-align(absolute);
-            }
-        }
-        &.right {
-            .hidden-container {
-                right: 0;
-                @include rounded(4px 0 0 4px);
-            }
-        }
-        &.left {
-            .hidden-container {
-                left: 0;
-                @include rounded(0 4px 4px 0);
-            }
-        }
-    }
-}
-
-.section-with-background-shield {
-    background-image: url(/assets/uploads/shield-background.svg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    .custom-container {
-        figure {
-            padding-top: 20px;
-            padding-bottom: 20px;
-            width: calc(50% - 30px);
-        }
-        .line-and-bullet {
-            width: 60px;
-            .line {
-                width: 2px;
-                margin: 0 auto;
-                height: 100%;
-                background-color: black;
-                position: relative;
-                .bullet {
-                    width: 15px;
-                    height: 15px;
-                    border: 2px solid white;
-                    background-color: black;
-                    @include vertical-horizontal-align(absolute);
-                    @include rounded(50%);
+                .hidden-label {
+                    display: block;
+                }
+                a {
+                    display: none;
                 }
             }
         }
-        .content {
-            width: calc(50% - 30px);
-            position: relative;
-            .wrapper {
-                width: 80%;
-                @include vertical-horizontal-align(absolute);
-            }
-        }
+    }
+    .fixed-calculate-button {
+        bottom: 0;
+        @include horizontal-align(fixed);
     }
 }
 

@@ -58,6 +58,12 @@
   src: url("/assets/fonts/Lato-Light.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/Lato-Light.woff2") format("woff2"), url("/assets/fonts/Lato-Light.woff") format("woff"), url("/assets/fonts/Lato-Light.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
+@font-face {
+  font-family: "Calibri-Regular";
+  src: url("/assets/fonts/Calibri.eot");
+  src: url("/assets/fonts/Calibri.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/Calibri.woff2") format("woff2"), url("/assets/fonts/Calibri.woff") format("woff"), url("/assets/fonts/Calibri.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
 .lato-semibold {
   font-family: "Lato-Semibold"; }
 
@@ -4180,6 +4186,51 @@ input[type='file'].hide-input {
 
 .slick-slider .slick-slide:focus {
   outline: -webkit-focus-ring-color auto 5px; }
+.slick-slider .slick-prev {
+  position: absolute;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-image: url(/assets/images/right-arrow.svg);
+  background-size: auto 100%;
+  z-index: 3;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+  display: block;
+  font-size: 0;
+  border: 0;
+  cursor: pointer; }
+  @media screen and (max-width: 1199px) {
+    .slick-slider .slick-prev {
+      left: -15px; } }
+.slick-slider .slick-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-image: url(/assets/images/left-arrow.svg);
+  right: -30px;
+  z-index: 3;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 30px;
+  height: 30px;
+  display: block;
+  font-size: 0;
+  border: 0;
+  cursor: pointer; }
+  @media screen and (max-width: 1199px) {
+    .slick-slider .slick-next {
+      right: -15px; } }
+.slick-slider.second-type-arrows .slick-prev {
+  background-image: url(/assets/images/slider-left-arrow.svg);
+  background-size: 100%;
+  width: 40px; }
+.slick-slider.second-type-arrows .slick-next {
+  background-image: url(/assets/images/slider-right-arrow.svg);
+  background-size: 100%;
+  width: 40px; }
 
 * {
   outline: none;
@@ -4334,46 +4385,6 @@ fieldset {
   .container {
     width: 95%;
     max-width: 1700px; } }
-.slick-prev {
-  position: absolute;
-  left: -30px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: url(/assets/images/right-arrow.svg);
-  background-size: auto 100%;
-  z-index: 3;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 30px;
-  height: 30px;
-  display: block;
-  font-size: 0;
-  border: 0;
-  cursor: pointer; }
-  @media screen and (max-width: 1199px) {
-    .slick-prev {
-      left: -15px; } }
-
-.slick-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: url(/assets/images/left-arrow.svg);
-  right: -30px;
-  background-size: auto 100%;
-  z-index: 3;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 30px;
-  height: 30px;
-  display: block;
-  font-size: 0;
-  border: 0;
-  cursor: pointer; }
-  @media screen and (max-width: 1199px) {
-    .slick-next {
-      right: -15px; } }
-
 .bootbox.calculator-popup .bootbox-close-button {
   font-size: 45px;
   margin-top: -20px;
@@ -4472,6 +4483,37 @@ fieldset {
       padding-left: 20px;
       padding-right: 20px; }
 
+input[type='text'] {
+  width: 100%;
+  padding: 12px 15px;
+  background-color: white;
+  font-size: 16px;
+  font-family: Calibri;
+  border: 0;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 2px 10px 0 rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 2px 10px 0 rgba(0, 0, 0, 0.2);
+  -ms-box-shadow: 0px 2px 10px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 10px 0 rgba(0, 0, 0, 0.2);
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s; }
+  input[type='text'].green-arrow-background {
+    background-image: url(/assets/images/green-arrow-rounded.png);
+    background-repeat: no-repeat;
+    background-size: 22px;
+    background-position: center right 10px; }
+  input[type='text']:focus {
+    -webkit-box-shadow: 0px 2px 10px 0 #679dca;
+    -moz-box-shadow: 0px 2px 10px 0 #679dca;
+    -ms-box-shadow: 0px 2px 10px 0 #679dca;
+    box-shadow: 0px 2px 10px 0 #679dca; }
+
 .white-blue-green-btn {
   font-size: 20px;
   color: white;
@@ -4540,14 +4582,136 @@ fieldset {
   .white-transparent-btn:focus {
     color: white; }
 
-header {
+.module.dentist-or-patient-section .inline-block-top picture img {
+  width: 100%; }
+.module.dentist-or-patient-section .inline-block-top:hover .hidden-container {
+  opacity: 1; }
+.module.dentist-or-patient-section .inline-block-top .hidden-container {
+  position: absolute;
+  display: block;
+  background-color: rgba(18, 101, 133, 0.7);
+  width: calc(100% - 15px);
+  top: 0;
+  height: 100%;
+  opacity: 0;
+  overflow: hidden;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s; }
+  .module.dentist-or-patient-section .inline-block-top .hidden-container a {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+  .module.dentist-or-patient-section .inline-block-top .hidden-container .hidden-label {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+    .module.dentist-or-patient-section .inline-block-top .hidden-container .hidden-label:hover {
+      color: white;
+      background-color: transparent; }
+.module.dentist-or-patient-section .inline-block-top.right .hidden-container {
+  right: 0;
+  -webkit-border-radius: 4px 0 0 4px;
+  -moz-border-radius: 4px 0 0 4px;
+  -ms-border-radius: 4px 0 0 4px;
+  border-radius: 4px 0 0 4px; }
+.module.dentist-or-patient-section .inline-block-top.left .hidden-container {
+  left: 0;
+  -webkit-border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
+  -ms-border-radius: 0 4px 4px 0;
+  border-radius: 0 4px 4px 0; }
+.module.intro-section {
+  position: relative; }
+  .module.intro-section .absolute-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+    .module.intro-section .absolute-container picture img {
+      width: 100%; }
+.module.easy-fast-steps-section .line {
+  width: 2px;
+  height: 100%;
+  background-color: black;
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0; }
+  .module.easy-fast-steps-section .line .bullet {
+    width: 15px;
+    height: 15px;
+    border: 2px solid white;
+    background-color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%; }
+.module.section-ideal-use-cases.background {
+  background-image: url(/assets/uploads/shield-background.svg);
+  background-repeat: no-repeat;
+  background-size: cover; }
+.module.section-ideal-use-cases .custom-container figure {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: calc(50% - 30px); }
+.module.section-ideal-use-cases .custom-container .line-and-bullet {
+  width: 60px; }
+  .module.section-ideal-use-cases .custom-container .line-and-bullet .line {
+    width: 2px;
+    margin: 0 auto;
+    height: 100%;
+    background-color: black;
+    position: relative; }
+    .module.section-ideal-use-cases .custom-container .line-and-bullet .line .bullet {
+      width: 15px;
+      height: 15px;
+      border: 2px solid white;
+      background-color: black;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      border-radius: 50%; }
+.module.section-ideal-use-cases .custom-container .content {
+  width: calc(50% - 30px);
+  position: relative; }
+  .module.section-ideal-use-cases .custom-container .content .wrapper {
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+
+header {
   width: 100%;
   height: 70px;
   z-index: 100;
-  background-color: rgba(255, 255, 255, 0.7); }
+  background-color: rgba(255, 255, 255, 0.7);
+  position: relative; }
   header > .container {
     position: absolute;
     top: 50%;
@@ -4588,121 +4752,19 @@ footer nav {
 footer .bottom-text a {
   text-decoration: underline; }
 
-.intro-section {
-  position: relative; }
-  .intro-section .absolute-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%); }
-    .intro-section .absolute-container picture img {
-      width: 100%; }
-
-.easy-fast-efficient-section .line {
-  width: 2px;
-  height: 100%;
-  background-color: black;
-  position: absolute;
-  top: 0;
-  right: 0; }
-  .easy-fast-efficient-section .line .bullet {
-    width: 15px;
-    height: 15px;
-    border: 2px solid white;
-    background-color: black;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    border-radius: 50%; }
-
-.dentist-or-patient-section .inline-block-top picture img {
-  width: 100%; }
-.dentist-or-patient-section .inline-block-top:hover .hidden-container {
+body.home .dentist-or-patient-section .inline-block-top.left .hidden-container {
   opacity: 1; }
-.dentist-or-patient-section .inline-block-top .hidden-container {
-  position: absolute;
-  display: block;
-  background-color: rgba(18, 101, 133, 0.7);
-  width: calc(100% - 15px);
-  top: 0;
-  height: 100%;
-  opacity: 0;
-  overflow: hidden;
-  -webkit-transition: 0.3s;
-  -moz-transition: 0.3s;
-  -o-transition: 0.3s;
-  -ms-transition: 0.3s;
-  transition: 0.3s; }
-  .dentist-or-patient-section .inline-block-top .hidden-container a {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%); }
-.dentist-or-patient-section .inline-block-top.right .hidden-container {
-  right: 0;
-  -webkit-border-radius: 4px 0 0 4px;
-  -moz-border-radius: 4px 0 0 4px;
-  -ms-border-radius: 4px 0 0 4px;
-  border-radius: 4px 0 0 4px; }
-.dentist-or-patient-section .inline-block-top.left .hidden-container {
-  left: 0;
-  -webkit-border-radius: 0 4px 4px 0;
-  -moz-border-radius: 0 4px 4px 0;
-  -ms-border-radius: 0 4px 4px 0;
-  border-radius: 0 4px 4px 0; }
-
-.section-with-background-shield {
-  background-image: url(/assets/uploads/shield-background.svg);
-  background-repeat: no-repeat;
-  background-size: cover; }
-  .section-with-background-shield .custom-container figure {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    width: calc(50% - 30px); }
-  .section-with-background-shield .custom-container .line-and-bullet {
-    width: 60px; }
-    .section-with-background-shield .custom-container .line-and-bullet .line {
-      width: 2px;
-      margin: 0 auto;
-      height: 100%;
-      background-color: black;
-      position: relative; }
-      .section-with-background-shield .custom-container .line-and-bullet .line .bullet {
-        width: 15px;
-        height: 15px;
-        border: 2px solid white;
-        background-color: black;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -webkit-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        -ms-border-radius: 50%;
-        border-radius: 50%; }
-  .section-with-background-shield .custom-container .content {
-    width: calc(50% - 30px);
-    position: relative; }
-    .section-with-background-shield .custom-container .content .wrapper {
-      width: 80%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%); }
+  body.home .dentist-or-patient-section .inline-block-top.left .hidden-container .hidden-label {
+    display: block; }
+  body.home .dentist-or-patient-section .inline-block-top.left .hidden-container a {
+    display: none; }
+body.home .fixed-calculate-button {
+  bottom: 0;
+  position: fixed;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%); }
 
 .testimonials-section picture:after {
   content: url(/assets/uploads/quote-bg.svg);
@@ -4764,5 +4826,108 @@ footer .bottom-text a {
     -moz-border-radius: 4px;
     -ms-border-radius: 4px;
     border-radius: 4px; }
+
+body.patients .dentist-or-patient-section .inline-block-top.right .hidden-container {
+  opacity: 1; }
+  body.patients .dentist-or-patient-section .inline-block-top.right .hidden-container .hidden-label {
+    display: block; }
+  body.patients .dentist-or-patient-section .inline-block-top.right .hidden-container a {
+    display: none; }
+
+.slider-section .support-guide-slider .single-slide {
+  padding-left: 20px;
+  padding-right: 20px; }
+  .slider-section .support-guide-slider .single-slide figure {
+    background-color: white;
+    -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    -ms-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px; }
+  .slider-section .support-guide-slider .single-slide .number {
+    font-size: 34px;
+    font-family: 'Calibri-Bold';
+    padding-top: 5px;
+    color: black;
+    border-bottom: 1px solid #6d6d6d; }
+  .slider-section .support-guide-slider .single-slide .description {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    position: relative; }
+    .slider-section .support-guide-slider .single-slide .description .wrapper {
+      padding: 15px;
+      background-color: #f2f2f2;
+      font-size: 16px;
+      color: black;
+      min-height: 125px;
+      -webkit-box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.2);
+      -ms-box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.2); }
+    .slider-section .support-guide-slider .single-slide .description .custom-triangle {
+      width: 0;
+      height: 0;
+      border-left: 11px solid transparent;
+      border-right: 11px solid transparent;
+      border-bottom: 11px solid black;
+      position: absolute;
+      top: -2px;
+      left: 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      transform: rotate(45deg); }
+    .slider-section .support-guide-slider .single-slide .description .custom-circle {
+      width: 13px;
+      height: 13px;
+      background-color: black;
+      position: absolute;
+      right: 0;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      border-radius: 50%; }
+
+.list .section-row > ul {
+  padding-left: 20px; }
+  .list .section-row > ul > li .question {
+    padding: 15px 40px 15px 20px;
+    margin-bottom: 15px;
+    background-image: url(/assets/images/angle-down-solid.svg);
+    background-repeat: no-repeat;
+    background-size: 15px auto;
+    background-position: center right 20px;
+    display: block;
+    color: black;
+    font-family: 'Lato-Regular';
+    -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    -ms-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2); }
+    .list .section-row > ul > li .question span {
+      color: #126585;
+      display: inline-block;
+      padding-right: 10px;
+      font-family: 'Calibri-Bold'; }
+  .list .section-row > ul > li .question-content {
+    display: none; }
+    .list .section-row > ul > li .question-content ul li {
+      list-style: disc inside none; }
+    .list .section-row > ul > li .question-content a {
+      text-decoration: underline; }
+
+@media screen and (max-width: 767px) {
+  .list .section-row ul {
+    padding-left: 0; }
+    .list .section-row ul li .question {
+      padding: 15px 30px 15px 10px;
+      background-position: center right 10px; } }
 
 /*# sourceMappingURL=style.css.map */

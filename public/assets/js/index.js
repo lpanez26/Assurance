@@ -10,10 +10,6 @@ $(window).on('load', function() {
 
 });
 
-$(window).on("load", function()   {
-
-});
-
 $(window).on('resize', function(){
 
 });
@@ -33,7 +29,7 @@ function fixButtonsFocus() {
 fixButtonsFocus();
 
 function generateUrl(str)  {
-    var str_arr = str.split("");
+    var str_arr = str.split('');
     var cyr = [
         'Ð°','Ð±','Ð²','Ð³','Ð´','Ðµ','Ñ‘','Ð¶','Ð·','Ð¸','Ð¹','Ðº','Ð»','Ð¼','Ð½','Ð¾','Ð¿',
         'Ñ€','Ñ','Ñ‚','Ñƒ','Ñ„','Ñ…','Ñ†','Ñ‡','Ñˆ','Ñ‰','ÑŠ','Ñ‹','ÑŒ','Ñ','ÑŽ','Ñ',
@@ -53,7 +49,7 @@ function generateUrl(str)  {
             }
         }
     }
-    return str_arr.join("").toLowerCase();
+    return str_arr.join('').toLowerCase();
 }
 
 function checkIfCookie()    {
@@ -568,6 +564,27 @@ if($('body').hasClass('home')) {
                     }
                 }
             });
+        });
+    }
+}else if($('body').hasClass('patients')) {
+    if($('.ask-your-dentist-for-assurance').length) {
+        $('.ask-your-dentist-for-assurance').click(function() {
+            $('html, body').animate({scrollTop: $('#find-your-dentist').offset().top}, 500);
+            $('#find-your-dentist #search-dentist').focus();
+            return false;
+        });
+    }
+}else if($('body').hasClass('support-guide')) {
+    if($('.support-guide-slider').length) {
+        $('.support-guide-slider').slick({
+            slidesToShow: 3,
+            slidesToScroll: 3
+        });
+    }
+
+    if($('.list .question').length > 0) {
+        $('.list .question').click(function()   {
+            $(this).closest('li').find('.question-content').toggle(300);
         });
     }
 }

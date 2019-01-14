@@ -58,6 +58,12 @@
   src: url("/assets/fonts/Lato-Light.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/Lato-Light.woff2") format("woff2"), url("/assets/fonts/Lato-Light.woff") format("woff"), url("/assets/fonts/Lato-Light.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
+@font-face {
+  font-family: "Calibri-Regular";
+  src: url("/assets/fonts/Calibri.eot");
+  src: url("/assets/fonts/Calibri.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/Calibri.woff2") format("woff2"), url("/assets/fonts/Calibri.woff") format("woff"), url("/assets/fonts/Calibri.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
 .lato-semibold {
   font-family: "Lato-Semibold"; }
 
@@ -114,6 +120,9 @@
 
 .white-color {
   color: white; }
+
+.black-color {
+  color: black; }
 
 .white-color-background {
   background-color: white; }
@@ -185,6 +194,130 @@
     background-color: white; }
   .white-transparent-btn:focus {
     color: white; }
+
+.module.dentist-or-patient-section .inline-block-top picture img {
+  width: 100%; }
+.module.dentist-or-patient-section .inline-block-top:hover .hidden-container {
+  opacity: 1; }
+.module.dentist-or-patient-section .inline-block-top .hidden-container {
+  position: absolute;
+  display: block;
+  background-color: rgba(18, 101, 133, 0.7);
+  width: calc(100% - 15px);
+  top: 0;
+  height: 100%;
+  opacity: 0;
+  overflow: hidden;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s; }
+  .module.dentist-or-patient-section .inline-block-top .hidden-container a {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+  .module.dentist-or-patient-section .inline-block-top .hidden-container .hidden-label {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+    .module.dentist-or-patient-section .inline-block-top .hidden-container .hidden-label:hover {
+      color: white;
+      background-color: transparent; }
+.module.dentist-or-patient-section .inline-block-top.right .hidden-container {
+  right: 0;
+  -webkit-border-radius: 4px 0 0 4px;
+  -moz-border-radius: 4px 0 0 4px;
+  -ms-border-radius: 4px 0 0 4px;
+  border-radius: 4px 0 0 4px; }
+.module.dentist-or-patient-section .inline-block-top.left .hidden-container {
+  left: 0;
+  -webkit-border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
+  -ms-border-radius: 0 4px 4px 0;
+  border-radius: 0 4px 4px 0; }
+.module.intro-section {
+  position: relative; }
+  .module.intro-section .absolute-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+    .module.intro-section .absolute-container picture img {
+      width: 100%; }
+.module.easy-fast-steps-section .line {
+  width: 2px;
+  height: 100%;
+  background-color: black;
+  position: absolute;
+  top: 0;
+  right: 0; }
+  .module.easy-fast-steps-section .line .bullet {
+    width: 15px;
+    height: 15px;
+    border: 2px solid white;
+    background-color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%; }
+.module.section-ideal-use-cases.background {
+  background-image: url(/assets/uploads/shield-background.svg);
+  background-repeat: no-repeat;
+  background-size: cover; }
+.module.section-ideal-use-cases .custom-container figure {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: calc(50% - 30px); }
+.module.section-ideal-use-cases .custom-container .line-and-bullet {
+  width: 60px; }
+  .module.section-ideal-use-cases .custom-container .line-and-bullet .line {
+    width: 2px;
+    margin: 0 auto;
+    height: 100%;
+    background-color: black;
+    position: relative; }
+    .module.section-ideal-use-cases .custom-container .line-and-bullet .line .bullet {
+      width: 15px;
+      height: 15px;
+      border: 2px solid white;
+      background-color: black;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      border-radius: 50%; }
+.module.section-ideal-use-cases .custom-container .content {
+  width: calc(50% - 30px);
+  position: relative; }
+  .module.section-ideal-use-cases .custom-container .content .wrapper {
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
 
 body {
   background-color: #222d32; }

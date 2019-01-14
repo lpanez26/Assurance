@@ -602,8 +602,6 @@ $(document).ready(function () {
 
 $(window).on('load', function () {});
 
-$(window).on("load", function () {});
-
 $(window).on('resize', function () {});
 
 $(window).on('scroll', function () {});
@@ -619,7 +617,7 @@ function fixButtonsFocus() {
 fixButtonsFocus();
 
 function generateUrl(str) {
-    var str_arr = str.split("");
+    var str_arr = str.split('');
     var cyr = ['Ð°', 'Ð±', 'Ð²', 'Ð³', 'Ð´', 'Ðµ', 'Ñ‘', 'Ð¶', 'Ð·', 'Ð¸', 'Ð¹', 'Ðº', 'Ð»', 'Ð¼', 'Ð½', 'Ð¾', 'Ð¿', 'Ñ€', 'Ñ', 'Ñ‚', 'Ñƒ', 'Ñ„', 'Ñ…', 'Ñ†', 'Ñ‡', 'Ñˆ', 'Ñ‰', 'ÑŠ', 'Ñ‹', 'ÑŒ', 'Ñ', 'ÑŽ', 'Ñ', 'Ð', 'Ð‘', 'Ð’', 'Ð“', 'Ð”', 'Ð•', 'Ð', 'Ð–', 'Ð—', 'Ð˜', 'Ð™', 'Ðš', 'Ð›', 'Ðœ', 'Ð', 'Ðž', 'ÐŸ', 'Ð ', 'Ð¡', 'Ð¢', 'Ð£', 'Ð¤', 'Ð¥', 'Ð¦', 'Ð§', 'Ð¨', 'Ð©', 'Ðª', 'Ð«', 'Ð¬', 'Ð­', 'Ð®', 'Ð¯', ' '];
     var lat = ['a', 'b', 'v', 'g', 'd', 'e', 'io', 'zh', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'ts', 'ch', 'sh', 'sht', 'a', 'i', 'y', 'e', 'yu', 'ya', 'A', 'B', 'V', 'G', 'D', 'E', 'Io', 'Zh', 'Z', 'I', 'Y', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'H', 'Ts', 'Ch', 'Sh', 'Sht', 'A', 'I', 'Y', 'e', 'Yu', 'Ya', '-'];
     for (var i = 0; i < str_arr.length; i += 1) {
@@ -629,7 +627,7 @@ function generateUrl(str) {
             }
         }
     }
-    return str_arr.join("").toLowerCase();
+    return str_arr.join('').toLowerCase();
 }
 
 function checkIfCookie() {
@@ -1015,7 +1013,7 @@ var App = {
 
                                 return _context4.abrupt("return", App.assurance_instance.methods.withdrawToDentist(ready_to_withdraw_arr).send({
                                     from: global_state.account,
-                                    gas: ready_to_withdraw_arr.length * 65000
+                                    gas: ready_to_withdraw_arr.length * 60000
                                 }).on('transactionHash', function (hash) {
                                     basic.showAlert('Your transaction is now pending. Give it a minute and check for confirmation on <a href="https://rinkeby.etherscan.io/tx/' + hash + '" target="_blank" class="etherscan-hash">Etherscan</a>.', '', true);
                                 }).catch(function (err) {
@@ -1151,6 +1149,27 @@ if ($('body').hasClass('home')) {
                     }
                 }
             });
+        });
+    }
+} else if ($('body').hasClass('patients')) {
+    if ($('.ask-your-dentist-for-assurance').length) {
+        $('.ask-your-dentist-for-assurance').click(function () {
+            $('html, body').animate({ scrollTop: $('#find-your-dentist').offset().top }, 500);
+            $('#find-your-dentist #search-dentist').focus();
+            return false;
+        });
+    }
+} else if ($('body').hasClass('support-guide')) {
+    if ($('.support-guide-slider').length) {
+        $('.support-guide-slider').slick({
+            slidesToShow: 3,
+            slidesToScroll: 3
+        });
+    }
+
+    if ($('.list .question').length > 0) {
+        $('.list .question').click(function () {
+            $(this).closest('li').find('.question-content').toggle(300);
         });
     }
 }

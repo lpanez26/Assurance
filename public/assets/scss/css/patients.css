@@ -1,0 +1,8 @@
+body.patients .dentist-or-patient-section .inline-block-top.left .hidden-container {
+  opacity: 1; }
+  body.patients .dentist-or-patient-section .inline-block-top.left .hidden-container .hidden-label {
+    display: block; }
+  body.patients .dentist-or-patient-section .inline-block-top.left .hidden-container a {
+    display: none; }
+
+/*# sourceMappingURL=patients.css.map */

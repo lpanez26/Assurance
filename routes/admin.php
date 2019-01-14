@@ -67,4 +67,18 @@ Route::group(['prefix' => 'assurance-admin-access', 'middleware' => 'handleAdmin
 
         Route::get('/delete/{id}', 'Admin\CalculatorParametersController@deleteCalculatorParameter')->name('delete-calculator-parameter');
     });
+
+    Route::group(['prefix' => 'support-guide'], function()  {
+        Route::get('/', 'Admin\SupportGuideController@getView')->name('all-support-guides');
+
+        Route::any('/add', 'Admin\SupportGuideController@addEditSupportGuide')->name('add-support-guide');
+
+        Route::get('/delete/{id}', 'Admin\SupportGuideController@deleteSupportGuide')->name('delete-support-guide');
+
+        Route::any('/edit/{id}', 'Admin\SupportGuideController@addEditSupportGuide')->name('edit-support-guide');
+
+        Route::post('/update-order', function(\Illuminate\Http\Request $request){
+            (new \App\Http\Controllers\Admin\MainController())->updatePostsOrder('support_guides', $request);
+        });
+    });
 });

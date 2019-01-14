@@ -1,0 +1,24 @@
+body.patients {
+    .dentist-or-patient-section {
+        .inline-block-top.right {
+            .hidden-container {
+                opacity: 1;
+                .hidden-label {
+                    display: block;
+                }
+                a {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+.cant-find-your-dentist-section {
+    margin-top: -70px;
+    position: relative;
+    .absolute-container {
+        top: 20%;
+        @include horizontal-align(absolute);
+    }
+}

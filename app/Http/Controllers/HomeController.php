@@ -13,15 +13,15 @@ class HomeController extends Controller
 
     protected function getView()   {
         $testimonials = DB::connection('mysql2')->table('user_expressions')->leftJoin('media', 'user_expressions.media_id', '=', 'media.id')->select('user_expressions.*', 'media.name as media_name', 'media.alt as media_alt')->where('visible_assurance', 1)->orderByRaw('user_expressions.order_id ASC')->get()->toArray();
-        return view("pages/homepage", ['testimonials' => $testimonials]);
+        return view('pages/homepage', ['testimonials' => $testimonials]);
     }
 
     protected function getDentistView()   {
-        return view("pages/dentist", []);
+        return view('pages/dentist', []);
     }
 
     protected function getPatientView()   {
-        return view("pages/patient", []);
+        return view('pages/patient', []);
     }
 
     protected function getCalculatorHtml(Request $request) {
@@ -35,31 +35,31 @@ class HomeController extends Controller
             $params['param_cd'] = false;
             $params['param_id'] = false;
 
-            switch ($request->input('params_type')) {
-                case "param_gd_cd_id":
+            switch($request->input('params_type')) {
+                case 'param_gd_cd_id':
                     $params['param_gd'] = true;
                     $params['param_cd'] = true;
                     $params['param_id'] = true;
                     break;
-                case "param_gd_cd":
+                case 'param_gd_cd':
                     $params['param_gd'] = true;
                     $params['param_cd'] = true;
                     break;
-                case "param_gd_id":
+                case 'param_gd_id':
                     $params['param_gd'] = true;
                     $params['param_id'] = true;
                     break;
-                case "param_cd_id":
+                case 'param_cd_id':
                     $params['param_cd'] = true;
                     $params['param_id'] = true;
                     break;
-                case "param_gd":
+                case 'param_gd':
                     $params['param_gd'] = true;
                     break;
-                case "param_cd":
+                case 'param_cd':
                     $params['param_cd'] = true;
                     break;
-                case "param_id":
+                case 'param_id':
                     $params['param_id'] = true;
                     break;
             }
@@ -82,27 +82,26 @@ class HomeController extends Controller
         curl_close($curl);
 
         $currency = 0;
-
-        switch ($request->input('currency')) {
-            case "USD":
+        switch($request->input('currency')) {
+            case 'USD':
                 $currency = (float)$resp[0]->price_usd;
                 break;
-            case "EUR":
+            case 'EUR':
                 $currency = (float)$resp[0]->price_eur;
                 break;
-            case "GBP":
+            case 'GBP':
                 $currency = (float)$resp[0]->price_gbp;
                 break;
-            case "RUB":
+            case 'RUB':
                 $currency = (float)$resp[0]->price_rub;
                 break;
-            case "INR":
+            case 'INR':
                 $currency = (float)$resp[0]->price_inr;
                 break;
-            case "CNY":
+            case 'CNY':
                 $currency = (float)$resp[0]->price_cny;
                 break;
-            case "JPY":
+            case 'JPY':
                 $currency = (float)$resp[0]->price_jpy;
                 break;
         }

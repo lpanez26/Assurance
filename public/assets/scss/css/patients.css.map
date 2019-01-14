@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAGY,kFAAkB;EACd,OAAO,EAAE,CAAC;EACV,gGAAc;IACV,OAAO,EAAE,KAAK;EAElB,oFAAE;IACE,OAAO,EAAE,IAAI",
+"sources": ["../pages/patients.scss"],
+"names": [],
+"file": "patients.css"
+}

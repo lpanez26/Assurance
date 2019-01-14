@@ -91,6 +91,18 @@
                         <li @if(!empty(Route::current()->getName()) && Route::current()->getName() == 'add-calculator-parameter') class="active" @endif><a href="{{route('add-calculator-parameter')}}"><i class="fa fa-plus" aria-hidden="true"></i>Add parameter</a></li>
                     </ul>
                 </li>
+                <li class="treeview menu-open @if(!empty(Route::current()->getName()) && (Route::current()->getName() == 'all-support-guides' || Route::current()->getName() == 'add-support-guide' || Route::current()->getName() == 'edit-support-guide')) active @endif">
+                    <a href="#">
+                        <i class="fa fa-folder" aria-hidden="true"></i> <span>Support Guide</span>
+                        <span class="pull-right">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li @if(!empty(Route::current()->getName()) && (Route::current()->getName() == 'all-support-guides' || Route::current()->getName() == 'edit-support-guide')) class="active" @endif><a href="{{route('all-support-guides')}}"><i class="fa fa-list-ol" aria-hidden="true"></i>All support guides</a></li>
+                        <li @if(!empty(Route::current()->getName()) && Route::current()->getName() == 'add-support-guide') class="active" @endif><a href="{{route('add-support-guide')}}"><i class="fa fa-plus" aria-hidden="true"></i>Add support guide</a></li>
+                    </ul>
+                </li>
             </ul>
         </section>
         <!-- /.sidebar -->
