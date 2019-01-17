@@ -174,5 +174,8 @@
             </div>
         </div>
     </section>
+    <section>
+        <button id="civic-custom-btn" data-url="https://api.dentacoin.com/api/register" data-platform="assurance" data-type="patient">Login CIVIC</button>
+    </section>
 @endsection
 
