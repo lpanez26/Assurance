@@ -49,12 +49,12 @@ var pagesDataOnContractInit = function () {
                         $('.break-contract').click(function () {
                             App.assurance_methods.breakContract($('.breakContract .patient-address').val().trim(), global_state.account);
                         });
-                        _context5.next = 35;
+                        _context5.next = 36;
                         break;
 
                     case 16:
                         if (!$('body').hasClass('patient')) {
-                            _context5.next = 35;
+                            _context5.next = 36;
                             break;
                         }
 
@@ -104,7 +104,12 @@ var pagesDataOnContractInit = function () {
                             App.assurance_methods.breakContract(global_state.account, $('.breakContract .dentist-address').val().trim());
                         });
 
-                    case 35:
+                        //login
+                        $(document).on('successResponseCoreDBApi', function (event) {
+                            console.log(event, 'successResponseCoreDBApi');
+                        });
+
+                    case 36:
                     case "end":
                         return _context5.stop();
                 }

@@ -144,6 +144,9 @@
 .white-color {
   color: white; }
 
+.black-color {
+  color: black; }
+
 .white-color-background {
   background-color: white; }
 
@@ -4833,6 +4836,17 @@ body.patients .dentist-or-patient-section .inline-block-top.right .hidden-contai
     display: block; }
   body.patients .dentist-or-patient-section .inline-block-top.right .hidden-container a {
     display: none; }
+
+.cant-find-your-dentist-section {
+  margin-top: -70px;
+  position: relative; }
+  .cant-find-your-dentist-section .absolute-container {
+    top: 20%;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%); }
 
 .slider-section .support-guide-slider .single-slide {
   padding-left: 20px;
