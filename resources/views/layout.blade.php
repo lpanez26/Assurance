@@ -52,7 +52,7 @@
                     </ul>
                 </nav>
             @else
-                {{dump(session('logged_patient'))}}
+                {{var_dump(session('logged_patient'))}}
             @endif
         </div>
     </div>
