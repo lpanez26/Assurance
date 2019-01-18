@@ -142,6 +142,8 @@ class Controller extends BaseController
     }
 
     protected function userLogout(Request $request) {
+        var_dump('userLogout');
+        die('userLogout');
         $route = '';
         if($request->session()->has('logged_user'))    {
             if(session('logged_user')['type'] == 'dentist') {
