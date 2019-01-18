@@ -26,7 +26,9 @@ class Controller extends BaseController
     const POSTS_PER_PAGE = 8;
 
     public function __construct() {
-        if(!empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->getPrefix() == '/' && !Request::isMethod('post'))    {
+        var_dump(Request::method());
+        die();
+        if(!empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->getPrefix() == '/' && Request::method())    {
             View::share('mobile', $this->isMobile());
             View::share('meta_data', $this->getMetaData());
             View::share('sections', $this->getDbSections());
