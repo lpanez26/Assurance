@@ -1197,7 +1197,11 @@ if ($('body').hasClass('home')) {
     }
 } else if ($('body').hasClass('logged-in')) {
     //THIS IS FUNCTIONALITY ONLY FOR LOGGED IN USERS
-
+    $('.logged-user > a').hover(function () {
+        $('logged-user .hidden-box').show();
+    }, function () {
+        $('logged-user .hidden-box').hide();
+    });
 }
 
 function calculateLogic() {

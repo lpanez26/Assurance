@@ -55,19 +55,19 @@
                 <div class="col-xs-9 inline-block text-right logged-user">
                     <a href="javascript:void(0)">
                         <span>{{session('logged_user')['name']}}</span> <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                        <div class="hidden-box">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-xs-6 inline-block">
-                                        <a href="{{ route('user-logout') }}" class="logout"><i class="fa fa-power-off" aria-hidden="true"></i> Log out</a>
-                                    </div>
-                                    <div class="col-xs-6 inline-block">
-                                        <a href="javascript:void(0)" class="white-blue-green-btn">My account</a>
-                                    </div>
+                    </a>
+                    <div class="hidden-box">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-xs-6 inline-block">
+                                    <a href="{{ route('user-logout') }}" class="logout"><i class="fa fa-power-off" aria-hidden="true"></i> Log out</a>
+                                </div>
+                                <div class="col-xs-6 inline-block">
+                                    <a href="javascript:void(0)" class="white-blue-green-btn">My account</a>
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             @endif
         </div>
