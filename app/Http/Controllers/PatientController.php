@@ -10,7 +10,7 @@ class PatientController extends Controller {
     }
 
     protected function getStartFirstContractView()   {
-        return view('logged-patient/start-first-contract');
+        return view('pages/logged-patient/start-first-contract');
     }
 
     public function checkSession()   {
