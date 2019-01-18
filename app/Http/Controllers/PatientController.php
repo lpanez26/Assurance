@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller {
+    public static function instance() {
+        return new PatientController();
+    }
+
     protected function getNotLoggedView()   {
         return view('pages/patient');
     }
@@ -44,15 +48,20 @@ class PatientController extends Controller {
 
     protected function authenticate(Request $request) {
         $this->validate($request, [
-            'token' => 'required'
+            'token' => 'required',
+            'email' => 'required',
+            'name' => 'required',
         ], [
-            'token.required' => 'Token is required.'
+            'token.required' => 'Token is required.',
+            'email.required' => 'Email is required.',
+            'name.required' => 'Name is required.',
         ]);
 
         session(['logged_patient' => [
-            'token' => $request->input('token')
+            'token' => $request->input('token'),
+            'email' => $request->input('email'),
+            'name' => $request->input('name'),
         ]]);
-
         return redirect()->route('patient-access');
     }
 }

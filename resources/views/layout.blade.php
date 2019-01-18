@@ -40,16 +40,20 @@
                     <img src="{{URL::asset('assets/images/logo.svg') }}" itemprop="logo" alt="Dentacoin logo" class="max-width-50 max-width-xs-40"/>
                 </a>
             </figure>
-            <nav class="col-xs-9 inline-block">
-                <ul itemscope="" itemtype="http://schema.org/SiteNavigationElement">
-                    <li class="inline-block @if(!empty(Route::current())) @if(Route::current()->getName() == "home") active @endif @endif"><a href="{{route('home')}}" itemprop="url"><span itemprop="name">Dentists</span></a></li>
-                    <li class="inline-block">|</li>
-                    <li class="inline-block @if(!empty(Route::current())) @if(Route::current()->getName() == "patient-access") active @endif @endif"><a href="{{route('patient-access')}}" itemprop="url"><span itemprop="name">Patients</span></a></li>
-                    <li class="inline-block">
-                        <a href="" itemprop="url" class="blue-green-white-btn sign-in"><span itemprop="name">SIGN IN</span></a>
-                    </li>
-                </ul>
-            </nav>
+            @if(!\App\Http\Controllers\PatientController::instance()->checkSession())
+                <nav class="col-xs-9 inline-block">
+                    <ul itemscope="" itemtype="http://schema.org/SiteNavigationElement">
+                        <li class="inline-block @if(!empty(Route::current())) @if(Route::current()->getName() == "home") active @endif @endif"><a href="{{route('home')}}" itemprop="url"><span itemprop="name">Dentists</span></a></li>
+                        <li class="inline-block">|</li>
+                        <li class="inline-block @if(!empty(Route::current())) @if(Route::current()->getName() == "patient-access") active @endif @endif"><a href="{{route('patient-access')}}" itemprop="url"><span itemprop="name">Patients</span></a></li>
+                        <li class="inline-block">
+                            <a href="" itemprop="url" class="blue-green-white-btn sign-in"><span itemprop="name">SIGN IN</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            @else
+                Logout
+            @endif
         </div>
     </div>
 </header>

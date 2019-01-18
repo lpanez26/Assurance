@@ -1169,15 +1169,15 @@ if ($('body').hasClass('home')) {
 
     //login
     $(document).on('successResponseCoreDBApi', function (event) {
-        console.log(event.response_data);
-        return false;
         if (event.response_data.token) {
             $.ajax({
                 type: 'POST',
                 url: '/patient/authenticate',
                 dataType: 'json',
                 data: {
-                    token: event.response_data.token
+                    token: event.response_data.token,
+                    email: event.response_data.data.email,
+                    name: event.response_data.data.name
                 },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
