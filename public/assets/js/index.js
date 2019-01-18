@@ -589,6 +589,7 @@ if($('body').hasClass('home')) {
                 token: event.response_data.token,
                 email: event.response_data.data.email,
                 name: event.response_data.data.name,
+                _token: $('meta[name="csrf-token"]').attr('content')
             }, 'post');
         }
     });
