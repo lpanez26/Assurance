@@ -25,8 +25,8 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
 
     //======================================= TEMPORALLY FOR DAPP TESTING ========================================
-    Route::get('/dentist-test', 'HomeController@getDentistView')->name('dentist');
-    Route::get('/patient-test', 'HomeController@getPatientView')->name('patient');
+    Route::get('/dentist-test', 'HomeController@getDentistView')->name('dentist-test');
+    Route::get('/patient-test', 'HomeController@getPatientView')->name('patient-test');
     //======================================= /TEMPORALLY FOR DAPP TESTING ========================================
 
     //======================================= AJAX ========================================
