@@ -648,6 +648,9 @@ function initCaptchaRefreshEvent() {
                 type: 'GET',
                 url: '/refresh-captcha',
                 dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 success: function success(response) {
                     $('.captcha-container span').html(response.captcha);
                 }
@@ -1140,6 +1143,9 @@ if ($('body').hasClass('home')) {
                 type: 'POST',
                 url: '/get-calculator-html',
                 dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 success: function success(response) {
                     if (response.success) {
                         basic.showDialog(response.success, 'calculator-popup', null, true);
@@ -1223,6 +1229,9 @@ function calculateLogic() {
             url: '/get-calculator-result',
             dataType: 'json',
             data: calculator_data,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             success: function success(response) {
                 basic.closeDialog();
                 basic.showDialog(response.success, 'calculator-result-popup', null, true);
@@ -1234,6 +1243,9 @@ function calculateLogic() {
                         url: '/get-calculator-html',
                         dataType: 'json',
                         data: calculator_data,
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
                         success: function success(response) {
                             if (response.success) {
                                 basic.closeDialog();
