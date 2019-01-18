@@ -1170,25 +1170,11 @@ if ($('body').hasClass('home')) {
     //login
     $(document).on('successResponseCoreDBApi', function (event) {
         if (event.response_data.token) {
-            $.ajax({
-                type: 'POST',
-                url: '/patient/authenticate',
-                dataType: 'json',
-                data: {
-                    token: event.response_data.token,
-                    email: event.response_data.data.email,
-                    name: event.response_data.data.name
-                },
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function success(response) {
-                    console.log(response);
-                    if (response.success) {
-                        window.location.reload();
-                    }
-                }
-            });
+            customJavascriptForm('/patient/authenticate', {
+                token: event.response_data.token,
+                email: event.response_data.data.email,
+                name: event.response_data.data.name
+            }, 'post');
         }
     });
 
@@ -1293,4 +1279,28 @@ function calculateLogic() {
             }
         });
     });
+}
+
+function customJavascriptForm(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for (var key in params) {
+        if (params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+        }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
 }

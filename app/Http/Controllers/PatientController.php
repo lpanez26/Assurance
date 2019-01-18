@@ -18,7 +18,6 @@ class PatientController extends Controller {
     }
 
     public function checkSession()   {
-        print_r(session('logged_user'));
         if(!empty(session('logged_user')) && session('logged_user')['type'] == 'patient')    {
             //LOGGED
             return true;
@@ -64,8 +63,6 @@ class PatientController extends Controller {
             'name' => $request->input('name'),
             'type' => 'patient'
         ]]);
-
-        echo json_encode(array('success' => true));
-        exit();
+        return redirect()->route('patient-access');
     }
 }
