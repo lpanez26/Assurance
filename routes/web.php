@@ -19,8 +19,6 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
     Route::get('/', 'HomeController@getView')->name('home');
 
-    Route::get('/patients', 'PatientController@getNotLoggedView')->name('patients');
-
     Route::get('/support-guide', 'SupportGuideController@getView')->name('support-guide');
 
 
@@ -35,8 +33,8 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
     Route::post('/get-calculator-result', 'HomeController@getCalculatorResult')->name('get-calculator-result');
 
-    Route::group(['prefix' => 'patient'], function () {
-        //Route::get('/', 'Admin\PatientController@getAdminAccess')->name('admin-access');
+    Route::group(['prefix' => 'patient', 'middleware' => 'HandlePatientSession'], function () {
+        Route::get('/', 'PatientController@getPatientAccess')->name('patient-access');
 
         Route::post('/authenticate', 'PatientController@authenticate')->name('authenticate-patient');
     });

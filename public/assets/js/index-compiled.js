@@ -26190,7 +26190,7 @@ if ($('body').hasClass('home')) {
             });
         });
     }
-} else if ($('body').hasClass('patients')) {
+} else if ($('body').hasClass('patient')) {
     if ($('.ask-your-dentist-for-assurance').length) {
         $('.ask-your-dentist-for-assurance').click(function () {
             $('html, body').animate({ scrollTop: $('#find-your-dentist').offset().top }, 500);
@@ -26201,9 +26201,6 @@ if ($('body').hasClass('home')) {
 
     //login
     $(document).on('successResponseCoreDBApi', function (event) {
-        console.log(event);
-        console.log(event.response_data);
-        console.log(event.response_data.token);
         if (event.response_data.token) {
             $.ajax({
                 type: 'POST',

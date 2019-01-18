@@ -17,11 +17,11 @@ class HomeController extends Controller
     }
 
     protected function getDentistView()   {
-        return view('pages/dentist', []);
+        return view('pages/dentist-test', []);
     }
 
     protected function getPatientView()   {
-        return view('pages/patient', []);
+        return view('pages/patient-test', []);
     }
 
     protected function getCalculatorHtml(Request $request) {

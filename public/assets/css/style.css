@@ -4833,11 +4833,11 @@ body.home .fixed-calculate-button {
     -ms-border-radius: 4px;
     border-radius: 4px; }
 
-body.patients .dentist-or-patient-section .inline-block-top.right .hidden-container {
+body.patient .dentist-or-patient-section .inline-block-top.right .hidden-container {
   opacity: 1; }
-  body.patients .dentist-or-patient-section .inline-block-top.right .hidden-container .hidden-label {
+  body.patient .dentist-or-patient-section .inline-block-top.right .hidden-container .hidden-label {
     display: block; }
-  body.patients .dentist-or-patient-section .inline-block-top.right .hidden-container a {
+  body.patient .dentist-or-patient-section .inline-block-top.right .hidden-container a {
     display: none; }
 
 .cant-find-your-dentist-section {

@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 
 class PatientController extends Controller {
     protected function getNotLoggedView()   {
-        return view('pages/patients');
+        return view('pages/patient');
     }
 
-    protected function getView()   {
-        return view('logged-patient/no-contracts-yet');
+    protected function getStartFirstContractView()   {
+        return view('logged-patient/start-first-contract');
     }
 
     public function checkSession()   {
@@ -27,21 +27,32 @@ class PatientController extends Controller {
         if($request->session()->has('logged_patient'))    {
             $request->session()->forget('logged_patient');
         }
-        return redirect()->route('patients');
+        return redirect()->route('patient-access');
     }
 
     public function getPatientAccess()    {
         if($this->checkSession()) {
-            return $this->getView();
+            //IF PATIENT HAVE NO EXISTING CONTRACTS
+            return $this->getStartFirstContractView();
+
+            //IF PATIENT HAVE EXISTING CONTRACTS
+
         }else {
-            return view('admin/pages/login');
+            return $this->getNotLoggedView();
         }
     }
 
     protected function authenticate(Request $request) {
-        var_dump($request->input());
-        var_dump($request->input('token'));
-        die();
-        session(['logged_patient' => true]);
+        $this->validate($request, [
+            'token' => 'required'
+        ], [
+            'token.required' => 'Token is required.'
+        ]);
+
+        session(['logged_patient' => [
+            'token' => $request->input('token')
+        ]]);
+
+        return redirect()->route('patient-access');
     }
 }
