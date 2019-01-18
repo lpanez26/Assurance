@@ -66,5 +66,6 @@ class PatientController extends Controller {
         ]]);
 
         echo json_encode(array('success' => true));
+        exit();
     }
 }
