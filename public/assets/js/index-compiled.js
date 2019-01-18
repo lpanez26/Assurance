@@ -25395,12 +25395,12 @@ var pagesDataOnContractInit = function () {
                         $('.break-contract').click(function () {
                             App.assurance_methods.breakContract($('.breakContract .patient-address').val().trim(), global_state.account);
                         });
-                        _context5.next = 37;
+                        _context5.next = 35;
                         break;
 
                     case 16:
                         if (!$('body').hasClass('patient')) {
-                            _context5.next = 37;
+                            _context5.next = 35;
                             break;
                         }
 
@@ -25450,16 +25450,7 @@ var pagesDataOnContractInit = function () {
                             App.assurance_methods.breakContract(global_state.account, $('.breakContract .dentist-address').val().trim());
                         });
 
-                        //login
-                        $(document).on('successResponseCoreDBApi', function (event) {
-                            console.log(event, 'successResponseCoreDBApi');
-                        });
-
-                        $(document).on('errorResponseCoreDBApi', function (event) {
-                            console.log(event, 'errorResponseCoreDBApi');
-                        });
-
-                    case 37:
+                    case 35:
                     case 'end':
                         return _context5.stop();
                 }
@@ -26290,6 +26281,15 @@ function calculateLogic() {
         });
     });
 }
+
+//login
+$(document).on('successResponseCoreDBApi', function (event) {
+    console.log(event, 'successResponseCoreDBApi');
+});
+
+$(document).on('errorResponseCoreDBApi', function (event) {
+    console.log(event, 'errorResponseCoreDBApi');
+});
 
 /***/ }),
 /* 112 */

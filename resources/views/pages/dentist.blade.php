@@ -120,4 +120,10 @@
             </div>
         </div>
     </div>
+    <div class="padding-bottom-10">
+        <a href="javascript:void(0)" class="facebook-custom-btn login-btn calibri-regular fs-20" data-url="//api.dentacoin.com/api/register" data-platform="assurance" data-type="patient">with Facebook</a>
+    </div>
+    <div>
+        <a href="javascript:void(0)"  class="civic-custom-btn login-btn calibri-regular fs-20" data-url="//api.dentacoin.com/api/register" data-platform="assurance" data-type="patient">with Civic</a>
+    </div>
 @endsection

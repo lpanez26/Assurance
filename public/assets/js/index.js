@@ -451,15 +451,6 @@ async function pagesDataOnContractInit() {
         $('.break-contract').click(function() {
             App.assurance_methods.breakContract(global_state.account, $('.breakContract .dentist-address').val().trim());
         });
-
-        //login
-        $(document).on('successResponseCoreDBApi', function (event) {
-            console.log(event, 'successResponseCoreDBApi');
-        });
-
-        $(document).on('errorResponseCoreDBApi', function (event) {
-            console.log(event, 'errorResponseCoreDBApi');
-        });
     }
 }
 
@@ -673,3 +664,12 @@ function calculateLogic() {
         });
     });
 }
+
+//login
+$(document).on('successResponseCoreDBApi', function (event) {
+    console.log(event, 'successResponseCoreDBApi');
+});
+
+$(document).on('errorResponseCoreDBApi', function (event) {
+    console.log(event, 'errorResponseCoreDBApi');
+});
