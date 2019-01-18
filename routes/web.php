@@ -34,10 +34,10 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
     Route::post('/get-calculator-html', 'HomeController@getCalculatorHtml')->name('get-calculator-html');
 
     Route::post('/get-calculator-result', 'HomeController@getCalculatorResult')->name('get-calculator-result');
-});
 
-Route::group(['prefix' => 'patient', 'middleware' => 'handlePatientSession'], function () {
-    //Route::get('/', 'Admin\PatientController@getAdminAccess')->name('admin-access');
+    Route::group(['prefix' => 'patient'], function () {
+        //Route::get('/', 'Admin\PatientController@getAdminAccess')->name('admin-access');
 
-    Route::post('/authenticate', 'PatientController@authenticate')->name('authenticate-patient');
+        Route::post('/authenticate', 'PatientController@authenticate')->name('authenticate-patient');
+    });
 });
