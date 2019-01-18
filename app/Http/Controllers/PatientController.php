@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller{
+    protected function getNotLoggedView()   {
+        return view('pages/patients');
+    }
+
     protected function getView()   {
         return view('logged-patient/no-contracts-yet');
     }

@@ -19,14 +19,14 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
     Route::get('/', 'HomeController@getView')->name('home');
 
-    Route::get('/patients', 'PatientsController@getView')->name('patients');
+    Route::get('/patients', 'PatientsController@getNotLoggedView')->name('patients');
 
     Route::get('/support-guide', 'SupportGuideController@getView')->name('support-guide');
 
 
     //======================================= TEMPORALLY FOR DAPP TESTING ========================================
-    Route::get('/dentist', 'HomeController@getDentistView')->name('dentist');
-    Route::get('/patient', 'HomeController@getPatientView')->name('patient');
+    Route::get('/dentist-test', 'HomeController@getDentistView')->name('dentist');
+    Route::get('/patient-test', 'HomeController@getPatientView')->name('patient');
     //======================================= /TEMPORALLY FOR DAPP TESTING ========================================
 
     //======================================= AJAX ========================================
