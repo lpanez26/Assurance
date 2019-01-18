@@ -458,6 +458,9 @@ async function pagesDataOnContractInit() {
 
         //login
         $(document).on('successResponseCoreDBApi', function (event) {
+            console.log(event);
+            console.log(event.response_data);
+            console.log(event.response_data.token);
             if(event.response_data.token) {
                 $.ajax({
                     type: 'POST',
