@@ -18,9 +18,6 @@ class PatientController extends Controller {
     }
 
     public function checkSession()   {
-        var_dump('asd');
-        var_dump(session('logged_user'));
-        die();
         if(!empty(session('logged_user')) && session('logged_user')['type'] == 'patient')    {
             //LOGGED
             return true;
