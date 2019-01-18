@@ -19,7 +19,7 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
     Route::get('/', 'HomeController@getView')->name('home');
 
-    Route::get('/patients', 'PatientsController@getNotLoggedView')->name('patients');
+    Route::get('/patients', 'PatientController@getNotLoggedView')->name('patients');
 
     Route::get('/support-guide', 'SupportGuideController@getView')->name('support-guide');
 
