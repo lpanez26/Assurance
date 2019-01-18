@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Page;
 use App\PagesHtmlSection;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
+use Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -26,9 +26,7 @@ class Controller extends BaseController
     const POSTS_PER_PAGE = 8;
 
     public function __construct() {
-        var_dump(Request::method());
-        die();
-        if(!empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->getPrefix() == '/' && Request::method())    {
+        if(!empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->getPrefix() == '/' && !Request::isMethod('post'))    {
             View::share('mobile', $this->isMobile());
             View::share('meta_data', $this->getMetaData());
             View::share('sections', $this->getDbSections());
