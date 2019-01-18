@@ -1,8 +1,9 @@
 var {getWeb3, getContractInstance} = require('./helper');
 
+basic.init();
+
 $(document).ready(function() {
-    basic.init();
-    
+
     App.init();
 });
 

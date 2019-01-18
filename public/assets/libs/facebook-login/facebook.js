@@ -49,6 +49,9 @@ if(fb_custom_btn.length) {
                     type: 'POST',
                     dataType: 'json',
                     url: fb_custom_btn.attr('data-url'),
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
                     data: {
                         platform: fb_custom_btn.attr('data-platform'),
                         social_network: fb_config.platform,
