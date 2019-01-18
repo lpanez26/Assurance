@@ -49,12 +49,12 @@ var pagesDataOnContractInit = function () {
                         $('.break-contract').click(function () {
                             App.assurance_methods.breakContract($('.breakContract .patient-address').val().trim(), global_state.account);
                         });
-                        _context5.next = 37;
+                        _context5.next = 35;
                         break;
 
                     case 16:
                         if (!$('body').hasClass('patient')) {
-                            _context5.next = 37;
+                            _context5.next = 35;
                             break;
                         }
 
@@ -104,34 +104,7 @@ var pagesDataOnContractInit = function () {
                             App.assurance_methods.breakContract(global_state.account, $('.breakContract .dentist-address').val().trim());
                         });
 
-                        //login
-                        $(document).on('successResponseCoreDBApi', function (event) {
-                            console.log(event);
-                            console.log(event.response_data);
-                            console.log(event.response_data.token);
-                            if (event.response_data.token) {
-                                $.ajax({
-                                    type: 'POST',
-                                    url: '/patient/authenticate',
-                                    dataType: 'json',
-                                    data: {
-                                        token: event.response_data.token
-                                    },
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                    },
-                                    success: function success(response) {
-                                        if (response.success) {}
-                                    }
-                                });
-                            }
-                        });
-
-                        $(document).on('errorResponseCoreDBApi', function (event) {
-                            console.log(event, 'errorResponseCoreDBApi');
-                        });
-
-                    case 37:
+                    case 35:
                     case "end":
                         return _context5.stop();
                 }
@@ -1193,6 +1166,33 @@ if ($('body').hasClass('home')) {
             return false;
         });
     }
+
+    //login
+    $(document).on('successResponseCoreDBApi', function (event) {
+        console.log(event);
+        console.log(event.response_data);
+        console.log(event.response_data.token);
+        if (event.response_data.token) {
+            $.ajax({
+                type: 'POST',
+                url: '/patient/authenticate',
+                dataType: 'json',
+                data: {
+                    token: event.response_data.token
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function success(response) {
+                    if (response.success) {}
+                }
+            });
+        }
+    });
+
+    $(document).on('errorResponseCoreDBApi', function (event) {
+        console.log(event, 'errorResponseCoreDBApi');
+    });
 } else if ($('body').hasClass('support-guide')) {
     if ($('.support-guide-slider').length) {
         $('.support-guide-slider').slick({
