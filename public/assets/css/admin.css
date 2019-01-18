@@ -85,6 +85,9 @@
 .calibri-light {
   font-family: "Calibri Light"; }
 
+.calibri-regular {
+  font-family: "Calibri-Regular"; }
+
 @media screen and (max-width: 400px) {
   .col-xxs-12 {
     width: 100%; }

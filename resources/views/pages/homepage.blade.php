@@ -169,7 +169,7 @@
                                         @if(empty($testimonial->media_name))
                                             <img src="/assets/images/avatar-icon.svg" alt="" itemprop="contentUrl"/>
                                         @else
-                                            <img src="http://dentacoin.com/assets/uploads/{{$testimonial->media_name}}" alt="{{$testimonial->media_alt}}" itemprop="contentUrl"/>
+                                            <img src="//dentacoin.com/assets/uploads/{{$testimonial->media_name}}" alt="{{$testimonial->media_alt}}" itemprop="contentUrl"/>
                                         @endif
                                     </figure>
                                     <div class="title-job inline-block-top">

@@ -173,6 +173,19 @@
                 </div>
             </div>
         </div>
+        <div class="container second-absolute-container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-sm-offset-5 text-center">
+                    <h3 class="lato-regular fs-30 white-color padding-bottom-30 text-center">SIGN UP TO GET STARTED</h3>
+                    <div class="padding-bottom-10">
+                        <a href="javascript:void(0)" class="facebook-custom-btn login-btn calibri-regular fs-20" data-url="//api.dentacoin.com/api/register" data-platform="assurance" data-type="patient">with Facebook</a>
+                    </div>
+                    <div>
+                        <a href="javascript:void(0)"  class="civic-custom-btn login-btn calibri-regular fs-20" data-url="//api.dentacoin.com/api/register" data-platform="assurance" data-type="patient">with Civic</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     <section>
         <button id="civic-custom-btn" data-url="https://api.dentacoin.com/api/register" data-platform="assurance" data-type="patient">Login CIVIC</button>
