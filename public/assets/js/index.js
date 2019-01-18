@@ -456,6 +456,10 @@ async function pagesDataOnContractInit() {
         $(document).on('successResponseCoreDBApi', function (event) {
             console.log(event, 'successResponseCoreDBApi');
         });
+
+        $(document).on('errorResponseCoreDBApi', function (event) {
+            console.log(event, 'errorResponseCoreDBApi');
+        });
     }
 }
 
