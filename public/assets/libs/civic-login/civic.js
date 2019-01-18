@@ -5,13 +5,12 @@ const civic_config = {
 };
 
 (async function() {
-    var base_url = window.location.origin;
 
     //load civic lib CSS
-    $('head').append('<link rel="stylesheet" type="text/css" href='+base_url+'"/civic-login/civic/civic.min.css"/>');
+    $('head').append('<link rel="stylesheet" type="text/css" href="https://dev-test.dentacoin.com/assets/libs/civic-login/civic/civic.min.css"/>');
 
     //load civic lib JS
-    await $.getScript(base_url+'/civic-login/civic/civic.min.js', function() {});
+    await $.getScript('https://dev-test.dentacoin.com/assets/libs/civic-login/civic/civic.min.js', function() {});
 
     var civic_custom_btn = $('.civic-custom-btn');
     if(civic_custom_btn.length) {
