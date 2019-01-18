@@ -52,7 +52,7 @@
                     </ul>
                 </nav>
             @else
-                Logout
+                {{dump(session('logged_patient'))}}
             @endif
         </div>
     </div>
