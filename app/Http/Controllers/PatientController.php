@@ -36,6 +36,7 @@ class PatientController extends Controller{
 
     protected function authenticate(Request $request) {
         var_dump($request->input());
+        var_dump($request->input('token'));
         return false;
         session(['logged_patient' => true]);
     }

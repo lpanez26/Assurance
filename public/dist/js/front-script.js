@@ -49,12 +49,12 @@ var pagesDataOnContractInit = function () {
                         $('.break-contract').click(function () {
                             App.assurance_methods.breakContract($('.breakContract .patient-address').val().trim(), global_state.account);
                         });
-                        _context5.next = 35;
+                        _context5.next = 37;
                         break;
 
                     case 16:
                         if (!$('body').hasClass('patient')) {
-                            _context5.next = 35;
+                            _context5.next = 37;
                             break;
                         }
 
@@ -104,7 +104,31 @@ var pagesDataOnContractInit = function () {
                             App.assurance_methods.breakContract(global_state.account, $('.breakContract .dentist-address').val().trim());
                         });
 
-                    case 35:
+                        //login
+                        $(document).on('successResponseCoreDBApi', function (event) {
+                            if (event.response_data.token) {
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/patient/authenticate',
+                                    dataType: 'json',
+                                    data: {
+                                        token: event.response_data.token
+                                    },
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    },
+                                    success: function success(response) {
+                                        if (response.success) {}
+                                    }
+                                });
+                            }
+                        });
+
+                        $(document).on('errorResponseCoreDBApi', function (event) {
+                            console.log(event, 'errorResponseCoreDBApi');
+                        });
+
+                    case 37:
                     case "end":
                         return _context5.stop();
                 }
@@ -1262,12 +1286,3 @@ function calculateLogic() {
         });
     });
 }
-
-//login
-$(document).on('successResponseCoreDBApi', function (event) {
-    console.log(event, 'successResponseCoreDBApi');
-});
-
-$(document).on('errorResponseCoreDBApi', function (event) {
-    console.log(event, 'errorResponseCoreDBApi');
-});
