@@ -99,8 +99,8 @@
 @endif
 <script src="/assets/js/basic.js"></script>
 <script src="/dist/js/front-libs-script.js?v=1.0.14"></script>
-<script src="//dentacoin.com/assets/libs/civic-login/civic.js"></script>
-<script src="//dentacoin.com/assets/libs/facebook-login/facebook.js"></script>
+<script src="/assets/libs/civic-login/civic.js"></script>
+<script src="/assets/libs/facebook-login/facebook.js"></script>
 @yield("script_block")
 {{--<script src="/dist/js/front-script.js?v=1.0.13"></script>--}}
 <script src="/assets/js/index-compiled.js"></script>
