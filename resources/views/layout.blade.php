@@ -44,7 +44,7 @@
                 <ul itemscope="" itemtype="http://schema.org/SiteNavigationElement">
                     <li class="inline-block @if(!empty(Route::current())) @if(Route::current()->getName() == "home") active @endif @endif"><a href="{{route('home')}}" itemprop="url"><span itemprop="name">Dentists</span></a></li>
                     <li class="inline-block">|</li>
-                    <li class="inline-block @if(!empty(Route::current())) @if(Route::current()->getName() == "patient") active @endif @endif"><a href="{{route('patient')}}" itemprop="url"><span itemprop="name">Patients</span></a></li>
+                    <li class="inline-block @if(!empty(Route::current())) @if(Route::current()->getName() == "patient-access") active @endif @endif"><a href="{{route('patient-access')}}" itemprop="url"><span itemprop="name">Patients</span></a></li>
                     <li class="inline-block">
                         <a href="" itemprop="url" class="blue-green-white-btn sign-in"><span itemprop="name">SIGN IN</span></a>
                     </li>
