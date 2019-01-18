@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PatientController extends Controller{
+class PatientController extends Controller {
     protected function getNotLoggedView()   {
         return view('pages/patients');
     }
@@ -41,7 +41,7 @@ class PatientController extends Controller{
     protected function authenticate(Request $request) {
         var_dump($request->input());
         var_dump($request->input('token'));
-        return false;
+        die();
         session(['logged_patient' => true]);
     }
 }
