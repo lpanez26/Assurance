@@ -49,12 +49,12 @@ var pagesDataOnContractInit = function () {
                         $('.break-contract').click(function () {
                             App.assurance_methods.breakContract($('.breakContract .patient-address').val().trim(), global_state.account);
                         });
-                        _context5.next = 36;
+                        _context5.next = 37;
                         break;
 
                     case 16:
                         if (!$('body').hasClass('patient')) {
-                            _context5.next = 36;
+                            _context5.next = 37;
                             break;
                         }
 
@@ -109,7 +109,11 @@ var pagesDataOnContractInit = function () {
                             console.log(event, 'successResponseCoreDBApi');
                         });
 
-                    case 36:
+                        $(document).on('errorResponseCoreDBApi', function (event) {
+                            console.log(event, 'errorResponseCoreDBApi');
+                        });
+
+                    case 37:
                     case "end":
                         return _context5.stop();
                 }
