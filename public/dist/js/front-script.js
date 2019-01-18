@@ -281,7 +281,7 @@ var basic = {
         alert: null
     },
     init: function init(opt) {
-        basic.addCsrfTokenToAllAjax();
+        //basic.addCsrfTokenToAllAjax();
         //basic.stopMaliciousInspect();
     },
     cookies: {
@@ -597,6 +597,7 @@ var _require = require('./helper'),
 basic.init();
 
 $(document).ready(function () {
+
     App.init();
 });
 

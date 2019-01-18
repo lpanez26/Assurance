@@ -25629,6 +25629,7 @@ var _require = __webpack_require__(115),
 basic.init();
 
 $(document).ready(function () {
+
     App.init();
 });
 
