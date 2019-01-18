@@ -599,7 +599,7 @@ if($('body').hasClass('home')) {
                 },
                 success: function (response) {
                     if(response.success) {
-                        window.location.reload();
+
                     }
                 }
             });

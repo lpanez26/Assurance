@@ -65,7 +65,6 @@ class PatientController extends Controller {
             'type' => 'patient'
         ]]);
 
-        echo json_encode(array('success' => true));
-        die();
+        return redirect()->route('patient-access');
     }
 }
