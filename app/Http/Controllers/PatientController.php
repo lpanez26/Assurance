@@ -27,13 +27,6 @@ class PatientController extends Controller {
         }
     }
 
-    protected function logout(Request $request)    {
-        if($request->session()->has('logged_user'))    {
-            $request->session()->forget('logged_user');
-        }
-        return redirect()->route('patient-access');
-    }
-
     public function getPatientAccess()    {
         if($this->checkSession()) {
             //IF PATIENT HAVE NO EXISTING CONTRACTS
