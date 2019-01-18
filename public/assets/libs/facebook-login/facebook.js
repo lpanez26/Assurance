@@ -45,6 +45,7 @@ if(fb_custom_btn.length) {
                 //for exchange token with user data, but we do this on API level and we dont need it here
                 //fbGetData();
 
+                console.log($('meta[name="csrf-token"]').attr('content'), '$(\'meta[name="csrf-token"]\').attr(\'content\')');
                 $.ajax({
                     type: 'POST',
                     dataType: 'json',
