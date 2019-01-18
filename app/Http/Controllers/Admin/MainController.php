@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\AdminUser;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;

@@ -38,4 +38,6 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
         Route::post('/authenticate', 'PatientController@authenticate')->name('authenticate-patient');
     });
+
+    Route::post('/logout', 'Controller@userLogout')->name('user-logout');
 });

@@ -599,7 +599,7 @@ if($('body').hasClass('home')) {
                 },
                 success: function (response) {
                     if(response.success) {
-
+                        window.location.reload();
                     }
                 }
             });
@@ -622,6 +622,9 @@ if($('body').hasClass('home')) {
             $(this).closest('li').find('.question-content').toggle(300);
         });
     }
+} else if($('body').hasClass('logged-in')) {
+    //THIS IS FUNCTIONALITY ONLY FOR LOGGED IN USERS
+
 }
 
 function calculateLogic() {

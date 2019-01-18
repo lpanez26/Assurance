@@ -1183,7 +1183,9 @@ if ($('body').hasClass('home')) {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function success(response) {
-                    if (response.success) {}
+                    if (response.success) {
+                        window.location.reload();
+                    }
                 }
             });
         }
@@ -1205,6 +1207,9 @@ if ($('body').hasClass('home')) {
             $(this).closest('li').find('.question-content').toggle(300);
         });
     }
+} else if ($('body').hasClass('logged-in')) {
+    //THIS IS FUNCTIONALITY ONLY FOR LOGGED IN USERS
+
 }
 
 function calculateLogic() {

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Page;
 use App\PagesHtmlSection;
 use Illuminate\Support\Facades\DB;
-use Request;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -139,5 +139,18 @@ class Controller extends BaseController
 
     protected function refreshCaptcha() {
         return response()->json(['captcha' => captcha_img()]);
+    }
+
+    protected function userLogout(Request $request) {
+        $route = '';
+        if($request->session()->has('logged_user'))    {
+            if(session('logged_user')['type'] == 'dentist') {
+                $route = 'home';
+            }else if(session('logged_user')['type'] == 'patient') {
+                $route = 'patient-access';
+            }
+            $request->session()->forget('logged_user');
+        }
+        return redirect()->route($route);
     }
 }

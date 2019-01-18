@@ -18,7 +18,7 @@ class PatientController extends Controller {
     }
 
     public function checkSession()   {
-        if(!empty(session('logged_patient')) && session('logged_patient') == true)    {
+        if(!empty(session('logged_user')) && session('logged_user')['type'] == 'patient')    {
             //LOGGED
             return true;
         }else {
@@ -28,8 +28,8 @@ class PatientController extends Controller {
     }
 
     protected function logout(Request $request)    {
-        if($request->session()->has('logged_patient'))    {
-            $request->session()->forget('logged_patient');
+        if($request->session()->has('logged_user'))    {
+            $request->session()->forget('logged_user');
         }
         return redirect()->route('patient-access');
     }
@@ -57,11 +57,14 @@ class PatientController extends Controller {
             'name.required' => 'Name is required.',
         ]);
 
-        session(['logged_patient' => [
+        session(['logged_user' => [
             'token' => $request->input('token'),
             'email' => $request->input('email'),
             'name' => $request->input('name'),
+            'type' => 'patient'
         ]]);
-        return redirect()->route('patient-access');
+        
+        echo json_encode(array('success' => true));
+        die();
     }
 }

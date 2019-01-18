@@ -31,7 +31,7 @@
         var HOME_URL = '{{ route("home") }}';
     </script>
 </head>
-<body class="@if(!empty(Route::current())) {{Route::current()->getName()}} @else class-404 @endif">
+<body class="@if(!empty(Route::current())) {{Route::current()->getName()}} @else class-404 @endif @if(\App\Http\Controllers\PatientController::instance()->checkSession()) logged-in @endif">
 <header>
     <div class="container">
         <div class="row fs-0">
@@ -52,7 +52,23 @@
                     </ul>
                 </nav>
             @else
-                {{var_dump(session('logged_patient'))}}
+                <div class="col-xs-9 inline-block text-right logged-user">
+                    <a href="javascript:void(0)">
+                        <span>{{session('logged_user')['name']}}</span> <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                        <div class="hidden-box">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-xs-6 inline-block">
+                                        <a href="{{ route('user-logout') }}" class="logout"><i class="fa fa-power-off" aria-hidden="true"></i> Log out</a>
+                                    </div>
+                                    <div class="col-xs-6 inline-block">
+                                        <a href="javascript:void(0)" class="white-blue-green-btn">My account</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             @endif
         </div>
     </div>
