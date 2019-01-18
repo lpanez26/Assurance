@@ -36,7 +36,7 @@
                         <img alt="Two dentists" itemprop="contentUrl" src="/assets/uploads/patient-big.jpg"/>
                     </picture>
                     <span class="hidden-container">
-                        <a href="/patients" class="white-transparent-btn fs-30">I'm a Patient</a>
+                        <a href="/patient" class="white-transparent-btn fs-30">I'm a Patient</a>
                         <div class="hidden-label white-transparent-btn fs-30">I'm a Dentist</div>
                     </span>
                 </div>
