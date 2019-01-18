@@ -1169,6 +1169,8 @@ if ($('body').hasClass('home')) {
 
     //login
     $(document).on('successResponseCoreDBApi', function (event) {
+        console.log(event.response_data);
+        return false;
         if (event.response_data.token) {
             $.ajax({
                 type: 'POST',
