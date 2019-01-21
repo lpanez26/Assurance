@@ -98,8 +98,11 @@ contract ownerSettings is Ownable {
     bool public usd_over_dcn = true;
 
     function circuitBreaker() public onlyOwner {
-        if (contract_paused == false) { contract_paused = true; }
-        else { contract_paused = false; }
+        if(!contract_paused) {
+            contract_paused = true;
+        }else {
+            contract_paused = false;
+        }
     }
 
     function changePeriodToWithdraw(uint256 _period_to_withdraw) public onlyOwner {
@@ -119,7 +122,6 @@ contract ownerSettings is Ownable {
     }
 
     // ====== PRICE SETTERS ======
-
     function changeApiResultDcnUsdPrice(uint256 _api_result_dcn_usd_price) public onlyOwnerOrAdmin {
         api_result_dcn_usd_price = _api_result_dcn_usd_price;
     }
@@ -150,7 +152,6 @@ contract Assurance is ownerSettings, SafeMath {
     }
 
     struct dentistStruct {
-        address addr;
         bool exists;
         address[] patients_addresses; //list of patients addresses for THIS dentist
         mapping (address => contractStruct) contracts; //list of contracts for THIS dentist
@@ -181,7 +182,7 @@ contract Assurance is ownerSettings, SafeMath {
     }
 
     modifier checkIfPaused() {
-        require(contract_paused == false, "Contract is paused. Please try again later.");
+        require(!contract_paused, "Contract is paused. Please try again later.");
         _;
     }
     // ==================================== /MODIFIERS ====================================
@@ -243,7 +244,7 @@ contract Assurance is ownerSettings, SafeMath {
         //check if dentist is registered in the dentists mapping, so there cannot be overwrite
         require(!dentists[msg.sender].exists, "A Dentist can only be registered once in the Assurance contract.");
 
-        dentists[msg.sender] = dentistStruct(msg.sender, true, new address[](0));
+        dentists[msg.sender] = dentistStruct(true, new address[](0));
         dentists_addresses.push(msg.sender);
         emit logSuccessfulDentistRegistration(msg.sender, now);
     }
@@ -337,21 +338,17 @@ contract Assurance is ownerSettings, SafeMath {
     /// @dev add a fallback method including require(msg.data.length == 0) to prevent invalid calls.
 
     // ====== GETTERS ======
-    function getDentist(address _dentist_addr) public view returns(address) {
-        return dentists[_dentist_addr].addr;
+    function getDentist(address _dentist_addr) public view returns(bool, address[] memory) {
+        return (dentists[_dentist_addr].exists, dentists[_dentist_addr].patients_addresses);
     }
 
     function getDentistsArr() public view returns(address[] memory) {
         return dentists_addresses;
     }
 
-    function getPatient(address _patient_addr, address _dentist_addr) public view validPatientDentistAddresses(_patient_addr, _dentist_addr) returns(address, address, uint256, bool, bool, bool, uint256, uint256, string memory) {
+    function getPatient(address _patient_addr, address _dentist_addr) public view validPatientDentistAddresses(_patient_addr, _dentist_addr) returns(uint256, bool, bool, bool, uint256, uint256, string memory) {
         contractStruct memory patient = dentists[_dentist_addr].contracts[_patient_addr];
-        return (_dentist_addr, _patient_addr, patient.next_transfer, patient.approved_by_dentist, patient.approved_by_patient, patient.validation_checked, patient.value_usd, patient.value_dcn, patient.contract_ipfs_hash);
-    }
-
-    function getPatientsArrForDentist(address _dentist_addr) public view returns(address[] memory) {
-        return dentists[_dentist_addr].patients_addresses;
+        return (patient.next_transfer, patient.approved_by_dentist, patient.approved_by_patient, patient.validation_checked, patient.value_usd, patient.value_dcn, patient.contract_ipfs_hash);
     }
 
     function getWaitingContractsForPatient(address _patient_addr) public view returns(address[] memory) {
