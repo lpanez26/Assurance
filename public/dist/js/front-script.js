@@ -1195,12 +1195,14 @@ if ($('body').hasClass('home')) {
             $(this).closest('li').find('.question-content').toggle(300);
         });
     }
-} else if ($('body').hasClass('logged-in')) {
-    //THIS IS FUNCTIONALITY ONLY FOR LOGGED IN USERS
-    $('.logged-user > a').hover(function () {
-        $('logged-user .hidden-box').show();
+}
+
+//THIS IS FUNCTIONALITY ONLY FOR LOGGED IN USERS
+if ($('body').hasClass('logged-in')) {
+    $('.logged-user > a, .logged-user .hidden-box').hover(function () {
+        $('.logged-user .hidden-box').show();
     }, function () {
-        $('logged-user .hidden-box').hide();
+        $('.logged-user .hidden-box').hide();
     });
 }
 

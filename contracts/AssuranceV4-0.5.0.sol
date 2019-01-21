@@ -106,6 +106,10 @@ contract ownerSettings is Ownable {
         period_to_withdraw = _period_to_withdraw;
     }
 
+    function changeDentacoinTokenAddress(address _dentacoin_token_address) public onlyOwner {
+        dentacoin_token_address = _dentacoin_token_address;
+    }
+
     function changeMinimumAllowedAmount(uint256 _min_allowed_amount) public onlyOwner {
         min_allowed_amount = _min_allowed_amount;
     }
@@ -130,7 +134,9 @@ contract Assurance is ownerSettings, SafeMath {
     // ==================================== STATE ====================================
     address public AssuranceContract = address(this);
     //DentacoinToken address
-    DentacoinToken dcn = DentacoinToken(0x19f49a24c7CB0ca1cbf38436A86656C2F30ab362);
+    address public dentacoin_token_address = 0x19f49a24c7CB0ca1cbf38436A86656C2F30ab362;
+    //DentacoinToken instance
+    DentacoinToken dcn = DentacoinToken(dentacoin_token_address);
 
     struct contractStruct {
         uint256 next_transfer;
@@ -168,9 +174,9 @@ contract Assurance is ownerSettings, SafeMath {
     // ==================================== MODIFIERS ====================================
     modifier validPatientDentistAddresses(address _patient_addr, address _dentist_addr)  {
         //check if both patient and dentist address are valid
-        require(_patient_addr != address(0) && _dentist_addr != address(0), "Patient and dentist addresses must be valid addresses.");
+        require(_patient_addr != address(0) && _dentist_addr != address(0), "Patient and Dentist addresses must be valid.");
         //check if valid dentist and patient address are different
-        require(_patient_addr != _dentist_addr, "Patient and dentist addresses must be different.");
+        require(_patient_addr != _dentist_addr, "Patient and Dentist addresses cannot match.");
         _;
     }
 
@@ -196,15 +202,15 @@ contract Assurance is ownerSettings, SafeMath {
     //can be called by patient and by dentist
     function registerContract(address _patient_addr, address _dentist_addr, uint256 _value_usd, uint256 _value_dcn, uint256 _date_start_contract, string memory _contract_ipfs_hash) public validPatientDentistAddresses(_patient_addr, _dentist_addr) checkIfPaused {
         //check if one of the patient or dentist is the one who call the method
-        require(msg.sender == _patient_addr || msg.sender == _dentist_addr, "Only patients and dentists can create contract for them selves.");
+        require(msg.sender == _patient_addr || msg.sender == _dentist_addr, "Contract cannot be created for other parties. A Patient and Dentist can only create a contract between themselves.");
         //check if this dentist is already registered one in the contract (used registerDentist method to register him self)
-        require(dentists[_dentist_addr].exists, "Please select a dentist who is registered on the Assurance contract.");
+        require(dentists[_dentist_addr].exists, "Please select a Dentist who is already registered in the Assurance contract database.");
         //check if this patient already allowed Assurance to use his DCN in DentacoinToken
-        require(dcn.allowance(_patient_addr, AssuranceContract) >= min_allowed_amount, "This patient has not allowed Assurance contract to manage his Dentacoins.");
+        require(dcn.allowance(_patient_addr, AssuranceContract) >= min_allowed_amount, "This Patient has not allowed the Assurance contract to automatically manage their Dentacoin tokens.");
         //check if value for USD and DCN are valid
         require(_value_usd > 0 && _value_dcn > 0, "USD and DCN values must be valid.");
         //check if this patient is not already registered for this dentist, so there cannot be overwrite
-        require(dentists[_dentist_addr].contracts[_patient_addr].next_transfer == 0, "Only one contract is allowed per pair of patient and dentist.");
+        require(dentists[_dentist_addr].contracts[_patient_addr].next_transfer == 0, "Only one contract is allowed per Patient - Dentist pair.");
 
 
         //if dentist is the one who calls the method the patient should approve the new contract
@@ -235,7 +241,7 @@ contract Assurance is ownerSettings, SafeMath {
     //called by dentist
     function registerDentist() public checkIfPaused {
         //check if dentist is registered in the dentists mapping, so there cannot be overwrite
-        require(!dentists[msg.sender].exists, "Dentist can be registered only once in the Assurance contract.");
+        require(!dentists[msg.sender].exists, "A Dentist can only be registered once in the Assurance contract.");
 
         dentists[msg.sender] = dentistStruct(msg.sender, true, new address[](0));
         dentists_addresses.push(msg.sender);
@@ -246,17 +252,17 @@ contract Assurance is ownerSettings, SafeMath {
         //'caching' the check for next withdraw for same patient
         if(!dentists[msg.sender].contracts[_patient_addr].validation_checked) {
             //check if both patient and dentist address are valid
-            require(_patient_addr != address(0) && msg.sender != address(0), "Patient and dentist addresses must be valid addresses.");
+            require(_patient_addr != address(0) && msg.sender != address(0), "Patient and Dentist addresses must be valid.");
             //check if valid dentist and patient address are different
-            require(_patient_addr != msg.sender, "Patient and dentist addresses must be different.");
+            require(_patient_addr != msg.sender, "Patient and Dentist addresses cannot match.");
             //check if contract is approved by the dentist and by the patient
-            require(dentists[msg.sender].contracts[_patient_addr].approved_by_dentist && dentists[msg.sender].contracts[_patient_addr].approved_by_patient, "In order contract to be active both patient and dentist must agree with the contract terms.");
+            require(dentists[msg.sender].contracts[_patient_addr].approved_by_dentist && dentists[msg.sender].contracts[_patient_addr].approved_by_patient, "Both Patient and Dentist must agree to the contract terms, before the contract becomes active.");
 
             dentists[msg.sender].contracts[_patient_addr].validation_checked = true;
         }
 
         //check if time passed for dentist to withdraw his dentacoins from patient
-        require(now > dentists[msg.sender].contracts[_patient_addr].next_transfer, "Please wait, you cannot withdraw Dentacoins yet.");
+        require(now > dentists[msg.sender].contracts[_patient_addr].next_transfer, "Please wait, you cannot withdraw your Dentacoin tokens yet.");
 
         uint256 months_num = 1;
         //time range from the last withdraw from this patient till now
@@ -299,9 +305,9 @@ contract Assurance is ownerSettings, SafeMath {
     //can be called from patient and dentist
     function breakContract(address _patient_addr, address _dentist_addr) public validPatientDentistAddresses(_patient_addr, _dentist_addr) checkIfPaused {
         //check if patient or dentist calling
-        require(msg.sender == _patient_addr || msg.sender == _dentist_addr, "Only patient and dentist can break contract.");
+        require(msg.sender == _patient_addr || msg.sender == _dentist_addr, "Only the Patient, or the Dentist can void the contract.");
         //check if this patient is registered for this dentist
-        require(dentists[_dentist_addr].contracts[_patient_addr].next_transfer > 0, "This patient is not in contract with this dentist.");
+        require(dentists[_dentist_addr].contracts[_patient_addr].next_transfer > 0, "This Patient does not have a contract with this Dentist.");
 
         //if there is proposal recorded from this dentist for this patient ----> delete it
         if(patient_contract_history[_patient_addr].dentists[_dentist_addr].exists) {

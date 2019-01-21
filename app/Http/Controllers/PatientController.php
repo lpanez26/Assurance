@@ -28,6 +28,14 @@ class PatientController extends Controller {
     }
 
     public function getPatientAccess()    {
+        /*session(['logged_user' => [
+            'token' => 'test-token',
+            'email' => 'test@abv.bg',
+            'name' => 'hello-test',
+            'type' => 'patient'
+        ]]);*/
+
+
         if($this->checkSession()) {
             //IF PATIENT HAVE NO EXISTING CONTRACTS
             return $this->getStartFirstContractView();

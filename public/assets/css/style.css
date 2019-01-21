@@ -4744,10 +4744,23 @@ header {
         header > .container nav ul li.active {
           font-family: 'Lato-Black';
           text-transform: uppercase; }
-    header > .container .logged-user > a .hidden-box {
+    header > .container .logged-user > a {
+      font-size: 16px;
+      color: black;
+      display: inline-block;
+      padding: 10px 0; }
+      header > .container .logged-user > a span {
+        vertical-align: middle; }
+      header > .container .logged-user > a i {
+        font-size: 30px;
+        margin-left: 15px;
+        vertical-align: middle; }
+    header > .container .logged-user .hidden-box {
       display: none;
       position: absolute;
-      top: 100%;
+      min-width: 270px;
+      padding: 15px 0;
+      top: calc(100% - 10px);
       right: 0;
       background-color: white;
       z-index: 50;
@@ -4756,8 +4769,16 @@ header {
       -moz-box-shadow: 0px 0px 7px 3px rgba(234, 234, 234, 0.5);
       -ms-box-shadow: 0px 0px 7px 3px rgba(234, 234, 234, 0.5);
       box-shadow: 0px 0px 7px 3px rgba(234, 234, 234, 0.5); }
-    header > .container .logged-user > a:hover .hidden-box {
-      display: block; }
+      header > .container .logged-user .hidden-box .white-blue-green-btn {
+        font-size: 16px;
+        padding: 5px 8px; }
+      header > .container .logged-user .hidden-box .logout {
+        font-size: 16px;
+        color: black; }
+        header > .container .logged-user .hidden-box .logout i {
+          font-size: 24px;
+          vertical-align: middle;
+          margin-right: 5px; }
 
 footer hr {
   border-width: 2px;

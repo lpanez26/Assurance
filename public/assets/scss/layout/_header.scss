@@ -35,19 +35,41 @@ header {
         }
         .logged-user {
             > a {
-                .hidden-box {
-                    display: none;
-                    position: absolute;
-                    top: 100%;
-                    right: 0;
-                    background-color: white;
-                    z-index: 50;
-                    border: 1px solid #e8e8e8;
-                    @include box-shadow(0px 0px 7px 3px rgba(234, 234, 234, 0.5));
+                font-size: 16px;
+                color: black;
+                display: inline-block;
+                padding: 10px 0;
+                span {
+                    vertical-align: middle;
                 }
-                &:hover {
-                    .hidden-box {
-                        display: block;
+                i {
+                    font-size: 30px;
+                    margin-left: 15px;
+                    vertical-align: middle;
+                }
+            }
+            .hidden-box {
+                display: none;
+                position: absolute;
+                min-width: 270px;
+                padding: 15px 0;
+                top: calc(100% - 10px);
+                right: 0;
+                background-color: white;
+                z-index: 50;
+                border: 1px solid #e8e8e8;
+                @include box-shadow(0px 0px 7px 3px rgba(234, 234, 234, 0.5));
+                .white-blue-green-btn {
+                    font-size: 16px;
+                    padding: 5px 8px;
+                }
+                .logout {
+                    font-size: 16px;
+                    color: black;
+                    i {
+                        font-size: 24px;
+                        vertical-align: middle;
+                        margin-right: 5px;
                     }
                 }
             }

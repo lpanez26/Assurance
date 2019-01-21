@@ -57,7 +57,7 @@
                         <span>{{session('logged_user')['name']}}</span> <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                     </a>
                     <div class="hidden-box">
-                        <div class="container-fluid">
+                        <div class="container-fluid text-center">
                             <div class="row">
                                 <div class="col-xs-6 inline-block">
                                     <a href="{{ route('user-logout') }}" class="logout"><i class="fa fa-power-off" aria-hidden="true"></i> Log out</a>
@@ -109,7 +109,7 @@
         </div>
     </div>
 </footer>
-{{--//Show the sticky calculate button only for dentists--}}
+{{--Show the sticky calculate button only for dentists--}}
 @if(!empty(Route::current()) && Route::current()->getName() == 'home')
     <figure class="fixed-calculate-button" itemscope="" itemtype="http://schema.org/ImageObject">
         <a href="javascript:void(0);" class="open-calculator">
@@ -117,6 +117,7 @@
         </a>
     </figure>
 @endif
+{{--/Show the sticky calculate button only for dentists--}}
 <script src="/assets/js/basic.js"></script>
 <script src="/dist/js/front-libs-script.js?v=1.0.14"></script>
 @yield("script_block")
