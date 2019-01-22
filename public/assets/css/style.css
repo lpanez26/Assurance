@@ -4561,10 +4561,13 @@ input[type='text'] {
         background: #f0f9ff;
         color: #126585; }
       .my-profile-menu .wrapper nav li a figure {
-        padding-right: 15px;
-        padding-left: 15px; }
+        padding-right: 10px;
+        padding-left: 15px;
+        vertical-align: middle; }
         .my-profile-menu .wrapper nav li a figure img {
-          width: 15px; }
+          width: 20px; }
+      .my-profile-menu .wrapper nav li a span {
+        vertical-align: middle; }
 
 .my-profile-page-content {
   width: calc(100% - 300px);
