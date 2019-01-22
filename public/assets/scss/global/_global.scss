@@ -660,7 +660,7 @@ input[type='text'] {
 
 .my-profile-menu {
     width: 300px;
-    padding: 15px; 
+    padding: 15px;
     .wrapper {
         border: 1px solid #f3f3f3;
         padding-top: 20px;
@@ -705,4 +705,5 @@ input[type='text'] {
 .my-profile-page-content {
     width: calc(100% - 300px);
     padding: 15px;
+    font-size: 16px; 
 }
