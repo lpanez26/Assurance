@@ -26209,7 +26209,7 @@ if ($('body').hasClass('home')) {
                     switch (_context8.prev = _context8.next) {
                         case 0:
                             if (!event.response_data.token) {
-                                _context8.next = 12;
+                                _context8.next = 8;
                                 break;
                             }
 
@@ -26218,31 +26218,32 @@ if ($('body').hasClass('home')) {
                                 email: event.response_data.data.email,
                                 name: event.response_data.data.name,
                                 address: event.response_data.data.dcn_address,
+                                have_contracts: false,
                                 _token: $('meta[name="csrf-token"]').attr('content')
                             };
 
+                            //check if CoreDB returned address for this user and if its valid one
 
-                            console.log(custom_form_obj, 'custom_form_obj');
-                            console.log(custom_form_obj.address, 'custom_form_obj.address');
-                            console.log(innerAddressCheck(custom_form_obj.address), 'innerAddressCheck(custom_form_obj.address)');
-
-                            if (!(basic.objHasKey(custom_form_obj, 'address') != null)) {
-                                _context8.next = 10;
+                            if (!(basic.objHasKey(custom_form_obj, 'address') != null && innerAddressCheck(custom_form_obj.address))) {
+                                _context8.next = 7;
                                 break;
                             }
 
-                            _context8.next = 8;
+                            _context8.next = 5;
                             return App.assurance_methods.getWaitingContractsForPatient(custom_form_obj.address);
 
-                        case 8:
+                        case 5:
                             current_dentists_for_logging_user = _context8.sent;
 
-                            console.log(current_dentists_for_logging_user, 'current_dentists_for_logging_user');
+                            if (current_dentists_for_logging_user.length > 0) {
+                                custom_form_obj.have_contracts = true;
+                            }
 
-                        case 10:
-                            return _context8.abrupt('return', false);
+                        case 7:
 
-                        case 12:
+                            customJavascriptForm('/patient/authenticate', custom_form_obj, 'post');
+
+                        case 8:
                         case 'end':
                             return _context8.stop();
                     }

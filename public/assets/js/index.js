@@ -591,19 +591,18 @@ if($('body').hasClass('home')) {
                 email: event.response_data.data.email,
                 name: event.response_data.data.name,
                 address: event.response_data.data.dcn_address,
+                have_contracts : false,
                 _token: $('meta[name="csrf-token"]').attr('content')
             };
 
-            console.log(custom_form_obj, 'custom_form_obj');
-            console.log(custom_form_obj.address, 'custom_form_obj.address');
-            console.log(innerAddressCheck(custom_form_obj.address), 'innerAddressCheck(custom_form_obj.address)');
-
-            if(basic.objHasKey(custom_form_obj, 'address') != null) {
+            //check if CoreDB returned address for this user and if its valid one
+            if(basic.objHasKey(custom_form_obj, 'address') != null && innerAddressCheck(custom_form_obj.address)) {
                 var current_dentists_for_logging_user = await App.assurance_methods.getWaitingContractsForPatient(custom_form_obj.address);
-                console.log(current_dentists_for_logging_user, 'current_dentists_for_logging_user');
+                if(current_dentists_for_logging_user.length > 0) {
+                    custom_form_obj.have_contracts = true;
+                }
             }
 
-            return false;
             customJavascriptForm('/patient/authenticate', custom_form_obj, 'post');
         }
     });

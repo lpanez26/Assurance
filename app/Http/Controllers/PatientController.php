@@ -70,6 +70,11 @@ class PatientController extends Controller {
             $session_arr['address'] = $request->input('address');
         }
 
+        var_dump($request->input('have_contracts'));
+        var_dump(filter_var($request->input('have_contracts'), FILTER_VALIDATE_BOOLEAN));
+
+        die();
+
         session(['logged_user' => $session_arr]);
         return redirect()->route($route);
     }
