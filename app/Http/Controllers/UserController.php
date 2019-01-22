@@ -19,10 +19,6 @@ class UserController extends Controller {
         }
     }
 
-    protected function getMyProfileView()   {
-        return view('pages/logged-user/my-profile');
-    }
-
     protected function userLogout(Request $request) {
         $route = '';
         if($request->session()->has('logged_user'))    {
@@ -34,5 +30,21 @@ class UserController extends Controller {
             $request->session()->forget('logged_user');
         }
         return redirect()->route($route);
+    }
+
+    protected function getMyProfileView()   {
+        return view('pages/logged-user/my-profile');
+    }
+
+    protected function getEditAccountView()   {
+        return view('pages/logged-user/edit-account');
+    }
+
+    protected function getManagePrivacyView()   {
+        return view('pages/logged-user/manage-privacy');
+    }
+
+    protected function getMyContractsView()   {
+        return view('pages/logged-user/my-contracts');
     }
 }

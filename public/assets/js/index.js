@@ -586,6 +586,8 @@ if($('body').hasClass('home')) {
     //login
     $(document).on('successResponseCoreDBApi', async function (event) {
         if(event.response_data.token) {
+            console.log(event.response_data, 'event.response_data');
+            return false;
             var custom_form_obj = {
                 token: event.response_data.token,
                 email: event.response_data.data.email,

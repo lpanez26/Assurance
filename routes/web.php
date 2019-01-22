@@ -33,8 +33,6 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
     Route::post('/get-calculator-result', 'HomeController@getCalculatorResult')->name('get-calculator-result');
     //======================================= /AJAX ========================================
 
-
-
     Route::group(['prefix' => 'patient', 'middleware' => 'HandlePatientSession'], function () {
         Route::get('/', 'PatientController@getPatientAccess')->name('patient-access');
 
@@ -42,6 +40,12 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
     });
 
     Route::get('/my-profile', 'UserController@getMyProfileView')->middleware('HandleUserSession')->name('my-profile');
+
+    Route::get('/edit-account', 'UserController@getEditAccountView')->middleware('HandleUserSession')->name('edit-account');
+
+    Route::get('/manage-privacy', 'UserController@getManagePrivacyView')->middleware('HandleUserSession')->name('manage-privacy');
+
+    Route::get('/my-contracts', 'UserController@getMyContractsView')->middleware('HandleUserSession')->name('my-contracts');
 
     Route::get('/user-logout', 'UserController@userLogout')->name('user-logout');
 });
