@@ -15,7 +15,7 @@ class PatientController extends Controller {
                 return view('pages/logged-user/patient/start-first-contract');
             }
         }else {
-            return (new UserController())->getNotLoggedView();
+            return (new HomeController())->getView();
         }
     }
 

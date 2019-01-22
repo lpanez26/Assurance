@@ -9,10 +9,6 @@ class UserController extends Controller {
         return new UserController();
     }
 
-    public function getNotLoggedView()   {
-        return view('pages/homepage');
-    }
-
     public function checkSession()   {
         if(!empty(session('logged_user')) && (session('logged_user')['type'] == 'patient' || session('logged_user')['type'] == 'dentist'))    {
             //LOGGED

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Closure;
 
@@ -18,7 +19,7 @@ class HandleUserSession
         $user_controller = new UserController();
         if(!$user_controller->checkSession() && !array_key_exists('token', $request->input()) && !array_key_exists('email', $request->input())) {
             //NOT LOGGED AND NOT TRYING TO LOG IN
-            return response($user_controller->getNotLoggedView());
+            return response((new HomeController())->getView());
         }
         return $next($request);
     }
