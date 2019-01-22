@@ -28,6 +28,7 @@ class PatientController extends Controller {
     }
 
     public function getPatientAccess()    {
+        var_dump(session('have_contracts'));
         /*session(['logged_user' => [
             'token' => 'test-token',
             'email' => 'test@abv.bg',
@@ -62,20 +63,19 @@ class PatientController extends Controller {
             'token' => $request->input('token'),
             'email' => $request->input('email'),
             'name' => $request->input('name'),
-            'type' => 'patient'
+            'type' => 'patient',
+            'have_contracts' => false
         ];
 
-        $route = '';
         if(!empty($request->input('address'))) {
             $session_arr['address'] = $request->input('address');
         }
 
-        var_dump($request->input('have_contracts'));
-        var_dump(filter_var($request->input('have_contracts'), FILTER_VALIDATE_BOOLEAN));
-
-        die();
+        if(filter_var($request->input('have_contracts'), FILTER_VALIDATE_BOOLEAN)) {
+            $session_arr['have_contracts'] = true;
+        }
 
         session(['logged_user' => $session_arr]);
-        return redirect()->route($route);
+        return redirect()->route('patient-access');
     }
 }
