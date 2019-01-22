@@ -19,7 +19,7 @@ class HandleUserSession
         $user_controller = new UserController();
         if(!$user_controller->checkSession() && !array_key_exists('token', $request->input()) && !array_key_exists('email', $request->input())) {
             //NOT LOGGED AND NOT TRYING TO LOG IN
-            return response((new HomeController())->redirectToHome());
+            return (new HomeController())->redirectToHome();
         }
         return $next($request);
     }
