@@ -5,9 +5,18 @@ $screen-xs: 768px;
 $dark_color: #212121;
 $blue_green_color: #126585;
 $beige_color: #fafafa;
+$solid_gray: #f2f2f2;
 
 .dark-color {
     color: $dark_color;
+}
+
+.solid-gray-color {
+    color: $solid_gray;
+}
+
+.solid-gray-color-background {
+    background-color: $solid_gray;
 }
 
 .dark-color-background {

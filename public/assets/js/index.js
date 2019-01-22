@@ -578,20 +578,25 @@ if($('body').hasClass('home')) {
     if($('.ask-your-dentist-for-assurance').length) {
         $('.ask-your-dentist-for-assurance').click(function() {
             $('html, body').animate({scrollTop: $('#find-your-dentist').offset().top}, 500);
-            $('#find-your-dentist #search-dentist').focus();
+            $('#find-your-dentist .search-dentist-input').focus();
             return false;
         });
     }
 
     //login
     $(document).on('successResponseCoreDBApi', function (event) {
+        console.log(event);
+        console.log(event.response_data, 'event.response_data');
+
         if(event.response_data.token) {
-            customJavascriptForm('/patient/authenticate', {
+            var custom_form_obj = {
                 token: event.response_data.token,
                 email: event.response_data.data.email,
                 name: event.response_data.data.name,
                 _token: $('meta[name="csrf-token"]').attr('content')
-            }, 'post');
+            };
+
+            customJavascriptForm('/patient/authenticate', custom_form_obj, 'post');
         }
     });
 

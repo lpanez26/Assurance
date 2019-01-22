@@ -155,7 +155,7 @@
                     <h2 class="lato-bold fs-45 padding-bottom-50">FIND YOUR DENTIST</h2>
                 </div>
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2 text-center">
-                    <input type="text" class="green-arrow-background" id="search-dentist" placeholder="Search by location or name..."/>
+                    <input type="text" class="green-arrow-background search-dentist-input" placeholder="Search by location or name..."/>
                 </div>
             </div>
         </div>

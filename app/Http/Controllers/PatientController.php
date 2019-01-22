@@ -28,12 +28,12 @@ class PatientController extends Controller {
     }
 
     public function getPatientAccess()    {
-        /*session(['logged_user' => [
+        session(['logged_user' => [
             'token' => 'test-token',
             'email' => 'test@abv.bg',
             'name' => 'hello-test',
             'type' => 'patient'
-        ]]);*/
+        ]]);
 
 
         if($this->checkSession()) {
@@ -58,12 +58,15 @@ class PatientController extends Controller {
             'name.required' => 'Name is required.',
         ]);
 
-        session(['logged_user' => [
+        $session_arr = [
             'token' => $request->input('token'),
             'email' => $request->input('email'),
             'name' => $request->input('name'),
-            'type' => 'patient'
-        ]]);
+            'type' => 'patient',
+            /*'have_contracts' ->*/
+        ];
+
+        session(['logged_user' => $session_arr]);
         return redirect()->route('patient-access');
     }
 }
