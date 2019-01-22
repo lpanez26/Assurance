@@ -584,19 +584,26 @@ if($('body').hasClass('home')) {
     }
 
     //login
-    $(document).on('successResponseCoreDBApi', function (event) {
-        console.log(event);
-        console.log(event.response_data, 'event.response_data');
-        return false;
-
+    $(document).on('successResponseCoreDBApi', async function (event) {
         if(event.response_data.token) {
             var custom_form_obj = {
                 token: event.response_data.token,
                 email: event.response_data.data.email,
                 name: event.response_data.data.name,
+                address: event.response_data.data.dcn_address,
                 _token: $('meta[name="csrf-token"]').attr('content')
             };
 
+            console.log(custom_form_obj, 'custom_form_obj');
+            console.log(custom_form_obj.address, 'custom_form_obj.address');
+            console.log(innerAddressCheck(custom_form_obj.address), 'innerAddressCheck(custom_form_obj.address)');
+
+            if(basic.objHasKey(custom_form_obj, 'address') != null) {
+                var current_dentists_for_logging_user = await App.assurance_methods.getWaitingContractsForPatient(custom_form_obj.address);
+                console.log(current_dentists_for_logging_user, 'current_dentists_for_logging_user');
+            }
+
+            return false;
             customJavascriptForm('/patient/authenticate', custom_form_obj, 'post');
         }
     });

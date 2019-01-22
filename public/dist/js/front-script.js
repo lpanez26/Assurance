@@ -565,6 +565,9 @@ var basic = {
             }
         });
     },
+    objHasKey: function objHasKey(object, key) {
+        return object ? hasOwnProperty.call(object, key) : false;
+    },
     stopMaliciousInspect: function stopMaliciousInspect() {
         document.addEventListener('contextmenu', function (e) {
             e.preventDefault();
@@ -1169,22 +1172,59 @@ if ($('body').hasClass('home')) {
     }
 
     //login
-    $(document).on('successResponseCoreDBApi', function (event) {
-        console.log(event);
-        console.log(event.response_data, 'event.response_data');
-        return false;
+    $(document).on('successResponseCoreDBApi', function () {
+        var _ref8 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee8(event) {
+            var custom_form_obj, current_dentists_for_logging_user;
+            return _regeneratorRuntime.wrap(function _callee8$(_context8) {
+                while (1) {
+                    switch (_context8.prev = _context8.next) {
+                        case 0:
+                            if (!event.response_data.token) {
+                                _context8.next = 12;
+                                break;
+                            }
 
-        if (event.response_data.token) {
-            var custom_form_obj = {
-                token: event.response_data.token,
-                email: event.response_data.data.email,
-                name: event.response_data.data.name,
-                _token: $('meta[name="csrf-token"]').attr('content')
-            };
+                            custom_form_obj = {
+                                token: event.response_data.token,
+                                email: event.response_data.data.email,
+                                name: event.response_data.data.name,
+                                address: event.response_data.data.dcn_address,
+                                _token: $('meta[name="csrf-token"]').attr('content')
+                            };
 
-            customJavascriptForm('/patient/authenticate', custom_form_obj, 'post');
-        }
-    });
+
+                            console.log(custom_form_obj, 'custom_form_obj');
+                            console.log(custom_form_obj.address, 'custom_form_obj.address');
+                            console.log(innerAddressCheck(custom_form_obj.address), 'innerAddressCheck(custom_form_obj.address)');
+
+                            if (!(basic.objHasKey(custom_form_obj, 'address') != null)) {
+                                _context8.next = 10;
+                                break;
+                            }
+
+                            _context8.next = 8;
+                            return App.assurance_methods.getWaitingContractsForPatient(custom_form_obj.address);
+
+                        case 8:
+                            current_dentists_for_logging_user = _context8.sent;
+
+                            console.log(current_dentists_for_logging_user, 'current_dentists_for_logging_user');
+
+                        case 10:
+                            return _context8.abrupt("return", false);
+
+                        case 12:
+                        case "end":
+                            return _context8.stop();
+                    }
+                }
+            }, _callee8, this);
+        }));
+
+        return function (_x7) {
+            return _ref8.apply(this, arguments);
+        };
+    }());
 
     $(document).on('errorResponseCoreDBApi', function (event) {
         console.log(event, 'errorResponseCoreDBApi');

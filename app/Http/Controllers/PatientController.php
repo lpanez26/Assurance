@@ -62,11 +62,15 @@ class PatientController extends Controller {
             'token' => $request->input('token'),
             'email' => $request->input('email'),
             'name' => $request->input('name'),
-            'type' => 'patient',
-            /*'have_contracts' ->*/
+            'type' => 'patient'
         ];
 
+        $route = '';
+        if(!empty($request->input('address'))) {
+            $session_arr['address'] = $request->input('address');
+        }
+
         session(['logged_user' => $session_arr]);
-        return redirect()->route('patient-access');
+        return redirect()->route($route);
     }
 }

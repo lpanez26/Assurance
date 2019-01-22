@@ -287,6 +287,9 @@ var basic = {
             }
         });
     },
+    objHasKey: function(object, key) {
+        return object ? hasOwnProperty.call(object, key) : false;
+    },
     stopMaliciousInspect: function()  {
         document.addEventListener('contextmenu', function(e) {
             e.preventDefault();
