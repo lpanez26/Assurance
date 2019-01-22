@@ -13,10 +13,6 @@ class PatientController extends Controller {
         return view('pages/patient');
     }
 
-    protected function getStartFirstContractView()   {
-        return view('pages/logged-patient/start-first-contract');
-    }
-
     public function checkSession()   {
         if(!empty(session('logged_user')) && session('logged_user')['type'] == 'patient')    {
             //LOGGED
@@ -27,24 +23,15 @@ class PatientController extends Controller {
         }
     }
 
-    public function getPatientAccess()    {
-        var_dump(session('logged_user'));
-        var_dump(session('logged_user')['have_contracts']);
-        die();
-        /*session(['logged_user' => [
-            'token' => 'test-token',
-            'email' => 'test@abv.bg',
-            'name' => 'hello-test',
-            'type' => 'patient'
-        ]]);*/
-
-
+    protected function getPatientAccess()    {
         if($this->checkSession()) {
-            //IF PATIENT HAVE NO EXISTING CONTRACTS
-            return $this->getStartFirstContractView();
-
-            //IF PATIENT HAVE EXISTING CONTRACTS
-
+            if(filter_var(session('logged_user')['have_contracts'], FILTER_VALIDATE_BOOLEAN)) {
+                //IF PATIENT HAVE EXISTING CONTRACTS
+                return view('pages/logged-patient/have-contracts');
+            } else {
+                //IF PATIENT HAVE NO EXISTING CONTRACTS
+                return view('pages/logged-patient/start-first-contract');
+            }
         }else {
             return $this->getNotLoggedView();
         }

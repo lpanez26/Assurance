@@ -96,6 +96,10 @@ contract ownerSettings is Ownable {
     uint256 public api_result_dcn_usd_price = 1700000; //usd for one dcn
     uint256 public api_decimals = 10; //decimals, because solidity doesn't support float at this time
     bool public usd_over_dcn = true;
+    //DentacoinToken address
+    address public dentacoin_token_address = 0x19f49a24c7CB0ca1cbf38436A86656C2F30ab362;
+    //DentacoinToken instance
+    DentacoinToken dcn = DentacoinToken(dentacoin_token_address);
 
     function circuitBreaker() public onlyOwner {
         if(!contract_paused) {
@@ -135,10 +139,6 @@ contract ownerSettings is Ownable {
 contract Assurance is ownerSettings, SafeMath {
     // ==================================== STATE ====================================
     address public AssuranceContract = address(this);
-    //DentacoinToken address
-    address public dentacoin_token_address = 0x19f49a24c7CB0ca1cbf38436A86656C2F30ab362;
-    //DentacoinToken instance
-    DentacoinToken dcn = DentacoinToken(dentacoin_token_address);
 
     struct contractStruct {
         uint256 next_transfer;
