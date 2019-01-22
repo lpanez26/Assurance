@@ -31,7 +31,7 @@
         var HOME_URL = '{{ route("home") }}';
     </script>
 </head>
-<body class="@if(!empty(Route::current())) {{Route::current()->getName()}} @else class-404 @endif @if(\App\Http\Controllers\PatientController::instance()->checkSession()) logged-in @endif">
+<body class="@if(!empty(Route::current())) {{Route::current()->getName()}} @else class-404 @endif @if(\App\Http\Controllers\UserController::instance()->checkSession()) logged-in @endif">
 <header>
     <div class="container">
         <div class="row fs-0">
@@ -40,7 +40,7 @@
                     <img src="{{URL::asset('assets/images/logo.svg') }}" itemprop="logo" alt="Dentacoin logo" class="max-width-50 max-width-xs-40"/>
                 </a>
             </figure>
-            @if(!\App\Http\Controllers\PatientController::instance()->checkSession())
+            @if(!\App\Http\Controllers\UserController::instance()->checkSession())
                 <nav class="col-xs-9 inline-block">
                     <ul itemscope="" itemtype="http://schema.org/SiteNavigationElement">
                         <li class="inline-block @if(!empty(Route::current())) @if(Route::current()->getName() == "home") active @endif @endif"><a href="{{route('home')}}" itemprop="url"><span itemprop="name">Dentists</span></a></li>

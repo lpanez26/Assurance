@@ -69,6 +69,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'handleAdminSession' => \App\Http\Middleware\HandleAdminSession::class,
         'frontEndMiddleware' => \App\Http\Middleware\AdditionalMiddleware::class,
-        'HandlePatientSession' => \App\Http\Middleware\HandlePatientSession::class
+        'HandleUserSession' => \App\Http\Middleware\HandleUserSession::class
     ];
 }

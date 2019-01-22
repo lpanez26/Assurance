@@ -28,19 +28,20 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
     //======================================= /TEMPORALLY FOR DAPP TESTING ========================================
 
     //======================================= AJAX ========================================
-
     Route::post('/get-calculator-html', 'HomeController@getCalculatorHtml')->name('get-calculator-html');
 
     Route::post('/get-calculator-result', 'HomeController@getCalculatorResult')->name('get-calculator-result');
+    //======================================= /AJAX ========================================
 
-    Route::group(['prefix' => 'patient', 'middleware' => 'HandlePatientSession'], function () {
+
+
+    Route::group(['prefix' => 'patient', 'middleware' => 'HandleUserSession'], function () {
         Route::get('/', 'PatientController@getPatientAccess')->name('patient-access');
 
         Route::post('/authenticate', 'PatientController@authenticate')->name('authenticate-patient');
-
     });
 
-    Route::get('/my-profile', 'LoggedUserAdditionalLogic@getMyProfileView')->middleware('HandlePatientSession')->name('my-profile');
+    Route::get('/my-profile', 'UserController@getMyProfileView')->middleware('HandleUserSession')->name('my-profile');
 
     Route::get('/user-logout', 'UserController@userLogout')->name('user-logout');
 });

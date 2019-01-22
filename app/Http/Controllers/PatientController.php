@@ -5,35 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller {
-    public static function instance() {
-        return new PatientController();
-    }
-
-    protected function getNotLoggedView()   {
-        return view('pages/patient');
-    }
-
-    public function checkSession()   {
-        if(!empty(session('logged_user')) && session('logged_user')['type'] == 'patient')    {
-            //LOGGED
-            return true;
-        }else {
-            //NOT LOGGED
-            return false;
-        }
-    }
-
     public function getPatientAccess()    {
-        if($this->checkSession()) {
+        if((new UserController())->checkSession()) {
             if(filter_var(session('logged_user')['have_contracts'], FILTER_VALIDATE_BOOLEAN)) {
                 //IF PATIENT HAVE EXISTING CONTRACTS
-                return view('pages/logged-patient/have-contracts');
+                return view('pages/logged-user/patient/have-contracts');
             } else {
                 //IF PATIENT HAVE NO EXISTING CONTRACTS
-                return view('pages/logged-patient/start-first-contract');
+                return view('pages/logged-user/patient/start-first-contract');
             }
         }else {
-            return $this->getNotLoggedView();
+            return (new UserController())->getNotLoggedView();
         }
     }
 
