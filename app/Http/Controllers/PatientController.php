@@ -28,7 +28,7 @@ class PatientController extends Controller {
     }
 
     public function getPatientAccess()    {
-        var_dump(session('have_contracts'));
+        var_dump(session());
         die();
         /*session(['logged_user' => [
             'token' => 'test-token',
