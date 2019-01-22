@@ -19,6 +19,11 @@ class HandlePatientSession
         if(!$patient_controller->checkSession()) {
             return redirect()->route('patients');
         }*/
+        $patient_controller = new PatientController();
+        if(!$patient_controller->checkSession()) {
+            //NOT LOGGED AND NOT TRYING TO LOG IN
+            return response($patient_controller->getPatientAccess());
+        }
         return $next($request);
     }
 }

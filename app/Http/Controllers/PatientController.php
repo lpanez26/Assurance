@@ -23,7 +23,7 @@ class PatientController extends Controller {
         }
     }
 
-    protected function getPatientAccess()    {
+    public function getPatientAccess()    {
         if($this->checkSession()) {
             if(filter_var(session('logged_user')['have_contracts'], FILTER_VALIDATE_BOOLEAN)) {
                 //IF PATIENT HAVE EXISTING CONTRACTS
