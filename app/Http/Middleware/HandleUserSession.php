@@ -16,7 +16,7 @@ class HandleUserSession
      * @return mixed
      */
     public function handle($request, Closure $next) {
-        var_dump($request->route());
+        var_dump($request->route()->getName());
         die();
         $user_controller = new UserController();
         if(!$user_controller->checkSession() && !array_key_exists('token', $request->input()) && !array_key_exists('email', $request->input())) {
