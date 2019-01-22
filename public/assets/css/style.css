@@ -4526,11 +4526,24 @@ input[type='text'] {
   -moz-box-shadow: 0px 0px 10px 2px #f3f3f3;
   -ms-box-shadow: 0px 0px 10px 2px #f3f3f3;
   box-shadow: 0px 0px 10px 2px #f3f3f3; }
+  .my-profile-menu .wrapper .avatar-and-name {
+    padding-left: 15px;
+    padding-right: 15px; }
+    .my-profile-menu .wrapper .avatar-and-name figure {
+      width: 40px;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      border-radius: 50%; }
+    .my-profile-menu .wrapper .avatar-and-name .welcome-name {
+      width: calc(100% - 40px);
+      padding-left: 10px; }
   .my-profile-menu .wrapper nav li a {
     display: block;
     font-size: 16px;
     padding: 10px;
     color: #212121;
+    border-left: 3px solid transparent;
     -webkit-transition: 0.3s;
     -moz-transition: 0.3s;
     -o-transition: 0.3s;

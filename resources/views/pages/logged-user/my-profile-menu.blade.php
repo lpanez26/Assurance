@@ -1,10 +1,10 @@
 <div class="col-xs-12 col-sm-3 my-profile-menu">
     <div class="wrapper">
-        <div class="avatar-and-name">
+        <div class="avatar-and-name padding-bottom-15">
             <figure itemscope="" itemtype="http://schema.org/ImageObject" class="inline-block">
                 <img alt="" itemprop="contentUrl" src="/assets/uploads/patient-benefit-3.svg"/>
             </figure>
-            <div class="welcome-name">Welcome, {{session('logged_user')['name']}}</div>
+            <div class="welcome-name inline-block fs-16 lato-bold">Welcome, {{session('logged_user')['name']}}</div>
         </div>
         <nav>
             <ul itemscope="" itemtype="http://schema.org/SiteNavigationElement">
