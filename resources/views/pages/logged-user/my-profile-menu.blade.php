@@ -8,9 +8,9 @@
         </div>
         <nav>
             <ul itemscope="" itemtype="http://schema.org/SiteNavigationElement">
-                <li><a href="" @if(!empty(Route::current()) && Route::current()->getName() == 'my-profile') class="active" @endif itemprop="url"><span itemprop="name">My Wallet</span></a></li>
-                <li><a href="" @if(!empty(Route::current()) && Route::current()->getName() == 'edit-account') class="active" @endif itemprop="url"><span itemprop="name">Edit Account</span></a></li>
-                <li><a href="" @if(!empty(Route::current()) && Route::current()->getName() == 'manage-privacy') class="active" @endif itemprop="url"><span itemprop="name">Manage Privacy</span></a></li>
+                <li><a href="{{ route('my-profile') }}" @if(!empty(Route::current()) && Route::current()->getName() == 'my-profile') class="active" @endif itemprop="url"><span itemprop="name">My Wallet</span></a></li>
+                <li><a href="{{ route('edit-account') }}" @if(!empty(Route::current()) && Route::current()->getName() == 'edit-account') class="active" @endif itemprop="url"><span itemprop="name">Edit Account</span></a></li>
+                <li><a href="{{ route('manage-privacy') }}" @if(!empty(Route::current()) && Route::current()->getName() == 'manage-privacy') class="active" @endif itemprop="url"><span itemprop="name">Manage Privacy</span></a></li>
                 <li><a href="{{ route('user-logout') }}" itemprop="url"><span itemprop="name">Log out</span></a></li>
             </ul>
         </nav>

@@ -63,7 +63,7 @@
                                     <a href="{{ route('user-logout') }}" class="logout"><i class="fa fa-power-off" aria-hidden="true"></i> Log out</a>
                                 </div>
                                 <div class="col-xs-6 inline-block">
-                                    <a href="javascript:void(0)" class="white-blue-green-btn">My account</a>
+                                    <a href="{{ route('my-profile') }}" class="white-blue-green-btn">My profile</a>
                                 </div>
                             </div>
                         </div>
