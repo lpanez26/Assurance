@@ -664,6 +664,7 @@ input[type='text'] {
     .wrapper {
         border: 1px solid #f3f3f3;
         padding-top: 20px;
+        padding-bottom: 20px;
         @include box-shadow(0px 0px 10px 2px #f3f3f3);
         .avatar-and-name {
             padding-left: 15px;
@@ -696,6 +697,13 @@ input[type='text'] {
                         background: #f0f9ff;
                         color: $blue_green_color;
                     }
+                    figure {
+                        padding-right: 15px;
+                        padding-left: 15px;  
+                        img {
+                            width: 15px;
+                        }
+                    }
                 }
             }
         }
@@ -705,5 +713,5 @@ input[type='text'] {
 .my-profile-page-content {
     width: calc(100% - 300px);
     padding: 15px;
-    font-size: 16px; 
+    font-size: 16px;
 }
