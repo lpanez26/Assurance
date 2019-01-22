@@ -16,6 +16,8 @@ class HandleUserSession
      * @return mixed
      */
     public function handle($request, Closure $next) {
+        var_dump($request);
+        die();
         $user_controller = new UserController();
         if(!$user_controller->checkSession() && !array_key_exists('token', $request->input()) && !array_key_exists('email', $request->input())) {
             //NOT LOGGED AND NOT TRYING TO LOG IN
