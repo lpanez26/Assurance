@@ -40,7 +40,7 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
     });
 
-    Route::get('/my-profile', 'PatientController@getPatientAccess')->middleware('HandlePatientSession')->name('my-profile');
+    Route::get('/my-profile', 'LoggedUserAdditionalLogic@getMyProfileView')->middleware('HandlePatientSession')->name('my-profile');
 
     Route::get('/user-logout', 'UserController@userLogout')->name('user-logout');
 });
