@@ -3,9 +3,11 @@
     <section class="manage-privacy padding-top-100">
         <div class="container">
             <div class="row">
-                @include('pages.logged-user.my-profile-menu')
-                <div class="col-xs-12 col-sm-9">
-                    Manage Privacy
+                <div class="col-xs-12">
+                    @include('pages.logged-user.my-profile-menu')
+                    <div class="my-profile-page-content inline-block-top">
+                        MANAGE PRIVACY
+                    </div>
                 </div>
             </div>
         </div>

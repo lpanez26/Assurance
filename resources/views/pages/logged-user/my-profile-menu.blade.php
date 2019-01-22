@@ -1,6 +1,6 @@
-<div class="col-xs-12 col-sm-3 my-profile-menu">
+<div class="my-profile-menu inline-block-top">
     <div class="wrapper">
-        <div class="avatar-and-name padding-bottom-15">
+        <div class="avatar-and-name padding-bottom-15 fs-0">
             <figure itemscope="" itemtype="http://schema.org/ImageObject" class="inline-block">
                 <img alt="" itemprop="contentUrl" src="/assets/uploads/patient-benefit-3.svg"/>
             </figure>

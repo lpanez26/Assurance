@@ -3,9 +3,11 @@
     <section class="edit-account padding-top-100">
         <div class="container">
             <div class="row">
-                @include('pages.logged-user.my-profile-menu')
-                <div class="col-xs-12 col-sm-9">
-                    Edit Account Data
+                <div class="col-xs-12">
+                    @include('pages.logged-user.my-profile-menu')
+                    <div class="my-profile-page-content inline-block-top">
+                        EDIT ACCOUTN
+                    </div>
                 </div>
             </div>
         </div>

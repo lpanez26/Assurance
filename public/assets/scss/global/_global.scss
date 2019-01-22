@@ -659,10 +659,11 @@ input[type='text'] {
 }
 
 .my-profile-menu {
+    width: 300px;
+    padding: 15px; 
     .wrapper {
         border: 1px solid #f3f3f3;
-        padding-top: 15px;
-        padding-bottom: 15px;
+        padding-top: 20px;
         @include box-shadow(0px 0px 10px 2px #f3f3f3);
         .avatar-and-name {
             padding-left: 15px;
@@ -683,7 +684,7 @@ input[type='text'] {
                     font-size: 16px;
                     padding: 10px;
                     color: $dark_color;
-                    border-left: 3px solid transparent;  
+                    border-left: 3px solid transparent;
                     @include simple_transition(.3s);
                     &.active {
                         border-left: 3px solid $blue_green_color;
@@ -699,4 +700,9 @@ input[type='text'] {
             }
         }
     }
+}
+
+.my-profile-page-content {
+    width: calc(100% - 300px);
+    padding: 15px;
 }
