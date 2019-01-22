@@ -586,13 +586,12 @@ if($('body').hasClass('home')) {
     //login
     $(document).on('successResponseCoreDBApi', async function (event) {
         if(event.response_data.token) {
-            console.log(event.response_data, 'event.response_data');
-            return false;
             var custom_form_obj = {
                 token: event.response_data.token,
                 email: event.response_data.data.email,
                 name: event.response_data.data.name,
                 address: event.response_data.data.dcn_address,
+                avatar_url: event.response_data.data.avatar_url,
                 have_contracts : false,
                 _token: $('meta[name="csrf-token"]').attr('content')
             };

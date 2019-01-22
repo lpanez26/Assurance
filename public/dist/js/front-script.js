@@ -1179,15 +1179,30 @@ if ($('body').hasClass('home')) {
                 while (1) {
                     switch (_context8.prev = _context8.next) {
                         case 0:
-                            if (!event.response_data.token) {
-                                _context8.next = 6;
-                                break;
+                            if (event.response_data.token) {
+                                custom_form_obj = {
+                                    token: event.response_data.token,
+                                    email: event.response_data.data.email,
+                                    name: event.response_data.data.name,
+                                    address: event.response_data.data.dcn_address,
+                                    avatar_url: event.response_data.data.avatar_url,
+                                    have_contracts: false,
+                                    _token: $('meta[name="csrf-token"]').attr('content')
+                                };
+
+                                //check if CoreDB returned address for this user and if its valid one
+
+                                if (basic.objHasKey(custom_form_obj, 'address') != null && innerAddressCheck(custom_form_obj.address)) {
+                                    //var current_dentists_for_logging_user = await App.assurance_methods.getWaitingContractsForPatient(custom_form_obj.address);
+                                    //if(current_dentists_for_logging_user.length > 0) {
+                                    //custom_form_obj.have_contracts = true;
+                                    //}
+                                }
+
+                                customJavascriptForm('/patient/authenticate', custom_form_obj, 'post');
                             }
 
-                            console.log(event.response_data, 'event.response_data');
-                            return _context8.abrupt("return", false);
-
-                        case 6:
+                        case 1:
                         case "end":
                             return _context8.stop();
                     }
