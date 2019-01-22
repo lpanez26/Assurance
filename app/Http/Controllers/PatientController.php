@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 class PatientController extends Controller {
     public function getNotLoggedView()   {
-        return view('pages/patient');
+        return redirect()->route('home');
+        //return view('pages/patient');
     }
 
     public function getPatientAccess()    {
