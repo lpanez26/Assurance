@@ -16,6 +16,10 @@ class HomeController extends Controller
         return view('pages/homepage', ['testimonials' => $testimonials]);
     }
 
+    public function redirectToHome() {
+        return redirect()->route('home');
+    }
+
     protected function getDentistView()   {
         return view('pages/dentist-test', []);
     }
