@@ -597,10 +597,10 @@ if($('body').hasClass('home')) {
 
             //check if CoreDB returned address for this user and if its valid one
             if(basic.objHasKey(custom_form_obj, 'address') != null && innerAddressCheck(custom_form_obj.address)) {
-                var current_dentists_for_logging_user = await App.assurance_methods.getWaitingContractsForPatient(custom_form_obj.address);
-                if(current_dentists_for_logging_user.length > 0) {
-                    custom_form_obj.have_contracts = true;
-                }
+                //var current_dentists_for_logging_user = await App.assurance_methods.getWaitingContractsForPatient(custom_form_obj.address);
+                //if(current_dentists_for_logging_user.length > 0) {
+                    //custom_form_obj.have_contracts = true;
+                //}
             }
 
             customJavascriptForm('/patient/authenticate', custom_form_obj, 'post');
