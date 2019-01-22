@@ -35,7 +35,7 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
 
 
-    Route::group(['prefix' => 'patient', 'middleware' => 'HandleUserSession'], function () {
+    Route::group(['prefix' => 'patient', 'middleware' => 'HandlePatientSession'], function () {
         Route::get('/', 'PatientController@getPatientAccess')->name('patient-access');
 
         Route::post('/authenticate', 'PatientController@authenticate')->name('authenticate-patient');

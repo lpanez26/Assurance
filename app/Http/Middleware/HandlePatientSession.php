@@ -2,11 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PatientController;
 use App\Http\Controllers\UserController;
 use Closure;
 
-class HandleUserSession
+class HandlePatientSession
 {
     /**
      * Handle an incoming request.
@@ -19,7 +19,7 @@ class HandleUserSession
         $user_controller = new UserController();
         if(!$user_controller->checkSession() && !array_key_exists('token', $request->input()) && !array_key_exists('email', $request->input())) {
             //NOT LOGGED AND NOT TRYING TO LOG IN
-            return response((new HomeController())->getView());
+            return response((new PatientController())->getNotLoggedView());
         }
         return $next($request);
     }

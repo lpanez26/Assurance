@@ -13,7 +13,7 @@
 
 Route::get('/refresh-captcha', 'Controller@refreshCaptcha')->name('refresh-captcha');
 
-Route::group(['prefix' => 'assurance-admin-access', 'middleware' => 'handleAdminSession'], function () {
+Route::group(['prefix' => 'assurance-admin-access', 'middleware' => 'HandleAdminSession'], function () {
     Route::get('/', 'Admin\MainController@getAdminAccess')->name('admin-access');
 
     Route::get('/logout', 'Admin\MainController@logout')->name('logout');

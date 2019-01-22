@@ -67,8 +67,9 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'handleAdminSession' => \App\Http\Middleware\HandleAdminSession::class,
+        'HandleAdminSession' => \App\Http\Middleware\HandleAdminSession::class,
         'frontEndMiddleware' => \App\Http\Middleware\AdditionalMiddleware::class,
-        'HandleUserSession' => \App\Http\Middleware\HandleUserSession::class
+        'HandleUserSession' => \App\Http\Middleware\HandleUserSession::class,
+        'HandlePatientSession' => \App\Http\Middleware\HandlePatientSession::class
     ];
 }

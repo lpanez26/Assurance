@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller {
+    public function getNotLoggedView()   {
+        return view('pages/patient');
+    }
+
     public function getPatientAccess()    {
         if((new UserController())->checkSession()) {
             if(filter_var(session('logged_user')['have_contracts'], FILTER_VALIDATE_BOOLEAN)) {
