@@ -140,4 +140,10 @@ class Controller extends BaseController
     protected function refreshCaptcha() {
         return response()->json(['captcha' => captcha_img()]);
     }
+
+    protected function getLoginSigninHtml() {
+        $view = view('partials/login-signin');
+        $view = $view->render();
+        return response()->json(['success' => $view]);
+    }
 }

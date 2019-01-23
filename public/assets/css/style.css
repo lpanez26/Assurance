@@ -4486,6 +4486,101 @@ fieldset {
       border-bottom: 3px solid white;
       padding-left: 20px;
       padding-right: 20px; }
+.bootbox.login-signin-popup .bootbox-close-button {
+  display: none; }
+.bootbox.login-signin-popup .modal-dialog {
+  width: 95%;
+  max-width: 1000px; }
+  .bootbox.login-signin-popup .modal-dialog .modal-content {
+    background: transparent;
+    border: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    box-shadow: none; }
+    .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body {
+      padding: 0; }
+      .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-header-action a {
+        width: 50%;
+        font-size: 35px;
+        padding: 10px;
+        text-align: center;
+        border-top: 3px solid white;
+        border-left: 3px solid white;
+        border-right: 3px solid white;
+        -webkit-border-radius: 4px 4px 0 0;
+        -moz-border-radius: 4px 4px 0 0;
+        -ms-border-radius: 4px 4px 0 0;
+        border-radius: 4px 4px 0 0; }
+        .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-header-action a[data-type="patient"] {
+          color: white;
+          background-color: #126585;
+          border-bottom: 1px solid white; }
+        .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-header-action a[data-type="dentist"] {
+          color: #212121;
+          background-color: white;
+          border-bottom: 1px solid #212121; }
+      .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body {
+        display: flex; }
+        .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist {
+          background: white;
+          color: #212121; }
+          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .popup-half-footer {
+            padding: 30px 0;
+            margin-top: 50px;
+            margin-left: -15%;
+            margin-right: -15%;
+            text-align: center;
+            border-top: 1px solid #212121;
+            color: #212121;
+            font-size: 18px; }
+            .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .popup-half-footer a {
+              font-family: 'Calibri-Bold';
+              color: #212121;
+              font-size: 20px;
+              text-decoration: underline; }
+        .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient {
+          background-color: #126585;
+          color: white; }
+          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient .popup-half-footer {
+            padding: 30px 0;
+            margin-top: 50px;
+            margin-left: -15%;
+            margin-right: -15%;
+            text-align: center;
+            border-top: 1px solid white;
+            color: white;
+            font-size: 18px; }
+            .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient .popup-half-footer a {
+              font-family: 'Calibri-Bold';
+              color: white;
+              font-size: 20px;
+              text-decoration: underline; }
+        .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient {
+          width: 50%;
+          padding-top: 50px;
+          border-bottom: 3px solid white;
+          border-left: 3px solid white;
+          border-right: 3px solid white;
+          -webkit-border-radius: 0 0 4px 4px;
+          -moz-border-radius: 0 0 4px 4px;
+          -ms-border-radius: 0 0 4px 4px;
+          border-radius: 0 0 4px 4px; }
+          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist h2, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient h2 {
+            font-size: 35px;
+            padding-bottom: 20px;
+            font-family: "Calibri Light"; }
+          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient h2, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient h2 {
+            color: white; }
+          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.dentist h2, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.dentist h2 {
+            color: #212121; }
+          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient .form-register {
+            display: none; }
+          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-login, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient .form-register, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient .form-login {
+            width: 70%;
+            margin: 0 auto; }
+          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.custom-hide, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.custom-hide {
+            visibility: hidden; }
 
 input[type='text'] {
   width: 100%;
@@ -4562,7 +4657,7 @@ input[type='text'] {
         color: #126585; }
       .my-profile-menu .wrapper nav li a figure {
         padding-right: 10px;
-        padding-left: 15px;
+        padding-left: 10px;
         vertical-align: middle; }
         .my-profile-menu .wrapper nav li a figure img {
           width: 20px; }
@@ -4641,6 +4736,28 @@ input[type='text'] {
     background-color: white; }
   .white-transparent-btn:focus {
     color: white; }
+
+.social-login-btn {
+  background-color: white;
+  width: 100%;
+  display: inline-block;
+  text-align: left;
+  color: black;
+  font-size: 20px;
+  padding: 10px 15px 10px 70px;
+  max-width: 350px;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  background-size: 30px auto;
+  background-position: center left 15px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px; }
+  .social-login-btn.civic-custom-btn {
+    background-image: url(/assets/uploads/civic.svg); }
+  .social-login-btn.facebook-custom-btn {
+    background-image: url(/assets/uploads/facebook.svg); }
 
 .module.dentist-or-patient-section .inline-block-top picture img {
   width: 100%; }
@@ -4948,27 +5065,6 @@ body.patient-access .dentist-or-patient-section .inline-block-top.right .hidden-
     -webkit-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
     transform: translateX(-50%); }
-    .cant-find-your-dentist-section .second-absolute-container .login-btn {
-      background-color: white;
-      width: 100%;
-      display: inline-block;
-      text-align: left;
-      color: black;
-      font-size: 20px;
-      padding: 10px 15px 10px 70px;
-      max-width: 350px;
-      margin: 0 auto;
-      background-repeat: no-repeat;
-      background-size: 30px auto;
-      background-position: center left 15px;
-      -webkit-border-radius: 4px;
-      -moz-border-radius: 4px;
-      -ms-border-radius: 4px;
-      border-radius: 4px; }
-      .cant-find-your-dentist-section .second-absolute-container .login-btn.civic-custom-btn {
-        background-image: url(/assets/uploads/civic.svg); }
-      .cant-find-your-dentist-section .second-absolute-container .login-btn.facebook-custom-btn {
-        background-image: url(/assets/uploads/facebook.svg); }
 
 .section-logged-patient-form {
   background-repeat: no-repeat;

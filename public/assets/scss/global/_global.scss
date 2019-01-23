@@ -635,6 +635,121 @@ fieldset {
             }
         }
     }
+    &.login-signin-popup {
+        .bootbox-close-button {
+            display: none;
+        }
+        .modal-dialog {
+            width: 95%;
+            max-width: 1000px;
+            .modal-content {
+                background: transparent;
+                border: 0;
+                @include box-shadow(none);
+                .modal-body {
+                    padding: 0;
+                    .popup-header-action {
+                        a {
+                            width: 50%;
+                            font-size: 35px;
+                            padding: 10px;
+                            text-align: center;
+                            border-top: 3px solid white;
+                            border-left: 3px solid white;
+                            border-right: 3px solid white;
+                            @include rounded(4px 4px 0 0);
+                            &[data-type="patient"] {
+                                color: white;
+                                background-color: $blue_green_color;
+                                border-bottom: 1px solid white;
+                            }
+                            &[data-type="dentist"] {
+                                color: $dark_color;
+                                background-color: white;
+                                border-bottom: 1px solid $dark_color;
+                            }
+                        }
+                    }
+                    .popup-body {
+                        display: flex;
+                        .dentist {
+                            background: white;
+                            color: $dark_color;
+                            .popup-half-footer {
+                                padding: 30px 0;
+                                margin-top: 50px;
+                                margin-left: -15%;
+                                margin-right: -15%;
+                                text-align: center;
+                                border-top: 1px solid $dark_color;
+                                color: $dark_color;
+                                font-size: 18px;
+                                a {
+                                    font-family: 'Calibri-Bold';
+                                    color: $dark_color;
+                                    font-size: 20px;
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                        .patient {
+                            background-color: $blue_green_color;
+                            color: white;
+                            .popup-half-footer {
+                                padding: 30px 0;
+                                margin-top: 50px;
+                                margin-left: -15%;
+                                margin-right: -15%;
+                                text-align: center;
+                                border-top: 1px solid white;
+                                color: white;
+                                font-size: 18px;
+                                a {
+                                    font-family: 'Calibri-Bold';
+                                    color: white;
+                                    font-size: 20px;
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                        .dentist, .patient {
+                            width: 50%;
+                            padding-top: 50px;
+                            border-bottom: 3px solid white;
+                            border-left: 3px solid white;
+                            border-right: 3px solid white;
+                            @include rounded(0 0 4px 4px);
+                            h2 {
+                                font-size: 35px;
+                                padding-bottom: 20px;
+                                font-family: "Calibri Light";
+                            }
+                            &.patient {
+                                h2 {
+                                    color: white;
+                                }
+                            }
+                            &.dentist {
+                                h2 {
+                                    color: $dark_color;
+                                }
+                            }
+                            .form-register {
+                                display: none;
+                            }
+                            .form-register, .form-login {
+                                width: 70%;
+                                margin: 0 auto;
+                            }
+                            &.custom-hide {
+                                visibility: hidden;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 input[type='text'] {
@@ -699,7 +814,7 @@ input[type='text'] {
                     }
                     figure {
                         padding-right: 10px;
-                        padding-left: 10px;   
+                        padding-left: 10px;
                         vertical-align: middle;
                         img {
                             width: 20px;

@@ -26377,6 +26377,57 @@ function customJavascriptForm(path, params, method) {
     form.submit();
 }
 
+//call the popup for login/sign for patient and dentist
+function bindLoginSigninPopupShow() {
+    if ($('.show-login-signin').length) {
+        $('.show-login-signin').click(function () {
+            $.ajax({
+                type: 'POST',
+                url: '/get-login-signin',
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function success(response) {
+                    if (response.success) {
+                        basic.closeDialog();
+                        basic.showDialog(response.success, 'login-signin-popup', null, true);
+
+                        $('.popup-header-action a').click(function () {
+                            $('.login-signin-popup .popup-body > .inline-block').addClass('custom-hide');
+                            $('.login-signin-popup .popup-body .' + $(this).attr('data-type')).removeClass('custom-hide');
+
+                            $('.login-signin-popup .call-sign-up').click(function () {
+                                $('.login-signin-popup .form-login').hide();
+                                $('.login-signin-popup .form-register').show();
+                            });
+
+                            $('.login-signin-popup .call-log-in').click(function () {
+                                $('.login-signin-popup .form-login').show();
+                                $('.login-signin-popup .form-register').hide();
+                            });
+                        });
+                    }
+                }
+            });
+        });
+    }
+}
+bindLoginSigninPopupShow();
+
+//hide bootbox popup when its clicked around him (outside of him)
+function hidePopupOnBackdropClick() {
+    $(document).on('click', '.bootbox', function () {
+        var classname = event.target.className;
+        classname = classname.replace(/ /g, '.');
+
+        if (classname && !$('.' + classname).parents('.modal-dialog').length) {
+            bootbox.hideAll();
+        }
+    });
+}
+hidePopupOnBackdropClick();
+
 /***/ }),
 /* 112 */
 /***/ (function(module, exports, __webpack_require__) {
