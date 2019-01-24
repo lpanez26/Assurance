@@ -126,72 +126,7 @@
 <script src="//dentacoin.com/assets/libs/civic-login/civic.js"></script>
 <script src="//dentacoin.com/assets/libs/facebook-login/facebook.js"></script>
 <script>
-    var mapsLoaded = true;
-    var mapsWaiting = [];
 
-
-
-    //
-    //Maps stuff
-    //
-
-
-    var prepareMapFucntion = function( callback ) {
-        console.log('prepareMapFucntion');
-        if(mapsLoaded) {
-            console.log('prepareMapFucntion', '1');
-            callback();
-        } else {
-            console.log('prepareMapFucntion', '2');
-            mapsWaiting.push(callback);
-        }
-    }
-
-    var initMap = function () {
-        console.log('initMap');
-        mapsLoaded = true;
-        for(var i in mapsWaiting) {
-            mapsWaiting[i]();
-        }
-
-        $('.map').each( function(){
-            var address = $(this).attr('data-address') ;
-
-            var geocoder = new google.maps.Geocoder();
-            geocoder.geocode( { 'address': address}, (function(results, status) {
-                console.log(address);
-                console.log(status);
-                if (status == google.maps.GeocoderStatus.OK) {
-                    if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
-                        var position = {
-                            lat: results[0].geometry.location.lat(),
-                            lng: results[0].geometry.location.lng()
-                        };
-
-                        map = new google.maps.Map($(this)[0], {
-                            center: position,
-                            scrollwheel: false,
-                            zoom: 15
-                        });
-
-                        new google.maps.Marker({
-                            position: position,
-                            map: map,
-                            title: results[0].formatted_address
-                        });
-
-                    } else {
-                        console.log('456');
-                        $(this).remove();
-                    }
-                } else {
-                    console.log('123');
-                    $(this).remove();
-                }
-            }).bind( $(this) )  );
-
-        });
-    }
 
 
 
@@ -199,6 +134,73 @@
     var initAddressSuggesters;
 
     jQuery(document).ready(function($){
+
+        var mapsLoaded = true;
+        var mapsWaiting = [];
+
+
+
+        //
+        //Maps stuff
+        //
+
+
+        var prepareMapFucntion = function( callback ) {
+            console.log('prepareMapFucntion');
+            if(mapsLoaded) {
+                console.log('prepareMapFucntion', '1');
+                callback();
+            } else {
+                console.log('prepareMapFucntion', '2');
+                mapsWaiting.push(callback);
+            }
+        }
+
+        var initMap = function () {
+            console.log('initMap');
+            mapsLoaded = true;
+            for(var i in mapsWaiting) {
+                mapsWaiting[i]();
+            }
+
+            $('.map').each( function(){
+                var address = $(this).attr('data-address') ;
+
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode( { 'address': address}, (function(results, status) {
+                    console.log(address);
+                    console.log(status);
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+                            var position = {
+                                lat: results[0].geometry.location.lat(),
+                                lng: results[0].geometry.location.lng()
+                            };
+
+                            map = new google.maps.Map($(this)[0], {
+                                center: position,
+                                scrollwheel: false,
+                                zoom: 15
+                            });
+
+                            new google.maps.Marker({
+                                position: position,
+                                map: map,
+                                title: results[0].formatted_address
+                            });
+
+                        } else {
+                            console.log('456');
+                            $(this).remove();
+                        }
+                    } else {
+                        console.log('123');
+                        $(this).remove();
+                    }
+                }).bind( $(this) )  );
+
+            });
+        }
 
         initAddressSuggesters = function() {
             console.log('initAddressSuggesters');
