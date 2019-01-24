@@ -943,10 +943,10 @@ input[type='text'], .custom-input {
     &.on-blue-green-background {
         display: block;
         margin-bottom: 15px;
-        input[type='checkbox'] {   
+        input[type='checkbox'] {
             max-width: 250px;
         }
-        .state label {
+        .state label {    
             a {
                 color: white;
                 text-decoration: underline;
@@ -956,10 +956,10 @@ input[type='text'], .custom-input {
             border-color: white !important;
             border-width: 2px;
         }
-        input:checked~.state.p-success label:after, .p-toggle .state.p-success label:after {
+        input:checked~.state.p-success label:after, &.p-toggle .state.p-success label:after {
             background-color: $blue_green_color !important;
         }
-        &.p-curve .state label:after, .p-curve .state label:before {
+        &.p-curve .state label:after, &.p-curve .state label:before {
             @include rounded(0);
         }
         .state label:after, .state label:before {
@@ -990,10 +990,10 @@ input[type='text'], .custom-input {
             border-color: $blue_green_color !important;
             border-width: 2px;
         }
-        input:checked~.state.p-success label:after, .p-toggle .state.p-success label:after {
+        input:checked~.state.p-success label:after, &.p-toggle .state.p-success label:after {
             background-color: $blue_green_color !important;
         }
-        &.p-curve .state label:after, .p-curve .state label:before {
+        &.p-curve .state label:after, &.p-curve .state label:before {
             @include rounded(0);
         }
         .state label:after, .state label:before {

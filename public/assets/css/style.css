@@ -4760,9 +4760,9 @@ input[type='text'], .custom-input {
   .pretty.on-blue-green-background .state label:before {
     border-color: white !important;
     border-width: 2px; }
-  .pretty.on-blue-green-background input:checked ~ .state.p-success label:after, .pretty.on-blue-green-background .p-toggle .state.p-success label:after {
+  .pretty.on-blue-green-background input:checked ~ .state.p-success label:after, .pretty.on-blue-green-background.p-toggle .state.p-success label:after {
     background-color: #126585 !important; }
-  .pretty.on-blue-green-background.p-curve .state label:after, .pretty.on-blue-green-background .p-curve .state label:before {
+  .pretty.on-blue-green-background.p-curve .state label:after, .pretty.on-blue-green-background.p-curve .state label:before {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     -ms-border-radius: 0;
@@ -4787,9 +4787,9 @@ input[type='text'], .custom-input {
   .pretty.on-white-background .state label:before {
     border-color: #126585 !important;
     border-width: 2px; }
-  .pretty.on-white-background input:checked ~ .state.p-success label:after, .pretty.on-white-background .p-toggle .state.p-success label:after {
+  .pretty.on-white-background input:checked ~ .state.p-success label:after, .pretty.on-white-background.p-toggle .state.p-success label:after {
     background-color: #126585 !important; }
-  .pretty.on-white-background.p-curve .state label:after, .pretty.on-white-background .p-curve .state label:before {
+  .pretty.on-white-background.p-curve .state label:after, .pretty.on-white-background.p-curve .state label:before {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
     -ms-border-radius: 0;
