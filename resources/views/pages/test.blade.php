@@ -351,6 +351,8 @@ Test body
         });
     }
 
+    initMap();
+
 
 
 
@@ -484,6 +486,6 @@ Test body
         ), "");
     }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaVeHq_LOhQndssbmw-aDnlMwUG73yCdk&amp;libraries=places&amp;callback=initMap&amp;language=en"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaVeHq_LOhQndssbmw-aDnlMwUG73yCdk&amp;libraries=places&amp;language=en"></script>
 </body>
 </html>
