@@ -349,7 +349,7 @@
                             <option value="zw">Zimbabwe</option>
                         </select>
                     </div>
-                    <div class="padding-bottom-10">
+                    <div class="padding-bottom-10 suggester-parent">
                         <input type="text" name="address" class="custom-input address-suggester" autocomplete="off" placeholder="City, Street">
                         <div class="suggester-map-div" style="height: 200px; display: none; margin: 10px 0px; background: transparent;">
                         </div>

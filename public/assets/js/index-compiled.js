@@ -26511,6 +26511,11 @@ function bindLoginSigninPopupShow() {
                                                         errors = true;
                                                     }
 
+                                                    //check if error from google place suggester
+                                                    if ($('.dentist .form-register .step.second .suggester-parent .alert.alert-warning').is(':visible')) {
+                                                        errors = true;
+                                                    }
+
                                                     if (!errors) {
                                                         $('.dentist .form-register .step').removeClass('visible');
                                                         $('.dentist .form-register .step.three').addClass('visible');

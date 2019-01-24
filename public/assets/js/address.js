@@ -79,14 +79,14 @@ jQuery(document).ready(function($){
                     });
                 });
 
-                if( step_container.find('.suggester-map-div').attr('lat')) {
+                if(step_container.find('.suggester-map-div').attr('lat')) {
                     var coords = {
-                        lat: parseFloat( step_container.find('.suggester-map-div').attr('lat') ),
-                        lng: parseFloat( step_container.find('.suggester-map-div').attr('lon') )
+                        lat: parseFloat( step_container.find('.suggester-map-div').attr('lat')),
+                        lng: parseFloat( step_container.find('.suggester-map-div').attr('lon'))
                     };
 
                     step_container.find('.suggester-map-div').show();
-                    var profile_address_map = new google.maps.Map( step_container.find('.suggester-map-div')[0], {
+                    var profile_address_map = new google.maps.Map(step_container.find('.suggester-map-div')[0], {
                         center: coords,
                         zoom: 14,
                         backgroundColor: 'none'
@@ -116,20 +116,20 @@ jQuery(document).ready(function($){
                     this.step_container.find('.geoip-hint').hide();
                     this.step_container.find('.suggester-map-div').hide();
 
-                    if( place && place.geometry ) {
+                    if(place && place.geometry) {
                         //address_components
-                        if( place.types.indexOf('street_address')!=-1 || place.types.indexOf('street_number')!=-1 ) {
+                        if(place.types.indexOf('street_address')!=-1 || place.types.indexOf('street_number')!=-1) {
                             var newaddress = place.name + ', ' + place.vicinity;
                             this.step_container.find('.address-suggester').val(newaddress);
 
-                            prepareMapFunction( (function() {
+                            prepareMapFunction((function() {
                                 var coords = {
                                     lat: place.geometry.location.lat(),
                                     lng: place.geometry.location.lng()
                                 };
 
                                 this.step_container.find('.suggester-map-div').show();
-                                var profile_address_map = new google.maps.Map( this.step_container.find('.suggester-map-div')[0], {
+                                var profile_address_map = new google.maps.Map(this.step_container.find('.suggester-map-div')[0], {
                                     center: coords,
                                     zoom: 14,
                                     backgroundColor: 'none'
@@ -139,8 +139,7 @@ jQuery(document).ready(function($){
                                     map: profile_address_map,
                                     center: coords,
                                 });
-
-                            }).bind(this) );
+                            }).bind(this));
                             return;
                         }
                     }
