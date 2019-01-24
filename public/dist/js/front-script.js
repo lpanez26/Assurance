@@ -1496,6 +1496,8 @@ function bindLoginSigninPopupShow() {
                                                     }
 
                                                     if (!errors) {
+                                                        styleAvatarUploadButton();
+
                                                         $('.dentist .form-register .step').removeClass('visible');
                                                         $('.dentist .form-register .step.third').addClass('visible');
 
@@ -1503,7 +1505,6 @@ function bindLoginSigninPopupShow() {
                                                     }
                                                     break;
                                                 case 'third':
-                                                    styleAvatarUploadButton();
 
                                                     break;
                                             }
@@ -1537,9 +1538,10 @@ function readURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            $('.current-image').attr('src', e.target.result);
+            //$('.current-image').attr('src', e.target.result);
+            console.log(e.target.result, 'e.target.result');
         };
-        reader.readAsDataURL(input.files[0]);
+        //reader.readAsDataURL(input.files[0]);
     }
 }
 
