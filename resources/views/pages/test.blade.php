@@ -1,7 +1,7 @@
 @extends("layout")
 @section("content")
 
-    <div class="sign-in-step address-suggester-wrapper active" id="step-2">
+    <div class="sign-in-step address-suggester-wrapper active padding-top-150" id="step-2">
         <select name="country_id" id="dentist-country" class="input country-select">
             <option value="1" code="af">Afghanistan</option>
             <option value="2" code="ax">Aland Islands</option>
@@ -478,5 +478,4 @@
             ), "");
         }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaVeHq_LOhQndssbmw-aDnlMwUG73yCdk&amp;libraries=places&amp;callback=initMap&amp;language=en"></script>
 @endsection
