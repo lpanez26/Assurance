@@ -126,11 +126,6 @@
 <script src="//dentacoin.com/assets/libs/civic-login/civic.js"></script>
 <script src="//dentacoin.com/assets/libs/facebook-login/facebook.js"></script>
 <script>
-
-
-
-
-
     var initAddressSuggesters;
 
     jQuery(document).ready(function($){
@@ -320,15 +315,6 @@
             initAddressSuggesters();
         }
     });
-
-
-    function trimChar (str, c) {
-        if (c === "]") c = "\\]";
-        if (c === "\\") c = "\\\\";
-        return str.replace(new RegExp(
-            "^[" + c + "]+|[" + c + "]+$", "g"
-        ), "");
-    }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaVeHq_LOhQndssbmw-aDnlMwUG73yCdk&libraries=places&callback=initMap&language=en"></script>
 </body>
