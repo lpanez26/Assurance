@@ -25,7 +25,7 @@
                 <a href="javascript:void(0)"  class="civic-custom-btn social-login-btn calibri-regular fs-20" data-url="//api.dentacoin.com/api/register" data-platform="assurance" data-type="patient">with Civic</a>
             </div>
             <div class="privacy-policy-row padding-top-20">
-                <div class="pretty p-svg p-curve">
+                <div class="pretty p-svg p-curve on-blue-green-background">
                     <input type="checkbox" name="specialization[]"/>
                     <div class="state p-success">
                         <!-- svg path -->
@@ -368,7 +368,7 @@
                     </div>
                 </div>
                 <div class="step third" data-step="third">
-                    <div class="padding-bottom-20 fs-0">
+                    <div class="padding-bottom-30 fs-0">
                         <div class="inline-block-top avatar">
                             <div class="border text-center">
                                 <div class="inner">
@@ -379,7 +379,7 @@
                         </div>
                         <div class="inline-block-top specializations">
                             <h4>Please select your specializations:</h4>
-                            <div class="pretty p-svg p-curve">
+                            <div class="pretty p-svg p-curve on-white-background">
                                 <input type="checkbox" name="specialization[]" value="6"/>
                                 <div class="state p-success">
                                     <!-- svg path -->
@@ -389,7 +389,7 @@
                                     <label class="fs-14">General Dentistry</label>
                                 </div>
                             </div>
-                            <div class="pretty p-svg p-curve">
+                            <div class="pretty p-svg p-curve on-white-background">
                                 <input type="checkbox" name="specialization[]" value="1"/>
                                 <div class="state p-success">
                                     <!-- svg path -->
@@ -399,7 +399,7 @@
                                     <label class="fs-14">Cosmetic Dentistry</label>
                                 </div>
                             </div>
-                            <div class="pretty p-svg p-curve">
+                            <div class="pretty p-svg p-curve on-white-background">
                                 <input type="checkbox" name="specialization[]" value="2"/>
                                 <div class="state p-success">
                                     <!-- svg path -->
@@ -409,7 +409,7 @@
                                     <label class="fs-14">Implantology</label>
                                 </div>
                             </div>
-                            <div class="pretty p-svg p-curve">
+                            <div class="pretty p-svg p-curve on-white-background">
                                 <input type="checkbox" name="specialization[]" value="3"/>
                                 <div class="state p-success">
                                     <!-- svg path -->
@@ -419,7 +419,7 @@
                                     <label class="fs-14">Orthodontics</label>
                                 </div>
                             </div>
-                            <div class="pretty p-svg p-curve">
+                            <div class="pretty p-svg p-curve on-white-background">
                                 <input type="checkbox" name="specialization[]" value="4"/>
                                 <div class="state p-success">
                                     <!-- svg path -->
@@ -429,7 +429,7 @@
                                     <label class="fs-14">Periodontics</label>
                                 </div>
                             </div>
-                            <div class="pretty p-svg p-curve">
+                            <div class="pretty p-svg p-curve on-white-background">
                                 <input type="checkbox" name="specialization[]" value="5"/>
                                 <div class="state p-success">
                                     <!-- svg path -->
@@ -439,7 +439,7 @@
                                     <label class="fs-14">Pediatrics</label>
                                 </div>
                             </div>
-                            <div class="pretty p-svg p-curve">
+                            <div class="pretty p-svg p-curve on-white-background">
                                 <input type="checkbox" name="specialization[]" value="6"/>
                                 <div class="state p-success">
                                     <!-- svg path -->

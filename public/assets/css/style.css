@@ -4566,7 +4566,7 @@ fieldset {
                     left: 1px;
                     top: 1px; }
             .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar {
-              padding-right: 10px;
+              padding-right: 20px;
               width: 50%; }
               .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar .border {
                 background-color: #e3e3e3;
@@ -4585,6 +4585,11 @@ fieldset {
                   transform: translateY(-50%); }
             .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .specializations {
               width: 50%; }
+              .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .specializations h4 {
+                padding-bottom: 10px; }
+              .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .specializations .pretty {
+                margin-bottom: 10px;
+                display: block; }
           .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .btns-container {
             font-size: 0; }
             .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .btns-container .inline-block {
@@ -4629,33 +4634,6 @@ fieldset {
             font-size: 35px;
             padding-bottom: 20px;
             font-family: "Calibri Light"; }
-          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty {
-            display: block;
-            margin-bottom: 15px; }
-            .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty input[type='checkbox'], .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty input[type='checkbox'] {
-              max-width: 250px; }
-          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty .state label a, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty .state label a {
-            color: white;
-            text-decoration: underline; }
-          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty .state label:before, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty .state label:before {
-            border-color: white !important;
-            border-width: 2px; }
-          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty input:checked ~ .state.p-success label:after, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty.p-toggle .state.p-success label:after, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty input:checked ~ .state.p-success label:after, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty.p-toggle .state.p-success label:after {
-            background-color: #126585 !important; }
-          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty.p-curve .state label:after, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty.p-curve .state label:before, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty.p-curve .state label:after, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty.p-curve .state label:before {
-            -webkit-border-radius: 0;
-            -moz-border-radius: 0;
-            -ms-border-radius: 0;
-            border-radius: 0; }
-          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty .state label:after, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty .state label:before, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty .state label:after, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty .state label:before {
-            width: 20px;
-            height: 20px; }
-          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty.p-svg .state .svg, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty.p-svg .state .svg {
-            width: 20px;
-            height: 20px;
-            top: -1px;
-            border-color: white !important;
-            border-width: 2px; }
           .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient h2, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient h2 {
             color: white; }
           .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.dentist h2, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.dentist h2 {
@@ -4770,6 +4748,61 @@ input[type='text'], .custom-input {
 
 .pac-container {
   z-index: 10000; }
+
+.pretty.on-blue-green-background {
+  display: block;
+  margin-bottom: 15px; }
+  .pretty.on-blue-green-background input[type='checkbox'] {
+    max-width: 250px; }
+  .pretty.on-blue-green-background .state label a {
+    color: white;
+    text-decoration: underline; }
+  .pretty.on-blue-green-background .state label:before {
+    border-color: white !important;
+    border-width: 2px; }
+  .pretty.on-blue-green-background input:checked ~ .state.p-success label:after, .pretty.on-blue-green-background .pretty.p-toggle .state.p-success label:after {
+    background-color: #126585 !important; }
+  .pretty.on-blue-green-background.p-curve .state label:after, .pretty.on-blue-green-background .pretty.p-curve .state label:before {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    border-radius: 0; }
+  .pretty.on-blue-green-background .state label:after, .pretty.on-blue-green-background .pretty .state label:before {
+    width: 20px;
+    height: 20px; }
+  .pretty.on-blue-green-background.p-svg .state .svg {
+    width: 20px;
+    height: 20px;
+    top: -1px;
+    border-color: white !important;
+    border-width: 2px; }
+.pretty.on-white-background {
+  display: block;
+  margin-bottom: 15px; }
+  .pretty.on-white-background input[type='checkbox'] {
+    max-width: 250px; }
+  .pretty.on-white-background .state label a {
+    color: white;
+    text-decoration: underline; }
+  .pretty.on-white-background .state label:before {
+    border-color: #126585 !important;
+    border-width: 2px; }
+  .pretty.on-white-background input:checked ~ .state.p-success label:after, .pretty.on-white-background .pretty.p-toggle .state.p-success label:after {
+    background-color: #126585 !important; }
+  .pretty.on-white-background.p-curve .state label:after, .pretty.on-white-background .pretty.p-curve .state label:before {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    border-radius: 0; }
+  .pretty.on-white-background .state label:after, .pretty.on-white-background .pretty .state label:before {
+    width: 20px;
+    height: 20px; }
+  .pretty.on-white-background.p-svg .state .svg {
+    width: 20px;
+    height: 20px;
+    top: -1px;
+    border-color: white !important;
+    border-width: 2px; }
 
 .white-blue-green-btn {
   font-size: 20px;
