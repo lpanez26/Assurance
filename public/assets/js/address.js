@@ -55,11 +55,10 @@ initMap();*/
 var initAddressSuggesters;
 jQuery(document).ready(function($){
     initAddressSuggesters = function() {
+        var step_container = $(this).closest('.step.second');
         prepareMapFunction(function() {
             if($('.address-suggester').length) {
                 $('.address-suggester').each( function() {
-                    var step_container = $(this).closest('.step.second');
-
                     step_container.find('.country-select').change( function() {
                         var cc = $(this).find('option:selected').attr('code');
                         GMautocomplete.setComponentRestrictions({
