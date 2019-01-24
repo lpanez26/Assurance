@@ -1497,13 +1497,13 @@ function bindLoginSigninPopupShow() {
 
                                                     if (!errors) {
                                                         $('.dentist .form-register .step').removeClass('visible');
-                                                        $('.dentist .form-register .step.three').addClass('visible');
+                                                        $('.dentist .form-register .step.third').addClass('visible');
 
-                                                        this_btn.attr('data-current-step', 'three');
+                                                        this_btn.attr('data-current-step', 'third');
                                                     }
                                                     break;
                                                 case 'third':
-                                                    console.log('third');
+
                                                     break;
                                             }
                                         });
