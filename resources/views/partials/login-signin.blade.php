@@ -369,13 +369,9 @@
                 </div>
                 <div class="step third" data-step="third">
                     <div class="padding-bottom-30 fs-0">
-                        <div class="inline-block-top avatar">
-                            <div class="border text-center">
-                                <div class="inner">
-                                    <i class="fa fa-plus fs-30" aria-hidden="true"></i>
-                                    <div class="fs-18">Add profile photo</div>
-                                </div>
-                            </div>
+                        <div class="inline-block-top avatar upload-file">
+                            <input type="file" class="visualise-image inputfile" id="custom-upload-avatar" name="image"/>
+                            <button type="button"></button>
                         </div>
                         <div class="inline-block-top specializations">
                             <h4>Please select your specializations:</h4>

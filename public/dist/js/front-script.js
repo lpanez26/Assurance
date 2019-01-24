@@ -1503,6 +1503,7 @@ function bindLoginSigninPopupShow() {
                                                     }
                                                     break;
                                                 case 'third':
+                                                    styleAvatarUploadButton();
 
                                                     break;
                                             }
@@ -1527,6 +1528,58 @@ function bindLoginSigninPopupShow() {
     }
 }
 bindLoginSigninPopupShow();
+
+$(".visualise-image").change(function () {
+    readURL(this);
+});
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('.current-image').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function styleAvatarUploadButton() {
+    if (jQuery(".upload-file.avatar").length) {
+        jQuery(".upload-file.avatar").each(function (key, form) {
+            var this_file_btn_parent = jQuery(this);
+            this_file_btn_parent.find('button').append('<label for="custom-upload-avatar"><div class="border text-center"><div class="inner"><i class="fa fa-plus fs-30" aria-hidden="true"></i><div class="fs-18">Add profile photo</div></div></div></label>');
+
+            var inputs = document.querySelectorAll('.inputfile');
+            Array.prototype.forEach.call(inputs, function (input) {
+                var label = input.nextElementSibling,
+                    labelVal = label.innerHTML;
+
+                input.addEventListener('change', function (e) {
+                    var fileName = '';
+                    if (this.files && this.files.length > 1) fileName = (this.getAttribute('data-multiple-caption') || '').replace('{count}', this.files.length);else fileName = e.target.value.split('\\').pop();
+
+                    console.log(fileName, 'fileName');
+                    /*if(fileName) {
+                        if(load_filename_to_other_el)    {
+                            $(this).closest('.form-row').find('.file-name').html('<i class="fa fa-file-text-o" aria-hidden="true"></i>' + fileName);
+                        }else {
+                            label.querySelector('span').innerHTML = fileName;
+                        }
+                    }else{
+                        label.innerHTML = labelVal;
+                    }*/
+                });
+                // Firefox bug fix
+                input.addEventListener('focus', function () {
+                    input.classList.add('has-focus');
+                });
+                input.addEventListener('blur', function () {
+                    input.classList.remove('has-focus');
+                });
+            });
+        });
+    }
+}
 
 //hide bootbox popup when its clicked around him (outside of him)
 function hidePopupOnBackdropClick() {
