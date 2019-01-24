@@ -732,21 +732,23 @@ fieldset {
                                     &.third {
                                         .avatar {
                                             padding-right: 10px;
-                                            width: 100%;
-                                            padding-top: calc(100% - 4px);
+                                            width: 50%;
                                             .border {
                                                 background-color: #e3e3e3;
                                                 border: 2px dashed #777777;
                                                 color: #777777;
                                                 position: relative;
                                                 width: 100%;
-                                                height: 100%;     
+                                                padding-top: calc(100% - 4px);
                                                 .inner {
                                                     left: 0;
                                                     width: 100%;
                                                     @include vertical-align(absolute);
                                                 }
                                             }
+                                        }
+                                        .specializations {
+                                            width: 50%;     
                                         }
                                     }
                                 }

@@ -367,7 +367,7 @@
                         <input class="custom-input" type="url" placeholder="Website"/>
                     </div>
                 </div>
-                <div class="step three" data-step="three">
+                <div class="step third" data-step="third">
                     <div class="padding-bottom-20 fs-0">
                         <div class="inline-block-top avatar">
                             <div class="border text-center">

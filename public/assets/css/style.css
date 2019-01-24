@@ -4567,15 +4567,14 @@ fieldset {
                     top: 1px; }
             .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar {
               padding-right: 10px;
-              width: 100%;
-              padding-top: calc(100% - 4px); }
+              width: 50%; }
               .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar .border {
                 background-color: #e3e3e3;
                 border: 2px dashed #777777;
                 color: #777777;
                 position: relative;
                 width: 100%;
-                height: 100%; }
+                padding-top: calc(100% - 4px); }
                 .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar .border .inner {
                   left: 0;
                   width: 100%;
@@ -4584,6 +4583,8 @@ fieldset {
                   -webkit-transform: translateY(-50%);
                   -ms-transform: translateY(-50%);
                   transform: translateY(-50%); }
+            .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .specializations {
+              width: 50%; }
           .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .btns-container {
             font-size: 0; }
             .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .btns-container .inline-block {
