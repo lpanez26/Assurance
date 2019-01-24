@@ -126,6 +126,5 @@
 <script src="//dentacoin.com/assets/libs/civic-login/civic.js"></script>
 <script src="//dentacoin.com/assets/libs/facebook-login/facebook.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaVeHq_LOhQndssbmw-aDnlMwUG73yCdk&libraries=places&language=en"></script>
-<script src="/assets/js/address.js"></script>
 </body>
 </html>

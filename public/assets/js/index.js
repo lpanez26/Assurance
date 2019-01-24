@@ -752,10 +752,13 @@ function bindLoginSigninPopupShow() {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function (response) {
+                success: async function (response) {
                     if(response.success) {
                         basic.closeDialog();
                         basic.showDialog(response.success, 'login-signin-popup', null, true);
+
+                        //load address script
+                        await $.getScript('/assets/js/address.js', function() {});
 
                         $('.popup-header-action a').click(function() {
                             $('.login-signin-popup .popup-body > .inline-block').addClass('custom-hide');
