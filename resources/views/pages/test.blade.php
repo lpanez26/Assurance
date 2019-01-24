@@ -464,21 +464,12 @@ Test body
                     return false;
                 }
             });
-        }
+        };
 
         if( $('.address-suggester').length ) {
             initAddressSuggesters();
         }
     });
-
-
-    function trimChar (str, c) {
-        if (c === "]") c = "\\]";
-        if (c === "\\") c = "\\\\";
-        return str.replace(new RegExp(
-            "^[" + c + "]+|[" + c + "]+$", "g"
-        ), "");
-    }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaVeHq_LOhQndssbmw-aDnlMwUG73yCdk&amp;libraries=places&amp;language=en"></script>
 </body>
