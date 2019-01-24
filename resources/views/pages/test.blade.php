@@ -283,7 +283,7 @@ Test body
     </div>
 </div>
 
-<script src="/assets/libs/js/address.js"></script>
+<script src="/assets/js/address.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaVeHq_LOhQndssbmw-aDnlMwUG73yCdk&amp;libraries=places&amp;language=en"></script>
 </body>
 </html>
