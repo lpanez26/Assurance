@@ -4527,30 +4527,67 @@ fieldset {
           color: #212121; }
           .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .popup-half-footer {
             padding: 30px 0;
-            margin-top: 50px;
+            margin-top: 80px;
             margin-left: -15%;
             margin-right: -15%;
             text-align: center;
             border-top: 1px solid #212121;
             color: #212121;
-            font-size: 18px; }
+            font-size: 16px; }
             .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .popup-half-footer a {
               font-family: 'Calibri-Bold';
               color: #212121;
               font-size: 20px;
               text-decoration: underline; }
+          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step {
+            display: none; }
+            .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.visible {
+              display: block; }
+            .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.second .phone {
+              display: flex;
+              align-items: center; }
+              .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.second .phone .country-code {
+                font-size: 16px;
+                padding-right: 10px; }
+              .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.second .phone .input-phone {
+                flex: 1; }
+            .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.second .pretty {
+              white-space: normal;
+              padding-bottom: 5px; }
+              .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.second .pretty .state {
+                position: relative; }
+                .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.second .pretty .state i {
+                  left: 1px;
+                  top: 1px;
+                  position: absolute; }
+                .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.second .pretty .state label {
+                  line-height: 20px; }
+                  .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.second .pretty .state label:before, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.second .pretty .state label:after {
+                    left: 1px;
+                    top: 1px; }
+          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .btns-container {
+            font-size: 0; }
+            .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .btns-container .inline-block {
+              width: 50%; }
+              .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .btns-container .inline-block .prev-step {
+                display: none;
+                color: #999999;
+                font-size: 14px;
+                font-family: 'Calibri Light';
+                border: 0;
+                background: transparent; }
         .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient {
           background-color: #126585;
           color: white; }
           .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient .popup-half-footer {
             padding: 30px 0;
-            margin-top: 50px;
+            margin-top: 80px;
             margin-left: -15%;
             margin-right: -15%;
             text-align: center;
             border-top: 1px solid white;
             color: white;
-            font-size: 18px; }
+            font-size: 16px; }
             .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient .popup-half-footer a {
               font-family: 'Calibri-Bold';
               color: white;
@@ -4566,10 +4603,39 @@ fieldset {
           -moz-border-radius: 0 0 4px 4px;
           -ms-border-radius: 0 0 4px 4px;
           border-radius: 0 0 4px 4px; }
+          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .custom-input, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient .custom-input {
+            padding: 7px 12px; }
           .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist h2, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient h2 {
             font-size: 35px;
             padding-bottom: 20px;
             font-family: "Calibri Light"; }
+          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty {
+            display: block;
+            margin-bottom: 15px; }
+            .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty input[type='checkbox'], .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty input[type='checkbox'] {
+              max-width: 250px; }
+          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty .state label a, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty .state label a {
+            color: white;
+            text-decoration: underline; }
+          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty .state label:before, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty .state label:before {
+            border-color: white !important;
+            border-width: 2px; }
+          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty input:checked ~ .state.p-success label:after, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty.p-toggle .state.p-success label:after, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty input:checked ~ .state.p-success label:after, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty.p-toggle .state.p-success label:after {
+            background-color: #126585 !important; }
+          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty.p-curve .state label:after, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty.p-curve .state label:before, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty.p-curve .state label:after, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty.p-curve .state label:before {
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            -ms-border-radius: 0;
+            border-radius: 0; }
+          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty .state label:after, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty .state label:before, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty .state label:after, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty .state label:before {
+            width: 20px;
+            height: 20px; }
+          .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient .form-register .pretty.p-svg .state .svg, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient .form-register .pretty.p-svg .state .svg {
+            width: 20px;
+            height: 20px;
+            top: -1px;
+            border-color: white !important;
+            border-width: 2px; }
           .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.patient h2, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.patient h2 {
             color: white; }
           .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.dentist h2, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.dentist h2 {
@@ -4582,7 +4648,7 @@ fieldset {
           .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist.custom-hide, .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .patient.custom-hide {
             visibility: hidden; }
 
-input[type='text'] {
+input[type='text'], .custom-input {
   width: 100%;
   padding: 12px 15px;
   background-color: white;
@@ -4602,12 +4668,12 @@ input[type='text'] {
   -o-transition: 0.3s;
   -ms-transition: 0.3s;
   transition: 0.3s; }
-  input[type='text'].green-arrow-background {
+  input[type='text'].green-arrow-background, .custom-input.green-arrow-background {
     background-image: url(/assets/images/green-arrow-rounded.png);
     background-repeat: no-repeat;
     background-size: 22px;
     background-position: center right 10px; }
-  input[type='text']:focus {
+  input[type='text']:focus, .custom-input:focus {
     -webkit-box-shadow: 0px 2px 10px 0 #679dca;
     -moz-box-shadow: 0px 2px 10px 0 #679dca;
     -ms-box-shadow: 0px 2px 10px 0 #679dca;
@@ -4668,6 +4734,18 @@ input[type='text'] {
   width: calc(100% - 300px);
   padding: 15px;
   font-size: 16px; }
+
+.error-handle {
+  color: #a94442;
+  background-color: #f2dede;
+  border: 1px solid #a94442;
+  margin-top: 5px;
+  font-size: 14px;
+  padding: 5px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px; }
 
 .white-blue-green-btn {
   font-size: 20px;

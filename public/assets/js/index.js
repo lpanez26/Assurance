@@ -760,16 +760,113 @@ function bindLoginSigninPopupShow() {
                         $('.popup-header-action a').click(function() {
                             $('.login-signin-popup .popup-body > .inline-block').addClass('custom-hide');
                             $('.login-signin-popup .popup-body .'+$(this).attr('data-type')).removeClass('custom-hide');
+                        });
 
-                            $('.login-signin-popup .call-sign-up').click(function() {
-                                $('.login-signin-popup .form-login').hide();
-                                $('.login-signin-popup .form-register').show();
-                            });
+                        $('.login-signin-popup .call-sign-up').click(function() {
+                            $('.login-signin-popup .form-login').hide();
+                            $('.login-signin-popup .form-register').show();
+                        });
 
-                            $('.login-signin-popup .call-log-in').click(function() {
-                                $('.login-signin-popup .form-login').show();
-                                $('.login-signin-popup .form-register').hide();
-                            });
+                        $('.login-signin-popup .call-log-in').click(function() {
+                            $('.login-signin-popup .form-login').show();
+                            $('.login-signin-popup .form-register').hide();
+                        });
+
+                        $('.dentist .form-register .prev-step').click(function() {
+                            var current_step = $('.dentist .form-register .step.visible');
+                            var current_prev_step = current_step.prev();
+                            current_step.removeClass('visible');
+                            if(current_prev_step.hasClass('first')) {
+                                $(this).hide();
+                            }
+                            current_prev_step.addClass('visible');
+
+                            $('.dentist .form-register .next-step').attr('data-current-step', current_prev_step.attr('data-step'));
+                        });
+
+                        function customErrorHandle(el, string) {
+                            el.append('<div class="error-handle">'+string+'</div>');
+                        }
+
+                        $('.dentist .form-register .next-step').click(function() {
+                            var this_btn = $(this);
+                            switch(this_btn.attr('data-current-step')) {
+                                case 'first':
+                                    var first_step_inputs = $('.dentist .form-register .step.first .custom-input');
+                                    var errors = false;
+                                    $('.dentist .form-register .step.first').parent().find('.error-handle').remove();
+                                    for(var i = 0, len = first_step_inputs.length; i < len; i+=1) {
+                                        if(first_step_inputs.eq(i).attr('type') == 'email' && !basic.validateEmail(first_step_inputs.eq(i).val().trim())) {
+                                            customErrorHandle(first_step_inputs.eq(i).parent(), 'Please use valid email address.');
+                                            errors = true;
+                                        }else if(first_step_inputs.eq(i).attr('type') == 'password' && first_step_inputs.eq(i).val().length < 6) {
+                                            customErrorHandle(first_step_inputs.eq(i).parent(), 'Passwords must be min length 6.');
+                                            errors = true;
+                                        }
+
+                                        if(first_step_inputs.eq(i).val().trim() == '') {
+                                            customErrorHandle(first_step_inputs.eq(i).parent(), 'This field is required.');
+                                            errors = true;
+                                        }
+                                    }
+
+                                    if($('.dentist .form-register .step.first .custom-input.password').val().trim() != $('.step.first .custom-input.repeat-password').val().trim()) {
+                                        customErrorHandle($('.step.first .custom-input.repeat-password').parent(), 'Both passwords don\'t match.');
+                                        errors = true;
+                                    }
+
+                                    if(!errors) {
+                                        $('.dentist .form-register .step').removeClass('visible');
+                                        $('.dentist .form-register .step.second').addClass('visible');
+                                        $('.prev-step').show();
+
+                                        this_btn.attr('data-current-step', 'second');
+                                    }
+                                    break;
+                                case 'second':
+                                    var second_step_inputs = $('.dentist .form-register .step.second .custom-input');
+                                    var errors = false;
+                                    $('.dentist .form-register .step.second').find('.error-handle').remove();
+
+                                    //check custom-input fields
+                                    for(var i = 0, len = second_step_inputs.length; i < len; i+=1) {
+                                        if(second_step_inputs.eq(i).is('select')) {
+                                            //IF SELECT TAG
+                                            if(second_step_inputs.eq(i).val().trim() == '') {
+                                                customErrorHandle(second_step_inputs.eq(i).parent(), 'This field is required.');
+                                                errors = true;
+                                            }
+                                        }else if(second_step_inputs.eq(i).is('input')) {
+                                            //IF INPUT TAG
+                                            if(second_step_inputs.eq(i).val().trim() == '') {
+                                                customErrorHandle(second_step_inputs.eq(i).parent(), 'This field is required.');
+                                                errors = true;
+                                            }
+
+                                            if(second_step_inputs.eq(i).attr('type') == 'url' && !basic.validateUrl(second_step_inputs.eq(i).val().trim())) {
+                                                customErrorHandle(second_step_inputs.eq(i).parent(), 'Please use valid website.');
+                                                errors = true;
+                                            }
+                                        }
+                                    }
+
+                                    //check custom radio buttons
+                                    if($('.dentist .form-register .step.second [name="work-type"]:checked').val() == undefined) {
+                                        customErrorHandle($('.dentist .form-register .step.second .radio-buttons-holder'), 'Please select one of the options.');
+                                        errors = true;
+                                    }
+
+                                    if(!errors) {
+                                        $('.dentist .form-register .step').removeClass('visible');
+                                        $('.dentist .form-register .step.three').addClass('visible');
+
+                                        this_btn.attr('data-current-step', 'three');
+                                    }
+                                    break;
+                                case 'third':
+                                    console.log('third');
+                                    break;
+                            }
                         });
                     }
                 }

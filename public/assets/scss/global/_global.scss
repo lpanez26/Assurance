@@ -677,18 +677,72 @@ fieldset {
                             color: $dark_color;
                             .popup-half-footer {
                                 padding: 30px 0;
-                                margin-top: 50px;
+                                margin-top: 80px;
                                 margin-left: -15%;
                                 margin-right: -15%;
                                 text-align: center;
                                 border-top: 1px solid $dark_color;
                                 color: $dark_color;
-                                font-size: 18px;
+                                font-size: 16px;
                                 a {
                                     font-family: 'Calibri-Bold';
                                     color: $dark_color;
                                     font-size: 20px;
                                     text-decoration: underline;
+                                }
+                            }
+                            .form-register {
+                                .step {
+                                    display: none;
+                                    &.visible {
+                                        display: block;
+                                    }
+                                    &.second {
+                                        .phone {
+                                            display: flex;
+                                            align-items: center;
+                                            .country-code {
+                                                font-size: 16px;
+                                                padding-right: 10px;
+                                            }
+                                            .input-phone {
+                                                flex: 1;
+                                            }
+                                        }
+                                        .pretty {
+                                            white-space: normal;
+                                            padding-bottom: 5px;
+                                            .state {
+                                                position: relative;
+                                                i {
+                                                    left: 1px;
+                                                    top: 1px;
+                                                    position: absolute;
+                                                }
+                                                label {
+                                                    line-height: 20px;
+                                                    &:before, &:after {
+                                                        left: 1px;
+                                                        top: 1px;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                .btns-container {
+                                    font-size: 0;
+                                    .inline-block {
+                                        width: 50%;
+                                        .prev-step {
+                                            display: none;
+                                            color: #999999;
+                                            font-size: 14px;
+                                            font-family: 'Calibri Light';
+                                            border: 0;
+                                            background: transparent;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -697,13 +751,13 @@ fieldset {
                             color: white;
                             .popup-half-footer {
                                 padding: 30px 0;
-                                margin-top: 50px;
+                                margin-top: 80px;
                                 margin-left: -15%;
                                 margin-right: -15%;
                                 text-align: center;
                                 border-top: 1px solid white;
                                 color: white;
-                                font-size: 18px;
+                                font-size: 16px;
                                 a {
                                     font-family: 'Calibri-Bold';
                                     color: white;
@@ -719,12 +773,51 @@ fieldset {
                             border-left: 3px solid white;
                             border-right: 3px solid white;
                             @include rounded(0 0 4px 4px);
+                            .custom-input {
+                                padding: 7px 12px;
+                            }
                             h2 {
                                 font-size: 35px;
                                 padding-bottom: 20px;
                                 font-family: "Calibri Light";
                             }
                             &.patient {
+                                .form-register {
+                                    .pretty {
+                                        display: block;
+                                        margin-bottom: 15px;
+                                        input[type='checkbox'] {
+                                            max-width: 250px;
+                                        }
+                                    }
+                                    .pretty .state label {
+                                        a {
+                                            color: white;
+                                            text-decoration: underline;
+                                        }
+                                    }
+                                    .pretty .state label:before {
+                                        border-color: white !important;
+                                        border-width: 2px;
+                                    }
+                                    .pretty input:checked~.state.p-success label:after, .pretty.p-toggle .state.p-success label:after {
+                                        background-color: $blue_green_color !important;
+                                    }
+                                    .pretty.p-curve .state label:after, .pretty.p-curve .state label:before {
+                                        @include rounded(0);
+                                    }
+                                    .pretty .state label:after, .pretty .state label:before {
+                                        width: 20px;
+                                        height: 20px;
+                                    }
+                                    .pretty.p-svg .state .svg {
+                                        width: 20px;
+                                        height: 20px;
+                                        top: -1px;
+                                        border-color: white !important;
+                                        border-width: 2px;
+                                    }
+                                }
                                 h2 {
                                     color: white;
                                 }
@@ -752,7 +845,7 @@ fieldset {
     }
 }
 
-input[type='text'] {
+input[type='text'], .custom-input {
     width: 100%;
     padding: 12px 15px;
     background-color: white;
@@ -833,4 +926,14 @@ input[type='text'] {
     width: calc(100% - 300px);
     padding: 15px;
     font-size: 16px;
+}
+
+.error-handle {
+    color: #a94442;
+    background-color: #f2dede;
+    border: 1px solid #a94442;
+    margin-top: 5px;
+    font-size: 14px;
+    padding: 5px;
+    @include rounded(4px);
 }

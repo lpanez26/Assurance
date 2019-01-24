@@ -19,8 +19,12 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
     Route::get('/', 'HomeController@getView')->name('home');
 
+
     Route::get('/support-guide', 'SupportGuideController@getView')->name('support-guide');
 
+    Route::get('/test', function() {
+        return view('pages/test');
+    })->name('test');
 
     //======================================= TEMPORALLY FOR DAPP TESTING ========================================
     Route::get('/dentist-test', 'HomeController@getDentistView')->name('dentist-test');
