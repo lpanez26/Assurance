@@ -154,7 +154,7 @@
                 console.log('prepareMapFucntion', '2');
                 mapsWaiting.push(callback);
             }
-        }
+        };
 
         var initMap = function () {
             console.log('initMap');
@@ -200,7 +200,9 @@
                 }).bind( $(this) )  );
 
             });
-        }
+        };
+
+
 
         initAddressSuggesters = function() {
             console.log('initAddressSuggesters');
@@ -312,7 +314,7 @@
                     return false;
                 }
             });
-        }
+        };
 
         if( $('.address-suggester').length ) {
             initAddressSuggesters();
