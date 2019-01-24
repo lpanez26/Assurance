@@ -284,15 +284,9 @@ Test body
 </div>
 
 <script>
+    console.log("WTFF");
     var mapsLoaded = true;
     var mapsWaiting = [];
-
-
-
-    //
-    //Maps stuff
-    //
-
 
     var prepareMapFucntion = function( callback ) {
         console.log('prepareMapFucntion');
@@ -303,7 +297,7 @@ Test body
             console.log('prepareMapFucntion', '2');
             mapsWaiting.push(callback);
         }
-    }
+    };
 
     var initMap = function () {
         console.log('initMap');
@@ -349,7 +343,7 @@ Test body
             }).bind( $(this) )  );
 
         });
-    }
+    };
 
     initMap();
 
