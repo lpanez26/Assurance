@@ -875,7 +875,7 @@ function bindLoginSigninPopupShow() {
                                     }
                                     break;
                                 case 'third':
-                                    console.log('third');
+                                    
                                     break;
                             }
                         });

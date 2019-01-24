@@ -26,7 +26,7 @@
             </div>
             <div class="privacy-policy-row padding-top-20">
                 <div class="pretty p-svg p-curve">
-                    <input type="checkbox"/>
+                    <input type="checkbox" name="specialization[]"/>
                     <div class="state p-success">
                         <!-- svg path -->
                         <svg class="svg svg-icon" viewBox="0 0 20 20">
@@ -368,7 +368,89 @@
                     </div>
                 </div>
                 <div class="step three" data-step="three">
-                    THIRD STEP
+                    <div class="padding-bottom-20 fs-0">
+                        <div class="inline-block-top avatar">
+                            <div class="border text-center">
+                                <div class="inner">
+                                    <i class="fa fa-plus fs-30" aria-hidden="true"></i>
+                                    <div class="fs-18">Add profile photo</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="inline-block-top specializations">
+                            <h4>Please select your specializations:</h4>
+                            <div class="pretty p-svg p-curve">
+                                <input type="checkbox" name="specialization[]" value="6"/>
+                                <div class="state p-success">
+                                    <!-- svg path -->
+                                    <svg class="svg svg-icon" viewBox="0 0 20 20">
+                                        <path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>
+                                    </svg>
+                                    <label class="fs-14">General Dentistry</label>
+                                </div>
+                            </div>
+                            <div class="pretty p-svg p-curve">
+                                <input type="checkbox" name="specialization[]" value="1"/>
+                                <div class="state p-success">
+                                    <!-- svg path -->
+                                    <svg class="svg svg-icon" viewBox="0 0 20 20">
+                                        <path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>
+                                    </svg>
+                                    <label class="fs-14">Cosmetic Dentistry</label>
+                                </div>
+                            </div>
+                            <div class="pretty p-svg p-curve">
+                                <input type="checkbox" name="specialization[]" value="2"/>
+                                <div class="state p-success">
+                                    <!-- svg path -->
+                                    <svg class="svg svg-icon" viewBox="0 0 20 20">
+                                        <path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>
+                                    </svg>
+                                    <label class="fs-14">Implantology</label>
+                                </div>
+                            </div>
+                            <div class="pretty p-svg p-curve">
+                                <input type="checkbox" name="specialization[]" value="3"/>
+                                <div class="state p-success">
+                                    <!-- svg path -->
+                                    <svg class="svg svg-icon" viewBox="0 0 20 20">
+                                        <path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>
+                                    </svg>
+                                    <label class="fs-14">Orthodontics</label>
+                                </div>
+                            </div>
+                            <div class="pretty p-svg p-curve">
+                                <input type="checkbox" name="specialization[]" value="4"/>
+                                <div class="state p-success">
+                                    <!-- svg path -->
+                                    <svg class="svg svg-icon" viewBox="0 0 20 20">
+                                        <path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>
+                                    </svg>
+                                    <label class="fs-14">Periodontics</label>
+                                </div>
+                            </div>
+                            <div class="pretty p-svg p-curve">
+                                <input type="checkbox" name="specialization[]" value="5"/>
+                                <div class="state p-success">
+                                    <!-- svg path -->
+                                    <svg class="svg svg-icon" viewBox="0 0 20 20">
+                                        <path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>
+                                    </svg>
+                                    <label class="fs-14">Pediatrics</label>
+                                </div>
+                            </div>
+                            <div class="pretty p-svg p-curve">
+                                <input type="checkbox" name="specialization[]" value="6"/>
+                                <div class="state p-success">
+                                    <!-- svg path -->
+                                    <svg class="svg svg-icon" viewBox="0 0 20 20">
+                                        <path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path>
+                                    </svg>
+                                    <label class="fs-14">Endodontics</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="btns-container">
                     <div class="inline-block">
