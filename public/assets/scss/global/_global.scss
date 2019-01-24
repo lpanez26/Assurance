@@ -733,17 +733,23 @@ fieldset {
                                         .avatar {
                                             padding-right: 20px;
                                             width: 50%;
-                                            .border {
+                                            button {
                                                 background-color: #e3e3e3;
                                                 border: 2px dashed #777777;
                                                 color: #777777;
-                                                position: relative;
                                                 width: 100%;
                                                 padding-top: calc(100% - 4px);
-                                                .inner {
-                                                    left: 0;
+                                                label {
+                                                    height: 100%;
                                                     width: 100%;
-                                                    @include vertical-align(absolute);
+                                                    display: block;
+                                                    position: relative;
+                                                    text-align: center;    
+                                                    .inner {
+                                                        left: 0;
+                                                        width: 100%;
+                                                        @include vertical-align(absolute);
+                                                    }
                                                 }
                                             }
                                         }

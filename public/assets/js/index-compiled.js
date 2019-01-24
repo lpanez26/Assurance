@@ -26568,7 +26568,7 @@ function styleAvatarUploadButton() {
     if (jQuery(".upload-file.avatar").length) {
         jQuery(".upload-file.avatar").each(function (key, form) {
             var this_file_btn_parent = jQuery(this);
-            this_file_btn_parent.find('button').append('<label for="custom-upload-avatar"><div class="border text-center"><div class="inner"><i class="fa fa-plus fs-30" aria-hidden="true"></i><div class="fs-18">Add profile photo</div></div></div></label>');
+            this_file_btn_parent.find('button').append('<label for="custom-upload-avatar"><div class="inner"><i class="fa fa-plus fs-30" aria-hidden="true"></i><div class="fs-18">Add profile photo</div></div></label>');
 
             var inputs = document.querySelectorAll('.inputfile');
             Array.prototype.forEach.call(inputs, function (input) {

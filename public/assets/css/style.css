@@ -4568,21 +4568,26 @@ fieldset {
             .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar {
               padding-right: 20px;
               width: 50%; }
-              .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar .border {
+              .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar button {
                 background-color: #e3e3e3;
                 border: 2px dashed #777777;
                 color: #777777;
-                position: relative;
                 width: 100%;
                 padding-top: calc(100% - 4px); }
-                .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar .border .inner {
-                  left: 0;
+                .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar button label {
+                  height: 100%;
                   width: 100%;
-                  position: absolute;
-                  top: 50%;
-                  -webkit-transform: translateY(-50%);
-                  -ms-transform: translateY(-50%);
-                  transform: translateY(-50%); }
+                  display: block;
+                  position: relative;
+                  text-align: center; }
+                  .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar button label .inner {
+                    left: 0;
+                    width: 100%;
+                    position: absolute;
+                    top: 50%;
+                    -webkit-transform: translateY(-50%);
+                    -ms-transform: translateY(-50%);
+                    transform: translateY(-50%); }
             .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .specializations {
               width: 50%; }
               .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .specializations h4 {
