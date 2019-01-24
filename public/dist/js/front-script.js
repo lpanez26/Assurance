@@ -543,6 +543,10 @@ var basic = {
         return (/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)
         );
     },
+    validatePhone: function validatePhone(phone) {
+        return (/^[\d\.\-]+$/.test(phone)
+        );
+    },
     validateUrl: function validateUrl(url) {
         return (/(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/.test(url)
         );
@@ -1472,6 +1476,9 @@ function bindLoginSigninPopupShow() {
 
                                                             if (second_step_inputs.eq(i).attr('type') == 'url' && !basic.validateUrl(second_step_inputs.eq(i).val().trim())) {
                                                                 customErrorHandle(second_step_inputs.eq(i).parent(), 'Please use valid website.');
+                                                                errors = true;
+                                                            } else if (second_step_inputs.eq(i).attr('type') == 'number' && !basic.validatePhone(second_step_inputs.eq(i).val().trim())) {
+                                                                customErrorHandle(second_step_inputs.eq(i).parent(), 'Please use valid numbers.');
                                                                 errors = true;
                                                             }
                                                         }

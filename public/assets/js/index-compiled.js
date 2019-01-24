@@ -26498,6 +26498,9 @@ function bindLoginSigninPopupShow() {
                                                             if (second_step_inputs.eq(i).attr('type') == 'url' && !basic.validateUrl(second_step_inputs.eq(i).val().trim())) {
                                                                 customErrorHandle(second_step_inputs.eq(i).parent(), 'Please use valid website.');
                                                                 errors = true;
+                                                            } else if (second_step_inputs.eq(i).attr('type') == 'number' && !basic.validatePhone(second_step_inputs.eq(i).val().trim())) {
+                                                                customErrorHandle(second_step_inputs.eq(i).parent(), 'Please use valid numbers.');
+                                                                errors = true;
                                                             }
                                                         }
                                                     }
