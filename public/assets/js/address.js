@@ -94,15 +94,13 @@ jQuery(document).ready(function($){
 
 
                 var input = $(this)[0];
-                var cc = step_container.find('.country-select option:selected').attr('code');
+                var cc = step_container.find('.country-select option:selected').attr('value');
                 var options = {
                     componentRestrictions: {
                         country: cc
                     },
                     types: ['address']
                 };
-
-                console.log('hmm');
 
                 var GMautocomplete = new google.maps.places.Autocomplete(input, options);
                 GMautocomplete.step_container = step_container;
