@@ -937,3 +937,7 @@ input[type='text'], .custom-input {
     padding: 5px;
     @include rounded(4px);
 }
+
+.pac-container {
+    z-index: 10000;
+}

@@ -4747,6 +4747,9 @@ input[type='text'], .custom-input {
   -ms-border-radius: 4px;
   border-radius: 4px; }
 
+.pac-container {
+  z-index: 10000; }
+
 .white-blue-green-btn {
   font-size: 20px;
   color: white;

@@ -1,7 +1,7 @@
-var mapsLoaded = false;
+var mapsLoaded = true;
 var mapsWaiting = [];
 
-var prepareMapFucntion = function( callback ) {
+var prepareMapFunction = function( callback ) {
     if(mapsLoaded) {
         callback();
     } else {
@@ -9,7 +9,7 @@ var prepareMapFucntion = function( callback ) {
     }
 };
 
-var initMap = function () {
+/*var initMap = function () {
     mapsLoaded = true;
     for(var i in mapsWaiting) {
         mapsWaiting[i]();
@@ -50,111 +50,92 @@ var initMap = function () {
 
     });
 };
-
-initMap();
-
-
-
+initMap();*/
 
 var initAddressSuggesters;
-
 jQuery(document).ready(function($){
-
     initAddressSuggesters = function() {
-        prepareMapFucntion( function() {
-            $('.address-suggester').each( function() {
-                var step_container = $(this).closest('.step.second');
+        prepareMapFunction(function() {
+            if($('.address-suggester').length) {
+                $('.address-suggester').each( function() {
+                    var step_container = $(this).closest('.step.second');
 
-                step_container.find('.country-select').change( function() {
-                    var cc = $(this).find('option:selected').attr('code');
-                    GMautocomplete.setComponentRestrictions({
-                        'country': cc
-                    });
-                } );
-
-
-                if( step_container.find('.suggester-map-div').attr('lat') ) {
-                    var coords = {
-                        lat: parseFloat( step_container.find('.suggester-map-div').attr('lat') ),
-                        lng: parseFloat( step_container.find('.suggester-map-div').attr('lon') )
-                    };
-
-                    step_container.find('.suggester-map-div').show();
-                    var profile_address_map = new google.maps.Map( step_container.find('.suggester-map-div')[0], {
-                        center: coords,
-                        zoom: 14,
-                        backgroundColor: 'none'
+                    step_container.find('.country-select').change( function() {
+                        var cc = $(this).find('option:selected').attr('code');
+                        GMautocomplete.setComponentRestrictions({
+                            'country': cc
+                        });
                     });
 
-                    var marker = new google.maps.Marker({
-                        map: profile_address_map,
-                        center: coords,
-                    });
-                }
+                    if( step_container.find('.suggester-map-div').attr('lat') ) {
+                        var coords = {
+                            lat: parseFloat( step_container.find('.suggester-map-div').attr('lat') ),
+                            lng: parseFloat( step_container.find('.suggester-map-div').attr('lon') )
+                        };
 
+                        step_container.find('.suggester-map-div').show();
+                        var profile_address_map = new google.maps.Map( step_container.find('.suggester-map-div')[0], {
+                            center: coords,
+                            zoom: 14,
+                            backgroundColor: 'none'
+                        });
 
-                var input = $(this)[0];
-                var cc = step_container.find('.country-select option:selected').attr('value');
-                var options = {
-                    componentRestrictions: {
-                        country: cc
-                    },
-                    types: ['address']
-                };
-
-                var GMautocomplete = new google.maps.places.Autocomplete(input, options);
-                GMautocomplete.step_container = step_container;
-                google.maps.event.addListener(GMautocomplete, 'place_changed', (function () {
-                    var place = this.getPlace();
-
-                    this.step_container.find('.address-suggester').blur();
-                    this.step_container.find('.geoip-hint').hide();
-                    this.step_container.find('.suggester-map-div').hide();
-
-                    if( place && place.geometry ) {
-                        //address_components
-                        console.log(place);
-                        console.log( place.formatted_address )
-                        console.log( place.types ); //street_address
-                        console.log( place.geometry.location.lat() )
-                        console.log( place.geometry.location.lng() )
-
-
-                        if( place.types.indexOf('street_address')!=-1 || place.types.indexOf('street_number')!=-1 ) {
-                            var cname = '';
-                            var newaddress = place.name + ', ' + place.vicinity;
-                            this.step_container.find('.address-suggester').val(newaddress);
-
-                            prepareMapFucntion( (function() {
-                                var coords = {
-                                    lat: place.geometry.location.lat(),
-                                    lng: place.geometry.location.lng()
-                                };
-
-                                this.step_container.find('.suggester-map-div').show();
-                                var profile_address_map = new google.maps.Map( this.step_container.find('.suggester-map-div')[0], {
-                                    center: coords,
-                                    zoom: 14,
-                                    backgroundColor: 'none'
-                                });
-
-                                var marker = new google.maps.Marker({
-                                    map: profile_address_map,
-                                    center: coords,
-                                });
-
-                            }).bind(this) );
-
-                            return;
-                        }
-
+                        var marker = new google.maps.Marker({
+                            map: profile_address_map,
+                            center: coords,
+                        });
                     }
 
-                    this.step_container.find('.geoip-hint').show();
-                }).bind(GMautocomplete));
+                    var input = $(this)[0];
+                    var cc = step_container.find('.country-select option:selected').attr('value');
+                    var options = {
+                        componentRestrictions: {
+                            country: cc
+                        },
+                        types: ['address']
+                    };
 
-            } )
+                    var GMautocomplete = new google.maps.places.Autocomplete(input, options);
+                    GMautocomplete.step_container = step_container;
+                    google.maps.event.addListener(GMautocomplete, 'place_changed', (function () {
+                        var place = this.getPlace();
 
+                        this.step_container.find('.address-suggester').blur();
+                        this.step_container.find('.geoip-hint').hide();
+                        this.step_container.find('.suggester-map-div').hide();
+
+                        if( place && place.geometry ) {
+                            //address_components
+                            if( place.types.indexOf('street_address')!=-1 || place.types.indexOf('street_number')!=-1 ) {
+                                var newaddress = place.name + ', ' + place.vicinity;
+                                this.step_container.find('.address-suggester').val(newaddress);
+
+                                prepareMapFunction( (function() {
+                                    var coords = {
+                                        lat: place.geometry.location.lat(),
+                                        lng: place.geometry.location.lng()
+                                    };
+
+                                    this.step_container.find('.suggester-map-div').show();
+                                    var profile_address_map = new google.maps.Map( this.step_container.find('.suggester-map-div')[0], {
+                                        center: coords,
+                                        zoom: 14,
+                                        backgroundColor: 'none'
+                                    });
+
+                                    var marker = new google.maps.Marker({
+                                        map: profile_address_map,
+                                        center: coords,
+                                    });
+
+                                }).bind(this) );
+                                return;
+                            }
+                        }
+                        this.step_container.find('.geoip-hint').show();
+                    }).bind(GMautocomplete));
+                });
+            }
         });
 
         $('.address-suggester').on('keyup keypress', function(e) {
@@ -163,10 +144,14 @@ jQuery(document).ready(function($){
                 e.preventDefault();
                 return false;
             }
+
+            if($(this).val().trim() == '') {
+                step_container.find('.suggester-map-div').hide();
+            }
         });
     };
 
-    if( $('.address-suggester').length ) {
+    if($('.address-suggester').length) {
         initAddressSuggesters();
     }
 });
