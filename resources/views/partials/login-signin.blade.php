@@ -101,7 +101,7 @@
                         </div>
                     </div>
                     <div class="padding-bottom-10">
-                        <select name="country_id" id="dentist-country" class="custom-input">
+                        <select name="country_id" id="dentist-country" class="custom-input country-select">
                             <option value="af">Afghanistan</option>
                             <option value="ax">Aland Islands</option>
                             <option value="al">Albania</option>
@@ -348,6 +348,14 @@
                             <option value="zm">Zambia</option>
                             <option value="zw">Zimbabwe</option>
                         </select>
+                    </div>
+                    <div>
+                        <input type="text" name="address" class="custom-input address-suggester" autocomplete="off" placeholder="City, Street">
+                        <div class="suggester-map-div" style="height: 200px; display: none; margin: 10px 0px; background: transparent;">
+                        </div>
+                        <div class="alert alert-warning geoip-hint mobile" style="display: none; margin: 10px 0px;">
+                            Please enter a valid address for your practice (including street name and number)
+                        </div>
                     </div>
                     <div class="padding-bottom-10 phone">
                         <div class="country-code">+359</div>

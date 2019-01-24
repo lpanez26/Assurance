@@ -1,20 +1,15 @@
-console.log("WTFF");
-var mapsLoaded = true;
+var mapsLoaded = false;
 var mapsWaiting = [];
 
 var prepareMapFucntion = function( callback ) {
-    console.log('prepareMapFucntion');
     if(mapsLoaded) {
-        console.log('prepareMapFucntion', '1');
         callback();
     } else {
-        console.log('prepareMapFucntion', '2');
         mapsWaiting.push(callback);
     }
 };
 
 var initMap = function () {
-    console.log('initMap');
     mapsLoaded = true;
     for(var i in mapsWaiting) {
         mapsWaiting[i]();
@@ -22,11 +17,8 @@ var initMap = function () {
 
     $('.map').each( function(){
         var address = $(this).attr('data-address') ;
-
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode( { 'address': address}, (function(results, status) {
-            console.log(address);
-            console.log(status);
             if (status == google.maps.GeocoderStatus.OK) {
                 if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
                     var position = {
@@ -69,15 +61,11 @@ var initAddressSuggesters;
 jQuery(document).ready(function($){
 
     initAddressSuggesters = function() {
-        console.log('initAddressSuggesters');
-
         prepareMapFucntion( function() {
-            console.log('prepareMapFucntion');
-
             $('.address-suggester').each( function() {
-                var conatiner = $(this).closest('.address-suggester-wrapper');
+                var step_container = $(this).closest('.step.second');
 
-                conatiner.find('.country-select').change( function() {
+                step_container.find('.country-select').change( function() {
                     var cc = $(this).find('option:selected').attr('code');
                     GMautocomplete.setComponentRestrictions({
                         'country': cc
@@ -85,14 +73,14 @@ jQuery(document).ready(function($){
                 } );
 
 
-                if( conatiner.find('.suggester-map-div').attr('lat') ) {
+                if( step_container.find('.suggester-map-div').attr('lat') ) {
                     var coords = {
-                        lat: parseFloat( conatiner.find('.suggester-map-div').attr('lat') ),
-                        lng: parseFloat( conatiner.find('.suggester-map-div').attr('lon') )
+                        lat: parseFloat( step_container.find('.suggester-map-div').attr('lat') ),
+                        lng: parseFloat( step_container.find('.suggester-map-div').attr('lon') )
                     };
 
-                    conatiner.find('.suggester-map-div').show();
-                    var profile_address_map = new google.maps.Map( conatiner.find('.suggester-map-div')[0], {
+                    step_container.find('.suggester-map-div').show();
+                    var profile_address_map = new google.maps.Map( step_container.find('.suggester-map-div')[0], {
                         center: coords,
                         zoom: 14,
                         backgroundColor: 'none'
@@ -106,7 +94,7 @@ jQuery(document).ready(function($){
 
 
                 var input = $(this)[0];
-                var cc = conatiner.find('.country-select option:selected').attr('code');
+                var cc = step_container.find('.country-select option:selected').attr('code');
                 var options = {
                     componentRestrictions: {
                         country: cc
@@ -117,13 +105,13 @@ jQuery(document).ready(function($){
                 console.log('hmm');
 
                 var GMautocomplete = new google.maps.places.Autocomplete(input, options);
-                GMautocomplete.conatiner = conatiner;
+                GMautocomplete.step_container = step_container;
                 google.maps.event.addListener(GMautocomplete, 'place_changed', (function () {
                     var place = this.getPlace();
 
-                    this.conatiner.find('.address-suggester').blur();
-                    this.conatiner.find('.geoip-hint').hide();
-                    this.conatiner.find('.suggester-map-div').hide();
+                    this.step_container.find('.address-suggester').blur();
+                    this.step_container.find('.geoip-hint').hide();
+                    this.step_container.find('.suggester-map-div').hide();
 
                     if( place && place.geometry ) {
                         //address_components
@@ -137,7 +125,7 @@ jQuery(document).ready(function($){
                         if( place.types.indexOf('street_address')!=-1 || place.types.indexOf('street_number')!=-1 ) {
                             var cname = '';
                             var newaddress = place.name + ', ' + place.vicinity;
-                            this.conatiner.find('.address-suggester').val(newaddress);
+                            this.step_container.find('.address-suggester').val(newaddress);
 
                             prepareMapFucntion( (function() {
                                 var coords = {
@@ -145,8 +133,8 @@ jQuery(document).ready(function($){
                                     lng: place.geometry.location.lng()
                                 };
 
-                                this.conatiner.find('.suggester-map-div').show();
-                                var profile_address_map = new google.maps.Map( this.conatiner.find('.suggester-map-div')[0], {
+                                this.step_container.find('.suggester-map-div').show();
+                                var profile_address_map = new google.maps.Map( this.step_container.find('.suggester-map-div')[0], {
                                     center: coords,
                                     zoom: 14,
                                     backgroundColor: 'none'
@@ -164,7 +152,7 @@ jQuery(document).ready(function($){
 
                     }
 
-                    this.conatiner.find('.geoip-hint').show();
+                    this.step_container.find('.geoip-hint').show();
                 }).bind(GMautocomplete));
 
             } )
