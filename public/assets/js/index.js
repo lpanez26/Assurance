@@ -885,6 +885,7 @@ function bindLoginSigninPopupShow() {
                                     }
                                     break;
                                 case 'third':
+                                    $('.dentist .form-register .step.third').find('.error-handle').remove();
                                     var errors = false;
                                     //checking if empty avatar
                                     if($('#custom-upload-avatar').val().trim() == '') {
@@ -919,12 +920,11 @@ function bindLoginSigninPopupShow() {
 bindLoginSigninPopupShow();
 
 function readURL(input) {
-    console.log('readURL');
     if(input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
             //SHOW THE IMAGE ON LOAD
-            $('.bootbox.login-signin-popup .dentist .form-register .step.third .avatar').css({'background-image' : 'url("'+e.target.result+'")'});
+            $('.bootbox.login-signin-popup .dentist .form-register .step.third .avatar button label').css({'background-image' : 'url("'+e.target.result+'")'});
             $('.bootbox.login-signin-popup .dentist .form-register .step.third .avatar button label .inner i').addClass('fs-0');
             $('.bootbox.login-signin-popup .dentist .form-register .step.third .avatar button label .inner .inner-label').addClass('fs-0');
         };
@@ -952,7 +952,6 @@ function styleAvatarUploadButton()    {
                     else
                         fileName = e.target.value.split('\\').pop();
 
-                    console.log(fileName, 'fileName');
                     /*if(fileName) {
                         if(load_filename_to_other_el)    {
                             $(this).closest('.form-row').find('.file-name').html('<i class="fa fa-file-text-o" aria-hidden="true"></i>' + fileName);
