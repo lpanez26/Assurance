@@ -142,6 +142,7 @@ class Controller extends BaseController
     }
 
     protected function getLoginSigninHtml() {
+        var_dump($_SERVER['REMOTE_ADDR']);
         var_dump(trim(file_get_contents("http://ipinfo.io/" . $_SERVER['REMOTE_ADDR'] .  "/country")));
         die();
         $countries = (new APIRequestsController())->getAllCountries();
