@@ -150,7 +150,7 @@ class Controller extends BaseController
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_POSTFIELDS => array(
                 'type' => 'clinic',
-                'name' => 'Denta'
+                'name' => 'Dentaprime'
             )
         ));
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
