@@ -19,14 +19,14 @@
         <div class="form-register">
             <h2>SIGN UP</h2>
             <div class="padding-bottom-10">
-                <a href="javascript:void(0)" class="facebook-custom-btn social-login-btn calibri-regular fs-20" data-url="//api.dentacoin.com/api/register" data-platform="assurance" data-type="patient">with Facebook</a>
+                <a href="javascript:void(0)" class="facebook-custom-btn social-login-btn calibri-regular fs-20" data-url="//api.dentacoin.com/api/register" data-platform="assurance" data-type="patient" custom-stopper="true">with Facebook</a>
             </div>
             <div>
-                <a href="javascript:void(0)"  class="civic-custom-btn social-login-btn calibri-regular fs-20" data-url="//api.dentacoin.com/api/register" data-platform="assurance" data-type="patient">with Civic</a>
+                <a href="javascript:void(0)"  class="civic-custom-btn social-login-btn calibri-regular fs-20" data-url="//api.dentacoin.com/api/register" data-platform="assurance" data-type="patient" custom-stopper="true">with Civic</a>
             </div>
             <div class="privacy-policy-row padding-top-20">
                 <div class="pretty p-svg p-curve on-blue-green-background">
-                    <input type="checkbox" name="specialization[]"/>
+                    <input type="checkbox" id="privacy-policy-registration-patient"/>
                     <div class="state p-success">
                         <!-- svg path -->
                         <svg class="svg svg-icon" viewBox="0 0 20 20">
@@ -36,6 +36,7 @@
                     </div>
                 </div>
             </div>
+            <div class="step-errors-holder padding-top-20"></div>
             <div class="popup-half-footer">
                 Already have an account? <a href="javascript:void(0)" class="call-log-in">Log in</a>
             </div>

@@ -4605,7 +4605,8 @@ fieldset {
                     .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar button label .inner i {
                       font-size: 30px; }
                     .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar button label .inner .inner-label {
-                      font-size: 18px; }
+                      font-size: 18px;
+                      padding: 0 10px; }
             .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .specializations {
               width: 50%; }
               .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .specializations h4 {
@@ -4623,6 +4624,9 @@ fieldset {
               display: block;
               white-space: normal;
               text-indent: 25px; }
+            .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .privacy-policy-row a {
+              text-decoration: underline;
+              color: #212121; }
           .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .btns-container {
             font-size: 0; }
             .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .btns-container .inline-block {

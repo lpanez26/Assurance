@@ -756,6 +756,28 @@ function bindLoginSigninPopupShow() {
                         basic.closeDialog();
                         basic.showDialog(response.success, 'login-signin-popup', null, true);
 
+                        $('.patient .form-register #privacy-policy-registration-patient').on('change', function() {
+                            if($(this).is(':checked')) {
+                                $('.patient .form-register .facebook-custom-btn').removeAttr('custom-stopper');
+                                $('.patient .form-register .civic-custom-btn').removeAttr('custom-stopper');
+                            } else {
+                                $('.patient .form-register .facebook-custom-btn').attr('custom-stopper', 'true');
+                                $('.patient .form-register .civic-custom-btn').attr('custom-stopper', 'true');
+                            }
+                        });
+
+                        $(document).on('civicCustomBtnClicked', async function (event) {
+                            $('.patient .form-register .step-errors-holder').html('');
+                        });
+
+                        $(document).on('facebookCustomBtnClicked', async function (event) {
+                            $('.patient .form-register .step-errors-holder').html('');
+                        });
+
+                        $(document).on('customCivicFbStopperTriggered', async function (event) {
+                            customErrorHandle($('.patient .form-register .step-errors-holder'), 'Please agree with our privacy policy.');
+                        });
+
                         //INIT LOGIC FOR ALL STEPS
                         function customErrorHandle(el, string) {
                             el.append('<div class="error-handle">'+string+'</div>');
@@ -907,7 +929,7 @@ function bindLoginSigninPopupShow() {
 
                                     //check captcha length
                                     if($('.dentist .form-register .step.third #register-captcha').val().trim() == '' || $('.dentist .form-register .step.third #register-captcha').val().trim().length < 5) {
-                                        customErrorHandle($('.step.third .step-errors-holder'), 'Please enter captcha correct.');
+                                        customErrorHandle($('.step.third .step-errors-holder'), 'Please enter correct captcha.');
                                         errors = true;
                                     }
 
