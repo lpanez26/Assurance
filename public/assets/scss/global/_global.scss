@@ -758,6 +758,9 @@ fieldset {
                                                     text-align: center;
                                                     margin-bottom: 0;
                                                     cursor: pointer;
+                                                    background-position: center center;
+                                                    background-size: cover;
+                                                    background-repeat: no-repeat;
                                                     .inner {
                                                         left: 0;
                                                         width: 100%;
@@ -785,6 +788,14 @@ fieldset {
                                                 }
                                                 label {
                                                     text-indent: 25px;
+                                                }
+                                            }
+                                        }
+                                        .captcha-parent {
+                                            .width-50 {
+                                                width: 50%;
+                                                .captcha-container {
+                                                    text-align: center;
                                                 }
                                             }
                                         }

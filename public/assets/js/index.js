@@ -62,8 +62,8 @@ function checkIfCookie()    {
     }
 }
 
+//binding the refresh captcha event to existing button
 function initCaptchaRefreshEvent()  {
-//refreshing captcha on trying to log in admin
     if($('.refresh-captcha').length > 0)    {
         $('.refresh-captcha').click(function()  {
             $.ajax({
@@ -80,7 +80,6 @@ function initCaptchaRefreshEvent()  {
         });
     }
 } 
-initCaptchaRefreshEvent();
 
 var global_state = {};
 var temporally_timestamp = 0;
@@ -799,6 +798,7 @@ function bindLoginSigninPopupShow() {
 
                         //THIRD STEP INIT LOGIC
                         styleAvatarUploadButton();
+                        initCaptchaRefreshEvent();
 
                         $('.dentist .form-register .next-step').click(function() {
                             var this_btn = $(this);
@@ -877,7 +877,6 @@ function bindLoginSigninPopupShow() {
                                     }
 
                                     if(!errors) {
-
                                         $('.dentist .form-register .step').removeClass('visible');
                                         $('.dentist .form-register .step.third').addClass('visible');
 
@@ -885,8 +884,22 @@ function bindLoginSigninPopupShow() {
                                     }
                                     break;
                                 case 'third':
+                                    var errors = false;
+                                    //checking if empty avatar
+                                    if($('#custom-upload-avatar').val().trim() == '') {
+                                        customErrorHandle($('.step.third .step-errors-holder'), 'Please select avatar.');
+                                        errors = true;
+                                    }
 
+                                    //checking if no specialization checkbox selected
+                                    if($('[name="specialization[]"]:checked').val() == undefined) {
+                                        customErrorHandle($('.step.third .step-errors-holder'), 'Please select specialization/s.');
+                                        errors = true;
+                                    }
 
+                                    if(!errors) {
+                                        console.log('submit to controller');
+                                    }
                                     break;
                             }
                         });
@@ -903,8 +916,10 @@ function readURL(input) {
     if(input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            //$('.current-image').attr('src', e.target.result);
-            console.log(e.target.result, 'e.target.result');
+            //SHOW THE IMAGE ON LOAD
+            $('.bootbox.login-signin-popup .dentist .form-register .step.third .avatar').css({'background-image' : 'url("'+e.target.result+'")'});
+            $('.bootbox.login-signin-popup .dentist .form-register .step.third .avatar button label .inner i').addClass('fs-0');
+            $('.bootbox.login-signin-popup .dentist .form-register .step.third .avatar button label .inner .inner-label').addClass('fs-0');
         };
         reader.readAsDataURL(input.files[0]);
     }
