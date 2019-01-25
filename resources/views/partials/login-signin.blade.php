@@ -102,7 +102,10 @@
                     </div>
                     <div class="padding-bottom-10">
 
-                        {{var_dump($countries)}}
+                        {{var_dump($countries[0])}}
+                        {{var_dump($countries[0]->code)}}
+                        {{var_dump($countries[0]->phone_code)}}
+                        {{var_dump($countries[0]->name)}}
                         @php(die())
                         <select name="country_id" id="dentist-country" class="custom-input country-select">
                             @php($current_phone_code = '+')
