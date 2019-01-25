@@ -102,9 +102,17 @@
                     </div>
                     <div class="padding-bottom-10">
                         <select name="country_id" id="dentist-country" class="custom-input country-select">
+                            @php($current_phone_code = '+')
+                            @php($selected = '')
                             @if(!empty($counties))
                                 @foreach($countries as $country)
-                                    <option value="{{$country->code}}" data-code="{{$country->phone_code}}">{{$country->name}}</option>
+                                    @if(!empty($current_user_country_code))
+                                        @if($current_user_country_code == $country->code)
+                                            @php($current_phone_code = $current_phone_code.$country->phone_code)
+                                            @php($selected = 'selected')
+                                        @endif
+                                    @endif
+                                    <option value="{{$country->code}}" data-code="{{$country->phone_code}}" {{$selected}}>{{$country->name}}</option>
                                 @endforeach
                             @endif
                         </select>
@@ -118,7 +126,7 @@
                         </div>
                     </div>
                     <div class="padding-bottom-10 phone">
-                        <div class="country-code">+359</div>
+                        <div class="country-code">{{$current_phone_code}}</div>
                         <div class="input-phone">
                             <input class="custom-input" name="phone" type="number" placeholder="Phone number"/>
                         </div>
