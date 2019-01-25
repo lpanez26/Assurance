@@ -214,6 +214,7 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="search-for-clinic"></div>
                         <div class="fs-0 captcha-parent padding-top-15">
                             <div class="inline-block fs-14 width-50 padding-right-10">
                                 <input type="text" name="captcha" id="register-captcha" placeholder="Enter captcha" maxlength="5" class="custom-input"/>

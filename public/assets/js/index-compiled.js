@@ -26518,6 +26518,12 @@ function bindLoginSigninPopupShow() {
                                                     if ($('.dentist .form-register .step.second [name="work-type"]:checked').val() == undefined) {
                                                         customErrorHandle($('.dentist .form-register .step.second .radio-buttons-holder'), 'Please select one of the options.');
                                                         errors = true;
+                                                    } else {
+                                                        if ($('.dentist .form-register .step.second [name="work-type"]:checked').val() == 'an-associate-dentist') {
+                                                            $('.dentist .form-register .step.third .search-for-clinic').html('<div class="padding-bottom-10"><input class="custom-input" type="text" minlength="6" maxlength="100" placeholder="Search for clinic"/></div>');
+                                                        } else {
+                                                            $('.dentist .form-register .step.third .search-for-clinic').html('');
+                                                        }
                                                     }
 
                                                     //check if error from google place suggester
@@ -26534,6 +26540,7 @@ function bindLoginSigninPopupShow() {
                                                     }
                                                     break;
                                                 case 'third':
+                                                    $('.dentist .form-register .step.third').find('.error-handle').remove();
                                                     var errors = false;
                                                     //checking if empty avatar
                                                     if ($('#custom-upload-avatar').val().trim() == '') {
@@ -26581,12 +26588,11 @@ function bindLoginSigninPopupShow() {
 bindLoginSigninPopupShow();
 
 function readURL(input) {
-    console.log('readURL');
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
             //SHOW THE IMAGE ON LOAD
-            $('.bootbox.login-signin-popup .dentist .form-register .step.third .avatar').css({ 'background-image': 'url("' + e.target.result + '")' });
+            $('.bootbox.login-signin-popup .dentist .form-register .step.third .avatar button label').css({ 'background-image': 'url("' + e.target.result + '")' });
             $('.bootbox.login-signin-popup .dentist .form-register .step.third .avatar button label .inner i').addClass('fs-0');
             $('.bootbox.login-signin-popup .dentist .form-register .step.third .avatar button label .inner .inner-label').addClass('fs-0');
         };
@@ -26611,7 +26617,6 @@ function styleAvatarUploadButton() {
                     var fileName = '';
                     if (this.files && this.files.length > 1) fileName = (this.getAttribute('data-multiple-caption') || '').replace('{count}', this.files.length);else fileName = e.target.value.split('\\').pop();
 
-                    console.log(fileName, 'fileName');
                     /*if(fileName) {
                         if(load_filename_to_other_el)    {
                             $(this).closest('.form-row').find('.file-name').html('<i class="fa fa-file-text-o" aria-hidden="true"></i>' + fileName);

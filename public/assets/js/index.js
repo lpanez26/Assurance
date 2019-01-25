@@ -869,7 +869,14 @@ function bindLoginSigninPopupShow() {
                                     if($('.dentist .form-register .step.second [name="work-type"]:checked').val() == undefined) {
                                         customErrorHandle($('.dentist .form-register .step.second .radio-buttons-holder'), 'Please select one of the options.');
                                         errors = true;
+                                    } else {
+                                        if($('.dentist .form-register .step.second [name="work-type"]:checked').val() == 'an-associate-dentist') {
+                                            $('.dentist .form-register .step.third .search-for-clinic').html('<div class="padding-bottom-10"><input class="custom-input" type="text" minlength="6" maxlength="100" placeholder="Search for clinic"/></div>');
+                                        } else {
+                                            $('.dentist .form-register .step.third .search-for-clinic').html('');
+                                        }
                                     }
+
 
                                     //check if error from google place suggester
                                     if($('.dentist .form-register .step.second .suggester-parent .alert.alert-warning').is(':visible')) {
