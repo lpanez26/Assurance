@@ -142,7 +142,9 @@ class Controller extends BaseController
     }
 
     protected function getLoginSigninHtml() {
-        $view = view('partials/login-signin');
+        $countries = (new APIRequestsController())->getAllCountries();
+
+        $view = view('partials/login-signin', ['countries' => $countries]);
         $view = $view->render();
         return response()->json(['success' => $view]);
     }

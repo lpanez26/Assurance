@@ -728,13 +728,18 @@ fieldset {
                                                 }
                                             }
                                         }
+                                        .suggester-map-div {
+                                            height: 200px;
+                                            display: none;
+                                            background: transparent;
+                                        }
                                     }
                                     &.third {
                                         .avatar {
                                             padding-right: 20px;
                                             width: 50%;
                                             input[type="file"] {
-                                                display: none; 
+                                                display: none;
                                             }
                                             button {
                                                 display: block;
@@ -757,6 +762,12 @@ fieldset {
                                                         left: 0;
                                                         width: 100%;
                                                         @include vertical-align(absolute);
+                                                        i {
+                                                            font-size: 30px;
+                                                        }
+                                                        .inner-label {
+                                                            font-size: 18px;
+                                                        }
                                                     }
                                                 }
                                             }
@@ -953,6 +964,9 @@ input[type='text'], .custom-input {
     font-size: 14px;
     padding: 5px;
     @include rounded(4px);
+    &.alert.alert-warning {
+        display: none;
+    }
 }
 
 .pac-container {

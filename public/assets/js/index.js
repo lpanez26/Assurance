@@ -757,13 +757,10 @@ function bindLoginSigninPopupShow() {
                         basic.closeDialog();
                         basic.showDialog(response.success, 'login-signin-popup', null, true);
 
-                        //LOGIC FOR ALL STEPS
+                        //INIT LOGIC FOR ALL STEPS
                         function customErrorHandle(el, string) {
                             el.append('<div class="error-handle">'+string+'</div>');
                         }
-
-                        //load address script
-                        await $.getScript('/assets/js/address.js', function() {});
 
                         $('.popup-header-action a').click(function() {
                             $('.login-signin-popup .popup-body > .inline-block').addClass('custom-hide');
@@ -792,8 +789,20 @@ function bindLoginSigninPopupShow() {
                             $('.dentist .form-register .next-step').attr('data-current-step', current_prev_step.attr('data-step'));
                         });
 
-                        //THIRD STEP LOGIC
+                        //SECOND STEP INIT LOGIC
+                        //load address script
+                        await $.getScript('/assets/js/address.js', function() {});
+
+                        $('#dentist-country').on('change', function() {
+                            $('.step.second .phone .country-code').html('+'+$(this).find('option:selected').attr('data-code'));
+                        });
+
+                        //THIRD STEP INIT LOGIC
                         styleAvatarUploadButton();
+
+                        $(".step.three .visualise-image").change(function (){
+                            readURL(this);
+                        });
 
                         $('.dentist .form-register .next-step').click(function() {
                             var this_btn = $(this);
@@ -893,13 +902,8 @@ function bindLoginSigninPopupShow() {
 }
 bindLoginSigninPopupShow();
 
-$(".visualise-image").change(function (){
-    readURL(this);
-});
-
-
 function readURL(input) {
-    if (input.files && input.files[0]) {
+    if(input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
             //$('.current-image').attr('src', e.target.result);
@@ -913,7 +917,7 @@ function styleAvatarUploadButton()    {
     if(jQuery(".upload-file.avatar").length) {
         jQuery(".upload-file.avatar").each(function(key, form){
             var this_file_btn_parent = jQuery(this);
-            this_file_btn_parent.find('button').append('<label for="custom-upload-avatar"><div class="inner"><i class="fa fa-plus fs-30" aria-hidden="true"></i><div class="fs-18">Add profile photo</div></div></label>');
+            this_file_btn_parent.find('button').append('<label for="custom-upload-avatar"><div class="inner"><i class="fa fa-plus" aria-hidden="true"></i><div class="inner-label">Add profile photo</div></div></label>');
 
             var inputs = document.querySelectorAll('.inputfile');
             Array.prototype.forEach.call(inputs, function(input) {
