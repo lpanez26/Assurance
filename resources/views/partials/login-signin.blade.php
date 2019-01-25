@@ -101,11 +101,12 @@
                         </div>
                     </div>
                     <div class="padding-bottom-10">
+
+                        {{var_dump($countries)}}
+                        @php(die())
                         <select name="country_id" id="dentist-country" class="custom-input country-select">
                             @php($current_phone_code = '+')
                             @php($selected = '')
-                            {{var_dump($countries)}}
-                            @php(die())
                             @if(!empty($counties))
                                 @foreach($countries as $country)
                                     @if(!empty($current_user_country_code))
