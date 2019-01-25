@@ -104,7 +104,7 @@
                         <select name="country_id" id="dentist-country" class="custom-input country-select">
                             @php($current_phone_code = '+')
                             @php($selected = '')
-                            @if(!empty($counties))
+                            @if(!empty($countries))
                                 @foreach($countries as $country)
                                     @if(!empty($current_user_country_code))
                                         @if($current_user_country_code == $country->code)
