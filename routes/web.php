@@ -23,7 +23,8 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
     Route::get('/support-guide', 'SupportGuideController@getView')->name('support-guide');
 
     Route::get('/test', function() {
-        return view('pages/test');
+        var_dump((new \App\Http\Controllers\APIRequestsController())->getAllClinicsByName('Dentaprime'));
+        die();
     })->name('test');
 
     //======================================= TEMPORALLY FOR DAPP TESTING ========================================

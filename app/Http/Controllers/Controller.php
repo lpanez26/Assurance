@@ -142,26 +142,6 @@ class Controller extends BaseController
     }
 
     protected function getLoginSigninHtml() {
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_POST => 1,
-            CURLOPT_URL => 'https://dev-api.dentacoin.com/api/users/',
-            CURLOPT_SSL_VERIFYPEER => 0,
-            CURLOPT_POSTFIELDS => array(
-                'type' => 'clinic',
-                'name' => 'Dentaprime'
-            )
-        ));
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-        $resp = json_decode(curl_exec($curl));
-        curl_close($curl);
-
-        var_dump($resp);
-        die();
-
-
-
         //passing the countries
         $countries = (new APIRequestsController())->getAllCountries();
         $view = view('partials/login-signin', ['countries' => $countries, 'current_user_country_code' => mb_strtolower(trim(file_get_contents("http://ipinfo.io/" . $_SERVER['REMOTE_ADDR'] .  "/country")))]);
