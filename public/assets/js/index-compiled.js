@@ -26396,7 +26396,7 @@ function bindLoginSigninPopupShow() {
                                 switch (_context9.prev = _context9.next) {
                                     case 0:
                                         if (!response.success) {
-                                            _context9.next = 14;
+                                            _context9.next = 13;
                                             break;
                                         }
 
@@ -26448,11 +26448,6 @@ function bindLoginSigninPopupShow() {
 
                                         //THIRD STEP INIT LOGIC
                                         styleAvatarUploadButton();
-
-                                        $(".step.third .form-register .visualise-image").on('change', function () {
-                                            console.log('FIEL change');
-                                            readURL(this);
-                                        });
 
                                         $('.dentist .form-register .next-step').click(function () {
                                             var this_btn = $(this);
@@ -26544,7 +26539,7 @@ function bindLoginSigninPopupShow() {
                                             }
                                         });
 
-                                    case 14:
+                                    case 13:
                                     case 'end':
                                         return _context9.stop();
                                 }
@@ -26565,6 +26560,7 @@ function bindLoginSigninPopupShow() {
 bindLoginSigninPopupShow();
 
 function readURL(input) {
+    console.log('readURL');
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
@@ -26587,6 +26583,8 @@ function styleAvatarUploadButton() {
                     labelVal = label.innerHTML;
 
                 input.addEventListener('change', function (e) {
+                    readURL(this);
+
                     var fileName = '';
                     if (this.files && this.files.length > 1) fileName = (this.getAttribute('data-multiple-caption') || '').replace('{count}', this.files.length);else fileName = e.target.value.split('\\').pop();
 

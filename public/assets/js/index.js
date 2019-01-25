@@ -800,11 +800,6 @@ function bindLoginSigninPopupShow() {
                         //THIRD STEP INIT LOGIC
                         styleAvatarUploadButton();
 
-                        $(".step.third .form-register .visualise-image").on('change', function (){
-                            console.log('FIEL change');
-                            readURL(this);
-                        });
-
                         $('.dentist .form-register .next-step').click(function() {
                             var this_btn = $(this);
                             switch(this_btn.attr('data-current-step')) {
@@ -816,7 +811,7 @@ function bindLoginSigninPopupShow() {
                                         if(first_step_inputs.eq(i).attr('type') == 'email' && !basic.validateEmail(first_step_inputs.eq(i).val().trim())) {
                                             customErrorHandle(first_step_inputs.eq(i).parent(), 'Please use valid email address.');
                                             errors = true;
-                                        }else if(first_step_inputs.eq(i).attr('type') == 'password' && first_step_inputs.eq(i).val().length < 6) {
+                                        } else if(first_step_inputs.eq(i).attr('type') == 'password' && first_step_inputs.eq(i).val().length < 6) {
                                             customErrorHandle(first_step_inputs.eq(i).parent(), 'Passwords must be min length 6.');
                                             errors = true;
                                         }
@@ -904,6 +899,7 @@ function bindLoginSigninPopupShow() {
 bindLoginSigninPopupShow();
 
 function readURL(input) {
+    console.log('readURL');
     if(input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
@@ -926,6 +922,8 @@ function styleAvatarUploadButton()    {
                     labelVal = label.innerHTML;
 
                 input.addEventListener('change', function(e) {
+                    readURL(this);
+
                     var fileName = '';
                     if(this.files && this.files.length > 1)
                         fileName = ( this.getAttribute('data-multiple-caption') || '' ).replace('{count}', this.files.length);
