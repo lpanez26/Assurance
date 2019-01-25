@@ -74,6 +74,7 @@ jQuery(document).ready(function($){
 
                 step_container.find('.country-select').change( function() {
                     var cc = $(this).find('option:selected').attr('data-code');
+                    console.log(cc, 'cc');
                     GMautocomplete.setComponentRestrictions({
                         'country': cc
                     });
