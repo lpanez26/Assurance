@@ -136,7 +136,7 @@
                     </div>
                 </div>
                 <div class="step third" data-step="third">
-                    <div class="padding-bottom-30 fs-0">
+                    <div class="padding-bottom-20 fs-0">
                         <div class="inline-block-top avatar upload-file">
                             <input type="file" class="visualise-image inputfile" id="custom-upload-avatar" name="image"/>
                             <button type="button"></button>
@@ -214,8 +214,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="search-for-clinic"></div>
-                        <div class="fs-0 captcha-parent padding-top-15">
+                        <div class="search-for-clinic padding-top-15 padding-bottom-15"></div>
+                        <div class="fs-0 captcha-parent padding-bottom-15">
                             <div class="inline-block fs-14 width-50 padding-right-10">
                                 <input type="text" name="captcha" id="register-captcha" placeholder="Enter captcha" maxlength="5" class="custom-input"/>
                             </div>
@@ -230,7 +230,7 @@
                         </div>
                         <div class="privacy-policy-row">
                             <div class="pretty p-svg p-curve on-white-background">
-                                <input type="checkbox" name="specialization[]" value="6"/>
+                                <input type="checkbox" id="privacy-policy-registration" value="6"/>
                                 <div class="state p-success">
                                     <!-- svg path -->
                                     <svg class="svg svg-icon" viewBox="0 0 20 20">

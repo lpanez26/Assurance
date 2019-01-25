@@ -769,7 +769,8 @@ fieldset {
                                                             font-size: 30px;
                                                         }
                                                         .inner-label {
-                                                            font-size: 18px;
+                                                            font-size: 18px; 
+                                                            padding: 0 10px;
                                                         }
                                                     }
                                                 }
@@ -789,6 +790,16 @@ fieldset {
                                                 label {
                                                     text-indent: 25px;
                                                 }
+                                            }
+                                        }
+                                        .privacy-policy-row {
+                                            svg.svg {
+                                                border-color: $blue_green_color !important;
+                                            }
+                                            label {
+                                                display: block;
+                                                white-space: normal;
+                                                text-indent: 25px;
                                             }
                                         }
                                     }

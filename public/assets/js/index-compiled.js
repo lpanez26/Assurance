@@ -26543,20 +26543,26 @@ function bindLoginSigninPopupShow() {
                                                     $('.dentist .form-register .step.third').find('.error-handle').remove();
                                                     var errors = false;
                                                     //checking if empty avatar
-                                                    if ($('#custom-upload-avatar').val().trim() == '') {
+                                                    if ($('.dentist .form-register .step.third #custom-upload-avatar').val().trim() == '') {
                                                         customErrorHandle($('.step.third .step-errors-holder'), 'Please select avatar.');
                                                         errors = true;
                                                     }
 
                                                     //checking if no specialization checkbox selected
-                                                    if ($('[name="specialization[]"]:checked').val() == undefined) {
+                                                    if ($('.dentist .form-register .step.third [name="specialization[]"]:checked').val() == undefined) {
                                                         customErrorHandle($('.step.third .step-errors-holder'), 'Please select specialization/s.');
                                                         errors = true;
                                                     }
 
                                                     //check captcha length
-                                                    if ($('#register-captcha').val().trim() == '' || $('#register-captcha').val().trim().length < 5) {
+                                                    if ($('.dentist .form-register .step.third #register-captcha').val().trim() == '' || $('.dentist .form-register .step.third #register-captcha').val().trim().length < 5) {
                                                         customErrorHandle($('.step.third .step-errors-holder'), 'Please enter captcha correct.');
+                                                        errors = true;
+                                                    }
+
+                                                    //check if privacy policy checkbox is checked
+                                                    if (!$('.dentist .form-register .step.third #privacy-policy-registration').is(':checked')) {
+                                                        customErrorHandle($('.step.third .step-errors-holder'), 'Please agree with our privacy policy.');
                                                         errors = true;
                                                     }
 
