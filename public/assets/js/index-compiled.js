@@ -26396,19 +26396,20 @@ function bindLoginSigninPopupShow() {
                                 switch (_context9.prev = _context9.next) {
                                     case 0:
                                         if (!response.success) {
-                                            _context9.next = 11;
+                                            _context9.next = 12;
                                             break;
                                         }
 
+                                        //LOGIC FOR ALL STEPS
                                         customErrorHandle = function customErrorHandle(el, string) {
                                             el.append('<div class="error-handle">' + string + '</div>');
                                         };
 
-                                        basic.closeDialog();
-                                        basic.showDialog(response.success, 'login-signin-popup', null, true);
-
                                         //load address script
-                                        _context9.next = 6;
+
+
+                                        basic.closeDialog();
+                                        basic.showDialog(response.success, 'login-signin-popup', null, true);_context9.next = 6;
                                         return $.getScript('/assets/js/address.js', function () {});
 
                                     case 6:
@@ -26439,6 +26440,9 @@ function bindLoginSigninPopupShow() {
 
                                             $('.dentist .form-register .next-step').attr('data-current-step', current_prev_step.attr('data-step'));
                                         });
+
+                                        //THIRD STEP LOGIC
+                                        styleAvatarUploadButton();
 
                                         $('.dentist .form-register .next-step').click(function () {
                                             var this_btn = $(this);
@@ -26517,7 +26521,6 @@ function bindLoginSigninPopupShow() {
                                                     }
 
                                                     if (!errors) {
-                                                        styleAvatarUploadButton();
 
                                                         $('.dentist .form-register .step').removeClass('visible');
                                                         $('.dentist .form-register .step.third').addClass('visible');
@@ -26531,7 +26534,7 @@ function bindLoginSigninPopupShow() {
                                             }
                                         });
 
-                                    case 11:
+                                    case 12:
                                     case 'end':
                                         return _context9.stop();
                                 }

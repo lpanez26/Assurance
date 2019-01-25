@@ -757,6 +757,11 @@ function bindLoginSigninPopupShow() {
                         basic.closeDialog();
                         basic.showDialog(response.success, 'login-signin-popup', null, true);
 
+                        //LOGIC FOR ALL STEPS
+                        function customErrorHandle(el, string) {
+                            el.append('<div class="error-handle">'+string+'</div>');
+                        }
+
                         //load address script
                         await $.getScript('/assets/js/address.js', function() {});
 
@@ -787,9 +792,8 @@ function bindLoginSigninPopupShow() {
                             $('.dentist .form-register .next-step').attr('data-current-step', current_prev_step.attr('data-step'));
                         });
 
-                        function customErrorHandle(el, string) {
-                            el.append('<div class="error-handle">'+string+'</div>');
-                        }
+                        //THIRD STEP LOGIC
+                        styleAvatarUploadButton();
 
                         $('.dentist .form-register .next-step').click(function() {
                             var this_btn = $(this);
@@ -868,7 +872,6 @@ function bindLoginSigninPopupShow() {
                                     }
 
                                     if(!errors) {
-                                        styleAvatarUploadButton();
 
                                         $('.dentist .form-register .step').removeClass('visible');
                                         $('.dentist .form-register .step.third').addClass('visible');

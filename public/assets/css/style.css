@@ -4568,6 +4568,8 @@ fieldset {
             .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar {
               padding-right: 20px;
               width: 50%; }
+              .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar input[type="file"] {
+                display: none; }
               .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar button {
                 display: block;
                 width: 100%;
