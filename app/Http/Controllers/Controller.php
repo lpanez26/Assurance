@@ -149,8 +149,8 @@ class Controller extends BaseController
             CURLOPT_URL => 'https://dev-api.dentacoin.com/api/users/',
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_POSTFIELDS => array(
-                type => 'clinic',
-                name => 'Denta'
+                'type' => 'clinic',
+                'name' => 'Denta'
             )
         ));
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
