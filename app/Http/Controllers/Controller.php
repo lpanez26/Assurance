@@ -143,7 +143,8 @@ class Controller extends BaseController
 
     protected function getLoginSigninHtml() {
         //passing the countries
-        $view = view('partials/login-signin', ['countries' => (new APIRequestsController())->getAllCountries(), 'current_user_country_code' => mb_strtolower(trim(file_get_contents("http://ipinfo.io/" . $_SERVER['REMOTE_ADDR'] .  "/country")))]);
+        $countries = (new APIRequestsController())->getAllCountries();
+        $view = view('partials/login-signin', ['countries' => $countries, 'current_user_country_code' => mb_strtolower(trim(file_get_contents("http://ipinfo.io/" . $_SERVER['REMOTE_ADDR'] .  "/country")))]);
         $view = $view->render();
         return response()->json(['success' => $view]);
     }
