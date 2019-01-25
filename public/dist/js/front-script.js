@@ -1501,6 +1501,7 @@ function bindLoginSigninPopupShow() {
 
                                                     //check if error from google place suggester
                                                     if ($('.dentist .form-register .step.second .suggester-parent .alert.alert-warning').is(':visible')) {
+                                                        customErrorHandle($('.dentist .form-register .step.second .radio-buttons-holder'), 'Please select one of the options.');
                                                         errors = true;
                                                     }
 
@@ -1522,6 +1523,12 @@ function bindLoginSigninPopupShow() {
                                                     //checking if no specialization checkbox selected
                                                     if ($('[name="specialization[]"]:checked').val() == undefined) {
                                                         customErrorHandle($('.step.third .step-errors-holder'), 'Please select specialization/s.');
+                                                        errors = true;
+                                                    }
+
+                                                    //check captcha length
+                                                    if ($('#register-captcha').val().trim() == '' || $('#register-captcha').val().trim().length < 5) {
+                                                        customErrorHandle($('.step.third .step-errors-holder'), 'Please enter captcha correct.');
                                                         errors = true;
                                                     }
 
