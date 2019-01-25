@@ -800,7 +800,8 @@ function bindLoginSigninPopupShow() {
                         //THIRD STEP INIT LOGIC
                         styleAvatarUploadButton();
 
-                        $(".step.three .visualise-image").change(function (){
+                        $(".step.third .form-register .visualise-image").on('change', function (){
+                            console.log('FIEL change');
                             readURL(this);
                         });
 
@@ -909,7 +910,7 @@ function readURL(input) {
             //$('.current-image').attr('src', e.target.result);
             console.log(e.target.result, 'e.target.result');
         };
-        //reader.readAsDataURL(input.files[0]);
+        reader.readAsDataURL(input.files[0]);
     }
 }
 
