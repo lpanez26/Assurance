@@ -29,8 +29,6 @@ class APIRequestsController extends Controller {
     }
 
     public function dentistRegister($data, $files) {
-        var_dump($files['image']->getPathName());
-        die();
         $post_fields_arr = array(
             'platform' => 'assurance',
             'type' => 'dentist',
@@ -40,6 +38,7 @@ class APIRequestsController extends Controller {
             'password-repeat' => $data['password-repeat'],
             'country_code' => $data['country-code'],
             'address' => $data['address'],
+            'avatar' => '@'.$files['image']->getPathName(),
             'phone' => $data['phone'], //this is combination of the phone + the phone_code for the country or they must be passed separated ???
             'website' => $data['website'],
             'specialisations' => $data['specialization'], /// ??? ARRAY?
@@ -51,6 +50,9 @@ class APIRequestsController extends Controller {
         if(!empty($data['clinic-id'])) {
             $post_fields_arr['clinic_id'] = $data['clinic-id']; //ok? or everytime have to be passed with null?
         }
+
+
+        var_dump($post_fields_arr);die();
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
