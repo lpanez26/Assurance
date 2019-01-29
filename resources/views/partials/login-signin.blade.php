@@ -62,19 +62,19 @@
         </div>
         <div class="form-register">
             <h2>SIGN UP</h2>
-            <form>
+            <form method="POST" enctype="multipart/form-data" id="dentist-register" action="{{ route('patient-register') }}">
                 <div class="step first visible" data-step="first">
                     <div class="padding-bottom-10">
-                        <input class="custom-input" type="text" minlength="6" maxlength="100" placeholder="Dentist or Practice Name"/>
+                        <input class="custom-input" name="dentist-or-practice-name" type="text" minlength="6" maxlength="100" placeholder="Dentist or Practice Name"/>
                     </div>
                     <div class="padding-bottom-10">
-                        <input class="custom-input" type="email" maxlength="100" placeholder="Email address"/>
+                        <input class="custom-input" name="email" type="email" maxlength="100" placeholder="Email address"/>
                     </div>
                     <div class="padding-bottom-10">
-                        <input class="custom-input password" minlength="6" maxlength="50" type="password" placeholder="Password"/>
+                        <input class="custom-input password" name="password" minlength="6" maxlength="50" type="password" placeholder="Password"/>
                     </div>
                     <div class="padding-bottom-20">
-                        <input class="custom-input repeat-password" minlength="6" maxlength="50" type="password" placeholder="Repeat password"/>
+                        <input class="custom-input repeat-password" name="repeat-password" minlength="6" maxlength="50" type="password" placeholder="Repeat password"/>
                     </div>
                 </div>
                 <div class="step second" data-step="second">
@@ -102,7 +102,7 @@
                         </div>
                     </div>
                     <div class="padding-bottom-10">
-                        <select name="country_id" id="dentist-country" class="custom-input country-select">
+                        <select name="country-id" id="dentist-country" class="custom-input country-select">
                             @php($current_phone_code = '+')
                             @if(!empty($countries))
                                 @foreach($countries as $country)
@@ -127,13 +127,13 @@
                         </div>
                     </div>
                     <div class="padding-bottom-10 phone">
-                        <div class="country-code">{{$current_phone_code}}</div>
+                        <div class="country-code" name="phone-code">{{$current_phone_code}}</div>
                         <div class="input-phone">
                             <input class="custom-input" name="phone" type="number" placeholder="Phone number"/>
                         </div>
                     </div>
                     <div class="padding-bottom-20">
-                        <input class="custom-input" type="url" placeholder="Website"/>
+                        <input class="custom-input" name="website" type="url" placeholder="Website"/>
                     </div>
                 </div>
                 <div class="step third" data-step="third">
@@ -231,7 +231,7 @@
                         </div>
                         <div class="privacy-policy-row">
                             <div class="pretty p-svg p-curve on-white-background">
-                                <input type="checkbox" id="privacy-policy-registration" value="6"/>
+                                <input type="checkbox" id="privacy-policy-registration"/>
                                 <div class="state p-success">
                                     <!-- svg path -->
                                     <svg class="svg svg-icon" viewBox="0 0 20 20">

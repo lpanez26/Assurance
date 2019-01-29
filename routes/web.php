@@ -57,4 +57,6 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
     Route::get('/my-contracts', 'UserController@getMyContractsView')->middleware('HandleUserSession')->name('my-contracts');
 
     Route::get('/user-logout', 'UserController@userLogout')->name('user-logout');
+
+    Route::get('/patient-register', 'UserController@patientRegister')->name('patient-register');
 });

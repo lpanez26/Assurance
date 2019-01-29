@@ -32,6 +32,11 @@ class UserController extends Controller {
         return redirect()->route($route);
     }
 
+    protected function patientRegister(Request $request) {
+        var_dump($request->input());
+        die();
+    }
+
     protected function getMyProfileView()   {
         return view('pages/logged-user/my-profile');
     }

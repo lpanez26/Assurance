@@ -824,6 +824,12 @@ function bindLoginSigninPopupShow() {
 
                         $('.dentist .form-register .next-step').click(function() {
                             var this_btn = $(this);
+                            if(this_btn.attr('data-current-step') == 'third') {
+                                this_btn.val('Create profile');
+                            }else {
+                                this_btn.val('Next'); 
+                            }
+
                             switch(this_btn.attr('data-current-step')) {
                                 case 'first':
                                     var first_step_inputs = $('.dentist .form-register .step.first .custom-input');
@@ -893,14 +899,15 @@ function bindLoginSigninPopupShow() {
                                         errors = true;
                                     } else {
                                         if($('.dentist .form-register .step.second [name="work-type"]:checked').val() == 'an-associate-dentist') {
-                                            $('.dentist .form-register .step.third .search-for-clinic').html('<div class="padding-bottom-10"><select class="combobox custom-input"></select><input type="hidden" name="clinic_id"/></div>');
+                                            $('.dentist .form-register .step.third .search-for-clinic').html('<div class="padding-bottom-10"><select class="combobox custom-input" name="clinic-name"></select><input type="hidden" name="clinic-id"/></div>');
 
                                             initComboboxes();
+                                            $('.dentist .form-register .step.third .search-for-clinic input[type="text"].combobox').attr('placeholder', 'Search for a clinic...');
 
                                             //bind the logic for the fresh appended select
                                             var timer, delay = 1000;
-                                            $('.search-for-clinic input[type="text"].combobox').bind('keydown', function(e) {
-                                                var this_input_val = $('.search-for-clinic input[type="text"]').val().trim();
+                                            $('.dentist .form-register .step.third .search-for-clinic input[type="text"].combobox').bind('keydown', function(e) {
+                                                var this_input_val = $(this).val().trim();
                                                 clearTimeout(timer);
                                                 timer = setTimeout(function() {
                                                     if(this_input_val != '') {
@@ -920,10 +927,11 @@ function bindLoginSigninPopupShow() {
 
                                                                     //refresh the combobox with the data received from the API
                                                                     $('.dentist .form-register .step.third .search-for-clinic select.combobox').html(select_html).combobox('refresh');
+                                                                    $('.dentist .form-register .step.third .search-for-clinic input[type="text"].combobox').attr('placeholder', 'Search for a clinic...');
 
                                                                     //update the hidden input value on the select change
                                                                     $('.dentist .form-register .step.third .search-for-clinic select.combobox').on('change', function() {
-                                                                        $('.dentist .form-register .step.third .search-for-clinic input[name="clinic_id"]').val($(this).find('option:selected').val());
+                                                                        $('.dentist .form-register .step.third .search-for-clinic input[name="clinic-id"]').val($(this).find('option:selected').val());
                                                                     });
                                                                 } else if(response.error) {
                                                                     basic.showAlert(response.error);
@@ -979,7 +987,8 @@ function bindLoginSigninPopupShow() {
                                     }
 
                                     if(!errors) {
-                                        console.log('submit to controller');
+                                        //submit the form
+                                        $('form#dentist-register').submit();
                                     }
                                     break;
                             }
