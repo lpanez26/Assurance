@@ -1186,6 +1186,8 @@ if ($('body').hasClass('home')) {
                 while (1) {
                     switch (_context8.prev = _context8.next) {
                         case 0:
+                            console.log('successResponseCoreDBApi WEBSITE');
+                            console.log(event.response_data, 'event.response_data');
                             if (event.response_data.token) {
                                 custom_form_obj = {
                                     token: event.response_data.token,
@@ -1206,10 +1208,11 @@ if ($('body').hasClass('home')) {
                                     //}
                                 }
 
+                                console.log('customJavascriptForm WEBSITE');
                                 customJavascriptForm('/patient/authenticate', custom_form_obj, 'post');
                             }
 
-                        case 1:
+                        case 3:
                         case "end":
                             return _context8.stop();
                     }

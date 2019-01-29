@@ -38,22 +38,17 @@ class APIRequestsController extends Controller {
             'password-repeat' => $data['repeat-password'],
             'country_code' => $data['country-code'],
             'address' => $data['address'],
-            'avatar' => '@'.$files['image']->getPathName(),
+            'avatar' => '@'.$files['image']->getPathName(), //waiting for object reading  ... $files['image']->getPathName() is alike $FILES['image']['tmp_name']
             'phone' => $data['phone'], //this is combination of the phone + the phone_code for the country or they must be passed separated ???
             'website' => $data['website'],
             'specialisations' => $data['specialization'], /// ??? ARRAY?
-            //'avatar' => , /// ??? BUILT TO RECEIVE IMAGE OBJECT YET?
-            //'country-id' => $data['country-id'], /// ??? ADD
             //'zip' required ????
+            //'work-type' ????????
         );
 
         if(!empty($data['clinic-id'])) {
             $post_fields_arr['clinic_id'] = $data['clinic-id']; //ok? or everytime have to be passed with null?
         }
-
-
-        var_dump($post_fields_arr);
-        var_dump($_FILES);
 
         die();
 

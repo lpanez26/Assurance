@@ -584,6 +584,8 @@ if($('body').hasClass('home')) {
 
     //login
     $(document).on('successResponseCoreDBApi', async function (event) {
+        console.log('successResponseCoreDBApi WEBSITE');
+        console.log(event.response_data, 'event.response_data');
         if(event.response_data.token) {
             var custom_form_obj = {
                 token: event.response_data.token,
@@ -603,6 +605,7 @@ if($('body').hasClass('home')) {
                 //}
             }
 
+            console.log('customJavascriptForm WEBSITE');
             customJavascriptForm('/patient/authenticate', custom_form_obj, 'post');
         }
     });
