@@ -30,6 +30,7 @@ class APIRequestsController extends Controller {
 
     public function dentistRegister($data, $files) {
         var_dump($files);
+        var_dump($files[0]->getPathName());
         die();
         $post_fields_arr = array(
             'platform' => 'assurance',
