@@ -45,12 +45,12 @@
     <div class="dentist inline-block custom-hide">
         <div class="form-login">
             <h2>LOG IN</h2>
-            <form>
+            <form method="POST" action="{{ route('dentist-login') }}" id="dentist-login">
                 <div class="padding-bottom-10">
-                    <input class="custom-input" type="email" placeholder="Email address"/>
+                    <input class="custom-input" maxlength="100" type="email" placeholder="Email address"/>
                 </div>
                 <div class="padding-bottom-20">
-                    <input class="custom-input" type="password" placeholder="Password"/>
+                    <input class="custom-input" maxlength="50" type="password" placeholder="Password"/>
                 </div>
                 <div class="btn-container text-center">
                     <input type="submit" value="Log in" class="white-blue-green-btn"/>

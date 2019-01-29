@@ -1375,7 +1375,7 @@ function bindLoginSigninPopupShow() {
                                 switch (_context12.prev = _context12.next) {
                                     case 0:
                                         if (!response.success) {
-                                            _context12.next = 18;
+                                            _context12.next = 19;
                                             break;
                                         }
 
@@ -1383,10 +1383,34 @@ function bindLoginSigninPopupShow() {
                                         _customErrorHandle = function _customErrorHandle(el, string) {
                                             el.append('<div class="error-handle">' + string + '</div>');
                                         };
+                                        // ====================== /PATIENT LOGIN/SIGNUP LOGIC ======================
+
+                                        // ====================== DENTIST LOGIN/SIGNUP LOGIC ======================
+
+                                        //login
+
 
                                         basic.closeDialog();
                                         basic.showDialog(response.success, 'login-signin-popup', null, true);
 
+                                        $('.popup-header-action a').click(function () {
+                                            $('.login-signin-popup .popup-body > .inline-block').addClass('custom-hide');
+                                            $('.login-signin-popup .popup-body .' + $(this).attr('data-type')).removeClass('custom-hide');
+                                        });
+
+                                        $('.login-signin-popup .call-sign-up').click(function () {
+                                            $('.login-signin-popup .form-login').hide();
+                                            $('.login-signin-popup .form-register').show();
+                                        });
+
+                                        $('.login-signin-popup .call-log-in').click(function () {
+                                            $('.login-signin-popup .form-login').show();
+                                            $('.login-signin-popup .form-register').hide();
+                                        });
+
+                                        // ====================== PATIENT LOGIN/SIGNUP LOGIC ======================
+
+                                        //login
                                         $('.patient .form-register #privacy-policy-registration-patient').on('change', function () {
                                             if ($(this).is(':checked')) {
                                                 $('.patient .form-register .facebook-custom-btn').removeAttr('custom-stopper');
@@ -1458,23 +1482,30 @@ function bindLoginSigninPopupShow() {
                                             return function (_x11) {
                                                 return _ref12.apply(this, arguments);
                                             };
-                                        }());
+                                        }());$('form#dentist-login').on('submit', function (event) {
+                                            var form_fields = $(this).find('.custom-input');
+                                            var dentist_login_errors = false;
+                                            for (var i = 0, len = form_fields.length; i < len; i += 1) {
+                                                if (form_fields.eq(i).attr('type') == 'email' && !basic.validateEmail(form_fields.eq(i).val().trim())) {
+                                                    _customErrorHandle(form_fields.eq(i).parent(), 'Please use valid email address.');
+                                                    dentist_login_errors = true;
+                                                } else if (form_fields.eq(i).attr('type') == 'password' && form_fields.eq(i).val().length < 6) {
+                                                    _customErrorHandle(form_fields.eq(i).parent(), 'Passwords must be min length 6.');
+                                                    dentist_login_errors = true;
+                                                }
 
-                                        $('.popup-header-action a').click(function () {
-                                            $('.login-signin-popup .popup-body > .inline-block').addClass('custom-hide');
-                                            $('.login-signin-popup .popup-body .' + $(this).attr('data-type')).removeClass('custom-hide');
+                                                if (form_fields.eq(i).val().trim() == '') {
+                                                    _customErrorHandle(form_fields.eq(i).parent(), 'This field is required.');
+                                                    dentist_login_errors = true;
+                                                }
+                                            }
+
+                                            if (dentist_login_errors) {
+                                                event.preventDefault();
+                                            }
                                         });
 
-                                        $('.login-signin-popup .call-sign-up').click(function () {
-                                            $('.login-signin-popup .form-login').hide();
-                                            $('.login-signin-popup .form-register').show();
-                                        });
-
-                                        $('.login-signin-popup .call-log-in').click(function () {
-                                            $('.login-signin-popup .form-login').show();
-                                            $('.login-signin-popup .form-register').hide();
-                                        });
-
+                                        //register
                                         $('.dentist .form-register .prev-step').click(function () {
                                             var current_step = $('.dentist .form-register .step.visible');
                                             var current_prev_step = current_step.prev();
@@ -1489,10 +1520,10 @@ function bindLoginSigninPopupShow() {
 
                                         //SECOND STEP INIT LOGIC
                                         //load address script
-                                        _context12.next = 14;
+                                        _context12.next = 15;
                                         return $.getScript('/assets/js/address.js', function () {});
 
-                                    case 14:
+                                    case 15:
 
                                         $('#dentist-country').on('change', function () {
                                             $('.step.second .phone .country-code').html('+' + $(this).find('option:selected').attr('data-code'));
@@ -1674,8 +1705,9 @@ function bindLoginSigninPopupShow() {
                                                     break;
                                             }
                                         });
+                                        // ====================== /DENTIST LOGIN/SIGNUP LOGIC ======================
 
-                                    case 18:
+                                    case 19:
                                     case "end":
                                         return _context12.stop();
                                 }

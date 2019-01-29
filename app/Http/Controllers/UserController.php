@@ -49,9 +49,9 @@ class UserController extends Controller {
         ];
         $this->validate($request, [
             'dentist-or-practice-name' => 'required|max:250',
-            'email' => 'required|max:60',
-            'password' => 'required|max:100',
-            'repeat-password' => 'required|max:100',
+            'email' => 'required|max:50',
+            'password' => 'required|max:50',
+            'repeat-password' => 'required|max:50',
             'work-type' => 'required',
             'country-id' => 'required',
             'address' => 'required|max:300',
@@ -97,8 +97,27 @@ class UserController extends Controller {
         var_dump($data);
         var_dump($files);
         die();
+    }
 
+    protected function dentistLogin(Request $request) {
+        $customMessages = [
+            'email.required' => 'Email address is required.',
+            'password.required' => 'Password is required.',
+        ];
+        $this->validate($request, [
+            'email' => 'required|max:50',
+            'password' => 'required|max:50'
+        ], $customMessages);
 
+        $data = $request->input();
+
+        //check email validation
+        if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL))   {
+            return redirect()->route('home')->with(['error' => 'Your form was not sent. Please try again with valid email.']);
+        }
+
+        var_dump($data);
+        die();
     }
 
     protected function getMyProfileView()   {
