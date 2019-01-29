@@ -21,6 +21,7 @@ mix.styles([
     'node_modules/slick-carousel/slick/slick.css',
     'node_modules/pretty-checkbox/dist/pretty-checkbox.min.css',
     'node_modules/bootstrap-select/dist/css/bootstrap-select.min.css',
+    'public/assets/libs/combobox/combobox.css',
 ], 'public/dist/css/front-libs-style.css');
 
 mix.styles([
@@ -34,6 +35,7 @@ mix.scripts([
     'node_modules/bootbox.js/bootbox.min.js',
     'node_modules/slick-carousel/slick/slick.min.js',
     'node_modules/bootstrap-select/dist/js/bootstrap-select.min.js',
+    'public/assets/libs/combobox/combobox.js',
 ], 'public/dist/js/front-libs-script.js');
 
 mix.babel([

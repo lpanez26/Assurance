@@ -893,11 +893,13 @@ function bindLoginSigninPopupShow() {
                                         errors = true;
                                     } else {
                                         if($('.dentist .form-register .step.second [name="work-type"]:checked').val() == 'an-associate-dentist') {
-                                            $('.dentist .form-register .step.third .search-for-clinic').html('<div class="padding-bottom-10"><input class="custom-input" type="text" minlength="6" maxlength="100" placeholder="Search for clinic"/></div>');
+                                            $('.dentist .form-register .step.third .search-for-clinic').html('<div class="padding-bottom-10"><select class="combobox custom-input"></select></div>');
 
-                                            //bind the logic for the fresh appended input
+                                            initComboboxes();
+
+                                            //bind the logic for the fresh appended select
                                             var timer, delay = 1000;
-                                            $('.search-for-clinic input[type="text"]').bind('keydown blur change', function(e) {
+                                            $('.search-for-clinic input[type="text"].combobox').bind('keydown', function(e) {
                                                 var this_input = $('.search-for-clinic input[type="text"]');
                                                 clearTimeout(timer);
                                                 timer = setTimeout(function() {
@@ -1040,3 +1042,10 @@ function hidePopupOnBackdropClick() {
     });
 }
 hidePopupOnBackdropClick();
+
+//transfer all selects to bootstrap combobox
+function initComboboxes() {
+    jQuery("select.combobox").each(function () {
+        jQuery(this).combobox();
+    });
+}
