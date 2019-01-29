@@ -912,7 +912,7 @@ function bindLoginSigninPopupShow() {
                                                         },
                                                         success: function (response) {
                                                             if(response.success) {
-                                                                var select_html = '';
+                                                                var select_html = '<option></option>';
                                                                 for(var i = 0, len = response.success.length; i < len; i+=1) {
                                                                     select_html+='<option value="'+response.success[i].id+'">'+response.success[i].name+'</option>';
                                                                 }
