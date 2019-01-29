@@ -822,6 +822,26 @@ function bindLoginSigninPopupShow() {
                         styleAvatarUploadButton();
                         initCaptchaRefreshEvent();
 
+                        var timer, delay = 1000;
+                        $('.search-for-clinic input[type="text"]').bind('keydown blur change', function(e) {
+                            clearTimeout(timer);
+                            timer = setTimeout(function() {
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/get-clinics-by-name',
+                                    dataType: 'json',
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    },
+                                    success: function (response) {
+                                        if(response.success) {
+
+                                        }
+                                    }
+                                });
+                            }, delay );
+                        });
+
                         $('.dentist .form-register .next-step').click(function() {
                             var this_btn = $(this);
                             switch(this_btn.attr('data-current-step')) {
