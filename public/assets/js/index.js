@@ -827,7 +827,7 @@ function bindLoginSigninPopupShow() {
                             if(this_btn.attr('data-current-step') == 'third') {
                                 this_btn.val('Create profile');
                             }else {
-                                this_btn.val('Next'); 
+                                this_btn.val('Next');
                             }
 
                             switch(this_btn.attr('data-current-step')) {

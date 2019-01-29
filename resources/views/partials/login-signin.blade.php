@@ -250,6 +250,7 @@
                     </div>
                     <div class="inline-block text-right">
                         <input type="button" value="Next" class="white-blue-green-btn next-step" data-current-step="first"/>
+                        <input type="hidden" name="_token" value="{{csrf_token()}}">
                     </div>
                 </div>
             </form>
