@@ -1177,57 +1177,6 @@ if ($('body').hasClass('home')) {
             return false;
         });
     }
-
-    //login
-    $(document).on('successResponseCoreDBApi', function () {
-        var _ref8 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee8(event) {
-            var custom_form_obj;
-            return _regeneratorRuntime.wrap(function _callee8$(_context8) {
-                while (1) {
-                    switch (_context8.prev = _context8.next) {
-                        case 0:
-                            console.log('successResponseCoreDBApi WEBSITE');
-                            console.log(event.response_data, 'event.response_data');
-                            if (event.response_data.token) {
-                                custom_form_obj = {
-                                    token: event.response_data.token,
-                                    email: event.response_data.data.email,
-                                    name: event.response_data.data.name,
-                                    address: event.response_data.data.dcn_address,
-                                    avatar_url: event.response_data.data.avatar_url,
-                                    have_contracts: false,
-                                    _token: $('meta[name="csrf-token"]').attr('content')
-                                };
-
-                                //check if CoreDB returned address for this user and if its valid one
-
-                                if (basic.objHasKey(custom_form_obj, 'address') != null && innerAddressCheck(custom_form_obj.address)) {
-                                    //var current_dentists_for_logging_user = await App.assurance_methods.getWaitingContractsForPatient(custom_form_obj.address);
-                                    //if(current_dentists_for_logging_user.length > 0) {
-                                    //custom_form_obj.have_contracts = true;
-                                    //}
-                                }
-
-                                console.log('customJavascriptForm WEBSITE');
-                                customJavascriptForm('/patient/authenticate', custom_form_obj, 'post');
-                            }
-
-                        case 3:
-                        case "end":
-                            return _context8.stop();
-                    }
-                }
-            }, _callee8, this);
-        }));
-
-        return function (_x7) {
-            return _ref8.apply(this, arguments);
-        };
-    }());
-
-    $(document).on('errorResponseCoreDBApi', function (event) {
-        console.log(event, 'errorResponseCoreDBApi');
-    });
 } else if ($('body').hasClass('support-guide')) {
     if ($('.support-guide-slider').length) {
         $('.support-guide-slider').slick({
@@ -1370,15 +1319,15 @@ function bindLoginSigninPopupShow() {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function () {
-                    var _ref9 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee12(response) {
+                    var _ref8 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee11(response) {
                         var _customErrorHandle;
 
-                        return _regeneratorRuntime.wrap(function _callee12$(_context12) {
+                        return _regeneratorRuntime.wrap(function _callee11$(_context11) {
                             while (1) {
-                                switch (_context12.prev = _context12.next) {
+                                switch (_context11.prev = _context11.next) {
                                     case 0:
                                         if (!response.success) {
-                                            _context12.next = 19;
+                                            _context11.next = 19;
                                             break;
                                         }
 
@@ -1425,6 +1374,27 @@ function bindLoginSigninPopupShow() {
                                         });
 
                                         $(document).on('civicCustomBtnClicked', function () {
+                                            var _ref9 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee8(event) {
+                                                return _regeneratorRuntime.wrap(function _callee8$(_context8) {
+                                                    while (1) {
+                                                        switch (_context8.prev = _context8.next) {
+                                                            case 0:
+                                                                $('.patient .form-register .step-errors-holder').html('');
+
+                                                            case 1:
+                                                            case "end":
+                                                                return _context8.stop();
+                                                        }
+                                                    }
+                                                }, _callee8, this);
+                                            }));
+
+                                            return function (_x8) {
+                                                return _ref9.apply(this, arguments);
+                                            };
+                                        }());
+
+                                        $(document).on('facebookCustomBtnClicked', function () {
                                             var _ref10 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee9(event) {
                                                 return _regeneratorRuntime.wrap(function _callee9$(_context9) {
                                                     while (1) {
@@ -1445,13 +1415,13 @@ function bindLoginSigninPopupShow() {
                                             };
                                         }());
 
-                                        $(document).on('facebookCustomBtnClicked', function () {
+                                        $(document).on('customCivicFbStopperTriggered', function () {
                                             var _ref11 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee10(event) {
                                                 return _regeneratorRuntime.wrap(function _callee10$(_context10) {
                                                     while (1) {
                                                         switch (_context10.prev = _context10.next) {
                                                             case 0:
-                                                                $('.patient .form-register .step-errors-holder').html('');
+                                                                _customErrorHandle($('.patient .form-register .step-errors-holder'), 'Please agree with our privacy policy.');
 
                                                             case 1:
                                                             case "end":
@@ -1463,27 +1433,6 @@ function bindLoginSigninPopupShow() {
 
                                             return function (_x10) {
                                                 return _ref11.apply(this, arguments);
-                                            };
-                                        }());
-
-                                        $(document).on('customCivicFbStopperTriggered', function () {
-                                            var _ref12 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee11(event) {
-                                                return _regeneratorRuntime.wrap(function _callee11$(_context11) {
-                                                    while (1) {
-                                                        switch (_context11.prev = _context11.next) {
-                                                            case 0:
-                                                                _customErrorHandle($('.patient .form-register .step-errors-holder'), 'Please agree with our privacy policy.');
-
-                                                            case 1:
-                                                            case "end":
-                                                                return _context11.stop();
-                                                        }
-                                                    }
-                                                }, _callee11, this);
-                                            }));
-
-                                            return function (_x11) {
-                                                return _ref12.apply(this, arguments);
                                             };
                                         }());$('form#dentist-login').on('submit', function (event) {
                                             //clear prev errors
@@ -1528,7 +1477,7 @@ function bindLoginSigninPopupShow() {
 
                                         //SECOND STEP INIT LOGIC
                                         //load address script
-                                        _context12.next = 15;
+                                        _context11.next = 15;
                                         return $.getScript('/assets/js/address.js', function () {});
 
                                     case 15:
@@ -1717,14 +1666,14 @@ function bindLoginSigninPopupShow() {
 
                                     case 19:
                                     case "end":
-                                        return _context12.stop();
+                                        return _context11.stop();
                                 }
                             }
-                        }, _callee12, this);
+                        }, _callee11, this);
                     }));
 
-                    function success(_x8) {
-                        return _ref9.apply(this, arguments);
+                    function success(_x7) {
+                        return _ref8.apply(this, arguments);
                     }
 
                     return success;
@@ -1806,3 +1755,54 @@ function initComboboxes() {
         jQuery(this).combobox();
     });
 }
+
+function apiEventsListeners() {
+    //login
+    $(document).on('successResponseCoreDBApi', function () {
+        var _ref12 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee12(event) {
+            var custom_form_obj;
+            return _regeneratorRuntime.wrap(function _callee12$(_context12) {
+                while (1) {
+                    switch (_context12.prev = _context12.next) {
+                        case 0:
+                            if (event.response_data.token) {
+                                custom_form_obj = {
+                                    token: event.response_data.token,
+                                    email: event.response_data.data.email,
+                                    name: event.response_data.data.name,
+                                    address: event.response_data.data.dcn_address,
+                                    avatar_url: event.response_data.data.avatar_url,
+                                    have_contracts: false,
+                                    _token: $('meta[name="csrf-token"]').attr('content')
+                                };
+
+                                //check if CoreDB returned address for this user and if its valid one
+
+                                if (basic.objHasKey(custom_form_obj, 'address') != null && innerAddressCheck(custom_form_obj.address)) {
+                                    //var current_dentists_for_logging_user = await App.assurance_methods.getWaitingContractsForPatient(custom_form_obj.address);
+                                    //if(current_dentists_for_logging_user.length > 0) {
+                                    //custom_form_obj.have_contracts = true;
+                                    //}
+                                }
+
+                                customJavascriptForm('/patient/authenticate', custom_form_obj, 'post');
+                            }
+
+                        case 1:
+                        case "end":
+                            return _context12.stop();
+                    }
+                }
+            }, _callee12, this);
+        }));
+
+        return function (_x11) {
+            return _ref12.apply(this, arguments);
+        };
+    }());
+
+    $(document).on('errorResponseCoreDBApi', function (event) {
+        console.log(event, 'errorResponseCoreDBApi');
+    });
+}
+apiEventsListeners();

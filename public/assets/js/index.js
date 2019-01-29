@@ -581,38 +581,6 @@ if($('body').hasClass('home')) {
             return false;
         });
     }
-
-    //login
-    $(document).on('successResponseCoreDBApi', async function (event) {
-        console.log('successResponseCoreDBApi WEBSITE');
-        console.log(event.response_data, 'event.response_data');
-        if(event.response_data.token) {
-            var custom_form_obj = {
-                token: event.response_data.token,
-                email: event.response_data.data.email,
-                name: event.response_data.data.name,
-                address: event.response_data.data.dcn_address,
-                avatar_url: event.response_data.data.avatar_url,
-                have_contracts : false,
-                _token: $('meta[name="csrf-token"]').attr('content')
-            };
-
-            //check if CoreDB returned address for this user and if its valid one
-            if(basic.objHasKey(custom_form_obj, 'address') != null && innerAddressCheck(custom_form_obj.address)) {
-                //var current_dentists_for_logging_user = await App.assurance_methods.getWaitingContractsForPatient(custom_form_obj.address);
-                //if(current_dentists_for_logging_user.length > 0) {
-                    //custom_form_obj.have_contracts = true;
-                //}
-            }
-
-            console.log('customJavascriptForm WEBSITE');
-            customJavascriptForm('/patient/authenticate', custom_form_obj, 'post');
-        }
-    });
-
-    $(document).on('errorResponseCoreDBApi', function (event) {
-        console.log(event, 'errorResponseCoreDBApi');
-    });
 }else if($('body').hasClass('support-guide')) {
     if($('.support-guide-slider').length) {
         $('.support-guide-slider').slick({
@@ -1111,3 +1079,35 @@ function initComboboxes() {
         jQuery(this).combobox();
     });
 }
+
+function apiEventsListeners() {
+    //login
+    $(document).on('successResponseCoreDBApi', async function (event) {
+        if(event.response_data.token) {
+            var custom_form_obj = {
+                token: event.response_data.token,
+                email: event.response_data.data.email,
+                name: event.response_data.data.name,
+                address: event.response_data.data.dcn_address,
+                avatar_url: event.response_data.data.avatar_url,
+                have_contracts : false,
+                _token: $('meta[name="csrf-token"]').attr('content')
+            };
+
+            //check if CoreDB returned address for this user and if its valid one
+            if(basic.objHasKey(custom_form_obj, 'address') != null && innerAddressCheck(custom_form_obj.address)) {
+                //var current_dentists_for_logging_user = await App.assurance_methods.getWaitingContractsForPatient(custom_form_obj.address);
+                //if(current_dentists_for_logging_user.length > 0) {
+                //custom_form_obj.have_contracts = true;
+                //}
+            }
+
+            customJavascriptForm('/patient/authenticate', custom_form_obj, 'post');
+        }
+    });
+
+    $(document).on('errorResponseCoreDBApi', function (event) {
+        console.log(event, 'errorResponseCoreDBApi');
+    });
+}
+apiEventsListeners();
