@@ -487,22 +487,11 @@
 @endsection
 
 @section('script_block')
-    @if(count($errors) > 0)
-        <script>
-            var errors = '';
-            @foreach($errors->all() as $error)
-                errors+="{{ $error }}" + '<br>';
-            @endforeach
-            basic.showAlert(errors, '', true);
-        </script>
-    @endif
-    @if (session('error'))
+    @if(session('error'))
         <script>
             basic.showAlert("{{ session('error') }}", '', true);
         </script>
-    @endif
-
-    @if (session('success'))
+    @elseif(session('success'))
         <script>
             basic.showAlert("{{ session('success') }}", '', true);
         </script>
