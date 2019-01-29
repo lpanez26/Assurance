@@ -27,8 +27,6 @@ class APIRequestsController extends Controller {
     }
 
     public function getAllClinicsByName($name) {
-        var_dump($name);
-        die();
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,

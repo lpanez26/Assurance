@@ -26526,11 +26526,12 @@ function bindLoginSigninPopupShow() {
                                         delay = 1000;
 
                                         $('.search-for-clinic input[type="text"]').bind('keydown blur change', function (e) {
+                                            var this_input = $('.search-for-clinic input[type="text"]');
                                             clearTimeout(timer);
                                             timer = setTimeout(function () {
                                                 $.ajax({
                                                     type: 'POST',
-                                                    url: '/get-clinics-by-name',
+                                                    url: '/get-clinics-by-name/' + this_input.val().trim(),
                                                     dataType: 'json',
                                                     headers: {
                                                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
