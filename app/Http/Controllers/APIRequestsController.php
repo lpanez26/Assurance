@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 
 class APIRequestsController extends Controller {
     public function dentistLogin($data) {
-        var_dump($data);
-        die();
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
@@ -17,15 +15,16 @@ class APIRequestsController extends Controller {
             CURLOPT_POSTFIELDS => array(
                 'platform' => 'assurance',
                 'type' => 'dentist',
-                'email' => $name,
-                'password' => $name,
+                'email' => $data['email'],
+                'password' => $data['password'],
             )
         ));
 
         $resp = json_decode(curl_exec($curl));
         curl_close($curl);
 
-        var_dump($resp);die();
+        var_dump($resp);
+        var_dump('kozbira');die();
     }
 
     public function getAllCountries() {
