@@ -116,8 +116,7 @@ class UserController extends Controller {
             return redirect()->route('home')->with(['error' => 'Your form was not sent. Please try again with valid email.']);
         }
 
-        var_dump($data);
-        die();
+        (new APIRequestsController())->dentistLogin($data);
     }
 
     protected function getMyProfileView()   {

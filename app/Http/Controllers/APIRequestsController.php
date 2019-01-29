@@ -5,8 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 class APIRequestsController extends Controller {
-    public function getUser($token) {
+    public function dentistLogin($data) {
+        var_dump($data);
+        die();
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_POST => 1,
+            CURLOPT_URL => 'https://api.dentacoin.com/api/users/',
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_POSTFIELDS => array(
+                'platform' => 'assurance',
+                'type' => 'dentist',
+                'email' => $name,
+                'password' => $name,
+            )
+        ));
 
+        $resp = json_decode(curl_exec($curl));
+        curl_close($curl);
+
+        var_dump($resp);die();
     }
 
     public function getAllCountries() {
