@@ -10,23 +10,45 @@ class APIRequestsController extends Controller {
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POST => 1,
-            CURLOPT_URL => 'https://api.dentacoin.com/api/register',
+            CURLOPT_URL => 'https://api.dentacoin.com/api/login',
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_POSTFIELDS => array(
                 'platform' => 'assurance',
                 'type' => 'dentist',
                 'email' => $data['email'],
-                'password' => $data['password'],
+                'password' => $data['password']
             )
         ));
 
         $resp = json_decode(curl_exec($curl));
         curl_close($curl);
 
-        var_dump($data['email']);
-        var_dump($data['password']);
         var_dump($resp);
-        var_dump('kozbira');die();
+        var_dump('RESPONSE1');
+        die();
+    }
+
+    public function dentistRegister($data, $files) {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_POST => 1,
+            CURLOPT_URL => 'https://api.dentacoin.com/api/register',
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_POSTFIELDS => array(
+                'platform' => 'assurance',
+                'type' => 'dentist',
+                'email' => $data['email'],
+                'password' => $data['password']
+            )
+        ));
+
+        $resp = json_decode(curl_exec($curl));
+        curl_close($curl);
+
+        var_dump($resp);
+        var_dump('RESPONSE');
+        die();
     }
 
     public function getAllCountries() {
