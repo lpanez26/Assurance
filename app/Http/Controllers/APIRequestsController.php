@@ -35,7 +35,7 @@ class APIRequestsController extends Controller {
             'name' => $data['dentist-or-practice-name'],
             'email' => $data['email'],
             'password' => $data['password'],
-            'password-repeat' => $data['password-repeat'],
+            'password-repeat' => $data['repeat-password'],
             'country_code' => $data['country-code'],
             'address' => $data['address'],
             'avatar' => '@'.$files['image']->getPathName(),
