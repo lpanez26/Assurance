@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-            <div class="step-errors-holder padding-top-20"></div>
+            <div class="step-errors-holder"></div>
             <div class="popup-half-footer">
                 Already have an account? <a href="javascript:void(0)" class="call-log-in">Log in</a>
             </div>

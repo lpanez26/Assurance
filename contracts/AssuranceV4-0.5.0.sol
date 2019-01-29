@@ -267,14 +267,14 @@ contract Assurance is ownerSettings, SafeMath {
 
         uint256 months_num = 1;
         //time range from the last withdraw from this patient till now
-        uint256 time_range = now - dentists[msg.sender].contracts[_patient_addr].next_transfer;
+        uint256 time_range = sub(now, dentists[msg.sender].contracts[_patient_addr].next_transfer);
         //adding the number of months in a row dentists didn't pull his DCN from the patient
         months_num+=div(time_range, period_to_withdraw);
         //time_passed_for_next_withdraw is the time that passed until the next_withdraw , but not finished the full period_to_withdraw for next_withdraw
-        uint256 time_passed_for_next_withdraw = time_range - ((months_num - 1) * period_to_withdraw);
+        uint256 time_passed_for_next_withdraw = sub(time_range, ((months_num - 1) * period_to_withdraw));
 
         //updating next_transfer timestamp
-        dentists[msg.sender].contracts[_patient_addr].next_transfer = now + period_to_withdraw - time_passed_for_next_withdraw;
+        dentists[msg.sender].contracts[_patient_addr].next_transfer = add(now, sub(period_to_withdraw, time_passed_for_next_withdraw));
 
         //getting the amount that should be transfered to dentist for all the months since the contract init
         uint256 current_withdraw_amount;

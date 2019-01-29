@@ -23,7 +23,7 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
     Route::get('/support-guide', 'SupportGuideController@getView')->name('support-guide');
 
     Route::get('/test', function() {
-        var_dump((new \App\Http\Controllers\APIRequestsController())->getAllClinicsByName('Dentaprime'));
+        var_dump((new \App\Http\Controllers\APIRequestsController())->getAllClinics());
         die();
     })->name('test');
 

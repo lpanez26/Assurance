@@ -37,11 +37,25 @@ contract ownerSettings is Ownable {
     uint256 public api_result_dcn_usd_price = 1700000; //usd for one dcn
     uint256 public api_decimals = 10; //decimals, because solidity doesn't support float at this time
     bool public usd_over_dcn = true;
+    address public proxy_contract;
 
     //DentacoinToken address
     address public dentacoin_token_address = 0x19f49a24c7CB0ca1cbf38436A86656C2F30ab362;
     //DentacoinToken instance
     DentacoinToken dcn = DentacoinToken(dentacoin_token_address);
+
+
+    // ==================================== MODIFIERS ====================================
+    modifier onlyApprovedProxy() {
+        require(msg.sender == proxy_contract);
+        _;
+    }
+
+    modifier checkIfPaused() {
+        require(!contract_paused, "Contract is paused. Please try again later.");
+        _;
+    }
+    // ==================================== /MODIFIERS ====================================
 
     function circuitBreaker() public onlyOwner {
         if(!contract_paused) {
@@ -53,6 +67,10 @@ contract ownerSettings is Ownable {
 
     function changePeriodToWithdraw(uint256 _period_to_withdraw) public onlyOwner {
         period_to_withdraw = _period_to_withdraw;
+    }
+
+    function changeProxyAddress(address _proxy_contract) public onlyOwner {
+        proxy_contract = _proxy_contract;
     }
 
     function changeDentacoinTokenAddress(address _dentacoin_token_address) public onlyOwner {
@@ -72,7 +90,7 @@ contract ownerSettings is Ownable {
         api_result_dcn_usd_price = _api_result_dcn_usd_price;
     }
 
-    function changeApiDecimals(uint256 _api_decimals) public onlyOwner {
+    function changeApiDecimals(uint256 _api_decimals) public onlyOwnerOrAdmin {
         api_decimals = _api_decimals;
     }
     // ====== /PRICE SETTERS ======
@@ -107,7 +125,6 @@ contract ownerSettings is Ownable {
 contract Assurance is ownerSettings {
     // ==================================== STATE ====================================
     address public AssuranceContract = address(this);
-    address public proxy_contract;
 
     struct contractStruct {
         uint256 next_transfer;
@@ -141,18 +158,6 @@ contract Assurance is ownerSettings {
     address[] dentists_addresses;
     // ==================================== /STATE ====================================
 
-    // ==================================== MODIFIERS ====================================
-    modifier onlyApprovedProxy() {
-        require(msg.sender == proxy_contract);
-        _;
-    }
-
-    modifier checkIfPaused() {
-        require(!contract_paused, "Contract is paused. Please try again later.");
-        _;
-    }
-    // ==================================== /MODIFIERS ====================================
-
     // ==================================== LOGIC ====================================
     function registerDentist(address _dentist_addr) public onlyApprovedProxy checkIfPaused {
         dentists[_dentist_addr] = dentistStruct(true, new address[](0));
@@ -160,104 +165,108 @@ contract Assurance is ownerSettings {
     }
 
     function registerContract(address _patient_addr, address _dentist_addr, uint256 _date_start_contract, bool _approved_by_dentist, bool _approved_by_patient, bool _validation_checked, uint256 _value_usd, uint256 _value_dcn, string calldata _contract_ipfs_hash) external onlyApprovedProxy checkIfPaused {
-        dentists[_dentist_addr].contracts[_patient_addr] = contractStruct(_date_start_contract, _approved_by_dentist, _approved_by_patient, _validation_checked, _value_usd, _value_dcn, _contract_ipfs_hash, dentists[_dentist_addr].patients_addresses.push(_patient_addr) - 1);
-    }
+dentists[_dentist_addr].contracts[_patient_addr] = contractStruct(_date_start_contract, _approved_by_dentist, _approved_by_patient, _validation_checked, _value_usd, _value_dcn, _contract_ipfs_hash, dentists[_dentist_addr].patients_addresses.push(_patient_addr) - 1);
+}
 
-    function updateNextTransferTime(address _patient_addr, address _dentist_addr, uint256 _next_transfer) external onlyApprovedProxy checkIfPaused {
-        dentists[_dentist_addr].contracts[_patient_addr].next_transfer = _next_transfer;
-    }
+function updateNextTransferTime(address _patient_addr, address _dentist_addr, uint256 _next_transfer) external onlyApprovedProxy checkIfPaused {
+dentists[_dentist_addr].contracts[_patient_addr].next_transfer = _next_transfer;
+}
 
-    function dentistApproveContract(address _patient_addr, address _dentist_addr) external onlyApprovedProxy checkIfPaused {
-        dentists[_dentist_addr].contracts[_patient_addr].approved_by_dentist = true;
-    }
+function dentistApproveContract(address _patient_addr, address _dentist_addr) external onlyApprovedProxy checkIfPaused {
+dentists[_dentist_addr].contracts[_patient_addr].approved_by_dentist = true;
+}
 
-    function patientApproveContract(address _patient_addr, address _dentist_addr) external onlyApprovedProxy checkIfPaused {
-        dentists[_dentist_addr].contracts[_patient_addr].approved_by_patient = true;
-    }
+function patientApproveContract(address _patient_addr, address _dentist_addr) external onlyApprovedProxy checkIfPaused {
+dentists[_dentist_addr].contracts[_patient_addr].approved_by_patient = true;
+}
 
-    function insertPatientContractHistory(address _patient_addr, address _dentist_addr) external onlyApprovedProxy checkIfPaused {
-        patient_contract_history[_patient_addr].dentists[_dentist_addr] = dentistSentProposal(patient_contract_history[_patient_addr].dentists_addresses.push(_dentist_addr) - 1, true);
-    }
+function insertPatientContractHistory(address _patient_addr, address _dentist_addr) external onlyApprovedProxy checkIfPaused {
+patient_contract_history[_patient_addr].dentists[_dentist_addr] = dentistSentProposal(patient_contract_history[_patient_addr].dentists_addresses.push(_dentist_addr) - 1, true);
+}
 
-    function updateValidationCheck(address _patient_addr, address _dentist_addr) external onlyApprovedProxy checkIfPaused {
-        dentists[_dentist_addr].contracts[_patient_addr].validation_checked = true;
-    }
+function updateValidationCheck(address _patient_addr, address _dentist_addr) external onlyApprovedProxy checkIfPaused {
+dentists[_dentist_addr].contracts[_patient_addr].validation_checked = true;
+}
 
-    //can be called from patient and dentist
-    function breakContract(address _patient_addr, address _dentist_addr) public onlyApprovedProxy checkIfPaused {
-        //if there is proposal recorded from this dentist for this patient ----> delete it
-        if(patient_contract_history[_patient_addr].dentists[_dentist_addr].exists) {
-            //deleting the dentist address from the dentists_addresses array for the current patient
-            uint256 proposal_row_to_delete = patient_contract_history[_patient_addr].dentists[_dentist_addr].index_in_dentists_addresses;
-            address proposal_key_to_move = patient_contract_history[_patient_addr].dentists_addresses[patient_contract_history[_patient_addr].dentists_addresses.length-1];
-            patient_contract_history[_patient_addr].dentists_addresses[proposal_row_to_delete] = proposal_key_to_move;
-            patient_contract_history[_patient_addr].dentists[proposal_key_to_move].index_in_dentists_addresses = proposal_row_to_delete;
-            patient_contract_history[_patient_addr].dentists_addresses.length--;
+function dcnTransferFrom(address _patient_addr, address _dentist_addr, uint256 _amount) external onlyApprovedProxy checkIfPaused {
+require(dcn.transferFrom(_patient_addr, _dentist_addr, _amount));
+}
 
-            //deleting the struct
-            delete patient_contract_history[_patient_addr].dentists[_dentist_addr];
-        }
+//can be called from patient and dentist
+function breakContract(address _patient_addr, address _dentist_addr) public onlyApprovedProxy checkIfPaused {
+//if there is proposal recorded from this dentist for this patient ----> delete it
+if(patient_contract_history[_patient_addr].dentists[_dentist_addr].exists) {
+//deleting the dentist address from the dentists_addresses array for the current patient
+uint256 proposal_row_to_delete = patient_contract_history[_patient_addr].dentists[_dentist_addr].index_in_dentists_addresses;
+address proposal_key_to_move = patient_contract_history[_patient_addr].dentists_addresses[patient_contract_history[_patient_addr].dentists_addresses.length-1];
+patient_contract_history[_patient_addr].dentists_addresses[proposal_row_to_delete] = proposal_key_to_move;
+patient_contract_history[_patient_addr].dentists[proposal_key_to_move].index_in_dentists_addresses = proposal_row_to_delete;
+patient_contract_history[_patient_addr].dentists_addresses.length--;
 
-        //deleting the patient address from the patients_addresses array for the current dentist
-        uint256 row_to_delete = dentists[_dentist_addr].contracts[_patient_addr].index_in_patients_addresses;
-        address key_to_move = dentists[_dentist_addr].patients_addresses[dentists[_dentist_addr].patients_addresses.length-1];
-        dentists[_dentist_addr].patients_addresses[row_to_delete] = key_to_move;
-        dentists[key_to_move].contracts[_patient_addr].index_in_patients_addresses = row_to_delete;
-        dentists[_dentist_addr].patients_addresses.length--;
+//deleting the struct
+delete patient_contract_history[_patient_addr].dentists[_dentist_addr];
+}
 
-        //deleting the patient struct from the dentist patients mapping
-        delete dentists[_dentist_addr].contracts[_patient_addr];
-    }
+//deleting the patient address from the patients_addresses array for the current dentist
+uint256 row_to_delete = dentists[_dentist_addr].contracts[_patient_addr].index_in_patients_addresses;
+address key_to_move = dentists[_dentist_addr].patients_addresses[dentists[_dentist_addr].patients_addresses.length-1];
+dentists[_dentist_addr].patients_addresses[row_to_delete] = key_to_move;
+dentists[key_to_move].contracts[_patient_addr].index_in_patients_addresses = row_to_delete;
+dentists[_dentist_addr].patients_addresses.length--;
 
-    // ====== GETTERS ======
-    function getDentist(address _dentist_addr) public view returns(bool, address[] memory) {
-        return (dentists[_dentist_addr].exists, dentists[_dentist_addr].patients_addresses);
-    }
+//deleting the patient struct from the dentist patients mapping
+delete dentists[_dentist_addr].contracts[_patient_addr];
+}
 
-    function getDentistsArr() public view returns(address[] memory) {
-        return dentists_addresses;
-    }
+// ====== GETTERS ======
+function getDentist(address _dentist_addr) public view returns(bool, address[] memory) {
+return (dentists[_dentist_addr].exists, dentists[_dentist_addr].patients_addresses);
+}
 
-    function getPatient(address _patient_addr, address _dentist_addr) public view returns(uint256, bool, bool, bool, uint256, uint256, string memory) {
-        contractStruct memory patient = dentists[_dentist_addr].contracts[_patient_addr];
-        return (patient.next_transfer, patient.approved_by_dentist, patient.approved_by_patient, patient.validation_checked, patient.value_usd, patient.value_dcn, patient.contract_ipfs_hash);
-    }
+function getDentistsArr() public view returns(address[] memory) {
+return dentists_addresses;
+}
 
-    function getContractNextTransfer(address _patient_addr, address _dentist_addr) public view returns(uint256) {
-        return dentists[_dentist_addr].contracts[_patient_addr].next_transfer;
-    }
+function getPatient(address _patient_addr, address _dentist_addr) public view returns(uint256, bool, bool, bool, uint256, uint256, string memory) {
+contractStruct memory patient = dentists[_dentist_addr].contracts[_patient_addr];
+return (patient.next_transfer, patient.approved_by_dentist, patient.approved_by_patient, patient.validation_checked, patient.value_usd, patient.value_dcn, patient.contract_ipfs_hash);
+}
 
-    function getContractApprovedByDentist(address _patient_addr, address _dentist_addr) public view returns(bool) {
-        return dentists[_dentist_addr].contracts[_patient_addr].approved_by_dentist;
-    }
+function getContractNextTransfer(address _patient_addr, address _dentist_addr) public view returns(uint256) {
+return dentists[_dentist_addr].contracts[_patient_addr].next_transfer;
+}
 
-    function getContractApprovedByPatient(address _patient_addr, address _dentist_addr) public view returns(bool) {
-        return dentists[_dentist_addr].contracts[_patient_addr].approved_by_patient;
-    }
+function getContractApprovedByDentist(address _patient_addr, address _dentist_addr) public view returns(bool) {
+return dentists[_dentist_addr].contracts[_patient_addr].approved_by_dentist;
+}
 
-    function getContractValidationChecked(address _patient_addr, address _dentist_addr) public view returns(bool) {
-        return dentists[_dentist_addr].contracts[_patient_addr].validation_checked;
-    }
+function getContractApprovedByPatient(address _patient_addr, address _dentist_addr) public view returns(bool) {
+return dentists[_dentist_addr].contracts[_patient_addr].approved_by_patient;
+}
 
-    function getContractUsdValue(address _patient_addr, address _dentist_addr) public view returns(uint256) {
-        return dentists[_dentist_addr].contracts[_patient_addr].value_usd;
-    }
+function getContractValidationChecked(address _patient_addr, address _dentist_addr) public view returns(bool) {
+return dentists[_dentist_addr].contracts[_patient_addr].validation_checked;
+}
 
-    function getContractDcnValue(address _patient_addr, address _dentist_addr) public view returns(uint256) {
-        return dentists[_dentist_addr].contracts[_patient_addr].value_dcn;
-    }
+function getContractUsdValue(address _patient_addr, address _dentist_addr) public view returns(uint256) {
+return dentists[_dentist_addr].contracts[_patient_addr].value_usd;
+}
 
-    function getWaitingContractsForPatient(address _patient_addr) public view returns(address[] memory) {
-        return patient_contract_history[_patient_addr].dentists_addresses;
-    }
-    // ====== /GETTERS ======
-    // ==================================== /LOGIC ====================================
+function getContractDcnValue(address _patient_addr, address _dentist_addr) public view returns(uint256) {
+return dentists[_dentist_addr].contracts[_patient_addr].value_dcn;
+}
+
+function getWaitingContractsForPatient(address _patient_addr) public view returns(address[] memory) {
+return patient_contract_history[_patient_addr].dentists_addresses;
+}
+// ====== /GETTERS ======
+// ==================================== /LOGIC ====================================
 }
 
 interface DentacoinToken {
-    function balanceOf(address _owner) view external returns (uint256);
-    function transferFrom(address _from, address _to, uint256 _value) external returns (bool success);
-    function transfer(address _to, uint256 _value) external returns (bool success);
-    function allowance(address _owner, address _spender) external view returns (uint256);
-    function approve(address _spender, uint256 _value) external returns (bool success);
+function balanceOf(address _owner) view external returns (uint256);
+function transferFrom(address _from, address _to, uint256 _value) external returns (bool success);
+function transfer(address _to, uint256 _value) external returns (bool success);
+function allowance(address _owner, address _spender) external view returns (uint256);
+function approve(address _spender, uint256 _value) external returns (bool success);
 }

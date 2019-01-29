@@ -182,14 +182,14 @@ contract ProxyAssurance is SafeMath {
 
         uint256 months_num = 1;
         //time range from the last withdraw from this patient till now
-        uint256 time_range = now - assurance.getContractNextTransfer(_patient_addr, msg.sender);
+        uint256 time_range = sub(now, assurance.getContractNextTransfer(_patient_addr, msg.sender));
         //adding the number of months in a row dentists didn't pull his DCN from the patient
         months_num+=div(time_range, assurance.getPeriodToWithdraw());
         //time_passed_for_next_withdraw is the time that passed until the next_withdraw , but not finished the full period_to_withdraw for next_withdraw
-        uint256 time_passed_for_next_withdraw = time_range - ((months_num - 1) * assurance.getPeriodToWithdraw());
+        uint256 time_passed_for_next_withdraw = sub(time_range, (months_num - 1) * assurance.getPeriodToWithdraw());
 
         //updating next_transfer timestamp
-        assurance.updateNextTransferTime(_patient_addr, msg.sender, now + assurance.getPeriodToWithdraw() - time_passed_for_next_withdraw);
+        assurance.updateNextTransferTime(_patient_addr, msg.sender, add(now, sub(assurance.getPeriodToWithdraw(),time_passed_for_next_withdraw)));
 
         //getting the amount that should be transfered to dentist for all the months since the contract init
         uint256 current_withdraw_amount;
@@ -207,7 +207,7 @@ contract ProxyAssurance is SafeMath {
         }
 
         //transferring the DCN from patient to dentist
-        require(dcn.transferFrom(_patient_addr, msg.sender, current_withdraw_amount));
+        assurance.dcnTransferFrom(_patient_addr, msg.sender, current_withdraw_amount);
         emit logSuccessfulWithdraw(msg.sender, _patient_addr, current_withdraw_amount, now);
     }
 
@@ -241,6 +241,7 @@ interface DentacoinToken {
 interface Assurance {
     function getDentist(address _dentist_addr) external view returns(bool, address[] memory);
     function registerDentist(address _dentist_addr) external;
+    function dcnTransferFrom(address _patient_addr, address _dentist_addr, uint256 _amount) external;
     function registerContract(address _patient_addr, address _dentist_addr, uint256 _date_start_contract, bool _approved_by_dentist, bool _approved_by_patient, bool _validation_checked, uint256 _value_usd, uint256 _value_dcn, string calldata _contract_ipfs_hash) external;
     function insertPatientContractHistory(address _patient_addr, address _dentist_addr) external;
     function dentistApproveContract(address _patient_addr, address _dentist_addr) external;

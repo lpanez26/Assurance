@@ -26,7 +26,7 @@ class APIRequestsController extends Controller {
         }
     }
 
-    public function getAllClinicsByName($name) {
+    public function getAllClinics() {
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
@@ -34,8 +34,7 @@ class APIRequestsController extends Controller {
             CURLOPT_URL => 'https://api.dentacoin.com/api/users/',
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_POSTFIELDS => array(
-                'type' => 'clinic',
-                'name' => $name
+                'type' => 'clinic'
             )
         ));
 
