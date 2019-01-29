@@ -899,7 +899,7 @@ function bindLoginSigninPopupShow() {
                                         errors = true;
                                     } else {
                                         if($('.dentist .form-register .step.second [name="work-type"]:checked').val() == 'an-associate-dentist') {
-                                            $('.dentist .form-register .step.third .search-for-clinic').html('<div class="padding-bottom-10"><select class="combobox custom-input" name="clinic-name"></select><input type="hidden" name="clinic-id"/></div>');
+                                            $('.dentist .form-register .step.third .search-for-clinic').html('<div class="padding-bottom-10"><select class="combobox custom-input"></select><input type="hidden" name="clinic-id"/></div>');
 
                                             initComboboxes();
                                             $('.dentist .form-register .step.third .search-for-clinic input[type="text"].combobox').attr('placeholder', 'Search for a clinic...');

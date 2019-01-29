@@ -62,7 +62,7 @@
         </div>
         <div class="form-register">
             <h2>SIGN UP</h2>
-            <form method="POST" enctype="multipart/form-data" id="dentist-register" action="{{ route('patient-register') }}">
+            <form method="POST" enctype="multipart/form-data" id="dentist-register" action="{{ route('dentist-register') }}">
                 <div class="step first visible" data-step="first">
                     <div class="padding-bottom-10">
                         <input class="custom-input" name="dentist-or-practice-name" type="text" minlength="6" maxlength="100" placeholder="Dentist or Practice Name"/>
@@ -139,7 +139,7 @@
                 <div class="step third" data-step="third">
                     <div class="padding-bottom-20 fs-0">
                         <div class="inline-block-top avatar upload-file">
-                            <input type="file" class="visualise-image inputfile" id="custom-upload-avatar" name="image"/>
+                            <input type="file" class="visualise-image inputfile" id="custom-upload-avatar" name="image" accept=".jpg,.png,.jpeg,.svg,.bmp"/>
                             <button type="button"></button>
                         </div>
                         <div class="inline-block-top specializations">

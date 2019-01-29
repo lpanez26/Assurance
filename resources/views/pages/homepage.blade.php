@@ -485,3 +485,26 @@
         </div>
     </section>
 @endsection
+
+@section('script_block')
+    @if(count($errors) > 0)
+        <script>
+            var errors = '';
+            @foreach($errors->all() as $error)
+                errors+="{{ $error }}" + '<br>';
+            @endforeach
+            basic.showAlert(errors, '', true);
+        </script>
+    @endif
+    @if (session('error'))
+        <script>
+            basic.showAlert("{{ session('error') }}", '', true);
+        </script>
+    @endif
+
+    @if (session('success'))
+        <script>
+            basic.showAlert("{{ session('success') }}", '', true);
+        </script>
+    @endif
+@endsection
