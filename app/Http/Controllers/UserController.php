@@ -39,7 +39,7 @@ class UserController extends Controller {
             'password.required' => 'Password is required.',
             'repeat-password.required' => 'Repeat password is required.',
             'work-type.required' => 'Work type is required.',
-            'country-id.required' => 'Country is required.',
+            'country-code.required' => 'Country is required.',
             'address.required' => 'City, Street is required.',
             'phone.required' => 'Phone number is required.',
             'website.required' => 'Website is required.',
@@ -53,7 +53,7 @@ class UserController extends Controller {
             'password' => 'required|max:50',
             'repeat-password' => 'required|max:50',
             'work-type' => 'required',
-            'country-id' => 'required',
+            'country-code' => 'required',
             'address' => 'required|max:300',
             'phone' => 'required|max:50',
             'website' => 'required|max:250',
@@ -94,9 +94,8 @@ class UserController extends Controller {
             return redirect()->route('home')->with(['error' => 'Please select avatar and try again.']);
         }
 
-        var_dump($data);
-        var_dump($files);
-        die();
+        //handle the API response
+        (new APIRequestsController())->dentistRegister($data, $files);
     }
 
     protected function dentistLogin(Request $request) {
@@ -116,6 +115,7 @@ class UserController extends Controller {
             return redirect()->route('home')->with(['error' => 'Your form was not sent. Please try again with valid email.']);
         }
 
+        //handle the API response
         (new APIRequestsController())->dentistLogin($data);
     }
 

@@ -29,18 +29,36 @@ class APIRequestsController extends Controller {
     }
 
     public function dentistRegister($data, $files) {
+        var_dump($files);
+        die();
+        $post_fields_arr = array(
+            'platform' => 'assurance',
+            'type' => 'dentist',
+            'name' => $data['dentist-or-practice-name'],
+            'email' => $data['email'],
+            'password' => $data['password'],
+            'password-repeat' => $data['password-repeat'],
+            'country_code' => $data['country-code'],
+            'address' => $data['address'],
+            'phone' => $data['phone'], //this is combination of the phone + the phone_code for the country or they must be passed separated ???
+            'website' => $data['website'],
+            'specialisations' => $data['specialization'], /// ??? ARRAY?
+            //'avatar' => , /// ??? BUILT TO RECEIVE IMAGE OBJECT YET?
+            //'country-id' => $data['country-id'], /// ??? ADD
+            //'zip' required ????
+        );
+
+        if(!empty($data['clinic-id'])) {
+            $post_fields_arr['clinic_id'] = $data['clinic-id']; //ok? or everytime have to be passed with null?
+        }
+
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POST => 1,
             CURLOPT_URL => 'https://api.dentacoin.com/api/register',
             CURLOPT_SSL_VERIFYPEER => 0,
-            CURLOPT_POSTFIELDS => array(
-                'platform' => 'assurance',
-                'type' => 'dentist',
-                'email' => $data['email'],
-                'password' => $data['password']
-            )
+            CURLOPT_POSTFIELDS => $post_fields_arr
         ));
 
         $resp = json_decode(curl_exec($curl));

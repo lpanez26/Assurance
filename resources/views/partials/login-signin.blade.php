@@ -103,7 +103,7 @@
                         </div>
                     </div>
                     <div class="padding-bottom-10">
-                        <select name="country-id" id="dentist-country" class="custom-input country-select">
+                        <select name="country-code" id="dentist-country" class="custom-input country-select">
                             @php($current_phone_code = '+')
                             @if(!empty($countries))
                                 @foreach($countries as $country)
