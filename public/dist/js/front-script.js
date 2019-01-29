@@ -1368,14 +1368,14 @@ function bindLoginSigninPopupShow() {
                 },
                 success: function () {
                     var _ref9 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee12(response) {
-                        var _customErrorHandle, timer, delay;
+                        var _customErrorHandle;
 
                         return _regeneratorRuntime.wrap(function _callee12$(_context12) {
                             while (1) {
                                 switch (_context12.prev = _context12.next) {
                                     case 0:
                                         if (!response.success) {
-                                            _context12.next = 20;
+                                            _context12.next = 18;
                                             break;
                                         }
 
@@ -1502,30 +1502,6 @@ function bindLoginSigninPopupShow() {
                                         styleAvatarUploadButton();
                                         initCaptchaRefreshEvent();
 
-                                        delay = 1000;
-
-                                        $('.search-for-clinic input[type="text"]').bind('keydown blur change', function (e) {
-                                            var this_input = $('.search-for-clinic input[type="text"]');
-                                            clearTimeout(timer);
-                                            timer = setTimeout(function () {
-                                                $.ajax({
-                                                    type: 'POST',
-                                                    url: '/get-clinics-by-name/' + this_input.val().trim(),
-                                                    dataType: 'json',
-                                                    headers: {
-                                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                                    },
-                                                    success: function success(response) {
-                                                        if (response.success) {
-                                                            console.log(response.success);
-                                                        } else if (response.error) {
-                                                            basic.showAlert(response.error);
-                                                        }
-                                                    }
-                                                });
-                                            }, delay);
-                                        });
-
                                         $('.dentist .form-register .next-step').click(function () {
                                             var this_btn = $(this);
                                             switch (this_btn.attr('data-current-step')) {
@@ -1598,6 +1574,31 @@ function bindLoginSigninPopupShow() {
                                                     } else {
                                                         if ($('.dentist .form-register .step.second [name="work-type"]:checked').val() == 'an-associate-dentist') {
                                                             $('.dentist .form-register .step.third .search-for-clinic').html('<div class="padding-bottom-10"><input class="custom-input" type="text" minlength="6" maxlength="100" placeholder="Search for clinic"/></div>');
+
+                                                            //bind the logic for the fresh appended input
+                                                            var timer,
+                                                                delay = 1000;
+                                                            $('.search-for-clinic input[type="text"]').bind('keydown blur change', function (e) {
+                                                                var this_input = $('.search-for-clinic input[type="text"]');
+                                                                clearTimeout(timer);
+                                                                timer = setTimeout(function () {
+                                                                    $.ajax({
+                                                                        type: 'POST',
+                                                                        url: '/get-clinics-by-name/' + this_input.val().trim(),
+                                                                        dataType: 'json',
+                                                                        headers: {
+                                                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                                        },
+                                                                        success: function success(response) {
+                                                                            if (response.success) {
+                                                                                console.log(response.success);
+                                                                            } else if (response.error) {
+                                                                                basic.showAlert(response.error);
+                                                                            }
+                                                                        }
+                                                                    });
+                                                                }, delay);
+                                                            });
                                                         } else {
                                                             $('.dentist .form-register .step.third .search-for-clinic').html('');
                                                         }
@@ -1650,7 +1651,7 @@ function bindLoginSigninPopupShow() {
                                             }
                                         });
 
-                                    case 20:
+                                    case 18:
                                     case "end":
                                         return _context12.stop();
                                 }

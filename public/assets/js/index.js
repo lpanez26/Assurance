@@ -822,29 +822,6 @@ function bindLoginSigninPopupShow() {
                         styleAvatarUploadButton();
                         initCaptchaRefreshEvent();
 
-                        var timer, delay = 1000;
-                        $('.search-for-clinic input[type="text"]').bind('keydown blur change', function(e) {
-                            var this_input = $('.search-for-clinic input[type="text"]');
-                            clearTimeout(timer);
-                            timer = setTimeout(function() {
-                                $.ajax({
-                                    type: 'POST',
-                                    url: '/get-clinics-by-name/'+this_input.val().trim(),
-                                    dataType: 'json',
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                    },
-                                    success: function (response) {
-                                        if(response.success) {
-                                            console.log(response.success);
-                                        } else if(response.error) {
-                                            basic.showAlert(response.error);
-                                        }
-                                    }
-                                });
-                            }, delay );
-                        });
-
                         $('.dentist .form-register .next-step').click(function() {
                             var this_btn = $(this);
                             switch(this_btn.attr('data-current-step')) {
@@ -917,6 +894,30 @@ function bindLoginSigninPopupShow() {
                                     } else {
                                         if($('.dentist .form-register .step.second [name="work-type"]:checked').val() == 'an-associate-dentist') {
                                             $('.dentist .form-register .step.third .search-for-clinic').html('<div class="padding-bottom-10"><input class="custom-input" type="text" minlength="6" maxlength="100" placeholder="Search for clinic"/></div>');
+
+                                            //bind the logic for the fresh appended input
+                                            var timer, delay = 1000;
+                                            $('.search-for-clinic input[type="text"]').bind('keydown blur change', function(e) {
+                                                var this_input = $('.search-for-clinic input[type="text"]');
+                                                clearTimeout(timer);
+                                                timer = setTimeout(function() {
+                                                    $.ajax({
+                                                        type: 'POST',
+                                                        url: '/get-clinics-by-name/'+this_input.val().trim(),
+                                                        dataType: 'json',
+                                                        headers: {
+                                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                        },
+                                                        success: function (response) {
+                                                            if(response.success) {
+                                                                console.log(response.success);
+                                                            } else if(response.error) {
+                                                                basic.showAlert(response.error);
+                                                            }
+                                                        }
+                                                    });
+                                                }, delay );
+                                            });
                                         } else {
                                             $('.dentist .form-register .step.third .search-for-clinic').html('');
                                         }
