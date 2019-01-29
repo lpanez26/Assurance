@@ -54,6 +54,7 @@
                 </div>
                 <div class="btn-container text-center">
                     <input type="submit" value="Log in" class="white-blue-green-btn"/>
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
                 </div>
             </form>
             <div class="popup-half-footer">

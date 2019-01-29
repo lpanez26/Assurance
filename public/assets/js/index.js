@@ -806,6 +806,11 @@ function bindLoginSigninPopupShow() {
 
                         //login
                         $('form#dentist-login').on('submit', function(event) {
+                            //clear prev errors
+                            if($('form#dentist-login .error-handle').length) {
+                                $('form#dentist-login .error-handle').remove();
+                            }
+
                             var form_fields = $(this).find('.custom-input');
                             var dentist_login_errors = false;
                             for(var i = 0, len = form_fields.length; i < len; i+=1) {
