@@ -1516,7 +1516,11 @@ function bindLoginSigninPopupShow() {
                                                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                                     },
                                                     success: function success(response) {
-                                                        if (response.success) {}
+                                                        if (response.success) {
+                                                            console.log(response.success);
+                                                        } else if (response.error) {
+                                                            basic.showAlert(response.error);
+                                                        }
                                                     }
                                                 });
                                             }, delay);

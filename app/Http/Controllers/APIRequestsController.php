@@ -42,12 +42,11 @@ class APIRequestsController extends Controller {
         $resp = json_decode(curl_exec($curl));
         curl_close($curl);
 
-        var_dump($resp);
-        die();
         if(!empty($resp))   {
-            return $resp->data;
+            return response()->json(['success' => $resp->data]);
         }else {
-            return false;
+
+            return response()->json(['error' => 'API not working at this moment. Try again later.']);
         }
     }
 }

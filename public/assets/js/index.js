@@ -836,7 +836,9 @@ function bindLoginSigninPopupShow() {
                                     },
                                     success: function (response) {
                                         if(response.success) {
-
+                                            console.log(response.success);
+                                        } else if(response.error) {
+                                            basic.showAlert(response.error);
                                         }
                                     }
                                 });
