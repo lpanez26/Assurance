@@ -912,7 +912,14 @@ function bindLoginSigninPopupShow() {
                                                         },
                                                         success: function (response) {
                                                             if(response.success) {
-                                                                console.log(response.success);
+                                                                var select_html = '';
+                                                                for(var i = 0, len = response.success.length; i < len; i+=1) {
+                                                                    select_html+='<option value="'+response.success[i].id+'">'+response.success[i].name+'</option>';
+                                                                }
+
+                                                                console.log(select_html, 'select_html');
+
+                                                                $('.dentist .form-register .step.third .search-for-clinic select.combobox').html(select_html).combobox('refresh');
                                                             } else if(response.error) {
                                                                 basic.showAlert(response.error);
                                                             }
