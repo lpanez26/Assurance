@@ -806,6 +806,14 @@ fieldset {
                                                 color: $dark_color;
                                             }
                                         }
+                                        .combobox-container {
+                                            .input-group {
+                                                display: block;
+                                            }
+                                            .input-group-addon.dropdown-toggle {
+                                                display: none;
+                                            }
+                                        }
                                     }
                                 }
                                 .btns-container {

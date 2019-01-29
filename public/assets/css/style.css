@@ -4627,6 +4627,10 @@ fieldset {
             .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .privacy-policy-row a {
               text-decoration: underline;
               color: #212121; }
+            .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .combobox-container .input-group {
+              display: block; }
+            .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .combobox-container .input-group-addon.dropdown-toggle {
+              display: none; }
           .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .btns-container {
             font-size: 0; }
             .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .btns-container .inline-block {
