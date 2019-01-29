@@ -23,6 +23,8 @@ class APIRequestsController extends Controller {
         $resp = json_decode(curl_exec($curl));
         curl_close($curl);
 
+        var_dump($data['email']);
+        var_dump($data['password']);
         var_dump($resp);
         var_dump('kozbira');die();
     }
