@@ -41,6 +41,9 @@ class APIRequestsController extends Controller {
             'website' => $data['website'],
             'specialisations' => $data['specialization']
         );
+        var_dump($data);
+        var_dump($post_fields_arr);
+        die();
 
         switch($data['work-type']) {
             case 'independent-dental-practitioner':

@@ -139,7 +139,7 @@
                 </div>
                 <div class="step third" data-step="third">
                     <div class="padding-bottom-20 fs-0">
-                        <div class="inline-block-top avatar upload-file">
+                        <div class="inline-block-top avatar module upload-file">
                             <input type="file" class="visualise-image inputfile" id="custom-upload-avatar" name="image" accept=".jpg,.png,.jpeg,.svg,.bmp"/>
                             <button type="button"></button>
                         </div>

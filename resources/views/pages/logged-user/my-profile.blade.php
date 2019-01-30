@@ -6,7 +6,12 @@
                 <div class="col-xs-12 fs-0">
                     @include('pages.logged-user.my-profile-menu')
                     <div class="my-profile-page-content inline-block-top">
-                        ME WALLET DATA
+                        <div class="profile-page-title">
+                            <figure itemscope="" itemtype="http://schema.org/ImageObject" class="inline-block">
+                                <img alt="Wallet icon" src="/assets/uploads/wallet-icon.svg"/>
+                            </figure>
+                            <h2 class="fs-24 lato-semibold inline-block">My Wallet</h2>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -603,6 +603,43 @@ if($('body').hasClass('home')) {
     }
 }
 
+//LOGGED USER LOGIC
+if($('body').hasClass('logged-in')) {
+    if($('body').hasClass('edit-account')) {
+        styleAvatarUploadButton();
+
+        $('form#patient-update-profile').on('submit', function(event) {
+            var this_form = $(this);
+            var errors = false;
+            //clear prev errors
+            if(this_form.find('.error-handle').length) {
+                this_form.find('.error-handle').remove();
+            }
+
+            var form_fields = this_form.find('.custom-input');
+            var dentist_login_errors = false;
+            for(var i = 0, len = form_fields.length; i < len; i+=1) {
+                if(form_fields.eq(i).attr('type') == 'email' && !basic.validateEmail(form_fields.eq(i).val().trim())) {
+                    customErrorHandle(form_fields.eq(i).parent(), 'Please use valid email address.');
+                    dentist_login_errors = true;
+                } else if(form_fields.eq(i).attr('type') == 'password' && form_fields.eq(i).val().length < 6) {
+                    customErrorHandle(form_fields.eq(i).parent(), 'Passwords must be min length 6.');
+                    dentist_login_errors = true;
+                }
+
+                if(form_fields.eq(i).val().trim() == '') {
+                    customErrorHandle(form_fields.eq(i).parent(), 'This field is required.');
+                    dentist_login_errors = true;
+                }
+            }
+
+            if(errors) {
+                event.preventDefault();
+            }
+        });
+    }
+}
+
 //THIS IS FUNCTIONALITY ONLY FOR LOGGED IN USERS
 if($('body').hasClass('logged-in')) {
     $('.logged-user > a, .logged-user .hidden-box').hover(function(){
@@ -773,11 +810,6 @@ function bindLoginSigninPopupShow() {
                         $(document).on('customCivicFbStopperTriggered', async function (event) {
                             customErrorHandle($('.patient .form-register .step-errors-holder'), 'Please agree with our privacy policy.');
                         });
-
-                        //INIT LOGIC FOR ALL STEPS
-                        function customErrorHandle(el, string) {
-                            el.append('<div class="error-handle">'+string+'</div>');
-                        }
                         // ====================== /PATIENT LOGIN/SIGNUP LOGIC ======================
 
                         // ====================== DENTIST LOGIN/SIGNUP LOGIC ======================
@@ -1118,3 +1150,8 @@ function apiEventsListeners() {
     });
 }
 apiEventsListeners();
+
+//INIT LOGIC FOR ALL STEPS
+function customErrorHandle(el, string) {
+    el.append('<div class="error-handle">'+string+'</div>');
+}

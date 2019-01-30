@@ -10,7 +10,7 @@
                             <figure itemscope="" itemtype="http://schema.org/ImageObject" class="inline-block">
                                 <img alt="Privacy icon" src="/assets/uploads/privacy-icon.svg"/>
                             </figure>
-                            <h2 class="fs-26 lato-semibold inline-block">Manage privacy</h2>
+                            <h2 class="fs-24 lato-semibold inline-block">Manage privacy</h2>
                         </div>
                     </div>
                 </div>

@@ -4577,41 +4577,6 @@ fieldset {
             .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar {
               padding-right: 20px;
               width: 50%; }
-              .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar input[type="file"] {
-                display: none; }
-              .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar button {
-                display: block;
-                width: 100%;
-                padding: 0;
-                border: 0;
-                margin: 0; }
-                .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar button label {
-                  background-color: #e3e3e3;
-                  border: 2px dashed #777777;
-                  color: #777777;
-                  width: 100%;
-                  padding-top: 100%;
-                  display: block;
-                  position: relative;
-                  text-align: center;
-                  margin-bottom: 0;
-                  cursor: pointer;
-                  background-position: center center;
-                  background-size: cover;
-                  background-repeat: no-repeat; }
-                  .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar button label .inner {
-                    left: 0;
-                    width: 100%;
-                    position: absolute;
-                    top: 50%;
-                    -webkit-transform: translateY(-50%);
-                    -ms-transform: translateY(-50%);
-                    transform: translateY(-50%); }
-                    .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar button label .inner i {
-                      font-size: 30px; }
-                    .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .avatar button label .inner .inner-label {
-                      font-size: 18px;
-                      padding: 0 10px; }
             .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .specializations {
               width: 50%; }
               .bootbox.login-signin-popup .modal-dialog .modal-content .modal-body .popup-body .dentist .form-register .step.third .specializations h4 {
@@ -5016,6 +4981,41 @@ input[type='text'], .custom-input {
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%); }
+.module.avatar input[type="file"] {
+  display: none; }
+.module.avatar button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  margin: 0; }
+  .module.avatar button label {
+    background-color: #e3e3e3;
+    border: 2px dashed #777777;
+    color: #777777;
+    width: 100%;
+    padding-top: 100%;
+    display: block;
+    position: relative;
+    text-align: center;
+    margin-bottom: 0;
+    cursor: pointer;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat; }
+    .module.avatar button label .inner {
+      left: 0;
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%); }
+      .module.avatar button label .inner i {
+        font-size: 30px; }
+      .module.avatar button label .inner .inner-label {
+        font-size: 18px;
+        padding: 0 10px; }
 
 header {
   width: 100%;
@@ -5420,5 +5420,13 @@ body.logged-in .my-profile-page-content {
     body.logged-in .my-profile-page-content .profile-page-title h2 {
       width: calc(100% - 30px);
       padding-left: 15px; }
+  body.logged-in .my-profile-page-content form#patient-update-profile .form-row label {
+    width: 160px;
+    text-align: left;
+    padding-right: 15px; }
+  body.logged-in .my-profile-page-content form#patient-update-profile .form-row .custom-input {
+    width: calc(100% - 150px); }
+  body.logged-in .my-profile-page-content form#patient-update-profile .form-row .avatar {
+    width: 150px; }
 
 /*# sourceMappingURL=style.css.map */

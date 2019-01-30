@@ -27,7 +27,7 @@ class DentistController extends Controller
         ];
         $this->validate($request, [
             'dentist-or-practice-name' => 'required|max:250',
-            'email' => 'required|max:50',
+            'email' => 'required|max:100',
             'password' => 'required|max:50',
             'repeat-password' => 'required|max:50',
             'work-type' => 'required',
@@ -82,7 +82,7 @@ class DentistController extends Controller
             'password.required' => 'Password is required.',
         ];
         $this->validate($request, [
-            'email' => 'required|max:50',
+            'email' => 'required|max:100',
             'password' => 'required|max:50'
         ], $customMessages);
 

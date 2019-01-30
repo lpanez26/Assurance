@@ -1199,6 +1199,21 @@ if ($('body').hasClass('home')) {
     }
 }
 
+//LOGGED USER LOGIC
+if ($('body').hasClass('logged-in')) {
+    if ($('body').hasClass('edit-account')) {
+        styleAvatarUploadButton();
+
+        $('form#patient-update-profile').on('submit', function (event) {
+            var errors = false;
+
+            if (errors) {
+                event.preventDefault();
+            }
+        });
+    }
+}
+
 //THIS IS FUNCTIONALITY ONLY FOR LOGGED IN USERS
 if ($('body').hasClass('logged-in')) {
     $('.logged-user > a, .logged-user .hidden-box').hover(function () {

@@ -68,5 +68,20 @@ body.logged-in {
                 padding-left: 15px;
             }
         }
+        form#patient-update-profile {
+            .form-row {
+                label {
+                    width: 160px;
+                    text-align: left;
+                    padding-right: 15px;
+                }
+                .custom-input {
+                    width: calc(100% - 150px);
+                }
+                .avatar {
+                    width: 150px;
+                }
+            }
+        }
     }
 }

@@ -37,7 +37,7 @@ class UserController extends Controller {
     }
 
     protected function getEditAccountView()   {
-        return view('pages/logged-user/edit-account');
+        return view('pages/logged-user/edit-account', ['countries' => (new APIRequestsController())->getAllCountries()]);
     }
 
     protected function getManagePrivacyView()   {
