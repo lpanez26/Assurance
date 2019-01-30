@@ -26206,8 +26206,15 @@ if ($('body').hasClass('home')) {
         });
     }
 
-    if ($('.list .question').length > 0) {
-        $('.list .question').click(function () {
+    if ($('.section-support-guide-list .question').length > 0) {
+        $('.section-support-guide-list .question').click(function () {
+            $(this).closest('li').find('.question-content').toggle(300);
+        });
+    }
+} else if ($('body').hasClass('wallet-instructions')) {
+    if ($('.section-wallet-instructions-questions .question').length > 0) {
+        $('.section-wallet-instructions-questions .question').click(function () {
+            $(this).toggleClass('active');
             $(this).closest('li').find('.question-content').toggle(300);
         });
     }

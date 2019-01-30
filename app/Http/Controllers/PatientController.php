@@ -53,4 +53,9 @@ class PatientController extends Controller {
         session(['logged_user' => $session_arr]);
         return redirect()->route('patient-access');
     }
+
+    protected function getInviteDentistsView() {
+        var_dump('koz bira');
+        die();
+    }
 }

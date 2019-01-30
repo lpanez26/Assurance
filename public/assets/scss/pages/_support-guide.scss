@@ -1,4 +1,4 @@
-.slider-section {
+.section-support-guide-slider-section {
     .support-guide-slider {
         .single-slide {
             padding-left: 20px;
@@ -55,7 +55,7 @@
     }
 }
 
-.list {
+.section-support-guide-list {
     .section-row {
         > ul {
             padding-left: 20px;
@@ -93,8 +93,9 @@
         }
     }
 }
+
 @include breakpoint($xs) {
-    .list {
+    .section-support-guide-list {
         .section-row {
             ul {
                 padding-left: 0;

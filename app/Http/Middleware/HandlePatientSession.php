@@ -21,6 +21,9 @@ class HandlePatientSession
             //NOT LOGGED AND NOT TRYING TO LOG IN
             return response((new PatientController())->getNotLoggedView());
         }
+
+        var_dump('HandlePatientSession');
+        die();
         return $next($request);
     }
 }

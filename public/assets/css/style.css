@@ -4198,6 +4198,7 @@ input[type='file'].hide-input {
   background-image: url(/assets/images/right-arrow.svg);
   background-size: auto 100%;
   z-index: 3;
+  background: transparent;
   background-position: center;
   background-repeat: no-repeat;
   width: 30px;
@@ -4216,6 +4217,7 @@ input[type='file'].hide-input {
   background-image: url(/assets/images/left-arrow.svg);
   right: -30px;
   z-index: 3;
+  background: transparent;
   background-position: center;
   background-repeat: no-repeat;
   width: 30px;
@@ -4304,6 +4306,9 @@ li {
 
 a:hover, a:active, a:visited, a:focus {
   text-decoration: none; }
+
+iframe {
+  border: 0; }
 
 img {
   max-width: 100%;
@@ -4847,6 +4852,13 @@ input[type='text'], .custom-input {
     border-color: white !important;
     border-width: 2px; }
 
+.block-with-full-width {
+  display: block;
+  width: 100%; }
+
+.display-block {
+  display: block; }
+
 .white-blue-green-btn {
   font-size: 20px;
   color: white;
@@ -5282,10 +5294,10 @@ body.patient-access .dentist-or-patient-section .inline-block-top.right .hidden-
   .logged-patient-your-benefits .custom-grid .cell:last-child {
     padding-right: 0; }
 
-.slider-section .support-guide-slider .single-slide {
+.section-support-guide-slider-section .support-guide-slider .single-slide {
   padding-left: 20px;
   padding-right: 20px; }
-  .slider-section .support-guide-slider .single-slide figure {
+  .section-support-guide-slider-section .support-guide-slider .single-slide figure {
     background-color: white;
     -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
@@ -5295,18 +5307,18 @@ body.patient-access .dentist-or-patient-section .inline-block-top.right .hidden-
     -moz-border-radius: 4px;
     -ms-border-radius: 4px;
     border-radius: 4px; }
-  .slider-section .support-guide-slider .single-slide .number {
+  .section-support-guide-slider-section .support-guide-slider .single-slide .number {
     font-size: 34px;
     font-family: 'Calibri-Bold';
     padding-top: 5px;
     color: black;
     border-bottom: 1px solid #6d6d6d; }
-  .slider-section .support-guide-slider .single-slide .description {
+  .section-support-guide-slider-section .support-guide-slider .single-slide .description {
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 15px;
     position: relative; }
-    .slider-section .support-guide-slider .single-slide .description .wrapper {
+    .section-support-guide-slider-section .support-guide-slider .single-slide .description .wrapper {
       padding: 15px;
       background-color: #f2f2f2;
       font-size: 16px;
@@ -5316,7 +5328,7 @@ body.patient-access .dentist-or-patient-section .inline-block-top.right .hidden-
       -moz-box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.2);
       -ms-box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.2);
       box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.2); }
-    .slider-section .support-guide-slider .single-slide .description .custom-triangle {
+    .section-support-guide-slider-section .support-guide-slider .single-slide .description .custom-triangle {
       width: 0;
       height: 0;
       border-left: 11px solid transparent;
@@ -5329,7 +5341,7 @@ body.patient-access .dentist-or-patient-section .inline-block-top.right .hidden-
       -ms-transform: rotate(45deg);
       -o-transform: rotate(45deg);
       transform: rotate(45deg); }
-    .slider-section .support-guide-slider .single-slide .description .custom-circle {
+    .section-support-guide-slider-section .support-guide-slider .single-slide .description .custom-circle {
       width: 13px;
       height: 13px;
       background-color: black;
@@ -5343,9 +5355,9 @@ body.patient-access .dentist-or-patient-section .inline-block-top.right .hidden-
       -ms-border-radius: 50%;
       border-radius: 50%; }
 
-.list .section-row > ul {
+.section-support-guide-list .section-row > ul {
   padding-left: 20px; }
-  .list .section-row > ul > li .question {
+  .section-support-guide-list .section-row > ul > li .question {
     padding: 15px 40px 15px 20px;
     margin-bottom: 15px;
     background-image: url(/assets/images/angle-down-solid.svg);
@@ -5359,23 +5371,48 @@ body.patient-access .dentist-or-patient-section .inline-block-top.right .hidden-
     -moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
     -ms-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2); }
-    .list .section-row > ul > li .question span {
+    .section-support-guide-list .section-row > ul > li .question span {
       color: #126585;
       display: inline-block;
       padding-right: 10px;
       font-family: 'Calibri-Bold'; }
-  .list .section-row > ul > li .question-content {
+  .section-support-guide-list .section-row > ul > li .question-content {
     display: none; }
-    .list .section-row > ul > li .question-content ul li {
+    .section-support-guide-list .section-row > ul > li .question-content ul li {
       list-style: disc inside none; }
-    .list .section-row > ul > li .question-content a {
+    .section-support-guide-list .section-row > ul > li .question-content a {
       text-decoration: underline; }
 
 @media screen and (max-width: 767px) {
-  .list .section-row ul {
+  .section-support-guide-list .section-row ul {
     padding-left: 0; }
-    .list .section-row ul li .question {
+    .section-support-guide-list .section-row ul li .question {
       padding: 15px 30px 15px 10px;
       background-position: center right 10px; } }
+.section-wallet-instructions-questions .question {
+  color: #212121;
+  -webkit-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
+  -ms-box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.2);
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s; }
+  .section-wallet-instructions-questions .question .column {
+    background-image: url(/assets/uploads/arrow-down-blue-green.svg);
+    background-repeat: no-repeat;
+    background-size: 15px auto;
+    background-position: center right 15px; }
+  .section-wallet-instructions-questions .question.active {
+    color: white;
+    background-color: #126585; }
+    .section-wallet-instructions-questions .question.active .column {
+      background-image: url(/assets/uploads/arrow-up-white.svg); }
+    .section-wallet-instructions-questions .question.active .blue-green-color {
+      color: white; }
+.section-wallet-instructions-questions .question-content {
+  display: none; }
 
 /*# sourceMappingURL=style.css.map */

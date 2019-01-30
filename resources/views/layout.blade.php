@@ -74,7 +74,7 @@
     </div>
 </header>
 <main>@yield("content")</main>
-<footer>
+<footer class="padding-bottom-20">
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-10 col-sm-offset-1">

@@ -1,15 +1,15 @@
 @extends("layout")
 @section("content")
-    <section class="padding-top-30 padding-bottom-40 beige-background">
+    <section class="padding-top-110 padding-bottom-40 beige-background">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2 class="text-center fs-45 lato-bold">Support Guide</h2>
+                    <h1 class="text-center fs-45 lato-bold">Support Guide</h1>
                 </div>
             </div>
         </div>
     </section>
-    <section class="padding-bottom-50 beige-background slider-section">
+    <section class="padding-bottom-50 beige-background section-support-guide-slider-section">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1">
@@ -41,7 +41,7 @@
             </div>
         </div>
     </section>
-    <section class="padding-top-50 padding-bottom-50 list">
+    <section class="padding-top-50 padding-bottom-50 section-support-guide-list">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
