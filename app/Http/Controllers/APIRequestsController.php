@@ -43,6 +43,7 @@ class APIRequestsController extends Controller {
             'specialisations' => $data['specialization']
         );
 
+        var_dump($data['work-type']);
         var_dump($post_fields_arr);die();
 
         //CHECK TYPE DENTIST OR CLINIC
