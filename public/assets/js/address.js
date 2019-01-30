@@ -92,11 +92,11 @@ jQuery(document).ready(function($){
                         backgroundColor: 'none'
                     });
 
+                    console.log(coords, 'coords');
+
                     var marker = new google.maps.Marker({
                         map: profile_address_map,
-                        lat: parseFloat( step_container.find('.suggester-map-div').attr('lat')),
-                        lng: parseFloat( step_container.find('.suggester-map-div').attr('lon')),
-                        center: coords,
+                        position: coords,
                     });
                 }
 
