@@ -43,7 +43,7 @@
                 <li>
                     <a href="{{ route('user-logout') }}" itemprop="url">
                         <figure itemscope="" itemtype="http://schema.org/ImageObject" class="inline-block">
-                            <img alt="Contracts list" src="/assets/uploads/logout.svg"/>
+                            <img alt="Contracts list" src="/assets/uploads/logout-icon.svg"/>
                         </figure>
                         <span itemprop="name">Log out</span>
                     </a>
