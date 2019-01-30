@@ -3,7 +3,7 @@
     <section class="edit-account padding-top-100">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 fs-0">
+                <div class="col-xs-12 col-sm-10 col-sm-offset-1 fs-0">
                     @include('pages.logged-user.my-profile-menu')
                     <div class="my-profile-page-content inline-block-top">
                         <div class="profile-page-title padding-bottom-60">
@@ -31,13 +31,13 @@
                             </div>
                             <div class="form-row padding-bottom-25 fs-0">
                                 <label class="inline-block-top fs-16">Photo</label>
-                                <div class="inline-block-top avatar module upload-file">
+                                <div class="inline-block-top avatar module text-center upload-file">
                                     <input type="file" class="visualise-image inputfile" id="custom-upload-avatar" name="image" accept=".jpg,.png,.jpeg,.svg,.bmp"/>
                                     <button type="button"></button>
                                 </div>
                             </div>
                             <div class="btn-container text-center">
-                                <input type="submit" value="UPDATE PROFILE"/>
+                                <input type="submit" value="UPDATE PROFILE" class="white-blue-green-btn"/>
                             </div>
                         </form>
                     </div>

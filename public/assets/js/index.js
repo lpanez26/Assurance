@@ -606,7 +606,7 @@ if($('body').hasClass('home')) {
 //LOGGED USER LOGIC
 if($('body').hasClass('logged-in')) {
     if($('body').hasClass('edit-account')) {
-        styleAvatarUploadButton();
+        styleAvatarUploadButton($('body.edit-account form#patient-update-profile .avatar button label'));
 
         $('form#patient-update-profile').on('submit', function(event) {
             var this_form = $(this);
@@ -617,23 +617,22 @@ if($('body').hasClass('logged-in')) {
             }
 
             var form_fields = this_form.find('.custom-input');
-            var dentist_login_errors = false;
             for(var i = 0, len = form_fields.length; i < len; i+=1) {
                 if(form_fields.eq(i).attr('type') == 'email' && !basic.validateEmail(form_fields.eq(i).val().trim())) {
                     customErrorHandle(form_fields.eq(i).parent(), 'Please use valid email address.');
-                    dentist_login_errors = true;
-                } else if(form_fields.eq(i).attr('type') == 'password' && form_fields.eq(i).val().length < 6) {
-                    customErrorHandle(form_fields.eq(i).parent(), 'Passwords must be min length 6.');
-                    dentist_login_errors = true;
+                    errors = true;
                 }
 
                 if(form_fields.eq(i).val().trim() == '') {
                     customErrorHandle(form_fields.eq(i).parent(), 'This field is required.');
-                    dentist_login_errors = true;
+                    errors = true;
                 }
             }
 
             if(errors) {
+                event.preventDefault();
+            }else {
+                console.log('CONTROLLER!"');
                 event.preventDefault();
             }
         });
@@ -865,7 +864,7 @@ function bindLoginSigninPopupShow() {
                         });
 
                         //THIRD STEP INIT LOGIC
-                        styleAvatarUploadButton();
+                        styleAvatarUploadButton($('.bootbox.login-signin-popup .dentist .form-register .step.third .avatar button label'));
                         initCaptchaRefreshEvent();
 
                         $('.dentist .form-register .next-step').click(function() {
@@ -1048,20 +1047,20 @@ function bindLoginSigninPopupShow() {
 }
 bindLoginSigninPopupShow();
 
-function readURL(input) {
+function readURL(input, label_el) {
     if(input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
             //SHOW THE IMAGE ON LOAD
-            $('.bootbox.login-signin-popup .dentist .form-register .step.third .avatar button label').css({'background-image' : 'url("'+e.target.result+'")'});
-            $('.bootbox.login-signin-popup .dentist .form-register .step.third .avatar button label .inner i').addClass('fs-0');
-            $('.bootbox.login-signin-popup .dentist .form-register .step.third .avatar button label .inner .inner-label').addClass('fs-0');
+            label_el.css({'background-image' : 'url("'+e.target.result+'")'});
+            label_el.find('.inner i').addClass('fs-0');
+            label_el.find('.inner .inner-label').addClass('fs-0');
         };
         reader.readAsDataURL(input.files[0]);
     }
 }
 
-function styleAvatarUploadButton()    {
+function styleAvatarUploadButton(label_el)    {
     if(jQuery(".upload-file.avatar").length) {
         jQuery(".upload-file.avatar").each(function(key, form){
             var this_file_btn_parent = jQuery(this);
@@ -1073,7 +1072,7 @@ function styleAvatarUploadButton()    {
                     labelVal = label.innerHTML;
 
                 input.addEventListener('change', function(e) {
-                    readURL(this);
+                    readURL(this, label_el);
 
                     var fileName = '';
                     if(this.files && this.files.length > 1)

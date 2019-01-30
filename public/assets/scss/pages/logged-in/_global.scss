@@ -70,13 +70,13 @@ body.logged-in {
         }
         form#patient-update-profile {
             .form-row {
-                label {
+                > label {
                     width: 160px;
                     text-align: left;
                     padding-right: 15px;
                 }
                 .custom-input {
-                    width: calc(100% - 150px);
+                    width: calc(100% - 160px);
                 }
                 .avatar {
                     width: 150px;

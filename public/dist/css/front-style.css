@@ -5420,7 +5420,7 @@ body.logged-in .my-profile-page-content {
     body.logged-in .my-profile-page-content .profile-page-title h2 {
       width: calc(100% - 30px);
       padding-left: 15px; }
-  body.logged-in .my-profile-page-content form#patient-update-profile .form-row label {
+  body.logged-in .my-profile-page-content form#patient-update-profile .form-row > label {
     width: 160px;
     text-align: left;
     padding-right: 15px; }
