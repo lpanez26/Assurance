@@ -30,7 +30,6 @@ class APIRequestsController extends Controller {
     public function dentistRegister($data, $files) {
         $post_fields_arr = array(
             'platform' => 'assurance',
-            'type' => 'dentist',
             'name' => $data['dentist-or-practice-name'],
             'email' => $data['email'],
             'password' => $data['password'],
@@ -43,13 +42,20 @@ class APIRequestsController extends Controller {
             'specialisations' => $data['specialization']
         );
 
-        var_dump($data['work-type']);
-        var_dump($post_fields_arr);die();
+        switch($data['work-type']) {
+            case 'independent-dental-practitioner':
+                $post_fields_arr['type'] = 'dentist';
+                break;
+            case 'represent-dental-practice':
+                $post_fields_arr['type'] = 'clinic';
+                break;
+            case 'an-associate-dentist':
+                $post_fields_arr['type'] = 'dentist';
 
-        //CHECK TYPE DENTIST OR CLINIC
-
-        if(!empty($data['clinic-id'])) {
-            $post_fields_arr['clinic_id'] = $data['clinic-id'];
+                if(!empty($data['clinic-id'])) {
+                    $post_fields_arr['clinic_id'] = $data['clinic-id'];
+                }
+                break;
         }
 
         $curl = curl_init();
