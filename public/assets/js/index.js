@@ -606,7 +606,7 @@ if($('body').hasClass('home')) {
 //LOGGED USER LOGIC
 if($('body').hasClass('logged-in')) {
     if($('body').hasClass('edit-account')) {
-        styleAvatarUploadButton($('body.edit-account form#patient-update-profile .avatar button label'));
+        styleAvatarUploadButton('body.edit-account form#patient-update-profile .avatar button label');
 
         $('form#patient-update-profile').on('submit', function(event) {
             var this_form = $(this);
@@ -864,7 +864,7 @@ function bindLoginSigninPopupShow() {
                         });
 
                         //THIRD STEP INIT LOGIC
-                        styleAvatarUploadButton($('.bootbox.login-signin-popup .dentist .form-register .step.third .avatar button label'));
+                        styleAvatarUploadButton('.bootbox.login-signin-popup .dentist .form-register .step.third .avatar button label');
                         initCaptchaRefreshEvent();
 
                         $('.dentist .form-register .next-step').click(function() {
@@ -1048,16 +1048,13 @@ function bindLoginSigninPopupShow() {
 bindLoginSigninPopupShow();
 
 function readURL(input, label_el) {
-    console.log('readURL', label_el);
     if(input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
             //SHOW THE IMAGE ON LOAD
-            console.log('reader.onload', label_el);
-            console.log('+e.target.result', +e.target.result);
-            label_el.css({'background-image' : 'url("'+e.target.result+'")'});
-            label_el.find('.inner i').addClass('fs-0');
-            label_el.find('.inner .inner-label').addClass('fs-0');
+            $(label_el).css({'background-image' : 'url("'+e.target.result+'")'});
+            $(label_el).find('.inner i').addClass('fs-0');
+            $(label_el).find('.inner .inner-label').addClass('fs-0');
         };
         reader.readAsDataURL(input.files[0]);
     }
@@ -1075,7 +1072,6 @@ function styleAvatarUploadButton(label_el)    {
                     labelVal = label.innerHTML;
 
                 input.addEventListener('change', function(e) {
-                    console.log('CHANGE', label_el);
                     readURL(this, label_el);
 
                     var fileName = '';
