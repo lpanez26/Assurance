@@ -5425,7 +5425,7 @@ body.logged-in .my-profile-page-content {
     text-align: left;
     padding-right: 15px; }
   body.logged-in .my-profile-page-content form#patient-update-profile .form-row .custom-input {
-    width: calc(100% - 150px); }
+    width: calc(100% - 160px); }
   body.logged-in .my-profile-page-content form#patient-update-profile .form-row .avatar {
     width: 150px; }
 

@@ -1048,10 +1048,13 @@ function bindLoginSigninPopupShow() {
 bindLoginSigninPopupShow();
 
 function readURL(input, label_el) {
+    console.log('readURL', label_el);
     if(input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
             //SHOW THE IMAGE ON LOAD
+            console.log('reader.onload', label_el);
+            console.log('+e.target.result', +e.target.result);
             label_el.css({'background-image' : 'url("'+e.target.result+'")'});
             label_el.find('.inner i').addClass('fs-0');
             label_el.find('.inner .inner-label').addClass('fs-0');
@@ -1072,6 +1075,7 @@ function styleAvatarUploadButton(label_el)    {
                     labelVal = label.innerHTML;
 
                 input.addEventListener('change', function(e) {
+                    console.log('CHANGE', label_el);
                     readURL(this, label_el);
 
                     var fileName = '';
