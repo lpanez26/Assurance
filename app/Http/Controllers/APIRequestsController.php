@@ -20,7 +20,7 @@ class APIRequestsController extends Controller {
             )
         ));
 
-        $resp = json_decode(curl_exec($curl));
+        $resp = curl_exec($curl);
         curl_close($curl);
 
         var_dump($resp);
@@ -56,7 +56,7 @@ class APIRequestsController extends Controller {
                     $post_fields_arr['clinic_id'] = $data['clinic-id'];
                 }
                 break;
-        } 
+        }
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
@@ -67,7 +67,7 @@ class APIRequestsController extends Controller {
             CURLOPT_POSTFIELDS => $post_fields_arr
         ));
 
-        $resp = json_decode(curl_exec($curl));
+        $resp = curl_exec($curl);
         curl_close($curl);
 
         var_dump($resp);
