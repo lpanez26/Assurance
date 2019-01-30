@@ -1136,6 +1136,8 @@ function apiEventsListeners() {
 
             console.log(custom_form_obj, 'custom_form_obj');
 
+            return false;
+
             //check if CoreDB returned address for this user and if its valid one
             if(basic.objHasKey(custom_form_obj, 'address') != null && innerAddressCheck(custom_form_obj.address)) {
                 //var current_dentists_for_logging_user = await App.assurance_methods.getWaitingContractsForPatient(custom_form_obj.address);

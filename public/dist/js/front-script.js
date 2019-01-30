@@ -1801,34 +1801,29 @@ function apiEventsListeners() {
                 while (1) {
                     switch (_context12.prev = _context12.next) {
                         case 0:
-                            if (event.response_data.token) {
-                                console.log(event.response_data);
-                                custom_form_obj = {
-                                    token: event.response_data.token,
-                                    id: event.response_data.id,
-                                    email: event.response_data.data.email,
-                                    name: event.response_data.data.name,
-                                    address: event.response_data.data.dcn_address,
-                                    avatar_url: event.response_data.data.avatar_url,
-                                    have_contracts: false,
-                                    _token: $('meta[name="csrf-token"]').attr('content')
-                                };
-
-
-                                console.log(custom_form_obj, 'custom_form_obj');
-
-                                //check if CoreDB returned address for this user and if its valid one
-                                if (basic.objHasKey(custom_form_obj, 'address') != null && innerAddressCheck(custom_form_obj.address)) {
-                                    //var current_dentists_for_logging_user = await App.assurance_methods.getWaitingContractsForPatient(custom_form_obj.address);
-                                    //if(current_dentists_for_logging_user.length > 0) {
-                                    //custom_form_obj.have_contracts = true;
-                                    //}
-                                }
-
-                                customJavascriptForm('/patient/authenticate', custom_form_obj, 'post');
+                            if (!event.response_data.token) {
+                                _context12.next = 7;
+                                break;
                             }
 
-                        case 1:
+                            console.log(event.response_data);
+                            custom_form_obj = {
+                                token: event.response_data.token,
+                                id: event.response_data.id,
+                                email: event.response_data.data.email,
+                                name: event.response_data.data.name,
+                                address: event.response_data.data.dcn_address,
+                                avatar_url: event.response_data.data.avatar_url,
+                                have_contracts: false,
+                                _token: $('meta[name="csrf-token"]').attr('content')
+                            };
+
+
+                            console.log(custom_form_obj, 'custom_form_obj');
+
+                            return _context12.abrupt("return", false);
+
+                        case 7:
                         case "end":
                             return _context12.stop();
                     }
