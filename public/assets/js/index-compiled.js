@@ -26823,6 +26823,7 @@ function apiEventsListeners() {
                     switch (_context12.prev = _context12.next) {
                         case 0:
                             if (event.response_data.token) {
+                                console.log(event.response_data);
                                 custom_form_obj = {
                                     token: event.response_data.token,
                                     id: event.response_data.id,
@@ -26834,8 +26835,10 @@ function apiEventsListeners() {
                                     _token: $('meta[name="csrf-token"]').attr('content')
                                 };
 
-                                //check if CoreDB returned address for this user and if its valid one
 
+                                console.log(custom_form_obj, 'custom_form_obj');
+
+                                //check if CoreDB returned address for this user and if its valid one
                                 if (basic.objHasKey(custom_form_obj, 'address') != null && innerAddressCheck(custom_form_obj.address)) {
                                     //var current_dentists_for_logging_user = await App.assurance_methods.getWaitingContractsForPatient(custom_form_obj.address);
                                     //if(current_dentists_for_logging_user.length > 0) {
