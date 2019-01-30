@@ -36,8 +36,9 @@ class PatientController extends Controller {
 
         $session_arr = [
             'token' => $request->input('token'),
-            'email' => $request->input('email'),
-            'name' => $request->input('name'),
+            'id' => $request->input('id'),
+            'email' => $request->input('email'), // ??????
+            'name' => $request->input('name'), // ??????
             'type' => 'patient',
             'have_contracts' => false
         ];

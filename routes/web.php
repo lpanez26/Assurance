@@ -25,7 +25,8 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
     Route::get('/wallet-instructions', 'WalletInstructionsController@getView')->name('wallet-instructions');
 
     Route::get('/test', function() {
-        var_dump((new \App\Http\Controllers\APIRequestsController())->getAllClinics());
+        var_dump(session('logged_user'));
+        var_dump((new \App\Http\Controllers\APIRequestsController())->getUserData(session('logged_user')['id']));
         die();
     })->name('test');
 

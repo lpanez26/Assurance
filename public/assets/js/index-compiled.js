@@ -26825,6 +26825,7 @@ function apiEventsListeners() {
                             if (event.response_data.token) {
                                 custom_form_obj = {
                                     token: event.response_data.token,
+                                    id: event.response_data.id,
                                     email: event.response_data.data.email,
                                     name: event.response_data.data.name,
                                     address: event.response_data.data.dcn_address,
