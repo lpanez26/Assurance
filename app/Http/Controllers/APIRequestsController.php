@@ -10,7 +10,7 @@ class APIRequestsController extends Controller {
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POST => 1,
-            CURLOPT_URL => 'https://dev-api.dentacoin.com/api/login',
+            CURLOPT_URL => 'https://api.dentacoin.com/api/login',
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_POSTFIELDS => array(
                 'platform' => 'assurance',
@@ -36,13 +36,11 @@ class APIRequestsController extends Controller {
             'password-repeat' => $data['repeat-password'],
             'country_code' => $data['country-code'],
             'address' => $data['address'],
-            /*'avatar' => '@'.$files['image']->getPathName(),*/
+            'avatar' => curl_file_create($files['image']->getPathName(), 'image/'.pathinfo($files['image']->getClientOriginalName(), PATHINFO_EXTENSION), $files['image']->getClientOriginalName()),
             'phone' => $data['phone'],
             'website' => $data['website'],
             'specialisations' => json_encode($data['specialization'])
         );
-
-        $post_fields_arr['avatar'] = curl_file_create($files['image']->getPathName(), 'image/png', $files['image']->getClientOriginalName());
 
         switch($data['work-type']) {
             case 'independent-dental-practitioner':
@@ -64,7 +62,7 @@ class APIRequestsController extends Controller {
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POST => 1,
-            CURLOPT_URL => 'https://dev-api.dentacoin.com/api/register',
+            CURLOPT_URL => 'https://api.dentacoin.com/api/register',
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_POSTFIELDS => $post_fields_arr
         ));
