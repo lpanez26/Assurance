@@ -92,8 +92,6 @@ jQuery(document).ready(function($){
                         backgroundColor: 'none'
                     });
 
-                    console.log(coords, 'coords');
-
                     var marker = new google.maps.Marker({
                         map: profile_address_map,
                         position: coords,
@@ -137,9 +135,11 @@ jQuery(document).ready(function($){
                                     backgroundColor: 'none'
                                 });
 
+                                console.log(coords, 'coords');
+
                                 var marker = new google.maps.Marker({
                                     map: profile_address_map,
-                                    center: coords,
+                                    position: coords,
                                 });
                             }).bind(this));
                             return;
