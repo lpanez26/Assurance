@@ -36,11 +36,13 @@ class APIRequestsController extends Controller {
             'password-repeat' => $data['repeat-password'],
             'country_code' => $data['country-code'],
             'address' => $data['address'],
-            'avatar' => '@'.$files['image']->getPathName(),
+            /*'avatar' => '@'.$files['image']->getPathName(),*/
             'phone' => $data['phone'],
             'website' => $data['website'],
             'specialisations' => json_encode($data['specialization'])
         );
+
+        $post_fields_arr['avatar'] = curl_file_create($files['image']->getPathName(), 'image/png', $file->getClientOriginalName());
 
         switch($data['work-type']) {
             case 'independent-dental-practitioner':
@@ -70,7 +72,6 @@ class APIRequestsController extends Controller {
         $resp = curl_exec($curl);
         curl_close($curl);
 
-        var_dump('@'.$files['image']->getPathName());
         var_dump($resp);
         die();
     }
