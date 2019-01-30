@@ -39,7 +39,7 @@ class APIRequestsController extends Controller {
             'avatar' => '@'.$files['image']->getPathName(),
             'phone' => $data['phone'],
             'website' => $data['website'],
-            'specialisations' => $data['specialization']
+            'specialisations' => json_encode($data['specialization'])
         );
 
         switch($data['work-type']) {
@@ -56,7 +56,7 @@ class APIRequestsController extends Controller {
                     $post_fields_arr['clinic_id'] = $data['clinic-id'];
                 }
                 break;
-        }
+        } 
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
