@@ -1122,10 +1122,9 @@ function apiEventsListeners() {
     //login
     $(document).on('successResponseCoreDBApi', async function (event) {
         if(event.response_data.token) {
-            console.log(event.response_data);
             var custom_form_obj = {
                 token: event.response_data.token,
-                id: event.response_data.id,
+                id: event.response_data.data.id,
                 email: event.response_data.data.email,
                 name: event.response_data.data.name,
                 address: event.response_data.data.dcn_address,
@@ -1133,10 +1132,6 @@ function apiEventsListeners() {
                 have_contracts : false,
                 _token: $('meta[name="csrf-token"]').attr('content')
             };
-
-            console.log(custom_form_obj, 'custom_form_obj');
-
-            return false;
 
             //check if CoreDB returned address for this user and if its valid one
             if(basic.objHasKey(custom_form_obj, 'address') != null && innerAddressCheck(custom_form_obj.address)) {
