@@ -68,7 +68,7 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
     Route::get('/user-logout', 'UserController@userLogout')->name('user-logout');
 
-    Route::post('/dentist-register', 'UserController@dentistRegister')->name('dentist-register');
+    Route::post('/dentist-register', 'DentistController@register')->name('dentist-register');
 
-    Route::post('/dentist-login', 'UserController@dentistLogin')->name('dentist-login');
+    Route::post('/dentist-login', 'DentistController@login')->name('dentist-login');
 });
