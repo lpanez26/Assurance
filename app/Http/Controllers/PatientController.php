@@ -55,7 +55,6 @@ class PatientController extends Controller {
     }
 
     protected function getInviteDentistsView() {
-        var_dump('koz bira');
-        die();
+        return view('pages/logged-user/patient/invite-dentists');
     }
 }

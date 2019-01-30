@@ -70,6 +70,7 @@ class Kernel extends HttpKernel
         'HandleAdminSession' => \App\Http\Middleware\HandleAdminSession::class,
         'frontEndMiddleware' => \App\Http\Middleware\AdditionalMiddleware::class,
         'HandleUserSession' => \App\Http\Middleware\HandleUserSession::class,
-        'HandlePatientSession' => \App\Http\Middleware\HandlePatientSession::class
+        'HandlePatientSession' => \App\Http\Middleware\HandlePatientSession::class,
+        'HandleDentistSession' => \App\Http\Middleware\HandleDentistSession::class,
     ];
 }

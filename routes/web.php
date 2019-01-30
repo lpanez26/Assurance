@@ -52,6 +52,12 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
         Route::get('/invite-dentists', 'PatientController@getInviteDentistsView')->name('invite-dentists');
     });
 
+    Route::group(['prefix' => 'dentist', 'middleware' => 'HandleDentistSession'], function () {
+        //Route::get('/', 'PatientController@getPatientAccess')->name('patient-access');
+
+        Route::get('/create-contract', 'DentistController@getCreateContractView')->name('create-contract');
+    });
+
     Route::get('/my-profile', 'UserController@getMyProfileView')->middleware('HandleUserSession')->name('my-profile');
 
     Route::get('/edit-account', 'UserController@getEditAccountView')->middleware('HandleUserSession')->name('edit-account');
@@ -59,8 +65,6 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
     Route::get('/manage-privacy', 'UserController@getManagePrivacyView')->middleware('HandleUserSession')->name('manage-privacy');
 
     Route::get('/my-contracts', 'UserController@getMyContractsView')->middleware('HandleUserSession')->name('my-contracts');
-
-    //Route::get('/invite-dentists', 'UserController@getMyContractsView')->middleware('HandleUserSession')->name('invite-dentists');
 
     Route::get('/user-logout', 'UserController@userLogout')->name('user-logout');
 
