@@ -10,7 +10,7 @@ class APIRequestsController extends Controller {
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POST => 1,
-            CURLOPT_URL => 'https://api.dentacoin.com/api/login',
+            CURLOPT_URL => 'https://dev-api.dentacoin.com/api/login',
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_POSTFIELDS => array(
                 'platform' => 'assurance',
@@ -24,7 +24,6 @@ class APIRequestsController extends Controller {
         curl_close($curl);
 
         var_dump($resp);
-        var_dump('RESPONSE1');
         die();
     }
 
@@ -38,25 +37,25 @@ class APIRequestsController extends Controller {
             'password-repeat' => $data['repeat-password'],
             'country_code' => $data['country-code'],
             'address' => $data['address'],
-            'avatar' => '@'.$files['image']->getPathName(), //waiting for object reading  ... $files['image']->getPathName() is alike $FILES['image']['tmp_name']
-            'phone' => $data['phone'], //this is combination of the phone + the phone_code for the country or they must be passed separated ???
+            'avatar' => '@'.$files['image']->getPathName(),
+            'phone' => $data['phone'],
             'website' => $data['website'],
-            'specialisations' => $data['specialization'], /// ??? ARRAY?
-            //'zip' required ????
-            //'work-type' ????????
+            'specialisations' => $data['specialization']
         );
 
-        if(!empty($data['clinic-id'])) {
-            $post_fields_arr['clinic_id'] = $data['clinic-id']; //ok? or everytime have to be passed with null?
-        }
+        var_dump($post_fields_arr);die();
 
-        die();
+        //CHECK TYPE DENTIST OR CLINIC
+
+        if(!empty($data['clinic-id'])) {
+            $post_fields_arr['clinic_id'] = $data['clinic-id'];
+        }
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POST => 1,
-            CURLOPT_URL => 'https://api.dentacoin.com/api/register',
+            CURLOPT_URL => 'https://dev-api.dentacoin.com/api/register',
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_POSTFIELDS => $post_fields_arr
         ));
@@ -65,7 +64,6 @@ class APIRequestsController extends Controller {
         curl_close($curl);
 
         var_dump($resp);
-        var_dump('RESPONSE');
         die();
     }
 
