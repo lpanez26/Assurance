@@ -134,7 +134,7 @@
                         </div>
                     </div>
                     <div class="padding-bottom-20">
-                        <input class="custom-input" name="website" type="url" placeholder="Website"/>
+                        <input class="custom-input" name="website" maxlength="250" type="url" placeholder="Website"/>
                     </div>
                 </div>
                 <div class="step third" data-step="third">

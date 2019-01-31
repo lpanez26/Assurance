@@ -51,6 +51,8 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
         Route::post('/authenticate', 'PatientController@authenticate')->name('authenticate-patient');
 
         Route::get('/invite-dentists', 'PatientController@getInviteDentistsView')->name('invite-dentists');
+
+        Route::post('/submit-invite-dentists', 'UserController@inviteDentists')->middleware('HandleUserSession')->name('submit-invite-dentists');
     });
 
     Route::group(['prefix' => 'dentist', 'middleware' => 'HandleDentistSession'], function () {

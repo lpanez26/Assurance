@@ -115,4 +115,10 @@ class UserController extends Controller {
         var_dump($api_response);
         die();
     }
+
+    function inviteDentists(Request $request) {
+        $data = $request->input();
+        var_dump($data);
+        die();
+    }
 }
