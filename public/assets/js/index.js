@@ -1064,7 +1064,7 @@ function styleAvatarUploadButton(label_el)    {
     if(jQuery(".upload-file.avatar").length) {
         jQuery(".upload-file.avatar").each(function(key, form){
             var this_file_btn_parent = jQuery(this);
-            if(this_file_btn_parent.hasAttribute('data-current-user-avatar')) {
+            if(this_file_btn_parent.attr('data-current-user-avatar')) {
                 this_file_btn_parent.find('button').append('<label for="custom-upload-avatar" style="background-image: ('+this_file_btn_parent.attr('data-current-user-avatar')+');"><div class="inner"><i class="fa fa-plus fs-0" aria-hidden="true"></i><div class="inner-label fs-0">Add profile photo</div></div></label>');
             } else {
                 this_file_btn_parent.find('button').append('<label for="custom-upload-avatar"><div class="inner"><i class="fa fa-plus" aria-hidden="true"></i><div class="inner-label">Add profile photo</div></div></label>');
