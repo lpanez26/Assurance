@@ -74,8 +74,6 @@ class DentistController extends Controller
 
         //handle the API response
         $api_response = (new APIRequestsController())->dentistRegister($data, $files);
-        var_dump($api_response);
-        die();
         if($api_response->success) {
             $session_arr = [
                 'token' => $api_response->token,
@@ -85,8 +83,10 @@ class DentistController extends Controller
             ];
 
             session(['logged_user' => $session_arr]);
+            return redirect()->route('home');
+        } else {
+            return redirect()->route('home')->with(['errors' => $api_response->errors]);
         }
-        return redirect()->route('home');
     }
 
     protected function login(Request $request) {

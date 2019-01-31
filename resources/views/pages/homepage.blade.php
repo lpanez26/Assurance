@@ -487,6 +487,7 @@
 @endsection
 
 @section('script_block')
+    {{--Multiple errors from laravel validation--}}
     @if(count($errors) > 0)
         <script>
             var errors = '';
@@ -496,11 +497,23 @@
             basic.showAlert(errors, '', true);
         </script>
     @endif
+    {{--Single error from controller response--}}
     @if (session('error'))
         <script>
             basic.showAlert("{{ session('error') }}", '', true);
         </script>
     @endif
+    {{--Multiple errors from controller response--}}
+    @if(session('errors') && count(session('errors')) > 0)
+        <script>
+            var errors = '';
+            @foreach(session('errors') as $error)
+                errors+="{{ $error }}" + '<br>';
+            @endforeach
+            basic.showAlert(errors, '', true);
+        </script>
+    @endif
+    {{--Success from controller response--}}
     @if (session('success'))
         <script>
             basic.showAlert("{{ session('success') }}", '', true);
