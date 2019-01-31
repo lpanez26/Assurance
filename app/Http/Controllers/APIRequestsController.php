@@ -154,6 +154,14 @@ class APIRequestsController extends Controller {
             )
         ));
 
+        var_dump(array(
+            'name' => $data['full-name'],
+            'email' => $data['email'],
+            'country_code' => $data['country'],
+            'auth_token' => session('logged_user')['token']
+        ));
+        die();
+
         $resp = json_decode(curl_exec($curl), true);
         curl_close($curl);
 
