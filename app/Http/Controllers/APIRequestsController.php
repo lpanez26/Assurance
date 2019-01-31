@@ -143,8 +143,7 @@ class APIRequestsController extends Controller {
         $post_fields_arr = array(
             'name' => $data['full-name'],
             'email' => $data['email'],
-            'country_code' => $data['country'],
-            'auth_token' => session('logged_user')['token']
+            'country_code' => $data['country']
         );
 
         //if user selected new avatar submit it to the api
@@ -158,7 +157,10 @@ class APIRequestsController extends Controller {
             CURLOPT_POST => 1,
             CURLOPT_URL => 'https://api.dentacoin.com/api/user/',
             CURLOPT_SSL_VERIFYPEER => 0,
-            CURLOPT_POSTFIELDS => $post_fields_arr
+            CURLOPT_POSTFIELDS => $post_fields_arr,
+            CURLOPT_HTTPHEADER => array(
+                'bearer' => session('logged_user')['token']
+            )
         ));
 
         $resp = curl_exec($curl);

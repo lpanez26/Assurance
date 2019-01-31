@@ -113,7 +113,7 @@
 @if(!empty(Route::current()) && Route::current()->getName() == 'home')
     <figure class="fixed-calculate-button" itemscope="" itemtype="http://schema.org/ImageObject">
         <a href="javascript:void(0);" class="open-calculator">
-            <img alt="Sticky calculator button" itemprop="contentUrl" src="/assets/uploads/sticky-calculator-button.png"/>
+            <img alt="Sticky calculator button" itemprop="contentUrl" src="/assets/uploads/sticky-calculator-button.svg"/>
         </a>
     </figure>
 @endif
