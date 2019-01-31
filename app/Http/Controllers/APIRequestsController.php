@@ -140,26 +140,28 @@ class APIRequestsController extends Controller {
     }
 
     public function updateUserData($data, $files) {
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_POST => 1,
-            CURLOPT_URL => 'https://api.dentacoin.com/api/users/',
-            CURLOPT_SSL_VERIFYPEER => 0,
-            CURLOPT_POSTFIELDS => array(
-                'name' => $data['full-name'],
-                'email' => $data['email'],
-                'country_code' => $data['country'],
-                'auth_token' => session('logged_user')['token']
-            )
-        ));
-
-        var_dump(array(
+        $post_fields_arr = array(
             'name' => $data['full-name'],
             'email' => $data['email'],
             'country_code' => $data['country'],
             'auth_token' => session('logged_user')['token']
+        );
+
+        //if user selected new avatar submit it to the api
+        if(!empty($files['image'])) {
+            $post_fields_arr['avatar'] = curl_file_create($files['image']->getPathName(), 'image/'.pathinfo($files['image']->getClientOriginalName(), PATHINFO_EXTENSION), $files['image']->getClientOriginalName());
+        }
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_POST => 1,
+            CURLOPT_URL => 'https://api.dentacoin.com/api/user/',
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_POSTFIELDS => $post_fields_arr
         ));
+
+        var_dump($post_fields_arr);
         die();
 
         $resp = json_decode(curl_exec($curl), true);
