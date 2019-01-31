@@ -20,7 +20,7 @@ class APIRequestsController extends Controller {
             )
         ));
 
-        $resp = json_decode(curl_exec($curl));
+        $resp = json_decode(curl_exec($curl), true);
         curl_close($curl);
 
         if(!empty($resp))   {
@@ -70,7 +70,7 @@ class APIRequestsController extends Controller {
             CURLOPT_POSTFIELDS => $post_fields_arr
         ));
 
-        $resp = json_decode(curl_exec($curl));
+        $resp = json_decode(curl_exec($curl), true);
         curl_close($curl);
 
         if(!empty($resp))   {
