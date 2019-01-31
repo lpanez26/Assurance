@@ -9,49 +9,6 @@ var prepareMapFunction = function( callback ) {
     }
 };
 
-/*var initMap = function () {
-    mapsLoaded = true;
-    for(var i in mapsWaiting) {
-        mapsWaiting[i]();
-    }
-
-    $('.map').each( function(){
-        var address = $(this).attr('data-address') ;
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode( { 'address': address}, (function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
-                    var position = {
-                        lat: results[0].geometry.location.lat(),
-                        lng: results[0].geometry.location.lng()
-                    };
-
-                    map = new google.maps.Map($(this)[0], {
-                        center: position,
-                        scrollwheel: false,
-                        zoom: 15
-                    });
-
-                    new google.maps.Marker({
-                        position: position,
-                        map: map,
-                        title: results[0].formatted_address
-                    });
-
-                } else {
-                    console.log('456');
-                    $(this).remove();
-                }
-            } else {
-                console.log('123');
-                $(this).remove();
-            }
-        }).bind( $(this) )  );
-
-    });
-};
-initMap();*/
-
 var initAddressSuggesters;
 jQuery(document).ready(function($){
     initAddressSuggesters = function() {
@@ -134,8 +91,6 @@ jQuery(document).ready(function($){
                                     zoom: 14,
                                     backgroundColor: 'none'
                                 });
-
-                                console.log(coords, 'coords');
 
                                 var marker = new google.maps.Marker({
                                     map: profile_address_map,
