@@ -1,5 +1,7 @@
 @extends("layout")
 @section("content")
+    {{var_dump(session('errors'))}}
+    @php(die('asdsads'))
     <section class="module intro-section">
         <picture itemscope="" itemtype="http://schema.org/ImageObject">
             <img alt="Two dentists" itemprop="contentUrl" src="/assets/uploads/assurance-home-img.jpg"/>
