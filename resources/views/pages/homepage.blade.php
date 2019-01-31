@@ -486,6 +486,8 @@
     </section>
 @endsection
 
+{{var_dump(session('errors'))}}
+@php(die())
 @section('script_block')
     {{--Multiple errors from laravel validation--}}
     @if(count($errors) > 0)
@@ -504,8 +506,6 @@
             basic.showAlert("{!! session('error') !!}", '', true);
         </script>
     @endif
-    {{var_dump(session('errors'))}}
-    @php(die())
     {{--Multiple errors from controller response--}}
     @if(session('errors') && count(session('errors')) > 0)
         <script>
