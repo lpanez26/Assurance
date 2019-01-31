@@ -37,6 +37,7 @@
                                 </div>
                             </div>
                             <div class="btn-container text-center">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <input type="submit" value="UPDATE PROFILE" class="white-blue-green-btn"/>
                             </div>
                         </form>

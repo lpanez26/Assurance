@@ -66,7 +66,7 @@
             <form method="POST" enctype="multipart/form-data" id="dentist-register" action="{{ route('dentist-register') }}">
                 <div class="step first visible" data-step="first">
                     <div class="padding-bottom-10">
-                        <input class="custom-input" name="dentist-or-practice-name" type="text" minlength="6" maxlength="100" placeholder="Dentist or Practice Name"/>
+                        <input class="custom-input" name="dentist-or-practice-name" type="text" maxlength="100" placeholder="Dentist or Practice Name"/>
                     </div>
                     <div class="padding-bottom-10">
                         <input class="custom-input" name="email" type="email" maxlength="100" placeholder="Email address"/>
