@@ -486,6 +486,7 @@
     </section>
 @endsection
 
+{{var_dump($errors)}}
 {{var_dump(session('errors'))}}
 @php(die())
 @section('script_block')
