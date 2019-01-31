@@ -67,6 +67,8 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
     Route::get('/my-contracts', 'UserController@getMyContractsView')->middleware('HandleUserSession')->name('my-contracts');
 
+    Route::post('/update-account', 'UserController@updateAccount')->middleware('HandleUserSession')->name('update-account');
+
     Route::get('/user-logout', 'UserController@userLogout')->name('user-logout');
 
     Route::post('/dentist-register', 'DentistController@register')->name('dentist-register');

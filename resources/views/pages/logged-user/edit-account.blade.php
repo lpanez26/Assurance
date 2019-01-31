@@ -12,7 +12,7 @@
                             </figure>
                             <h2 class="fs-24 lato-semibold inline-block">Edit account</h2>
                         </div>
-                        <form method="POST" enctype="multipart/form-data" id="patient-update-profile" action="">
+                        <form method="POST" enctype="multipart/form-data" id="patient-update-profile" action="{{route('update-account')}}">
                             <div class="form-row padding-bottom-15 fs-0">
                                 <label class="inline-block fs-16" for="full-name">Your Name</label>
                                 <input class="inline-block fs-16 custom-input" minlength="6" maxlength="100" type="text" name="full-name" id="full-name" @if(!empty($user_data) && !empty($user_data->name)) value="{{$user_data->name}}" @endif/>

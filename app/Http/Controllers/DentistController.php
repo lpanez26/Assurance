@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 class DentistController extends Controller
 {
+    public function getView() {
+        return view('pages/logged-user/dentist/homepage');
+    }
+
     protected function getCreateContractView()   {
         return view('pages/logged-user/dentist/create-contract');
     }

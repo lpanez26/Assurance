@@ -6,14 +6,19 @@ use App\CalculatorParameter;
 use App\Http\Controllers\Admin\CalculatorParametersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\UserController;
 
 class HomeController extends Controller
 {
     const currencies = ['USD', 'EUR', 'GBP', 'RUB', 'INR', 'CNY', 'JPY'];
 
     public function getView()   {
-        $testimonials = DB::connection('mysql2')->table('user_expressions')->leftJoin('media', 'user_expressions.media_id', '=', 'media.id')->select('user_expressions.*', 'media.name as media_name', 'media.alt as media_alt')->where('visible_assurance', 1)->orderByRaw('user_expressions.order_id ASC')->get()->toArray();
-        return view('pages/homepage', ['testimonials' => $testimonials]);
+        if((new UserController())->checkSession()) {
+            return (new DentistController())->getView();
+        }else {
+            $testimonials = DB::connection('mysql2')->table('user_expressions')->leftJoin('media', 'user_expressions.media_id', '=', 'media.id')->select('user_expressions.*', 'media.name as media_name', 'media.alt as media_alt')->where('visible_assurance', 1)->orderByRaw('user_expressions.order_id ASC')->get()->toArray();
+            return view('pages/homepage', ['testimonials' => $testimonials]);
+        }
     }
 
     public function redirectToHome() {
