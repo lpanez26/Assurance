@@ -74,8 +74,6 @@ class DentistController extends Controller
 
         //handle the API response
         $api_response = (new APIRequestsController())->dentistRegister($data, $files);
-        var_dump($api_response);
-        die();
         if($api_response->success) {
             $session_arr = [
                 'token' => $api_response->token,
@@ -87,13 +85,7 @@ class DentistController extends Controller
             session(['logged_user' => $session_arr]);
             return redirect()->route('home');
         } else {
-            $response_errors = '';
-            foreach($api_response->errors as $key => $value) {
-                if(is_numeric($key)) {
-                    $response_errors.=$value.'<br>';
-                }
-            }
-            return redirect()->route('home')->with(['error' => $response_errors]);
+            return redirect()->route('home')->with(['error' => $api_response['errors']]);
         }
     }
 
@@ -116,9 +108,7 @@ class DentistController extends Controller
 
         //handle the API response
         $api_response = (new APIRequestsController())->dentistLogin($data);
-        var_dump($api_response);
-        die();
-        if($api_response->success) {
+        if($api_response['success']) {
             $session_arr = [
                 'token' => $api_response->token,
                 'id' => $api_response->data->id,
@@ -129,13 +119,7 @@ class DentistController extends Controller
             session(['logged_user' => $session_arr]);
             return redirect()->route('home');
         } else {
-            $response_errors = '';
-            foreach($api_response->errors as $key => $value) {
-                if(is_numeric($key)) {
-                    $response_errors.=$value.'<br>';
-                }
-            }
-            return redirect()->route('home')->with(['error' => $response_errors]);
+            return redirect()->route('home')->with(['error' => $api_response['errors']]);
         }
     }
 }
