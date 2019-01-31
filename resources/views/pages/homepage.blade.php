@@ -504,7 +504,8 @@
             basic.showAlert("{!! session('error') !!}", '', true);
         </script>
     @endif
-
+    {{var_dump(session('errors'))}}
+    @php(die())
     {{--Multiple errors from controller response--}}
     @if(session('errors') && count(session('errors')) > 0)
         <script>
