@@ -503,7 +503,7 @@
             basic.showAlert("{!! session('error') !!}", '', true);
         </script>
     @endif
-    
+
     {{--Multiple errors from controller response--}}
     @if(session('errors_response') && count(session('errors_response')) > 0)
         <script>

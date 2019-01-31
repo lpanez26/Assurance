@@ -74,10 +74,10 @@ class DentistController extends Controller
 
         //handle the API response
         $api_response = (new APIRequestsController())->dentistRegister($data, $files);
-        if($api_response->success) {
+        if($api_response['success']) {
             $session_arr = [
-                'token' => $api_response->token,
-                'id' => $api_response->data->id,
+                'token' => $api_response['token'],
+                'id' => $api_response['data']['id'],
                 'type' => 'dentist',
                 'have_contracts' => false
             ];
@@ -110,8 +110,8 @@ class DentistController extends Controller
         $api_response = (new APIRequestsController())->dentistLogin($data);
         if($api_response['success']) {
             $session_arr = [
-                'token' => $api_response->token,
-                'id' => $api_response->data->id,
+                'token' => $api_response['token'],
+                'id' => $api_response['data']['id'],
                 'type' => 'dentist',
                 'have_contracts' => false
             ];
