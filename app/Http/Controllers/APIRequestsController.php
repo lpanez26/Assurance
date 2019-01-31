@@ -151,6 +151,13 @@ class APIRequestsController extends Controller {
             $post_fields_arr['avatar'] = curl_file_create($files['image']->getPathName(), 'image/'.pathinfo($files['image']->getClientOriginalName(), PATHINFO_EXTENSION), $files['image']->getClientOriginalName());
         }
 
+        $header = array();
+        $header[] = 'Accept: */*';
+        $header[] = 'Authorization: Bearer ' . session('logged_user')['token'];
+        $header[] = 'Cache-Control: no-cache';
+
+        var_dump($header);
+
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
@@ -158,9 +165,7 @@ class APIRequestsController extends Controller {
             CURLOPT_URL => 'https://api.dentacoin.com/api/user/',
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_POSTFIELDS => $post_fields_arr,
-            CURLOPT_HTTPHEADER => array(
-                'bearer' => session('logged_user')['token']
-            )
+            CURLOPT_HTTPHEADER => $header
         ));
 
         $resp = curl_exec($curl);
