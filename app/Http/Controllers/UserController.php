@@ -108,9 +108,6 @@ class UserController extends Controller {
                     }
                 }
             }
-        } {
-            var_dump('NO IMAGE SELECTED');
-            die();
         }
 
         //handle the API response
