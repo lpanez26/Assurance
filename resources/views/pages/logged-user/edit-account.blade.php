@@ -2,7 +2,6 @@
 @section("content")
     <section class="edit-account padding-top-100">
         <div class="container">
-            {{var_dump($countries)}}
             <div class="row">
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1 fs-0">
                     @include('pages.logged-user.my-profile-menu')
@@ -26,13 +25,13 @@
                                 <label class="inline-block fs-16" for="country">Your Country</label>
                                 <select class="inline-block fs-16 custom-input" id="country" name="country">
                                     @foreach($countries as $country)
-                                        <option value="{{$country->code}}" data-code="{{$country->phone_code}}">{{$country->name}}</option>
+                                        <option value="{{$country->code}}" data-code="{{$country->phone_code}}" @if(!empty($user_data) && !empty($user_data->$country_id) && $user_data->$country_id == $country->id) selected @endif>{{$country->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-row padding-bottom-25 fs-0">
                                 <label class="inline-block-top fs-16">Photo</label>
-                                <div class="inline-block-top avatar module text-center upload-file">
+                                <div class="inline-block-top avatar module text-center upload-file" @if(!empty($user_data) && !empty($user_data->avatar_url)) data-current-user-avatar="{{$user_data->avatar_url}}" @endif>
                                     <input type="file" class="visualise-image inputfile" id="custom-upload-avatar" name="image" accept=".jpg,.png,.jpeg,.svg,.bmp"/>
                                     <button type="button"></button>
                                 </div>
