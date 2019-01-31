@@ -15,7 +15,7 @@ class HomeController extends Controller
     public function getView()   {
         if((new UserController())->checkDentistSession()) {
             return (new DentistController())->getView();
-        } else if((new UserController())->checkDentistSession()) {
+        } else if((new UserController())->checkPatientSession()) {
             return (new PatientController())->getPatientAccess();
         } else {
             $testimonials = DB::connection('mysql2')->table('user_expressions')->leftJoin('media', 'user_expressions.media_id', '=', 'media.id')->select('user_expressions.*', 'media.name as media_name', 'media.alt as media_alt')->where('visible_assurance', 1)->orderByRaw('user_expressions.order_id ASC')->get()->toArray();
