@@ -485,10 +485,6 @@
         </div>
     </section>
 @endsection
-
-{{var_dump($errors)}}
-{{var_dump(session('errors'))}}
-@php(die())
 @section('script_block')
     {{--Multiple errors from laravel validation--}}
     @if(count($errors) > 0)
@@ -507,11 +503,12 @@
             basic.showAlert("{!! session('error') !!}", '', true);
         </script>
     @endif
+    
     {{--Multiple errors from controller response--}}
-    @if(session('errors') && count(session('errors')) > 0)
+    @if(session('errors_response') && count(session('errors_response')) > 0)
         <script>
             var errors = '';
-            @foreach(session('errors') as $error)
+            @foreach(session('errors_response') as $error)
                 errors+="{{ $error }}" + '<br>';
             @endforeach
             basic.showAlert(errors, '', true);

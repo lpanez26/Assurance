@@ -85,7 +85,7 @@ class DentistController extends Controller
             session(['logged_user' => $session_arr]);
             return redirect()->route('home');
         } else {
-            return redirect()->route('home')->with(['errors' => $api_response['errors']]);
+            return redirect()->route('home')->with(['errors_response' => $api_response['errors']]);
         }
     }
 
@@ -119,7 +119,7 @@ class DentistController extends Controller
             session(['logged_user' => $session_arr]);
             return redirect()->route('home');
         } else {
-            return redirect()->route('home')->with(['errors' => $api_response['errors']]);
+            return redirect()->route('home')->with(['errors_response' => $api_response['errors']]);
         }
     }
 }
