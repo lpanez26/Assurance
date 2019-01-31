@@ -113,6 +113,24 @@ class DentistController extends Controller
         }
 
         //handle the API response
-        (new APIRequestsController())->dentistLogin($data);
+        $api_response = (new APIRequestsController())->dentistLogin($data);if($api_response->success) {
+            $session_arr = [
+                'token' => $api_response->token,
+                'id' => $api_response->data->id,
+                'type' => 'dentist',
+                'have_contracts' => false
+            ];
+
+            session(['logged_user' => $session_arr]);
+            return redirect()->route('home');
+        } else {
+            $response_errors = '';
+            foreach($api_response->errors as $key => $value) {
+                if(is_numeric($key)) {
+                    $response_errors.=$value.'<br>';
+                }
+            }
+            return redirect()->route('home')->with(['error' => $response_errors]);
+        }
     }
 }

@@ -501,7 +501,7 @@
     {{--Single error from controller response--}}
     @if (session('error'))
         <script>
-            basic.showAlert("{{ session('error') }}", '', true);
+            basic.showAlert("{!! session('error') !!}", '', true);
         </script>
     @endif
 
