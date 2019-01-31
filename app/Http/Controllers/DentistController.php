@@ -85,7 +85,13 @@ class DentistController extends Controller
             session(['logged_user' => $session_arr]);
             return redirect()->route('home');
         } else {
-            return redirect()->route('home')->with(['errors' => $api_response->errors]);
+            $response_errors = array();
+            foreach($api_response->errors as $key => $value) {
+                if(is_numeric($key)) {
+                    array_push($response_errors, $value);
+                }
+            }
+            return redirect()->route('home')->with(['errors' => $response_errors]);
         }
     }
 
