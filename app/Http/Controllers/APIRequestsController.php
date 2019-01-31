@@ -138,4 +138,29 @@ class APIRequestsController extends Controller {
             return false;
         }
     }
+
+    public function updateUserData($data, $files) {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_POST => 1,
+            CURLOPT_URL => 'https://api.dentacoin.com/api/users/',
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_POSTFIELDS => array(
+                'name' => $data['full-name'],
+                'email' => $data['email'],
+                'country_code' => $data['country'],
+                'auth_token' => session('logged_user')['token']
+            )
+        ));
+
+        $resp = json_decode(curl_exec($curl), true);
+        curl_close($curl);
+
+        if(!empty($resp))   {
+            return $resp;
+        }else {
+            return false;
+        }
+    }
 }

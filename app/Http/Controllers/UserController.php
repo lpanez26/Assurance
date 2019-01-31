@@ -69,10 +69,27 @@ class UserController extends Controller {
     }
 
     protected function updateAccount(Request $request) {
+        $this->validate($request, [
+            'full-name' => 'required|max:250',
+            'email' => 'required|max:100',
+            'country' => 'required',
+        ], [
+            'full-name.required' => 'Name is required.',
+            'email.required' => 'Email address is required.',
+            'country.required' => 'Country is required.',
+        ]);
+
         $data = $request->input();
         $files = $request->file();
-        var_dump($data);
-        var_dump($files);
+
+        //check email validation
+        if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL))   {
+            return redirect()->route('edit-account')->with(['error' => 'Your form was not sent. Please try again with valid email.']);
+        }
+
+        //handle the API response
+        $api_response = (new APIRequestsController())->updateUserData($data, $files);
+        var_dump($api_response);
         die();
     }
 }

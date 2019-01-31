@@ -126,5 +126,43 @@
 <script src="//dentacoin.com/assets/libs/facebook-login/facebook.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaVeHq_LOhQndssbmw-aDnlMwUG73yCdk&libraries=places&language=en"></script>
 @yield('script_block')
+
+
+{{--Multiple errors from laravel validation--}}
+@if(count($errors) > 0)
+    <script>
+        var errors = '';
+        @foreach($errors->all() as $error)
+            errors+="{{ $error }}" + '<br>';
+        @endforeach
+        basic.showAlert(errors, '', true);
+    </script>
+@endif
+
+{{--Single error from controller response--}}
+@if (session('error'))
+    <script>
+        basic.showAlert("{!! session('error') !!}", '', true);
+    </script>
+@endif
+
+{{--Multiple errors from controller response--}}
+@if(session('errors_response') && count(session('errors_response')) > 0)
+    <script>
+        var errors = '';
+        @foreach(session('errors_response') as $error)
+            errors+="{{ $error }}" + '<br>';
+        @endforeach
+        basic.showAlert(errors, '', true);
+    </script>
+@endif
+
+{{--Success from controller response--}}
+@if (session('success'))
+    <script>
+        basic.showAlert("{{ session('success') }}", '', true);
+    </script>
+@endif
+
 </body>
 </html>
