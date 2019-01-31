@@ -45,6 +45,16 @@ class UserController extends Controller {
         }
     }
 
+    public function checkPatientSession()   {
+        if(!empty(session('logged_user')) && session('logged_user')['type'] == 'patient')    {
+            //LOGGED
+            return true;
+        }else {
+            //NOT LOGGED
+            return false;
+        }
+    }
+
     protected function userLogout(Request $request) {
         $route = '';
         if($request->session()->has('logged_user'))    {
