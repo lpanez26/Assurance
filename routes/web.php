@@ -26,7 +26,7 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
     Route::get('/test', function() {
         var_dump(session('logged_user'));
-        var_dump((new \App\Http\Controllers\APIRequestsController())->getUserData(session('logged_user')['id']));
+        var_dump((new \App\Http\Controllers\APIRequestsController())->getUserData(68244));
         die();
     })->name('test');
 

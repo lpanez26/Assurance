@@ -119,22 +119,17 @@ class APIRequestsController extends Controller {
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_POST => 1,
-            CURLOPT_URL => 'https://api.dentacoin.com/api/users/',
+            CURLOPT_URL => 'https://api.dentacoin.com/api/user/'.$id,
             CURLOPT_SSL_VERIFYPEER => 0,
-            CURLOPT_POSTFIELDS => array(
-                'id' => $id
-            )
         ));
 
         $resp = json_decode(curl_exec($curl));
         curl_close($curl);
 
         if(!empty($resp))   {
-            return response()->json(['success' => $resp->data]);
+            return $resp->data;
         }else {
-
-            return response()->json(['error' => 'API not working at this moment. Try again later.']);
+            return false;
         }
     }
 }

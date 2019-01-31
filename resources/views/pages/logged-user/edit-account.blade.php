@@ -1,6 +1,7 @@
 @extends("layout")
 @section("content")
     <section class="edit-account padding-top-100">
+        {{var_dump($user_data)}}
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1 fs-0">
