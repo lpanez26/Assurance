@@ -1,9 +1,13 @@
 <div class="my-profile-menu inline-block-top">
     <div class="wrapper">
-        {{var_dump((new \App\Http\Controllers\APIRequestsController())->getUserData(session('logged_user')['id']))}}
         <div class="avatar-and-name padding-bottom-15 fs-0">
             <figure itemscope="" itemtype="http://schema.org/ImageObject" class="inline-block">
-                <img alt="" itemprop="contentUrl" src="/assets/uploads/patient-benefit-3.svg"/>
+                @php($avatar_url = (new \App\Http\Controllers\APIRequestsController())->getUserData(session('logged_user')['id'])->avatar_url)
+                @if(!empty($avatar_url))
+                    <img alt="" itemprop="contentUrl" src="{{$avatar_url}}"/>
+                @else
+                    <img alt="" itemprop="contentUrl" src="/assets/images/avatar-icon.svg"/>
+                @endif
             </figure>
             <div class="welcome-name inline-block fs-16 lato-bold">Welcome, {{(new \App\Http\Controllers\APIRequestsController())->getUserData(session('logged_user')['id'])->name}}</div>
         </div>
