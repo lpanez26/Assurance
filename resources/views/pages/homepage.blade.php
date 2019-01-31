@@ -1,7 +1,5 @@
 @extends("layout")
 @section("content")
-    {{var_dump(session('errors'))}}
-    @php(die('asdsads'))
     <section class="module intro-section">
         <picture itemscope="" itemtype="http://schema.org/ImageObject">
             <img alt="Two dentists" itemprop="contentUrl" src="/assets/uploads/assurance-home-img.jpg"/>
@@ -499,22 +497,14 @@
             basic.showAlert(errors, '', true);
         </script>
     @endif
+
     {{--Single error from controller response--}}
     @if (session('error'))
         <script>
             basic.showAlert("{{ session('error') }}", '', true);
         </script>
     @endif
-    {{--Multiple errors from controller response--}}
-    @if(session('errors') && count(session('errors')) > 0)
-        <script>
-            var errors = '';
-            @foreach(session('errors') as $error)
-                errors+="{{ $error }}" + '<br>';
-            @endforeach
-            basic.showAlert(errors, '', true);
-        </script>
-    @endif
+
     {{--Success from controller response--}}
     @if (session('success'))
         <script>
