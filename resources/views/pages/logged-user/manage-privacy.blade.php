@@ -14,7 +14,7 @@
                         </div>
                         <div class="delete padding-top-60 padding-bottom-50 fs-0">
                             <figure itemscope="" itemtype="http://schema.org/ImageObject" class="inline-block-top">
-                                <img alt="" src="/assets/images/avatar-icon.svg"/>
+                                <img alt="Cancel icon" src="/assets/uploads/cancel.svg"/>
                             </figure>
                             <div class="text inline-block-top">
                                 <h3 class="fs-20 padding-bottom-20 lato-semibold dark-color">Delete My Profile</h3>
@@ -26,7 +26,7 @@
                         </div>
                         <div class="download padding-top-60 padding-bottom-50 fs-0">
                             <figure itemscope="" itemtype="http://schema.org/ImageObject" class="inline-block-top">
-                                <img alt="" src="/assets/images/avatar-icon.svg"/>
+                                <img alt="Download icon" src="/assets/uploads/download.svg"/>
                             </figure>
                             <div class="text inline-block-top">
                                 <h3 class="fs-20 padding-bottom-20 lato-semibold dark-color">Download My Personal Data</h3>

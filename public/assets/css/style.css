@@ -5433,12 +5433,12 @@ body.logged-in .my-profile-page-content {
   body.logged-in .my-profile-page-content form#patient-update-profile .form-row .avatar {
     width: 150px; }
 
-.manage-privacy-container .delete > figure, .manage-privacy-container .downloads > figure {
+.manage-privacy-container .delete > figure, .manage-privacy-container .download > figure {
   width: 100px; }
-.manage-privacy-container .delete .text, .manage-privacy-container .downloads .text {
+.manage-privacy-container .delete .text, .manage-privacy-container .download .text {
   width: calc(100% - 100px);
   padding-left: 20px; }
-.manage-privacy-container .delete.delete, .manage-privacy-container .downloads.delete {
+.manage-privacy-container .delete.delete, .manage-privacy-container .download.delete {
   border-bottom: 3px solid black; }
 
 /*# sourceMappingURL=style.css.map */
