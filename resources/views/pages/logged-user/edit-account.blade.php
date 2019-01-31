@@ -6,7 +6,7 @@
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1 fs-0">
                     @include('pages.logged-user.my-profile-menu')
                     <div class="my-profile-page-content inline-block-top">
-                        <div class="profile-page-title padding-bottom-60">
+                        <div class="profile-page-title padding-bottom-50">
                             <figure itemscope="" itemtype="http://schema.org/ImageObject" class="inline-block">
                                 <img alt="Edit account icon" src="/assets/uploads/edit-account-icon.svg"/>
                             </figure>
