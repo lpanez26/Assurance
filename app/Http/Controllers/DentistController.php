@@ -116,6 +116,8 @@ class DentistController extends Controller
 
         //handle the API response
         $api_response = (new APIRequestsController())->dentistLogin($data);
+        var_dump($api_response);
+        die();
         if($api_response->success) {
             $session_arr = [
                 'token' => $api_response->token,
