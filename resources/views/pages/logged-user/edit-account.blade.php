@@ -1,8 +1,8 @@
 @extends("layout")
 @section("content")
     <section class="edit-account padding-top-100">
-        {{var_dump($user_data)}}
         <div class="container">
+            {{var_dump($countries)}}
             <div class="row">
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1 fs-0">
                     @include('pages.logged-user.my-profile-menu')
@@ -16,11 +16,11 @@
                         <form method="POST" enctype="multipart/form-data" id="patient-update-profile" action="">
                             <div class="form-row padding-bottom-15 fs-0">
                                 <label class="inline-block fs-16" for="full-name">Your Name</label>
-                                <input class="inline-block fs-16 custom-input" minlength="6" maxlength="100" type="text" name="full-name" id="full-name"/>
+                                <input class="inline-block fs-16 custom-input" minlength="6" maxlength="100" type="text" name="full-name" id="full-name" @if(!empty($user_data) && !empty($user_data->name)) value="{{$user_data->name}}" @endif/>
                             </div>
                             <div class="form-row padding-bottom-15 fs-0">
                                 <label class="inline-block fs-16" for="email">Your Email</label>
-                                <input class="inline-block fs-16 custom-input" maxlength="100" type="email" name="email" id="email"/>
+                                <input class="inline-block fs-16 custom-input" maxlength="100" type="email" name="email" id="email" @if(!empty($user_data) && !empty($user_data->email)) value="{{$user_data->email}}" @endif/>
                             </div>
                             <div class="form-row padding-bottom-15 fs-0">
                                 <label class="inline-block fs-16" for="country">Your Country</label>
