@@ -12,7 +12,7 @@
                             </figure>
                             <h2 class="fs-24 lato-semibold inline-block">Manage privacy</h2>
                         </div>
-                        <div class="delete padding-top-60 padding-bottom-50">
+                        <div class="delete padding-top-60 padding-bottom-50 fs-0">
                             <figure itemscope="" itemtype="http://schema.org/ImageObject" class="inline-block-top">
                                 <img alt="" src="/assets/images/avatar-icon.svg"/>
                             </figure>
@@ -24,7 +24,7 @@
                                 <a href="" class="white-blue-green-btn">DELETE MY PROFILE & PERSONAL DATA</a>
                             </div>
                         </div>
-                        <div class="download padding-top-60 padding-bottom-50">
+                        <div class="download padding-top-60 padding-bottom-50 fs-0">
                             <figure itemscope="" itemtype="http://schema.org/ImageObject" class="inline-block-top">
                                 <img alt="" src="/assets/images/avatar-icon.svg"/>
                             </figure>
