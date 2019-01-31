@@ -26826,10 +26826,6 @@ function apiEventsListeners() {
                                 custom_form_obj = {
                                     token: event.response_data.token,
                                     id: event.response_data.data.id,
-                                    email: event.response_data.data.email,
-                                    name: event.response_data.data.name,
-                                    address: event.response_data.data.dcn_address,
-                                    avatar_url: event.response_data.data.avatar_url,
                                     have_contracts: false,
                                     _token: $('meta[name="csrf-token"]').attr('content')
                                 };

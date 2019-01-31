@@ -26,26 +26,18 @@ class PatientController extends Controller {
     protected function authenticate(Request $request) {
         $this->validate($request, [
             'token' => 'required',
-            'email' => 'required',
-            'name' => 'required',
+            'id' => 'required'
         ], [
             'token.required' => 'Token is required.',
-            'email.required' => 'Email is required.',
-            'name.required' => 'Name is required.',
+            'id.required' => 'Email is required.'
         ]);
 
         $session_arr = [
             'token' => $request->input('token'),
             'id' => $request->input('id'),
-            'email' => $request->input('email'), // ??????
-            'name' => $request->input('name'), // ??????
             'type' => 'patient',
             'have_contracts' => false
         ];
-
-        if(!empty($request->input('address'))) {
-            $session_arr['address'] = $request->input('address');
-        }
 
         if(filter_var($request->input('have_contracts'), FILTER_VALIDATE_BOOLEAN)) {
             $session_arr['have_contracts'] = true;
