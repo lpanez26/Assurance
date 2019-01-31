@@ -20,11 +20,14 @@ class APIRequestsController extends Controller {
             )
         ));
 
-        $resp = curl_exec($curl);
+        $resp = json_decode(curl_exec($curl));
         curl_close($curl);
 
-        var_dump($resp);
-        die();
+        if(!empty($resp))   {
+            return $resp;
+        }else {
+            return false;
+        }
     }
 
     public function dentistRegister($data, $files) {
@@ -69,7 +72,6 @@ class APIRequestsController extends Controller {
 
         $resp = json_decode(curl_exec($curl));
         curl_close($curl);
-
 
         if(!empty($resp))   {
             return $resp;
