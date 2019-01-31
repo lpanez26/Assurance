@@ -620,8 +620,18 @@ $(window).on('scroll', function () {});
 
 //on button click next time when you hover the button the color is bugged until you click some other element (until you move out the focus from this button)
 function fixButtonsFocus() {
-    if ($('a').length > 0) {
-        $('a').click(function () {
+    if ($('.white-blue-green-btn').length > 0) {
+        $('.white-blue-green-btn').click(function () {
+            $(this).blur();
+        });
+    }
+    if ($('.blue-green-white-btn').length > 0) {
+        $('.blue-green-white-btn').click(function () {
+            $(this).blur();
+        });
+    }
+    if ($('.white-transparent-btn').length > 0) {
+        $('.white-transparent-btn').click(function () {
             $(this).blur();
         });
     }
@@ -1226,9 +1236,6 @@ if ($('body').hasClass('logged-in')) {
             }
 
             if (errors) {
-                event.preventDefault();
-            } else {
-                console.log('CONTROLLER!"');
                 event.preventDefault();
             }
         });
