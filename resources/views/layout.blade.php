@@ -54,7 +54,15 @@
             @else
                 <div class="col-xs-9 inline-block text-right logged-user">
                     <a href="javascript:void(0)">
-                        <span>{{(new \App\Http\Controllers\APIRequestsController())->getUserData(session('logged_user')['id'])->name}}</span> <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                        <span>{{(new \App\Http\Controllers\APIRequestsController())->getUserData(session('logged_user')['id'])->name}}</span>
+                        <figure itemscope="" itemtype="http://schema.org/ImageObject" class="inline-block">
+                            @php($avatar_url = (new \App\Http\Controllers\APIRequestsController())->getUserData(session('logged_user')['id'])->avatar_url)
+                            @if(!empty($avatar_url))
+                                <img alt="" itemprop="contentUrl" src="{{$avatar_url}}"/>
+                            @else
+                                <img alt="" itemprop="contentUrl" src="/assets/images/avatar-icon.svg"/>
+                            @endif
+                        </figure>
                     </a>
                     <div class="hidden-box">
                         <div class="container-fluid text-center">

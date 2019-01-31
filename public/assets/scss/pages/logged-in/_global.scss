@@ -12,6 +12,7 @@ body.logged-in {
                 padding-right: 15px;
                 figure {
                     width: 40px;
+                    overflow: hidden;
                     @include rounded(50%);
                 }
                 .welcome-name {

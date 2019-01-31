@@ -1,0 +1,14 @@
+.manage-privacy-container {
+    .delete, .downloads {
+        > figure {
+            width: 100px;
+        }
+        .text {
+            width: calc(100% - 100px);
+            padding-left: 20px;
+        }
+        &.delete {
+            border-bottom: 3px solid black; 
+        }
+    }
+}

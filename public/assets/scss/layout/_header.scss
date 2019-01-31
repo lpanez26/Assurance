@@ -44,10 +44,10 @@ header {
                 span {
                     vertical-align: middle;
                 }
-                i {
-                    font-size: 30px;
-                    margin-left: 15px;
-                    vertical-align: middle;
+                figure {
+                    width: 40px;
+                    overflow: hidden;
+                    @include rounded(50%);
                 }
             }
             .hidden-box {

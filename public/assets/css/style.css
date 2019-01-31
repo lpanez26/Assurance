@@ -5058,10 +5058,13 @@ header {
       padding: 10px 0; }
       header > .container .logged-user > a span {
         vertical-align: middle; }
-      header > .container .logged-user > a i {
-        font-size: 30px;
-        margin-left: 15px;
-        vertical-align: middle; }
+      header > .container .logged-user > a figure {
+        width: 40px;
+        overflow: hidden;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        border-radius: 50%; }
     header > .container .logged-user .hidden-box {
       display: none;
       position: absolute;
@@ -5375,6 +5378,7 @@ body.logged-in .my-profile-menu {
       padding-right: 15px; }
       body.logged-in .my-profile-menu .wrapper .avatar-and-name figure {
         width: 40px;
+        overflow: hidden;
         -webkit-border-radius: 50%;
         -moz-border-radius: 50%;
         -ms-border-radius: 50%;
@@ -5428,5 +5432,13 @@ body.logged-in .my-profile-page-content {
     width: calc(100% - 160px); }
   body.logged-in .my-profile-page-content form#patient-update-profile .form-row .avatar {
     width: 150px; }
+
+.manage-privacy-container .delete > figure, .manage-privacy-container .downloads > figure {
+  width: 100px; }
+.manage-privacy-container .delete .text, .manage-privacy-container .downloads .text {
+  width: calc(100% - 100px);
+  padding-left: 20px; }
+.manage-privacy-container .delete.delete, .manage-privacy-container .downloads.delete {
+  border-bottom: 3px solid black; }
 
 /*# sourceMappingURL=style.css.map */
