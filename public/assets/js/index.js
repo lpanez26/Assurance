@@ -661,8 +661,6 @@ if($('body').hasClass('logged-in')) {
 
             if(errors) {
                 event.preventDefault();
-            }else {
-                event.preventDefault();
             }
         });
     }

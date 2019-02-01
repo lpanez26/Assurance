@@ -96,15 +96,15 @@ class UserController extends Controller {
                 foreach($files as $file)  {
                     //checking the file size
                     if($file->getSize() > MAX_UPL_SIZE) {
-                        return redirect()->route('home', ['slug' => $request->input('post-slug')])->with(['error' => 'Your form was not sent. Files can be only with with maximum size of '.number_format(MAX_UPL_SIZE / 1048576).'MB. Please try again.']);
+                        return redirect()->route('edit-account', ['slug' => $request->input('post-slug')])->with(['error' => 'Your form was not sent. Files can be only with with maximum size of '.number_format(MAX_UPL_SIZE / 1048576).'MB. Please try again.']);
                     }
                     //checking file format
                     if(!in_array(pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION), $allowed)) {
-                        return redirect()->route('home')->with(['error' => 'Your form was not sent. Files can be only with .png, .jpg, .jpeg, .svg, .bmp formats. Please try again.']);
+                        return redirect()->route('edit-account')->with(['error' => 'Your form was not sent. Files can be only with .png, .jpg, .jpeg, .svg, .bmp formats. Please try again.']);
                     }
                     //checking if error in file
                     if($file->getError()) {
-                        return redirect()->route('home')->with(['error' => 'Your form was not sent. There is error with one or more of the files, please try with other files. Please try again.']);
+                        return redirect()->route('edit-account')->with(['error' => 'Your form was not sent. There is error with one or more of the files, please try with other files. Please try again.']);
                     }
                 }
             }
@@ -112,8 +112,11 @@ class UserController extends Controller {
 
         //handle the API response
         $api_response = (new APIRequestsController())->updateUserData($data, $files);
-        var_dump($api_response);
-        die();
+        if($api_response->success) {
+            return redirect()->route('edit-account')->with(['success' => 'Your data was updated successfully.']);
+        } else {
+            return redirect()->route('edit-account')->with(['errors_response' => $api_response['errors']]);
+        }
     }
 
     function inviteDentists(Request $request) {
