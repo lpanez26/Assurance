@@ -26258,6 +26258,8 @@ if ($('body').hasClass('logged-in')) {
 
             if (errors) {
                 event.preventDefault();
+            } else {
+                event.preventDefault();
             }
         });
     }
@@ -26633,47 +26635,68 @@ function bindLoginSigninPopupShow() {
                                                         if ($('.dentist .form-register .step.second [name="work-type"]:checked').val() == 'an-associate-dentist') {
                                                             $('.dentist .form-register .step.third .search-for-clinic').html('<div class="padding-bottom-10"><select class="combobox custom-input"></select><input type="hidden" name="clinic-id"/></div>');
 
-                                                            initComboboxes();
-                                                            $('.dentist .form-register .step.third .search-for-clinic input[type="text"].combobox').attr('placeholder', 'Search for a clinic...');
+                                                            $.ajax({
+                                                                type: 'POST',
+                                                                url: '/get-all-clinics/',
+                                                                dataType: 'json',
+                                                                headers: {
+                                                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                                },
+                                                                success: function success(response) {
+                                                                    if (response.success && response.success.length > 0) {
+                                                                        var select_html = '<option></option>';
+                                                                        for (var i = 0, len = response.success.length; i < len; i += 1) {
+                                                                            select_html += '<option value="' + response.success[i].id + '">' + response.success[i].name + '</option>';
+                                                                        }
+
+                                                                        initComboboxes();
+                                                                        $('.dentist .form-register .step.third .search-for-clinic input[type="text"].combobox').attr('placeholder', 'Search for a clinic...');
+
+                                                                        //update the hidden input value on the select change
+                                                                        $('.dentist .form-register .step.third .search-for-clinic select.combobox').on('change', function () {
+                                                                            $('.dentist .form-register .step.third .search-for-clinic input[name="clinic-id"]').val($(this).find('option:selected').val());
+                                                                        });
+                                                                    } else if (response.error) {
+                                                                        basic.showAlert(response.error);
+                                                                    }
+                                                                }
+                                                            });
 
                                                             //bind the logic for the fresh appended select
-                                                            var timer,
-                                                                delay = 1000;
-                                                            $('.dentist .form-register .step.third .search-for-clinic input[type="text"].combobox').bind('keydown', function (e) {
+                                                            /*var timer, delay = 1000;
+                                                            $('.dentist .form-register .step.third .search-for-clinic input[type="text"].combobox').bind('keydown', function(e) {
                                                                 var this_input_val = $(this).val().trim();
                                                                 clearTimeout(timer);
-                                                                timer = setTimeout(function () {
-                                                                    if (this_input_val != '') {
+                                                                timer = setTimeout(function() {
+                                                                    if(this_input_val != '') {
                                                                         $.ajax({
                                                                             type: 'POST',
-                                                                            url: '/get-clinics-by-name/' + this_input_val,
+                                                                            url: '/get-clinics-by-name/'+this_input_val,
                                                                             dataType: 'json',
                                                                             headers: {
                                                                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                                                             },
-                                                                            success: function success(response) {
-                                                                                if (response.success && response.success.length > 0) {
+                                                                            success: function (response) {
+                                                                                if(response.success && response.success.length > 0) {
                                                                                     var select_html = '<option></option>';
-                                                                                    for (var i = 0, len = response.success.length; i < len; i += 1) {
-                                                                                        select_html += '<option value="' + response.success[i].id + '">' + response.success[i].name + '</option>';
+                                                                                    for(var i = 0, len = response.success.length; i < len; i+=1) {
+                                                                                        select_html+='<option value="'+response.success[i].id+'">'+response.success[i].name+'</option>';
                                                                                     }
-
-                                                                                    //refresh the combobox with the data received from the API
+                                                                                      //refresh the combobox with the data received from the API
                                                                                     $('.dentist .form-register .step.third .search-for-clinic select.combobox').html(select_html).combobox('refresh');
                                                                                     $('.dentist .form-register .step.third .search-for-clinic input[type="text"].combobox').attr('placeholder', 'Search for a clinic...');
-
-                                                                                    //update the hidden input value on the select change
-                                                                                    $('.dentist .form-register .step.third .search-for-clinic select.combobox').on('change', function () {
+                                                                                      //update the hidden input value on the select change
+                                                                                    $('.dentist .form-register .step.third .search-for-clinic select.combobox').on('change', function() {
                                                                                         $('.dentist .form-register .step.third .search-for-clinic input[name="clinic-id"]').val($(this).find('option:selected').val());
                                                                                     });
-                                                                                } else if (response.error) {
+                                                                                } else if(response.error) {
                                                                                     basic.showAlert(response.error);
                                                                                 }
                                                                             }
                                                                         });
                                                                     }
-                                                                }, delay);
-                                                            });
+                                                                }, delay );
+                                                            });*/
                                                         } else {
                                                             $('.dentist .form-register .step.third .search-for-clinic').html('');
                                                         }

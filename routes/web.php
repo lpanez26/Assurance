@@ -43,7 +43,7 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
     Route::post('/get-login-signin', 'Controller@getLoginSigninHtml')->name('get-login-signin');
 
-    Route::post('/get-clinics-by-name/{name}', 'APIRequestsController@getAllClinicsByName')->name('get-clinics-by-name');
+    Route::post('/get-all-clinics', 'Controller@getAllClinicsResponse')->name('get-all-clinics');
     //======================================= /AJAX ========================================
 
     Route::group(['prefix' => 'patient', 'middleware' => 'HandlePatientSession'], function () {

@@ -116,13 +116,11 @@ class APIRequestsController extends Controller {
             CURLOPT_POSTFIELDS => $post_fields_arr
         ));
 
-        $resp = json_decode(curl_exec($curl), true);
+        $resp = json_decode(curl_exec($curl));
         curl_close($curl);
 
-        return $resp;
-
         if(!empty($resp))   {
-            return response()->json(['success' => $resp->data]);
+            return $resp->data;
         }else {
 
             return response()->json(['error' => 'API not working at this moment. Try again later.']);

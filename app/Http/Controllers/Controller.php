@@ -144,8 +144,18 @@ class Controller extends BaseController
     protected function getLoginSigninHtml() {
         //passing the countries
         $countries = (new APIRequestsController())->getAllCountries();
-        $view = view('partials/login-signin', ['countries' => $countries, 'current_user_country_code' => mb_strtolower(trim(file_get_contents("http://ipinfo.io/" . $_SERVER['REMOTE_ADDR'] .  "/country")))]);
+        $clinics = (new APIRequestsController())->getAllClinicsByName();
+        $view = view('partials/login-signin', ['countries' => $countries, 'clinics' => $clinics, 'current_user_country_code' => mb_strtolower(trim(file_get_contents("http://ipinfo.io/" . $_SERVER['REMOTE_ADDR'] .  "/country")))]);
         $view = $view->render();
         return response()->json(['success' => $view]);
+    }
+
+    protected function getAllClinicsResponse() {
+        $clinics = (new APIRequestsController())->getAllClinicsByName();
+        if(!empty($clinics)) {
+            return response()->json(['success' => $clinics]);
+        } else {
+            return response()->json(['error' => 'No clinics found at the moment. Try again later.']);
+        }
     }
 }
