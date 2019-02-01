@@ -26534,14 +26534,13 @@ function bindLoginSigninPopupShow() {
                                         $('.dentist .form-register .prev-step').click(function () {
                                             var current_step = $('.dentist .form-register .step.visible');
                                             var current_prev_step = current_step.prev();
-                                            console.log(current_step, 'current_step');
-                                            console.log(current_prev_step, 'current_prev_step');
                                             current_step.removeClass('visible');
                                             if (current_prev_step.hasClass('first')) {
                                                 $(this).hide();
                                             }
                                             current_prev_step.addClass('visible');
 
+                                            $('.dentist .form-register .next-step').val('Next');
                                             $('.dentist .form-register .next-step').attr('data-current-step', current_prev_step.attr('data-step'));
                                         });
 
