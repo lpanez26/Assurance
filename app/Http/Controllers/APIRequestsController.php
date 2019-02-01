@@ -98,16 +98,22 @@ class APIRequestsController extends Controller {
     }
 
     public function getAllClinicsByName($name = null) {
+        $post_fields_arr = array(
+            'type' => 'clinic',
+            'items_per_page' => 2000
+        );
+
+        if(!empty($name)) {
+            $post_fields_arr['name'] = $name;
+        }
+
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POST => 1,
             CURLOPT_URL => 'https://api.dentacoin.com/api/users/',
             CURLOPT_SSL_VERIFYPEER => 0,
-            CURLOPT_POSTFIELDS => array(
-                'type' => 'clinic',
-                'name' => $name
-            )
+            CURLOPT_POSTFIELDS => $post_fields_arr
         ));
 
         $resp = json_decode(curl_exec($curl), true);
