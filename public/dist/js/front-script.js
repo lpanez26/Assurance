@@ -1377,12 +1377,14 @@ function bindLoginSigninPopupShow() {
                                 switch (_context11.prev = _context11.next) {
                                     case 0:
                                         if (!response.success) {
-                                            _context11.next = 18;
+                                            _context11.next = 19;
                                             break;
                                         }
 
                                         basic.closeDialog();
                                         basic.showDialog(response.success, 'login-signin-popup', null, true);
+
+                                        fixButtonsFocus();
 
                                         $('.popup-header-action a').click(function () {
                                             $('.login-signin-popup .popup-body > .inline-block').addClass('custom-hide');
@@ -1511,6 +1513,8 @@ function bindLoginSigninPopupShow() {
                                         $('.dentist .form-register .prev-step').click(function () {
                                             var current_step = $('.dentist .form-register .step.visible');
                                             var current_prev_step = current_step.prev();
+                                            console.log(current_step, 'current_step');
+                                            console.log(current_prev_step, 'current_prev_step');
                                             current_step.removeClass('visible');
                                             if (current_prev_step.hasClass('first')) {
                                                 $(this).hide();
@@ -1522,10 +1526,10 @@ function bindLoginSigninPopupShow() {
 
                                         //SECOND STEP INIT LOGIC
                                         //load address script
-                                        _context11.next = 14;
+                                        _context11.next = 15;
                                         return $.getScript('/assets/js/address.js', function () {});
 
-                                    case 14:
+                                    case 15:
 
                                         $('#dentist-country').on('change', function () {
                                             $('.step.second .phone .country-code').html('+' + $(this).find('option:selected').attr('data-code'));
@@ -1731,7 +1735,7 @@ function bindLoginSigninPopupShow() {
                                         });
                                         // ====================== /DENTIST LOGIN/SIGNUP LOGIC ======================
 
-                                    case 18:
+                                    case 19:
                                     case "end":
                                         return _context11.stop();
                                 }

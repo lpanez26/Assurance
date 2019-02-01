@@ -779,6 +779,8 @@ function bindLoginSigninPopupShow() {
                         basic.closeDialog();
                         basic.showDialog(response.success, 'login-signin-popup', null, true);
 
+                        fixButtonsFocus();
+
                         $('.popup-header-action a').click(function() {
                             $('.login-signin-popup .popup-body > .inline-block').addClass('custom-hide');
                             $('.login-signin-popup .popup-body .'+$(this).attr('data-type')).removeClass('custom-hide');
@@ -855,6 +857,8 @@ function bindLoginSigninPopupShow() {
                         $('.dentist .form-register .prev-step').click(function() {
                             var current_step = $('.dentist .form-register .step.visible');
                             var current_prev_step = current_step.prev();
+                            console.log(current_step, 'current_step');
+                            console.log(current_prev_step, 'current_prev_step');
                             current_step.removeClass('visible');
                             if(current_prev_step.hasClass('first')) {
                                 $(this).hide();
