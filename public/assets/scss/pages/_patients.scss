@@ -14,6 +14,20 @@ body.patient-access {
     }
 }
 
+section#find-your-dentist {
+    .combobox-container {
+        .input-group {
+            display: block;
+            .input-group-addon {
+                display: none;
+            }
+            ul.dropdown-menu {
+                width: 100%;
+            }
+        }
+    }
+}
+
 .cant-find-your-dentist-section {
     margin-top: -70px;
     position: relative;

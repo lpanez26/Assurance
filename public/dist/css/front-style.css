@@ -5185,6 +5185,13 @@ body.patient-access .dentist-or-patient-section .inline-block-top.right .hidden-
   body.patient-access .dentist-or-patient-section .inline-block-top.right .hidden-container a {
     display: none; }
 
+section#find-your-dentist .combobox-container .input-group {
+  display: block; }
+  section#find-your-dentist .combobox-container .input-group .input-group-addon {
+    display: none; }
+  section#find-your-dentist .combobox-container .input-group ul.dropdown-menu {
+    width: 100%; }
+
 .cant-find-your-dentist-section {
   margin-top: -70px;
   position: relative; }

@@ -594,7 +594,21 @@ if($('body').hasClass('home')) {
 
     //init select combobox with clinics
     initComboboxes();
-    $('section#find-your-dentist input[type="text"].combobox').attr('placeholder', 'Search for a clinic...');
+    //on change show login popup
+    $('section#find-your-dentist input[type="text"].combobox').attr('placeholder', 'Search for a clinic...').on('keydown', function (e) {
+        if(e.which == 13) {
+            basic.closeDialog();
+            basic.showAlert('Please login to continue. If you don\'t have registration please click <a href="javascript:void(0)" class="show-login-signin">here</a>.', '', true);
+            bindLoginSigninPopupShow();
+        }
+    });
+
+    //on enter press show login popup
+    $('section#find-your-dentist input[type="text"].combobox').on('change', function() {
+        basic.closeDialog();
+        basic.showAlert('Please login to continue. If you don\'t have registration please click <a href="javascript:void(0)" class="show-login-signin">here</a>.', '', true);
+        bindLoginSigninPopupShow();
+    });
 }else if($('body').hasClass('support-guide')) {
     if($('.support-guide-slider').length) {
         $('.support-guide-slider').slick({
@@ -770,7 +784,7 @@ function customJavascriptForm(path, params, method) {
 //call the popup for login/sign for patient and dentist
 function bindLoginSigninPopupShow() {
     if($('.show-login-signin').length) {
-        $('.show-login-signin').click(function() {
+        $('.show-login-signin').unbind().click(function() {
             $.ajax({
                 type: 'POST',
                 url: '/get-login-signin',
