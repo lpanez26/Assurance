@@ -110,8 +110,10 @@ class APIRequestsController extends Controller {
             )
         ));
 
-        $resp = json_decode(curl_exec($curl));
+        $resp = json_decode(curl_exec($curl), true);
         curl_close($curl);
+
+        return $resp;
 
         if(!empty($resp))   {
             return response()->json(['success' => $resp->data]);
