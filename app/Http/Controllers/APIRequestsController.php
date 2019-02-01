@@ -97,7 +97,7 @@ class APIRequestsController extends Controller {
         }
     }
 
-    public function getAllClinicsByName($name) {
+    public function getAllClinicsByName($name = null) {
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,

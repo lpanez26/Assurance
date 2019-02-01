@@ -5445,7 +5445,7 @@ body.logged-in .my-profile-page-content {
   background-image: url(/assets/uploads/dentacoin-symbol-background.png);
   background-repeat: no-repeat;
   background-size: contain;
-  background-size: center center; }
+  background-position: center center; }
   .invite-dentists-container .my-profile-page-content .custom-input {
     max-width: 450px; }
 
