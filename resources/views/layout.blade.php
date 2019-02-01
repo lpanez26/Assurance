@@ -135,9 +135,8 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaVeHq_LOhQndssbmw-aDnlMwUG73yCdk&libraries=places&language=en"></script>
 @yield('script_block')
 
-
 {{--Multiple errors from laravel validation--}}
-@if(count($errors) > 0)
+@if(!empty($errors) && count($errors) > 0)
     <script>
         var errors = '';
         @foreach($errors->all() as $error)

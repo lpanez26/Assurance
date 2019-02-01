@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class PatientController extends Controller {
     public function getNotLoggedView()   {
-        return view('pages/patient');
+        return view('pages/patient', ['clinics' => (new APIRequestsController())->getAllClinicsByName()]);
     }
 
     public function getPatientAccess()    {

@@ -1187,6 +1187,10 @@ if ($('body').hasClass('home')) {
             return false;
         });
     }
+
+    //init select combobox with clinics
+    initComboboxes();
+    $('section#find-your-dentist input[type="text"].combobox').attr('placeholder', 'Search for a clinic...');
 } else if ($('body').hasClass('support-guide')) {
     if ($('.support-guide-slider').length) {
         $('.support-guide-slider').slick({

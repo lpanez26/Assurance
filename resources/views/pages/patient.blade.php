@@ -148,18 +148,25 @@
             </div>
         </div>
     </section>
-    <section class="beige-background padding-top-100 padding-bottom-100" id="find-your-dentist">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 text-center">
-                    <h2 class="lato-bold fs-45 padding-bottom-50">FIND YOUR DENTIST</h2>
-                </div>
-                <div class="col-xs-12 col-sm-8 col-sm-offset-2 text-center">
-                    <input type="text" class="green-arrow-background search-dentist-input" placeholder="Search by location or name..."/>
+    @if(!empty($clinis))
+        <section class="beige-background padding-top-100 padding-bottom-100" id="find-your-dentist">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <h2 class="lato-bold fs-45 padding-bottom-50">FIND YOUR DENTIST</h2>
+                    </div>
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2 text-center">
+                        <input type="text" class="green-arrow-background search-dentist-input" placeholder="Search by location or name..."/>
+                        <select class="combobox custom-input green-arrow-background">
+                            @foreach($clinics as $clinic)
+                                <option value="{{$clinic['id']}}">{{$clinic['name']}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
     <section class="cant-find-your-dentist-section">
         <picture class="two-dentists" itemscope="" itemtype="http://schema.org/ImageObject">
             <source media="(max-width: 1400px)" srcset="/assets/uploads/dentist-1366-not-loged-in-patients-page.png" />
