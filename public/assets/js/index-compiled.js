@@ -26643,6 +26643,7 @@ function bindLoginSigninPopupShow() {
                                                                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                                                 },
                                                                 success: function success(response) {
+                                                                    console.log(response, 'response');
                                                                     if (response.success && response.success.length > 0) {
                                                                         var select_html = '<option></option>';
                                                                         for (var i = 0, len = response.success.length; i < len; i += 1) {
