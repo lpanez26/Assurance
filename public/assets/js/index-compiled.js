@@ -26650,6 +26650,8 @@ function bindLoginSigninPopupShow() {
                                                                             select_html += '<option value="' + response.success[i].id + '">' + response.success[i].name + '</option>';
                                                                         }
 
+                                                                        $('.dentist .form-register .step.third .search-for-clinic select.combobox').html(select_html);
+
                                                                         initComboboxes();
                                                                         $('.dentist .form-register .step.third .search-for-clinic input[type="text"].combobox').attr('placeholder', 'Search for a clinic...');
 
