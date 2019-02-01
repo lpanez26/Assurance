@@ -26558,11 +26558,7 @@ function bindLoginSigninPopupShow() {
 
                                         $('.dentist .form-register .next-step').click(function () {
                                             var this_btn = $(this);
-                                            if (this_btn.attr('data-current-step') == 'third') {
-                                                this_btn.val('Create profile');
-                                            } else {
-                                                this_btn.val('Next');
-                                            }
+                                            var previous_step = this_btn.attr('data-current-step');
 
                                             switch (this_btn.attr('data-current-step')) {
                                                 case 'first':
@@ -26598,6 +26594,9 @@ function bindLoginSigninPopupShow() {
                                                     }
                                                     break;
                                                 case 'second':
+                                                    console.log(this_btn.attr('data-current-step'), 'this_btn.attr(\'data-current-step\'))');
+                                                    console.log(' case \'second\':');
+
                                                     var second_step_inputs = $('.dentist .form-register .step.second .custom-input');
                                                     var errors = false;
                                                     $('.dentist .form-register .step.second').find('.error-handle').remove();
