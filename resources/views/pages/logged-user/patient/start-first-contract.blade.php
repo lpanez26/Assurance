@@ -4,11 +4,29 @@
         <h1 class="fs-45 lato-bold text-center padding-top-110">Let's Start with a First Contract!</h1>
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-sm-offset-3 padding-top-20 padding-bottom-40">
-                    <input type="text" class="green-arrow-background search-dentist-input" placeholder="Find your preferred dentist/s in a snap"/>
-                </div>
+                @if(!empty($clinics))
+                    <div class="col-xs-12 col-sm-6 col-sm-offset-3 padding-top-20 padding-bottom-40">
+                        <select class="combobox custom-input green-arrow-background">
+                            <option></option>
+                            @foreach($clinics as $clinic)
+                                <option value="{{$clinic->id}}">{{$clinic->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
                 <div class="col-xs-12 col-sm-8 col-sm-offset-2 form">
-                    <form class="padding-top-50 padding-bottom-50 margin-left-40 margin-right-40 white-color-background">
+                    <div class="padding-top-50 padding-bottom-50 padding-left-40 padding-right-40 white-color-background form-wrapper">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                                    <h2 class="fs-40 lato-bold text-center">Invite Your Dentist. Earn 20,000 DCN!</h2>
+                                    <h3 class="fs-20 padding-top-20 padding-bottom-40 text-center">Help us change dentistry to the better by inviting new dentists. For each accepted invitation, you will receive a reward!</h3>
+                                    @include('partials.invite-dentists-form')
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{--<form class="padding-top-50 padding-bottom-50 margin-left-40 margin-right-40 white-color-background">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-8 col-sm-offset-2">
@@ -36,7 +54,7 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </form>--}}
                 </div>
             </div>
         </div>

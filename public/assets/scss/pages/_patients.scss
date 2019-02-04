@@ -56,13 +56,27 @@ section#find-your-dentist {
         background-color: white;
         z-index: 5;
     }
+    .combobox-container {
+        .input-group {
+            display: block;
+            .input-group-addon {
+                display: none;
+            }
+            ul.dropdown-menu {
+                width: 100%;
+            }
+        }
+    }
     >.container {
         z-index: 10;
         position: relative;
         .form {
-            form {
+            .form-wrapper {
                 @include rounded(20px);
                 @include box-shadow(0 2px 6px 0 rgba(0,0,0,.4));
+                .btn-container {
+                    text-align: center;
+                }
             }
         }
     }

@@ -16,7 +16,7 @@ class PatientController extends Controller {
                 return view('pages/logged-user/patient/have-contracts');
             } else {
                 //IF PATIENT HAVE NO EXISTING CONTRACTS
-                return view('pages/logged-user/patient/start-first-contract');
+                return view('pages/logged-user/patient/start-first-contract', ['clinics' => (new APIRequestsController())->getAllClinicsByName()]);
             }
         }else {
             return (new HomeController())->getView();

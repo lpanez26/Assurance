@@ -72,6 +72,8 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
     Route::post('/update-account', 'UserController@updateAccount')->middleware('HandleUserSession')->name('update-account');
 
+    Route::post('/add-dcn-address', 'UserController@addDcnAddress')->middleware('HandleUserSession')->name('add-dcn-address');
+
     Route::get('/user-logout', 'UserController@userLogout')->name('user-logout');
 
     Route::post('/dentist-register', 'DentistController@register')->name('dentist-register');

@@ -26212,22 +26212,34 @@ if ($('body').hasClass('home')) {
     //init select combobox with clinics
     initComboboxes();
 
-    $('section#find-your-dentist select.combobox').on('keydown', function (e) {
-        if (e.which == 13) {
+    if ($('section#find-your-dentist select.combobox').length) {
+        $('section#find-your-dentist select.combobox').on('keydown', function (e) {
+            if (e.which == 13) {
+                basic.showAlert('Please login to continue. If you don\'t have registration please click <a href="javascript:void(0)" class="show-login-signin">here</a>.', '', true);
+                bindLoginSigninPopupShow();
+            }
+        });
+
+        //on change show login popup
+        $('section#find-your-dentist input[type="text"].combobox').attr('placeholder', 'Search for a clinic...');
+
+        //on enter press show login popup
+        $('section#find-your-dentist select.combobox').on('change', function () {
+            basic.closeDialog();
             basic.showAlert('Please login to continue. If you don\'t have registration please click <a href="javascript:void(0)" class="show-login-signin">here</a>.', '', true);
             bindLoginSigninPopupShow();
-        }
-    });
+        });
+    }
 
-    //on change show login popup
-    $('section#find-your-dentist input[type="text"].combobox').attr('placeholder', 'Search for a clinic...');
+    if ($('section.section-logged-patient-form select.combobox').length) {
+        //on change show login popup
+        $('section.section-logged-patient-form input[type="text"].combobox').attr('placeholder', 'Find your preferred dentist/s in a snap...');
 
-    //on enter press show login popup
-    $('section#find-your-dentist input[type="text"].combobox').on('change', function () {
-        basic.closeDialog();
-        basic.showAlert('Please login to continue. If you don\'t have registration please click <a href="javascript:void(0)" class="show-login-signin">here</a>.', '', true);
-        bindLoginSigninPopupShow();
-    });
+        //on enter press show login popup
+        $('section.section-logged-patient-form select.combobox').on('change', function () {
+            console.log($(this).val());
+        });
+    }
 } else if ($('body').hasClass('support-guide')) {
     if ($('.support-guide-slider').length) {
         $('.support-guide-slider').slick({
@@ -26280,6 +26292,26 @@ if ($('body').hasClass('logged-in')) {
                 event.preventDefault();
             }
         });
+    } else if ($('body').hasClass('my-profile')) {
+        $('.my-profile-page-content .dropdown-hidden-menu button').click(function () {
+            var this_btn = $(this);
+            $('.my-profile-page-content .current-converted-price .amount').html((parseFloat($('.current-dcn-amount').html()) * parseFloat(this_btn.attr('data-multiple-with'))).toFixed(6));
+            $('.my-profile-page-content .current-converted-price .symbol span').html(this_btn.html());
+        });
+
+        if ($('form#add-dcn-address').length) {
+            $('form#add-dcn-address').on('submit', function (event) {
+                var this_form = $(this);
+                this_form.find('.error-handle').remove();
+                if (this_form.find('.address').val().trim() == '') {
+                    customErrorHandle(this_form.find('.address').parent(), 'Please enter your wallet address.');
+                    event.preventDefault();
+                } else if (!innerAddressCheck(this_form.find('.address').val().trim())) {
+                    customErrorHandle(this_form.find('.address').parent(), 'Please enter valid wallet address.');
+                    event.preventDefault();
+                }
+            });
+        }
     }
 }
 

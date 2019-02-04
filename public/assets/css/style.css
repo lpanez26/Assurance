@@ -5224,10 +5224,16 @@ section#find-your-dentist .combobox-container .input-group {
     height: 50px;
     background-color: white;
     z-index: 5; }
+  .section-logged-patient-form .combobox-container .input-group {
+    display: block; }
+    .section-logged-patient-form .combobox-container .input-group .input-group-addon {
+      display: none; }
+    .section-logged-patient-form .combobox-container .input-group ul.dropdown-menu {
+      width: 100%; }
   .section-logged-patient-form > .container {
     z-index: 10;
     position: relative; }
-    .section-logged-patient-form > .container .form form {
+    .section-logged-patient-form > .container .form .form-wrapper {
       -webkit-border-radius: 20px;
       -moz-border-radius: 20px;
       -ms-border-radius: 20px;
@@ -5236,6 +5242,8 @@ section#find-your-dentist .combobox-container .input-group {
       -moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
       -ms-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
       box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4); }
+      .section-logged-patient-form > .container .form .form-wrapper .btn-container {
+        text-align: center; }
 
 .logged-patient-your-benefits .custom-grid .cell {
   width: 16.6666666%;
@@ -5455,5 +5463,72 @@ body.logged-in .my-profile-page-content {
   background-position: center center; }
   .invite-dentists-container .my-profile-page-content .custom-input {
     max-width: 450px; }
+
+.my-profile .my-profile-page-content .current-converted-price .symbol {
+  position: relative;
+  padding-right: 20px;
+  color: #333333; }
+  .my-profile .my-profile-page-content .current-converted-price .symbol span {
+    text-transform: uppercase; }
+  .my-profile .my-profile-page-content .current-converted-price .symbol:after {
+    content: '';
+    right: 0;
+    border-style: solid;
+    border-width: 14px 6px 0 6px;
+    border-color: #616161 transparent transparent transparent;
+    top: 13px;
+    position: absolute; }
+  .my-profile .my-profile-page-content .current-converted-price .symbol .dropdown-hidden-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    z-index: 10;
+    right: 0;
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 7px 3px rgba(234, 234, 234, 0.9);
+    -moz-box-shadow: 0px 0px 7px 3px rgba(234, 234, 234, 0.9);
+    -ms-box-shadow: 0px 0px 7px 3px rgba(234, 234, 234, 0.9);
+    box-shadow: 0px 0px 7px 3px rgba(234, 234, 234, 0.9); }
+    .my-profile .my-profile-page-content .current-converted-price .symbol .dropdown-hidden-menu li button {
+      background-color: white;
+      border: 0;
+      padding: 0 10px;
+      font-size: 22px;
+      text-transform: uppercase;
+      -webkit-transition: 0.3s;
+      -moz-transition: 0.3s;
+      -o-transition: 0.3s;
+      -ms-transition: 0.3s;
+      transition: 0.3s; }
+      .my-profile .my-profile-page-content .current-converted-price .symbol .dropdown-hidden-menu li button:hover {
+        color: #126585; }
+  .my-profile .my-profile-page-content .current-converted-price .symbol:hover .dropdown-hidden-menu {
+    display: block; }
+.my-profile .my-profile-page-content h3 {
+  position: relative; }
+  .my-profile .my-profile-page-content h3 span {
+    background-color: white;
+    padding-right: 10px; }
+  .my-profile .my-profile-page-content h3:after {
+    content: '';
+    height: 3px;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    background-color: black;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%); }
+.my-profile .my-profile-page-content button.civic-custom-btn {
+  max-width: 240px;
+  border: 0;
+  -webkit-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+  -ms-box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2); }
+.my-profile .my-profile-page-content .missing-dcn-address .custom-input {
+  max-width: 450px; }
 
 /*# sourceMappingURL=style.css.map */

@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1 fs-0">
-                    @include('pages.logged-user.my-profile-menu')
+                    @include('partials.my-profile-menu')
                     <div class="my-profile-page-content inline-block-top">
                         <div class="profile-page-title padding-bottom-50">
                             <figure itemscope="" itemtype="http://schema.org/ImageObject" class="inline-block">

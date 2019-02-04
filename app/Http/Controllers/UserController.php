@@ -10,7 +10,21 @@ class UserController extends Controller {
     }
 
     protected function getMyProfileView()   {
-        return view('pages/logged-user/my-profile');
+        $currency_arr = array();
+        foreach(Controller::currencies as $currency) {
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_URL => 'https://api.coinmarketcap.com/v1/ticker/dentacoin/?convert=' . $currency,
+                CURLOPT_SSL_VERIFYPEER => 0
+            ));
+            curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+            $resp = json_decode(curl_exec($curl));
+            curl_close($curl);
+            $currency_arr[strtolower($currency)] = (array)$resp[0];
+        }
+
+        return view('pages/logged-user/my-profile', ['currency_arr' => $currency_arr, 'dcn_amount' => 123456]);
     }
 
     protected function getEditAccountView()   {
@@ -79,7 +93,7 @@ class UserController extends Controller {
             'country.required' => 'Country is required.',
         ]);
 
-        $data = $request->input();
+        $data = $this->clearPostData($request->input());
         $files = $request->file();
 
         //check email validation
@@ -110,16 +124,42 @@ class UserController extends Controller {
             }
         }
 
+        $post_fields_arr = array(
+            'name' => $data['full-name'],
+            'email' => $data['email'],
+            'country_code' => $data['country']
+        );
+
+        //if user selected new avatar submit it to the api
+        if(!empty($files['image'])) {
+            $post_fields_arr['avatar'] = curl_file_create($files['image']->getPathName(), 'image/'.pathinfo($files['image']->getClientOriginalName(), PATHINFO_EXTENSION), $files['image']->getClientOriginalName());
+        }
+
         //handle the API response
-        $api_response = (new APIRequestsController())->updateUserData($data, $files);
-        if($api_response->success) {
+        $api_response = (new APIRequestsController())->updateUserData($post_fields_arr);
+        if($api_response) {
             return redirect()->route('edit-account')->with(['success' => 'Your data was updated successfully.']);
         } else {
             return redirect()->route('edit-account')->with(['errors_response' => $api_response['errors']]);
         }
     }
 
-    function inviteDentists(Request $request) {
+    protected function addDcnAddress(Request $request) {
+        $data = $this->clearPostData($request->input());
+        $post_fields_arr = array(
+            'dcn_address' => $data['address']
+        );
+
+        //handle the API response
+        $api_response = (new APIRequestsController())->updateUserData($post_fields_arr);
+        if($api_response) {
+            return redirect()->route('edit-account')->with(['success' => 'Your Wallet Address was saved successfully.']);
+        } else {
+            return redirect()->route('edit-account')->with(['errors_response' => $api_response['errors']]);
+        }
+    }
+
+    protected function inviteDentists(Request $request) {
         $data = $request->input();
         var_dump($data);
         die();

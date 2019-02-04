@@ -10,9 +10,16 @@ use App\Http\Controllers\UserController;
 
 class HomeController extends Controller
 {
-    const currencies = ['USD', 'EUR', 'GBP', 'RUB', 'INR', 'CNY', 'JPY'];
-
     public function getView()   {
+        /*$session_arr = [
+            'token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImM3MzdhZTMwMmM4YTUwZWQ1MzQ1M2EzNGIzMmMyMzgzNDc2NTBkMWFlZGJkZDdhM2RhYjJhMTU4MzFlYjg5ODE3ZmUyOTJkZjQ0YjJhYjQ3In0.eyJhdWQiOiIxIiwianRpIjoiYzczN2FlMzAyYzhhNTBlZDUzNDUzYTM0YjMyYzIzODM0NzY1MGQxYWVkYmRkN2EzZGFiMmExNTgzMWViODk4MTdmZTI5MmRmNDRiMmFiNDciLCJpYXQiOjE1NDkwMjI0MDIsIm5iZiI6MTU0OTAyMjQwMiwiZXhwIjoxNTgwNTU4NDAyLCJzdWIiOiI2ODYyMiIsInNjb3BlcyI6W119.dVA5MMoe2-k1KWmw94k8OpBfLplVNPzDegRYtw_0phwEQHaypf9q2p0mgslFQjj4Tn4heNgaGlWyTr2GvLs2vQxFFRuxd5nRgOUi09U8Q7N0EujhvwueLoulb__8UFnzHiqMMXEpG1fvQ40loyAbmlqRE5qNCFqULVxUfaKXv779oyG5rCtTwWZY7QyhkmnOnCxnwXof8LinZvDB6ES1cK31X9haxkxpZpWtHsf8RkGDGYwvJzK0_3UMKB2qqdkfHuIOTk-0sB864p69zx9Mvm1RvZmtBElDoNPpzH8SDWsPKDGb4m34f1UtfF-sjyZ72UdFY6oW_V4tOm5QZKbHdnzVdjMEB_VMpNsBfaQB-BLLPa_wVOmrZZ2uaNcO772Ypa901MEruI56LL-Fp9ahlUpV3PEaHgCaqG0bhyr5OHwPXn25PRrHj0IsnhH68H_Bg4stv9HIr_3Fa-NVjwuVsMoxBGy_GBgKIisGl57fbtuGORJ0hXtkDxp_p6AKpB4GY6wyTHtCLZpnGk_ItKBBBAadAVoYzs3Koe9yJ0L5IQ3oCH9oeM-58STzH1gMYujn0OLDzzvYd3Frz6awTnaMTdCDv2bM0L6q3HPk433tInXVRlx8Vge7Y7G8w_exjzw6FtDWcSWQSNSCKbBjibyALXnuv7yVY1W5m0j3EPjdDi0',
+            'id' => '68622',
+            'type' => 'dentist',
+            'have_contracts' => false
+        ];
+
+        session(['logged_user' => $session_arr]);*/
+
         if((new UserController())->checkDentistSession()) {
             return (new DentistController())->getView();
         } else if((new UserController())->checkPatientSession()) {
@@ -76,7 +83,7 @@ class HomeController extends Controller
             }
         }
 
-        $view = view('partials/calculator', ['parameters' => (new CalculatorParametersController())->getAllCalculatorParameters(), 'currencies' => self::currencies, 'params' => $params]);
+        $view = view('partials/calculator', ['parameters' => (new CalculatorParametersController())->getAllCalculatorParameters(), 'currencies' => Controller::currencies, 'params' => $params]);
         $view = $view->render();
         return response()->json(['success' => $view]);
     }

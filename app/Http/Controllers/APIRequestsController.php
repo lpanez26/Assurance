@@ -145,18 +145,7 @@ class APIRequestsController extends Controller {
         }
     }
 
-    public function updateUserData($data, $files) {
-        $post_fields_arr = array(
-            'name' => $data['full-name'],
-            'email' => $data['email'],
-            'country_code' => $data['country']
-        );
-
-        //if user selected new avatar submit it to the api
-        if(!empty($files['image'])) {
-            $post_fields_arr['avatar'] = curl_file_create($files['image']->getPathName(), 'image/'.pathinfo($files['image']->getClientOriginalName(), PATHINFO_EXTENSION), $files['image']->getClientOriginalName());
-        }
-
+    public function updateUserData($data) {
         $header = array();
         $header[] = 'Accept: */*';
         $header[] = 'Authorization: Bearer ' . session('logged_user')['token'];
@@ -168,7 +157,7 @@ class APIRequestsController extends Controller {
             CURLOPT_POST => 1,
             CURLOPT_URL => 'https://api.dentacoin.com/api/user/',
             CURLOPT_SSL_VERIFYPEER => 0,
-            CURLOPT_POSTFIELDS => $post_fields_arr,
+            CURLOPT_POSTFIELDS => $data,
             CURLOPT_HTTPHEADER => $header
         ));
 
@@ -176,7 +165,7 @@ class APIRequestsController extends Controller {
         curl_close($curl);
 
         if(!empty($resp))   {
-            return $resp->data;
+            return $resp;
         }else {
             return false;
         }

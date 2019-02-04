@@ -25,6 +25,8 @@ class Controller extends BaseController
 
     const POSTS_PER_PAGE = 8;
 
+    const currencies = ['USD', 'EUR', 'GBP', 'RUB', 'INR', 'CNY', 'JPY'];
+
     public function __construct() {
         if(!empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->getPrefix() == '/' && !Request::isMethod('post'))    {
             View::share('mobile', $this->isMobile());
@@ -157,5 +159,12 @@ class Controller extends BaseController
         } else {
             return response()->json(['error' => 'No clinics found at the moment. Try again later.']);
         }
+    }
+
+    protected function clearPostData($data) {
+        foreach($data as &$value) {
+            $value = trim(strip_tags($value));
+        }
+        return $data;
     }
 }
