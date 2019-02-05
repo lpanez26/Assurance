@@ -11,8 +11,6 @@ class DentistController extends Controller
     }
 
     protected function getCreateContractView()   {
-        var_dump(session('logged_user'));
-        die();
         return view('pages/logged-user/dentist/create-contract');
     }
 

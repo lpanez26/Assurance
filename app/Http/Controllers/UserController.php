@@ -153,15 +153,9 @@ class UserController extends Controller {
         //handle the API response
         $api_response = (new APIRequestsController())->updateUserData($post_fields_arr);
         if($api_response) {
-            return redirect()->route('edit-account')->with(['success' => 'Your Wallet Address was saved successfully.']);
+            return redirect()->route('my-profile')->with(['success' => 'Your Wallet Address was saved successfully.']);
         } else {
-            return redirect()->route('edit-account')->with(['errors_response' => $api_response['errors']]);
+            return redirect()->route('my-profile')->with(['errors_response' => $api_response['errors']]);
         }
-    }
-
-    protected function inviteDentists(Request $request) {
-        $data = $request->input();
-        var_dump($data);
-        die();
     }
 }

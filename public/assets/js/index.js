@@ -3,8 +3,9 @@ var {getWeb3, getContractInstance} = require('./helper');
 basic.init();
 
 $(document).ready(function() {
-
     App.init();
+
+    fixButtonsFocus();
 });
 
 $(window).on('load', function() {
@@ -37,7 +38,6 @@ function fixButtonsFocus() {
         });
     }
 }
-fixButtonsFocus();
 
 function generateUrl(str)  {
     var str_arr = str.split('');
@@ -864,6 +864,10 @@ function bindLoginSigninPopupShow() {
                             $('.patient .form-register .step-errors-holder').html('');
                         });
 
+                        $(document).on('civicRead', async function (event) {
+                            $('.response-layer').show();
+                        });
+
                         $(document).on('facebookCustomBtnClicked', async function (event) {
                             $('.patient .form-register .step-errors-holder').html('');
                         });
@@ -1035,44 +1039,6 @@ function bindLoginSigninPopupShow() {
                                                     }
                                                 }
                                             });
-
-                                            //bind the logic for the fresh appended select
-                                            /*var timer, delay = 1000;
-                                            $('.dentist .form-register .step.third .search-for-clinic input[type="text"].combobox').bind('keydown', function(e) {
-                                                var this_input_val = $(this).val().trim();
-                                                clearTimeout(timer);
-                                                timer = setTimeout(function() {
-                                                    if(this_input_val != '') {
-                                                        $.ajax({
-                                                            type: 'POST',
-                                                            url: '/get-clinics-by-name/'+this_input_val,
-                                                            dataType: 'json',
-                                                            headers: {
-                                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                                            },
-                                                            success: function (response) {
-                                                                if(response.success && response.success.length > 0) {
-                                                                    var select_html = '<option></option>';
-                                                                    for(var i = 0, len = response.success.length; i < len; i+=1) {
-                                                                        select_html+='<option value="'+response.success[i].id+'">'+response.success[i].name+'</option>';
-                                                                    }
-
-                                                                    //refresh the combobox with the data received from the API
-                                                                    $('.dentist .form-register .step.third .search-for-clinic select.combobox').html(select_html).combobox('refresh');
-                                                                    $('.dentist .form-register .step.third .search-for-clinic input[type="text"].combobox').attr('placeholder', 'Search for a clinic...');
-
-                                                                    //update the hidden input value on the select change
-                                                                    $('.dentist .form-register .step.third .search-for-clinic select.combobox').on('change', function() {
-                                                                        $('.dentist .form-register .step.third .search-for-clinic input[name="clinic-id"]').val($(this).find('option:selected').val());
-                                                                    });
-                                                                } else if(response.error) {
-                                                                    basic.showAlert(response.error);
-                                                                }
-                                                            }
-                                                        });
-                                                    }
-                                                }, delay );
-                                            });*/
                                         } else {
                                             $('.dentist .form-register .step.third .search-for-clinic').html('');
                                         }
@@ -1242,4 +1208,67 @@ apiEventsListeners();
 //INIT LOGIC FOR ALL STEPS
 function customErrorHandle(el, string) {
     el.append('<div class="error-handle">'+string+'</div>');
+}
+
+if($('form#invite-dentists').length) {
+    $('form#invite-dentists').on('submit', function(event) {
+        event.preventDefault();
+        var this_form = $(this);
+
+        var form_fields = this_form.find('.custom-input.required');
+        var errors = false;
+        this_form.find('.error-handle').remove();
+
+        //check custom-input fields
+        for(var i = 0, len = form_fields.length; i < len; i+=1) {
+            if(form_fields.eq(i).is('select')) {
+                //IF SELECT TAG
+                if(form_fields.eq(i).val().trim() == '') {
+                    customErrorHandle(form_fields.eq(i).parent(), 'This field is required.');
+                    errors = true;
+                }
+            } else if(form_fields.eq(i).is('input')) {
+                //IF INPUT TAG
+                if(form_fields.eq(i).val().trim() == '') {
+                    customErrorHandle(form_fields.eq(i).parent(), 'This field is required.');
+                    errors = true;
+                }
+            }
+        }
+
+        if(!errors) {
+            $.ajax({
+                type: 'POST',
+                url: '/patient/get-invite-dentists-popup',
+                dataType: 'json',
+                data: {
+                    serialized: this_form.serialize()
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    basic.showDialog(response.success, 'invite-dentists-popup', null, true);
+                    fixButtonsFocus();
+
+                    var serialized_values = this_form.serializeArray();
+                    var custom_form_obj = {};
+                    $('.send-mail-invite-dentists').click(function() {
+                        $('.response-layer').show();
+
+                        //clear spamming
+                        $(this).unbind();
+
+                        for(var i = 0, len = serialized_values.length; i < len; i+=1) {
+                            custom_form_obj[serialized_values[i].name] = serialized_values[i].value;
+                        }
+
+                        customJavascriptForm('/patient/submit-invite-dentists', custom_form_obj, 'post');
+                    });
+                }
+            });
+
+            //AJAX
+        }
+    });
 }

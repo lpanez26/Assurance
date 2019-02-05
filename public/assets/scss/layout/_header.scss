@@ -46,6 +46,7 @@ header {
                 }
                 figure {
                     width: 40px;
+                    margin-left: 10px;
                     overflow: hidden;
                     @include rounded(50%);
                 }

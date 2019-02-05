@@ -31,6 +31,8 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
         die();
     })->name('test');
 
+    Route::get('/test123', 'Controller@testingTest')->name('test');
+
     //======================================= TEMPORALLY FOR DAPP TESTING ========================================
     Route::get('/dentist-test', 'HomeController@getDentistView')->name('dentist-test');
     Route::get('/patient-test', 'HomeController@getPatientView')->name('patient-test');
@@ -51,9 +53,11 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
         Route::post('/authenticate', 'PatientController@authenticate')->name('authenticate-patient');
 
+        Route::post('/get-invite-dentists-popup', 'PatientController@getInviteDentistsPopup')->name('get-invite-dentists-popup');
+
         Route::get('/invite-dentists', 'PatientController@getInviteDentistsView')->name('invite-dentists');
 
-        Route::post('/submit-invite-dentists', 'UserController@inviteDentists')->middleware('HandleUserSession')->name('submit-invite-dentists');
+        Route::post('/submit-invite-dentists', 'PatientController@inviteDentists')->middleware('HandleUserSession')->name('submit-invite-dentists');
     });
 
     Route::group(['prefix' => 'dentist', 'middleware' => 'HandleDentistSession'], function () {

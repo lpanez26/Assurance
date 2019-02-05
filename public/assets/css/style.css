@@ -4768,6 +4768,30 @@ input[type='text'], .custom-input {
 .display-block {
   display: block; }
 
+.response-layer {
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  display: none; }
+  .response-layer .wrapper {
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); }
+    .response-layer .wrapper img {
+      width: 150px;
+      margin-bottom: 15px; }
+
 .white-blue-green-btn {
   font-size: 20px;
   color: white;
@@ -4813,6 +4837,19 @@ input[type='text'], .custom-input {
     background-color: #126585; }
   .blue-green-white-btn:focus {
     color: #126585; }
+
+.light-blue-green-white-btn {
+  font-size: 20px;
+  color: #126585;
+  background-color: white;
+  padding: 10px 20px;
+  font-family: 'Calibri-Bold';
+  border: 2px solid #c9dfe7;
+  display: inline-block;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px; }
 
 .white-transparent-btn {
   font-size: 20px;
@@ -5060,6 +5097,7 @@ header {
         vertical-align: middle; }
       header > .container .logged-user > a figure {
         width: 40px;
+        margin-left: 10px;
         overflow: hidden;
         -webkit-border-radius: 50%;
         -moz-border-radius: 50%;
@@ -5447,6 +5485,34 @@ body.logged-in .my-profile-page-content {
     width: calc(100% - 160px); }
   body.logged-in .my-profile-page-content form#patient-update-profile .form-row .avatar {
     width: 150px; }
+
+.contract-creation-steps-container {
+  font-size: 0; }
+  .contract-creation-steps-container button {
+    width: calc(25% - 37.5px);
+    font-size: 16px; }
+  .contract-creation-steps-container .separator {
+    width: 50px;
+    height: 2px;
+    background-color: #c9dfe7; }
+
+.bootbox.invite-dentists-popup .modal-dialog {
+  width: 100%;
+  max-width: 800px; }
+  .bootbox.invite-dentists-popup .modal-dialog .modal-body {
+    padding: 20px 50px;
+    position: relative; }
+    .bootbox.invite-dentists-popup .modal-dialog .modal-body .bootbox-close-button {
+      float: none;
+      margin-top: auto !important;
+      position: absolute;
+      top: 0;
+      font-size: 40px;
+      right: 15px; }
+    .bootbox.invite-dentists-popup .modal-dialog .modal-body .single-line {
+      border-bottom: 1px solid #b7b7b7; }
+      .bootbox.invite-dentists-popup .modal-dialog .modal-body .single-line label {
+        color: #777777; }
 
 .manage-privacy-container .delete > figure, .manage-privacy-container .download > figure {
   width: 100px; }

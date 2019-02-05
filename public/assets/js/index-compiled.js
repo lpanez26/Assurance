@@ -25629,8 +25629,9 @@ var _require = __webpack_require__(115),
 basic.init();
 
 $(document).ready(function () {
-
     App.init();
+
+    fixButtonsFocus();
 });
 
 $(window).on('load', function () {});
@@ -25657,7 +25658,6 @@ function fixButtonsFocus() {
         });
     }
 }
-fixButtonsFocus();
 
 function generateUrl(str) {
     var str_arr = str.split('');
@@ -26443,13 +26443,13 @@ function bindLoginSigninPopupShow() {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function () {
-                    var _ref8 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee11(response) {
-                        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee11$(_context11) {
+                    var _ref8 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee12(response) {
+                        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee12$(_context12) {
                             while (1) {
-                                switch (_context11.prev = _context11.next) {
+                                switch (_context12.prev = _context12.next) {
                                     case 0:
                                         if (!response.success) {
-                                            _context11.next = 19;
+                                            _context12.next = 20;
                                             break;
                                         }
 
@@ -26507,13 +26507,13 @@ function bindLoginSigninPopupShow() {
                                             };
                                         }());
 
-                                        $(document).on('facebookCustomBtnClicked', function () {
+                                        $(document).on('civicRead', function () {
                                             var _ref10 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee9(event) {
                                                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee9$(_context9) {
                                                     while (1) {
                                                         switch (_context9.prev = _context9.next) {
                                                             case 0:
-                                                                $('.patient .form-register .step-errors-holder').html('');
+                                                                $('.response-layer').show();
 
                                                             case 1:
                                                             case 'end':
@@ -26528,13 +26528,13 @@ function bindLoginSigninPopupShow() {
                                             };
                                         }());
 
-                                        $(document).on('customCivicFbStopperTriggered', function () {
+                                        $(document).on('facebookCustomBtnClicked', function () {
                                             var _ref11 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee10(event) {
                                                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee10$(_context10) {
                                                     while (1) {
                                                         switch (_context10.prev = _context10.next) {
                                                             case 0:
-                                                                customErrorHandle($('.patient .form-register .step-errors-holder'), 'Please agree with our privacy policy.');
+                                                                $('.patient .form-register .step-errors-holder').html('');
 
                                                             case 1:
                                                             case 'end':
@@ -26546,6 +26546,27 @@ function bindLoginSigninPopupShow() {
 
                                             return function (_x10) {
                                                 return _ref11.apply(this, arguments);
+                                            };
+                                        }());
+
+                                        $(document).on('customCivicFbStopperTriggered', function () {
+                                            var _ref12 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee11(event) {
+                                                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee11$(_context11) {
+                                                    while (1) {
+                                                        switch (_context11.prev = _context11.next) {
+                                                            case 0:
+                                                                customErrorHandle($('.patient .form-register .step-errors-holder'), 'Please agree with our privacy policy.');
+
+                                                            case 1:
+                                                            case 'end':
+                                                                return _context11.stop();
+                                                        }
+                                                    }
+                                                }, _callee11, this);
+                                            }));
+
+                                            return function (_x11) {
+                                                return _ref12.apply(this, arguments);
                                             };
                                         }());
                                         // ====================== /PATIENT LOGIN/SIGNUP LOGIC ======================
@@ -26597,10 +26618,10 @@ function bindLoginSigninPopupShow() {
 
                                         //SECOND STEP INIT LOGIC
                                         //load address script
-                                        _context11.next = 15;
+                                        _context12.next = 16;
                                         return $.getScript('/assets/js/address.js', function () {});
 
-                                    case 15:
+                                    case 16:
 
                                         $('#dentist-country').on('change', function () {
                                             $('.step.second .phone .country-code').html('+' + $(this).find('option:selected').attr('data-code'));
@@ -26715,42 +26736,6 @@ function bindLoginSigninPopupShow() {
                                                                     }
                                                                 }
                                                             });
-
-                                                            //bind the logic for the fresh appended select
-                                                            /*var timer, delay = 1000;
-                                                            $('.dentist .form-register .step.third .search-for-clinic input[type="text"].combobox').bind('keydown', function(e) {
-                                                                var this_input_val = $(this).val().trim();
-                                                                clearTimeout(timer);
-                                                                timer = setTimeout(function() {
-                                                                    if(this_input_val != '') {
-                                                                        $.ajax({
-                                                                            type: 'POST',
-                                                                            url: '/get-clinics-by-name/'+this_input_val,
-                                                                            dataType: 'json',
-                                                                            headers: {
-                                                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                                                            },
-                                                                            success: function (response) {
-                                                                                if(response.success && response.success.length > 0) {
-                                                                                    var select_html = '<option></option>';
-                                                                                    for(var i = 0, len = response.success.length; i < len; i+=1) {
-                                                                                        select_html+='<option value="'+response.success[i].id+'">'+response.success[i].name+'</option>';
-                                                                                    }
-                                                                                      //refresh the combobox with the data received from the API
-                                                                                    $('.dentist .form-register .step.third .search-for-clinic select.combobox').html(select_html).combobox('refresh');
-                                                                                    $('.dentist .form-register .step.third .search-for-clinic input[type="text"].combobox').attr('placeholder', 'Search for a clinic...');
-                                                                                      //update the hidden input value on the select change
-                                                                                    $('.dentist .form-register .step.third .search-for-clinic select.combobox').on('change', function() {
-                                                                                        $('.dentist .form-register .step.third .search-for-clinic input[name="clinic-id"]').val($(this).find('option:selected').val());
-                                                                                    });
-                                                                                } else if(response.error) {
-                                                                                    basic.showAlert(response.error);
-                                                                                }
-                                                                            }
-                                                                        });
-                                                                    }
-                                                                }, delay );
-                                                            });*/
                                                         } else {
                                                             $('.dentist .form-register .step.third .search-for-clinic').html('');
                                                         }
@@ -26806,12 +26791,12 @@ function bindLoginSigninPopupShow() {
                                         });
                                         // ====================== /DENTIST LOGIN/SIGNUP LOGIC ======================
 
-                                    case 19:
+                                    case 20:
                                     case 'end':
-                                        return _context11.stop();
+                                        return _context12.stop();
                                 }
                             }
-                        }, _callee11, this);
+                        }, _callee12, this);
                     }));
 
                     function success(_x7) {
@@ -26905,11 +26890,11 @@ function initComboboxes() {
 function apiEventsListeners() {
     //login
     $(document).on('successResponseCoreDBApi', function () {
-        var _ref12 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee12(event) {
+        var _ref13 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee13(event) {
             var custom_form_obj;
-            return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee12$(_context12) {
+            return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee13$(_context13) {
                 while (1) {
-                    switch (_context12.prev = _context12.next) {
+                    switch (_context13.prev = _context13.next) {
                         case 0:
                             if (event.response_data.token) {
                                 custom_form_obj = {
@@ -26933,14 +26918,14 @@ function apiEventsListeners() {
 
                         case 1:
                         case 'end':
-                            return _context12.stop();
+                            return _context13.stop();
                     }
                 }
-            }, _callee12, this);
+            }, _callee13, this);
         }));
 
-        return function (_x11) {
-            return _ref12.apply(this, arguments);
+        return function (_x12) {
+            return _ref13.apply(this, arguments);
         };
     }());
 
@@ -26953,6 +26938,69 @@ apiEventsListeners();
 //INIT LOGIC FOR ALL STEPS
 function customErrorHandle(el, string) {
     el.append('<div class="error-handle">' + string + '</div>');
+}
+
+if ($('form#invite-dentists').length) {
+    $('form#invite-dentists').on('submit', function (event) {
+        event.preventDefault();
+        var this_form = $(this);
+
+        var form_fields = this_form.find('.custom-input.required');
+        var errors = false;
+        this_form.find('.error-handle').remove();
+
+        //check custom-input fields
+        for (var i = 0, len = form_fields.length; i < len; i += 1) {
+            if (form_fields.eq(i).is('select')) {
+                //IF SELECT TAG
+                if (form_fields.eq(i).val().trim() == '') {
+                    customErrorHandle(form_fields.eq(i).parent(), 'This field is required.');
+                    errors = true;
+                }
+            } else if (form_fields.eq(i).is('input')) {
+                //IF INPUT TAG
+                if (form_fields.eq(i).val().trim() == '') {
+                    customErrorHandle(form_fields.eq(i).parent(), 'This field is required.');
+                    errors = true;
+                }
+            }
+        }
+
+        if (!errors) {
+            $.ajax({
+                type: 'POST',
+                url: '/patient/get-invite-dentists-popup',
+                dataType: 'json',
+                data: {
+                    serialized: this_form.serialize()
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function success(response) {
+                    basic.showDialog(response.success, 'invite-dentists-popup', null, true);
+                    fixButtonsFocus();
+
+                    var serialized_values = this_form.serializeArray();
+                    var custom_form_obj = {};
+                    $('.send-mail-invite-dentists').click(function () {
+                        $('.response-layer').show();
+
+                        //clear spamming
+                        $(this).unbind();
+
+                        for (var i = 0, len = serialized_values.length; i < len; i += 1) {
+                            custom_form_obj[serialized_values[i].name] = serialized_values[i].value;
+                        }
+
+                        customJavascriptForm('/patient/submit-invite-dentists', custom_form_obj, 'post');
+                    });
+                }
+            });
+
+            //AJAX
+        }
+    });
 }
 
 /***/ }),

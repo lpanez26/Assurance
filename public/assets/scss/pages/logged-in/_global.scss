@@ -86,3 +86,43 @@ body.logged-in {
         }
     }
 }
+
+.contract-creation-steps-container {
+    font-size: 0;
+    button {
+        width: calc(25% - 37.5px);
+        font-size: 16px;
+    }
+    .separator {
+        width: 50px;
+        height: 2px;
+        background-color: $light_blue_green_color;
+    }
+}
+
+.bootbox {
+    &.invite-dentists-popup {
+        .modal-dialog {
+            width: 100%;
+            max-width: 800px;
+            .modal-body {
+                padding: 20px 50px;
+                position: relative;
+                .bootbox-close-button {
+                    float: none;
+                    margin-top: auto !important;
+                    position: absolute;
+                    top: 0;
+                    font-size: 40px;
+                    right: 15px;
+                }
+                .single-line {
+                    border-bottom: 1px solid #b7b7b7;
+                    label {
+                        color: #777777;
+                    }
+                }
+            }
+        }
+    }
+}

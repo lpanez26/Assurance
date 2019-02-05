@@ -125,6 +125,15 @@
         </a>
     </figure>
 @endif
+
+<div class="response-layer">
+    <div class="wrapper">
+        <figure itemscope="" itemtype="http://schema.org/ImageObject">
+            <img src="/assets/images/loader.gif" alt="Loader">
+        </figure>
+    </div>
+</div>
+
 {{--/Show the sticky calculate button only for dentists--}}
 <script src="/assets/js/basic.js"></script>
 <script src="/dist/js/front-libs-script.js?v=1.0.14"></script>

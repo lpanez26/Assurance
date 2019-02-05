@@ -182,6 +182,19 @@
   .blue-green-white-btn:focus {
     color: #126585; }
 
+.light-blue-green-white-btn {
+  font-size: 20px;
+  color: #126585;
+  background-color: white;
+  padding: 10px 20px;
+  font-family: 'Calibri-Bold';
+  border: 2px solid #c9dfe7;
+  display: inline-block;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  border-radius: 4px; }
+
 .white-transparent-btn {
   font-size: 20px;
   color: white;

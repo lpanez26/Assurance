@@ -1,12 +1,21 @@
 <form method="POST" enctype="multipart/form-data" id="invite-dentists" action="{{route('submit-invite-dentists')}}">
     <div class="padding-bottom-15 fs-0">
-        <input class="fs-16 custom-input" maxlength="100" type="text" name="dentist-name" placeholder="Your Dentist's Name"/>
+        <select name="title" class="custom-input required">
+            <option value="Dr.">Mr.</option>
+            <option value="Ms.">Ms.</option>
+            <option value="Dr.">Dr.</option>
+            <option value="Prof.">Prof.</option>
+            <option value="Prof. Dr.">Prof. Dr.</option>
+        </select>
     </div>
     <div class="padding-bottom-15 fs-0">
-        <input class="fs-16 custom-input" maxlength="250" type="url" name="website" placeholder="Your Dentist's Website"/>
+        <input class="fs-16 custom-input required" maxlength="100" type="text" name="dentist-name" placeholder="Your Dentist's Name"/>
     </div>
     <div class="padding-bottom-15 fs-0">
-        <input class="fs-16 custom-input" maxlength="100" type="email" name="email" placeholder="Your Dentist's Email"/>
+        <input class="fs-16 custom-input required" maxlength="250" type="url" name="website" placeholder="Your Dentist's Website"/>
+    </div>
+    <div class="padding-bottom-15 fs-0">
+        <input class="fs-16 custom-input required" maxlength="100" type="email" name="email" placeholder="Your Dentist's Email"/>
     </div>
     <div class="padding-bottom-15 fs-0">
         <input class="fs-16 custom-input" maxlength="100" type="number" name="phone" placeholder="Your Dentist's Phone"/>
