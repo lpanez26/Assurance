@@ -993,11 +993,11 @@ input[type='text'], .custom-input {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1001;
+    z-index: 1100;      
     display: none;
     .wrapper {
         text-align: center;
-        padding-left: 15px; 
+        padding-left: 15px;
         padding-right: 15px;
         font-size: 20px;
         @include vertical-horizontal-align(absolute);
