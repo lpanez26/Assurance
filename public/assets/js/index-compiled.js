@@ -26993,7 +26993,9 @@ if ($('form#invite-dentists').length) {
                             custom_form_obj[serialized_values[i].name] = serialized_values[i].value;
                         }
 
-                        customJavascriptForm('/patient/submit-invite-dentists', custom_form_obj, 'post');
+                        setTimeout(function () {
+                            customJavascriptForm('/patient/submit-invite-dentists', custom_form_obj, 'post');
+                        }, 1500);
                     });
                 }
             });

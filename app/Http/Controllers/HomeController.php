@@ -17,6 +17,7 @@ class HomeController extends Controller
             'type' => 'dentist',
             'have_contracts' => false
         ];
+
         session(['logged_user' => $session_arr]);*/
 
         if((new UserController())->checkDentistSession()) {
