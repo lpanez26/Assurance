@@ -46,22 +46,6 @@
                 }
             }
         }
-        h3 {
-            position: relative;
-            span {
-                background-color: white;
-                padding-right: 10px;
-            }
-            &:after {
-                content: '';
-                height: 3px;
-                left: 0;
-                z-index: -1;
-                width: 100%;
-                background-color: black;
-                @include vertical-align(absolute);
-            }
-        }
         button.civic-custom-btn {
             max-width: 240px;
             border: 0;

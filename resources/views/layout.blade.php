@@ -129,7 +129,15 @@
 <div class="response-layer">
     <div class="wrapper">
         <figure itemscope="" itemtype="http://schema.org/ImageObject">
-            <img src="/assets/images/loader.gif" alt="Loader">
+            <img src="/assets/images/loader.gif" class="max-width-160" alt="Loader">
+        </figure>
+    </div>
+</div>
+
+<div class="contract-response-layer">
+    <div class="wrapper">
+        <figure itemscope="" itemtype="http://schema.org/ImageObject">
+            <img src="/assets/images/contract-assurance-loading.gif" class="max-width-440" alt="Loader">
         </figure>
     </div>
 </div>

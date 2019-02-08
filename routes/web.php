@@ -16,18 +16,15 @@ Route::get('/refresh-captcha', 'Controller@refreshCaptcha')->name('refresh-captc
 Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function () {
 
     //======================================= PAGES ========================================
-
     Route::get('/', 'HomeController@getView')->name('home');
-
 
     Route::get('/support-guide', 'SupportGuideController@getView')->name('support-guide');
 
     Route::get('/wallet-instructions', 'WalletInstructionsController@getView')->name('wallet-instructions');
 
     Route::get('/test', function() {
-        var_dump(session('logged_user'));
-        //var_dump((new \App\Http\Controllers\APIRequestsController())->getUserData(68244));
-        var_dump((new \App\Http\Controllers\APIRequestsController())->getAllClinicsByName());
+        var_dump((new \App\Http\Controllers\APIRequestsController())->getAllEnums());
+        //var_dump((new \App\Http\Controllers\APIRequestsController())->getPatientsByEmail('miroslav.nedelchev@dentacoin.com'));
         die();
     })->name('test');
 

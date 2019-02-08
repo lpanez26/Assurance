@@ -84,7 +84,24 @@ class APIRequestsController extends Controller {
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_URL => "https://api.dentacoin.com/api/countries/",
+            CURLOPT_URL => 'https://api.dentacoin.com/api/countries/',
+            CURLOPT_SSL_VERIFYPEER => 0
+        ));
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        $resp = json_decode(curl_exec($curl));
+        curl_close($curl);
+        if(!empty($resp))   {
+            return $resp->data;
+        }else {
+            return false;
+        }
+    }
+
+    public function getAllEnums() {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => 'https://api.dentacoin.com/api/enums/',
             CURLOPT_SSL_VERIFYPEER => 0
         ));
         curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
@@ -127,6 +144,33 @@ class APIRequestsController extends Controller {
         }
     }
 
+    public function getPatientsByEmail($email) {
+        $post_fields_arr = array(
+            'type' => 'dentist',
+            'email' => $email,
+            'is_approved' => true
+        );
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_POST => 1,
+            CURLOPT_URL => 'https://api.dentacoin.com/api/users/',
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_POSTFIELDS => $post_fields_arr
+        ));
+
+        $resp = json_decode(curl_exec($curl));
+        curl_close($curl);
+
+        if(!empty($resp))   {
+            return $resp->data;
+        }else {
+
+            return response()->json(['error' => 'API not working at this moment. Try again later.']);
+        }
+    }
+
     public function getUserData($id) {
         $curl = curl_init();
         curl_setopt_array($curl, array(
@@ -140,6 +184,28 @@ class APIRequestsController extends Controller {
 
         if(!empty($resp))   {
             return $resp->data;
+        }else {
+            return false;
+        }
+    }
+
+    public function checkIfUserExist($email) {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_POST => 1,
+            CURLOPT_URL => 'https://api.dentacoin.com/api/check-email/',
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_POSTFIELDS => array(
+                'email' => $email
+            )
+        ));
+
+        $resp = json_decode(curl_exec($curl));
+        curl_close($curl);
+
+        if(!empty($resp))   {
+            return $resp;
         }else {
             return false;
         }

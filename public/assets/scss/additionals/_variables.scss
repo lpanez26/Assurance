@@ -7,9 +7,18 @@ $blue_green_color: #126585;
 $light_blue_green_color: #c9dfe7;
 $beige_color: #fafafa;
 $solid_gray: #f2f2f2;
+$light_gray: #888888;
 
 .dark-color {
     color: $dark_color;
+}
+
+.light-gray-color {
+    color: $light_gray;
+}
+
+.light-gray-color-background {
+    background-color: $light_gray;
 }
 
 .solid-gray-color {

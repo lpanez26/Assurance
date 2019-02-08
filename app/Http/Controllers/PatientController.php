@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\InviteDentistsReward;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -11,7 +12,7 @@ class PatientController extends Controller {
     }
 
     protected function getInviteDentistsView() {
-        return view('pages/logged-user/patient/invite-dentists');
+        return view('pages/logged-user/patient/invite-dentists', ['invited_dentists_list' => InviteDentistsReward::where(array('patient_id' => session('logged_user')['id']))->get()->sortByDesc('created_at')->all()]);
     }
 
     public function getPatientAccess()    {
@@ -56,6 +57,10 @@ class PatientController extends Controller {
         $data = $request->input('serialized');
         parse_str($data, $postdata);
 
+        //===================================================================================
+        //CHECK HERE IF THIS DENTIST EMAIL IS NOT ALREADY REGISTERED IN LOCAL DB AND IN API
+        //===================================================================================
+
         $view = view('partials/invite-dentists-popup', ['data' => $postdata]);
         $view = $view->render();
         return response()->json(['success' => $view]);
@@ -74,12 +79,16 @@ class PatientController extends Controller {
             'email.required' => 'Email is required.'
         ]);
 
-        $data = $request->input();
+        $data = $this->clearPostData($request->input());
 
         //check email validation
-        if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL))   {
+        if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             return redirect()->route('invite-dentists')->with(['error' => 'Your form was not sent. Please try again with valid email.']);
         }
+
+        //===================================================================================
+        //CHECK HERE IF THIS DENTIST EMAIL IS NOT ALREADY REGISTERED IN LOCAL DB AND IN API
+        //===================================================================================
 
         $sender = (new APIRequestsController())->getUserData(session('logged_user')['id']);
 
@@ -91,6 +100,23 @@ class PatientController extends Controller {
             $message->setBody($body, 'text/html');
         });
 
-        return redirect()->route('invite-dentists')->with(['success' => 'Email has been sent to your dentist successfully.']);
+        if(count(Mail::failures()) > 0) {
+            return redirect()->route('invite-dentists')->with(['error' => 'Email has not been sent to your dentist, please try again later.']);
+        } else {
+            $invite_dentist_reward = new InviteDentistsReward();
+            $invite_dentist_reward->patient_id = session('logged_user')['id'];
+            $invite_dentist_reward->dentist_email = $data['email'];
+            $invite_dentist_reward->title = $data['title'];
+            $invite_dentist_reward->name = $data['dentist-name'];
+            $invite_dentist_reward->website = $data['website'];
+            if(!empty($data['phone'])) {
+                $invite_dentist_reward->phone = $data['phone'];
+            }
+
+            //saving to DB
+            $invite_dentist_reward->save();
+
+            return redirect()->route('invite-dentists')->with(['success' => 'Email has been sent to your dentist successfully.']);
+        }
     }
 }

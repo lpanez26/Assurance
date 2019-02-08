@@ -11,7 +11,7 @@ class DentistController extends Controller
     }
 
     protected function getCreateContractView()   {
-        return view('pages/logged-user/dentist/create-contract');
+        return view('pages/logged-user/dentist/create-contract', ['countries' => (new APIRequestsController())->getAllCountries()]);
     }
 
     protected function register(Request $request) {

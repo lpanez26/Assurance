@@ -574,6 +574,8 @@ if($('body').hasClass('home')) {
                     if(response.success) {
                         basic.closeDialog();
                         basic.showDialog(response.success, 'calculator-popup', null, true);
+                        $('#number-of-patients').focus();
+
                         $('.selectpicker').selectpicker('refresh');
                         fixButtonsFocus();
 
@@ -648,7 +650,7 @@ if($('body').hasClass('home')) {
 //LOGGED USER LOGIC
 if($('body').hasClass('logged-in')) {
     if($('body').hasClass('edit-account')) {
-        styleAvatarUploadButton('body.edit-account form#patient-update-profile .avatar button label');
+        styleAvatarUploadButton('form#patient-update-profile .avatar button label');
 
         $('form#patient-update-profile').on('submit', function(event) {
             var this_form = $(this);
@@ -695,6 +697,182 @@ if($('body').hasClass('logged-in')) {
                 }
             });
         }
+    }else if($('body').hasClass('create-contract')) {
+        styleAvatarUploadButton('.steps-body .avatar button label');
+
+        function customCreateContractErrorHandle(el, text) {
+            el.addClass('with-error');
+            el.closest('.single-row').addClass('row-with-error');
+            el.parent().find('label').append('<span class="error-in-label">'+text+'</span>');
+        }
+
+        var form_props_arr = ['professional-company-number', 'postal-address', 'country', 'phone', 'website', 'address', 'fname', 'lname', 'email', 'monthly-premium', 'check-ups-per-year', 'teeth-cleaning-per-year'];
+        var create_contract_form = $('form#dentist-create-contract');
+        create_contract_form.find('.terms-and-conditions-long-list').mCustomScrollbar();
+
+        function validateStepFields(step_fields, step) {
+            step_fields.removeClass('with-error');
+            $('.step.'+step+' .single-row').removeClass('row-with-error');
+            $('.step.'+step+' .single-row label span').remove();
+
+            var inner_error = false;
+            for(var i = 0, len = step_fields.length; i < len; i+=1) {
+                if(step_fields.eq(i).val().trim() == '') {
+                    customCreateContractErrorHandle(step_fields.eq(i), 'Required field cannot be left blank.');
+                    inner_error = true;
+                } else if(step_fields.eq(i).attr('data-type') == 'email' && !basic.validateEmail(step_fields.eq(i).val().trim())) {
+                    customCreateContractErrorHandle(step_fields.eq(i), 'Please enter valid email.');
+                    inner_error = true;
+                } else if(step_fields.eq(i).attr('data-type') == 'address' && !innerAddressCheck(step_fields.eq(i).val().trim())) {
+                    customCreateContractErrorHandle(step_fields.eq(i), 'Please enter valid wallet address.');
+                    inner_error = true;
+                } else if(step_fields.eq(i).attr('data-type') == 'website' && !basic.validateUrl(step_fields.eq(i).val().trim())) {
+                    customCreateContractErrorHandle(step_fields.eq(i), 'Please enter valid website.');
+                    inner_error = true;
+                }else if(step_fields.eq(i).attr('data-type') == 'phone' && !basic.validatePhone(step_fields.eq(i).val().trim())) {
+                    customCreateContractErrorHandle(step_fields.eq(i), 'Please enter valid phone.');
+                    inner_error = true;
+                }
+            }
+
+            if(inner_error) {
+                window.scrollTo(0, create_contract_form.offset().top);
+            }
+
+            return inner_error;
+        }
+
+        $('.contract-creation-steps-container button').bind('click.validateStepsNav', function() {
+            var this_btn = $(this);
+            var current_step_error = validateStepFields($('.step.'+create_contract_form.find('.next').attr('data-current-step')+' input.right-field'), create_contract_form.find('.next').attr('data-current-step'));
+
+            if(current_step_error) {
+                this_btn.attr('data-stopper', 'true');
+            } else {
+                this_btn.attr('data-stopper', 'false');
+            }
+        });
+
+        function onStepValidationSuccess(current_step, next_step, button) {
+            console.log(next_step, 'next_step');
+            if(next_step == 'four') {
+                showContractResponseLayer(1000);
+            }else {
+                showResponseLayer(500);
+            }
+
+            $('.step.'+current_step).hide();
+            $('.step.'+next_step).show();
+            window.scrollTo(0, $('.contract-creation-steps-container').offset().top);
+
+            if(current_step == 'two') {
+                button.html('GENERATE CONTRACT SAMPLE');
+            } else if(current_step == 'three') {
+                button.html('SEND CONTRACT SAMPLE');
+            } else {
+                button.html('NEXT');
+            }
+
+            $('.contract-creation-steps-container button[data-step="'+next_step+'"]').removeClass('not-allowed-cursor').addClass('active');
+            $('.contract-creation-steps-container button[data-step="'+current_step+'"]').removeClass('active not-passed').addClass('passed');
+
+            $('.contract-creation-steps-container button[data-step="'+next_step+'"]').unbind('.moveNextStep').bind('click.moveNextStep', function() {
+                if($(this).attr('data-stopper') != 'true') {
+                    button.attr('data-current-step', next_step);
+                    $('.contract-creation-steps-container button[data-step="'+current_step+'"]').addClass('passed');
+                    $('.contract-creation-steps-container button').removeClass('active');
+                    $(this).addClass('active');
+
+                    console.log(next_step, 'next_step');
+                    if(next_step == 'four') {
+                        showContractResponseLayer(3000);
+                    }else {
+                        showResponseLayer(500);
+                    }
+
+                    $('.step').hide();
+                    $('.step.'+next_step).show();
+                    window.scrollTo(0, $('.contract-creation-steps-container').offset().top);
+
+                    if(next_step == 'three') {
+                        button.html('GENERATE CONTRACT SAMPLE');
+                    } else if(next_step == 'four') {
+                        button.html('SEND CONTRACT SAMPLE');
+                        for(var i = 0, len = form_props_arr.length; i < len; i+=1) {
+                            if(create_contract_form.find('[name="'+form_props_arr[i]+'"]').is('input')) {
+                                $('.step.four #'+form_props_arr[i]).html(create_contract_form.find('input[name="'+form_props_arr[i]+'"]').val().trim());
+                            } else if(create_contract_form.find('[name="'+form_props_arr[i]+'"]').is('select')) {
+                                $('.step.four #'+form_props_arr[i]).html(create_contract_form.find('select[name="'+form_props_arr[i]+'"]').val().trim());
+                            } else {
+                                $('.step.four #'+form_props_arr[i]).html(create_contract_form.find('[name="'+form_props_arr[i]+'"]').html().trim());
+                            }
+                        }
+                    } else {
+                        button.html('NEXT');
+                    }
+                }
+            });
+            button.attr('data-current-step', next_step);
+        }
+
+        create_contract_form.find('.next').click(function() {
+            var this_btn = $(this);
+
+            switch(this_btn.attr('data-current-step')) {
+                case 'one':
+                    var first_step_fields = $('.step.one input.right-field');
+                    var first_step_errors = validateStepFields(first_step_fields, 'one');
+
+                    if(!first_step_errors) {
+                        onStepValidationSuccess('one', 'two', this_btn);
+
+                        $('.contract-creation-steps-container button[data-step="one"]').unbind('.moveNextStep').bind('click.moveNextStep', function() {
+                            if($(this).attr('data-stopper') != 'true') {
+                                this_btn.attr('data-current-step', 'one');
+                                $('.contract-creation-steps-container button').removeClass('active');
+                                $(this).addClass('active');
+
+                                showResponseLayer(500);
+                                $('.step').hide();
+                                $('.step.one').show();
+                                window.scrollTo(0, $('.contract-creation-steps-container').offset().top);
+
+                                this_btn.html('NEXT');
+                            }
+                        });
+                    }
+                    break;
+                case 'two':
+                    var second_step_fields = $('.step.two input.right-field');
+                    var second_step_errors = validateStepFields(second_step_fields, 'two');
+
+                    if(!second_step_errors) {
+                        onStepValidationSuccess('two', 'three', this_btn);
+                    }
+                    break;
+                case 'three':
+                    var third_step_fields = $('.step.three .right-field');
+                    var third_step_errors = validateStepFields(third_step_fields, 'three');
+
+                    if(!third_step_errors) {
+                        onStepValidationSuccess('three', 'four', this_btn);
+
+                        for(var i = 0, len = form_props_arr.length; i < len; i+=1) {
+                            if(create_contract_form.find('[name="'+form_props_arr[i]+'"]').is('input')) {
+                                $('.step.four #'+form_props_arr[i]).html(create_contract_form.find('input[name="'+form_props_arr[i]+'"]').val().trim());
+                            } else if(create_contract_form.find('[name="'+form_props_arr[i]+'"]').is('select')) {
+                                $('.step.four #'+form_props_arr[i]).html(create_contract_form.find('select[name="'+form_props_arr[i]+'"]').val().trim());
+                            } else {
+                                $('.step.four #'+form_props_arr[i]).html(create_contract_form.find('[name="'+form_props_arr[i]+'"]').html().trim());
+                            }
+                        }
+                    }
+                    break;
+                case 'four':
+                    console.log('BUILD EMAIL TEMPLATE AND SEND IT TO PATIENT');
+                    break;
+            }
+        });
     }
 }
 
@@ -750,42 +928,54 @@ function calculateLogic() {
             'currency' : currency.trim()
         };
 
-        $.ajax({
-            type: 'POST',
-            url: '/get-calculator-result',
-            dataType: 'json',
-            data: calculator_data,
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (response) {
-                basic.closeDialog();
-                basic.showDialog(response.success, 'calculator-result-popup', null, true);
-                fixButtonsFocus();
+        $('.response-layer').show();
+        setTimeout(function() {
+            $.ajax({
+                type: 'POST',
+                url: '/get-calculator-result',
+                dataType: 'json',
+                data: calculator_data,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    basic.closeDialog();
+                    basic.showDialog(response.success, 'calculator-result-popup', null, true);
+                    $('.response-layer').hide();
 
-                $('.calculate-again').click(function() {
-                    $.ajax({
-                        type: 'POST',
-                        url: '/get-calculator-html',
-                        dataType: 'json',
-                        data: calculator_data,
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function (response) {
-                            if (response.success) {
-                                basic.closeDialog();
-                                basic.showDialog(response.success, 'calculator-popup', null, true);
-                                $('.selectpicker').selectpicker('refresh');
-                                fixButtonsFocus();
+                    var comma_separator_number_step = $.animateNumber.numberStepFactories.separator(',');
+                    $('.calculator-result-popup .price-container .result .amount').animateNumber({
+                        number: parseFloat($('.calculator-result-popup .price-container .result .amount').attr('data-result')),
+                        numberStep: comma_separator_number_step
+                    }, 1000);
 
-                                calculateLogic();
+                    fixButtonsFocus();
+
+                    $('.calculate-again').click(function () {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/get-calculator-html',
+                            dataType: 'json',
+                            data: calculator_data,
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    basic.closeDialog();
+                                    basic.showDialog(response.success, 'calculator-popup', null, true);
+
+                                    $('.selectpicker').selectpicker('refresh');
+                                    fixButtonsFocus();
+
+                                    calculateLogic();
+                                }
                             }
-                        }
+                        });
                     });
-                });
-            }
-        });
+                }
+            });
+        }, 1000);
     });
 }
 
@@ -1273,4 +1463,18 @@ if($('form#invite-dentists').length) {
             //AJAX
         }
     });
+}
+
+function showResponseLayer(time) {
+    $('.response-layer').show();
+    setTimeout(function() {
+        $('.response-layer').hide();
+    }, time);
+}
+
+function showContractResponseLayer(time) {
+    $('.contract-response-layer').show();
+    setTimeout(function() {
+        $('.contract-response-layer').hide();
+    }, time);
 }
