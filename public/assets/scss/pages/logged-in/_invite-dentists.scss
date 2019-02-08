@@ -1,11 +1,26 @@
 .invite-dentists-container {
     .my-profile-page-content {
-        background-image: url(/assets/uploads/dentacoin-symbol-background.png);
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center center;
-        .custom-input {
-            max-width: 450px;
+        .dcn-background {
+            background-image: url(/assets/uploads/dentacoin-symbol-background.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: bottom center;
+            .custom-input {
+                max-width: 450px;
+            }
+        }
+        .invited-dentists-list {
+            table {
+                width: 100%;
+                td, th {
+                    padding: 8px;
+                }
+                tbody {
+                    tr {
+                        border-top: 1px solid #bfbfbf;
+                    }
+                }
+            }
         }
     }
 }

@@ -244,4 +244,60 @@
             }
         }
     }
+    &.step-fields {
+        .single-row {
+            border-bottom: 1px solid $light_gray;
+            @include simple_transition(.3s);
+            &:hover {
+                border-bottom: 1px solid $blue_green_color;
+            }
+            &.row-with-error {
+                border-bottom: 1px solid #ff8d8d;
+            }
+            &.flex-row {
+                display: flex;
+            }
+            input[type="number"]::-webkit-outer-spin-button,
+            input[type="number"]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+            label {
+                width: 40%;
+                font-weight: normal;
+                padding-top: 15px;
+                .error-in-label {
+                    color: #ff8d8d;
+                    font-size: 14px;
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+                    display: block;
+                }
+            }
+            .right-field {
+                width: 60%;
+                padding: 20px 10px;
+                border: 0;
+                @include box-shadow(none);
+                &.with-error {
+                    background-color: #ff8d8d;
+                    background-image: none;
+                    @include rounded(0);
+                }
+            }
+            .right-extra-field {
+                width: 60%;
+                padding: 20px 10px;
+            }
+            input.right-field {
+                cursor: pointer;
+                &:focus {
+                    cursor: text;
+                    background-color: #eaeaea;
+                    background-image: none;
+                    @include rounded(0);
+                }
+            }
+        }
+    }
 }

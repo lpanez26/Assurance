@@ -514,47 +514,42 @@ fieldset {
             width: 95%;
             max-width: 1000px;
             .bootbox-body {
-                padding: 0 15%;
+                padding: 0 10%;
                 .popup-row {
+                    border-bottom: 1px solid #888888;
                     input[type='number'] {
-                        border-left: 0;
-                        border-right: 0;
-                        border-top: 0;
-                        border-bottom: 2px solid #d0d0d0;
-                        font-size: 28px;
-                        color: #555555;
+                        background-color: #eaeaea;
+                        border: 0;
+                        padding: 15px 10px;
                     }
-                    &.custom-width {
-                        input[type='number'] {
-                            width: 180px;
-                        }
-                        label {
-                            width: calc(100% - 180px);
-                            padding-right: 10px;
-                        }
+                    input, select {
+                        width: 100%;
+                        color: black;
+                        font-family: 'Calibri Light';
                     }
-                    &.select {
-                        label {
-                            padding-right: 10px;
-                        }
-                        select {
-                            width: 200px;
-                        }
+                    label {
+                        color: #888888;
+                        width: 50%;
+                        padding-right: 10px;
+                        font-weight: normal;
+                    }
+                    .input-holder {
+                        width: 50%;
                     }
                 }
                 .bootstrap-select {
+                    width: 100%;
                     button {
-                        border-left: 0;
-                        border-right: 0;
-                        border-top: 0;
-                        padding: 0;
-                        border-bottom: 2px solid #d0d0d0;
-                        font-size: 28px;
+                        font-size: 18px;
+                        border: 0;
+                        padding: 6px 20px 6px 12px;
+                        color: black;
                         .filter-option-inner {
                             padding-right: 30px;
                             .filter-option-inner-inner {
-                                text-align: center;
-                                color: #555555;
+                                text-align: left;
+                                color: black;
+                                font-family: 'Calibri Light';
                             }
                         }
                         .bs-caret {
@@ -563,7 +558,7 @@ fieldset {
                                 width: 15px;
                                 height: 15px;
                                 top: 17px;
-                                right: 0;
+                                right: 5px;
                                 border: 0;
                             }
                         }
@@ -632,11 +627,16 @@ fieldset {
                 text-align: center;
                 background: rgb(18,101,133);
                 background: linear-gradient(180deg, rgba(18,101,133,1) 0%, rgba(42,152,194,1) 50%, rgba(18,101,133,1) 100%), #0a3647;
-                span {
+                .result {
                     font-size: 60px;
-                    border-bottom: 3px solid white;
                     padding-left: 20px;
                     padding-right: 20px;
+                    span {
+                        border-bottom: 3px solid white;
+                        &.symbol {
+                            padding-left: 10px;
+                        }
+                    }
                 }
             }
         }
@@ -986,7 +986,7 @@ input[type='text'], .custom-input {
     display: block;
 }
 
-.response-layer {
+.response-layer, .contract-response-layer {
     background-color: rgba(255,255,255,.9);
     width: 100%;
     height: 100%;
@@ -1002,8 +1002,16 @@ input[type='text'], .custom-input {
         font-size: 20px;
         @include vertical-horizontal-align(absolute);
         img {
-            width: 150px;
+            width: 95%;
             margin-bottom: 15px;
         }
     }
+}
+
+.pencil-background {
+    background-image: url(/assets/images/pencil.svg);
+    background-size: 20px auto;
+    padding-right: 20px;
+    background-position: center right;
+    background-repeat: no-repeat;
 }

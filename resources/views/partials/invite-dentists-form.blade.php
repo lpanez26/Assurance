@@ -18,7 +18,7 @@
         <input class="fs-16 custom-input required" maxlength="100" type="email" name="email" placeholder="Your Dentist's Email"/>
     </div>
     <div class="padding-bottom-15 fs-0">
-        <input class="fs-16 custom-input" maxlength="100" type="number" name="phone" placeholder="Your Dentist's Phone"/>
+        <input class="fs-16 custom-input" maxlength="50" type="number" name="phone" placeholder="Your Dentist's Phone"/>
     </div>
     @php($dcn_address = (new \App\Http\Controllers\APIRequestsController())->getUserData(session('logged_user')['id'])->dcn_address)
     @if(empty($dcn_address))

@@ -12,7 +12,7 @@
                             </figure>
                             <h2 class="fs-24 lato-bold inline-block">My Wallet</h2>
                         </div>
-                        <h3 class="line-crossed margin-bottom-50 fs-20 lato-bold black-color"><span>Dentacoin balance</span></h3>
+                        <h3 class="line-crossed-title margin-bottom-50 fs-20 lato-bold black-color"><span>Dentacoin balance</span></h3>
                         <div class="fs-38 lato-bold black-color"><span class="current-dcn-amount">{{$dcn_amount}}</span> DCN</div>
                         <div class="fs-28 lato-bold current-converted-price">
                             = <div class="amount inline-block-top">{{round($dcn_amount * $currency_arr['usd']['price_usd'], 6)}}</div>
@@ -28,7 +28,7 @@
                         @php($dcn_address = (new \App\Http\Controllers\APIRequestsController())->getUserData(session('logged_user')['id'])->dcn_address)
                         @if(empty($dcn_address))
                             <div class="missing-dcn-address">
-                                <h3 class="line-crossed margin-bottom-20 fs-20 margin-top-50 lato-bold black-color"><span>Dentacoin address</span></h3>
+                                <h3 class="line-crossed-title margin-bottom-20 fs-20 margin-top-50 lato-bold black-color"><span>Dentacoin address</span></h3>
                                 <div class="padding-top-15 padding-bottom-30">You can only use a unique Dentacoin (DCN) wallet address. <a href="https://wallet.dentacoin.com/" target="_blank">Here you can create one.</a></div>
                                 <form method="POST" id="add-dcn-address" action="{{route('add-dcn-address')}}">
                                     <div>
@@ -41,7 +41,7 @@
                                 </form>
                             </div>
                         @else
-                            <h3 class="line-crossed margin-bottom-20 fs-20 margin-top-50 lato-bold black-color"><span>Withdraw Dentacoin</span></h3>
+                            <h3 class="line-crossed-title margin-bottom-20 fs-20 margin-top-50 lato-bold black-color"><span>Withdraw Dentacoin</span></h3>
                             <div class="fs-16">In order to withdraw your DCN you need to verify your account. We use Civic - a Blockchain-based identity platform that guarantees us that a person can have only one account on our platform. Please start by downloading the Civic app on your smartphone using the links below and add an email address or phone number to your Civic account. Then click the "Login with Civic" button below and use the app to scan the QR code.</div>
                             <div class="fs-16 padding-top-30 padding-bottom-15">1. Download and install Civic</div>
                             <div class="">
