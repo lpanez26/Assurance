@@ -158,4 +158,13 @@ class UserController extends Controller {
             return redirect()->route('my-profile')->with(['errors_response' => $api_response['errors']]);
         }
     }
+
+    protected function getForgottenPasswordView() {
+        return view('pages/forgotten-password');
+    }
+
+    protected function forgottenPasswordSubmit(Request $request) {
+        var_dump($request->input());
+        die();
+    }
 }

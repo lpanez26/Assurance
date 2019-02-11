@@ -134,13 +134,22 @@
     </div>
 </div>
 
-<div class="contract-response-layer">
-    <div class="wrapper">
-        <figure itemscope="" itemtype="http://schema.org/ImageObject">
-            <img src="/assets/images/contract-assurance-loading.gif" class="max-width-440" alt="Loader">
-        </figure>
+@if(\App\Http\Controllers\UserController::instance()->checkSession())
+    <div class="contract-response-layer">
+        <div class="wrapper">
+            <figure itemscope="" itemtype="http://schema.org/ImageObject">
+                <img src="/assets/images/contract-assurance-loading.gif" class="max-width-440" alt="Loader">
+            </figure>
+        </div>
     </div>
-</div>
+    <div class="contract-response-success-layer">
+        <div class="wrapper">
+            <figure itemscope="" itemtype="http://schema.org/ImageObject">
+                <img src="/assets/images/contract-assurance-loading-success.gif" class="max-width-440" alt="Loader">
+            </figure>
+        </div>
+    </div>
+@endif
 
 {{--/Show the sticky calculate button only for dentists--}}
 <script src="/assets/js/basic.js"></script>

@@ -279,11 +279,11 @@
                 padding: 20px 10px;
                 border: 0;
                 @include box-shadow(none);
-                &.with-error {
-                    background-color: #ff8d8d;
-                    background-image: none;
-                    @include rounded(0);
-                }
+            }
+            .with-error {
+                background-color: #ff8d8d;
+                background-image: none;
+                @include rounded(0);
             }
             .right-extra-field {
                 width: 60%;
@@ -296,6 +296,63 @@
                     background-color: #eaeaea;
                     background-image: none;
                     @include rounded(0);
+                }
+            }
+        }
+    }
+    &.contract-proposal {
+        .wrapper {
+            padding: 0 15%;
+            position: relative;
+            @include box-shadow(0px 3px 90px -10px rgba(0, 0, 0, 0.4));
+            @include rounded(6px);
+            .right-extra-field {
+                label {
+                    width: 100%;
+                    white-space: normal;
+                    line-height: 20px;
+                }
+            }
+            .top-right-page-alike {
+                border-left: 90px solid #f2f4f6;
+                border-top: 90px solid #d6dbe2;
+                position: absolute;
+                top: 0;
+                right: 0;
+                @include rounded(0 6px 0 0);
+            }
+            h3 {
+                border-bottom: 1px dashed black;
+                padding-bottom: 10px;
+            }
+            .single-row {
+                label {
+                    padding-bottom: 15px;
+                }
+            }
+
+            .pretty input[disabled]~* {
+                opacity: 1;
+            }
+            .pretty {
+                svg.svg {
+                    top: 0;
+                }
+            }
+            .pretty.on-white-background .state label:after, .pretty.on-white-background .state label:before {
+                top: 0;
+            }
+            .pretty label {
+                padding-top: 0;
+            }
+            .pretty.on-white-background.p-svg .state .svg {
+                border-color: $blue_green_color !important;
+            }
+            .blurred-contract-terms-container {
+                position: relative;
+                .show-login-signin {
+                    @include box-shadow(0px 3px 70px 50px rgba(255, 255, 255, 0.8));
+                    @include vertical-horizontal-align(absolute);
                 }
             }
         }

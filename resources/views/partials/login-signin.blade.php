@@ -58,7 +58,7 @@
                 </div>
             </form>
             <div class="popup-half-footer">
-                <a href="javascript:void(0)">Forgotten password?</a> | Don't have an account? <a href="javascript:void(0)" class="call-sign-up">Sign up</a>
+                <a href="{{route('forgotten-password')}}">Forgotten password?</a> | Don't have an account? <a href="javascript:void(0)" class="call-sign-up">Sign up</a>
             </div>
         </div>
         <div class="form-register">

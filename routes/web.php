@@ -20,10 +20,12 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
     Route::get('/support-guide', 'SupportGuideController@getView')->name('support-guide');
 
+    Route::get('/contract-proposal/{slug}', 'Controller@getContractProposalPartly')->name('contract-proposal');
+
     Route::get('/wallet-instructions', 'WalletInstructionsController@getView')->name('wallet-instructions');
 
     Route::get('/test', function() {
-        var_dump((new \App\Http\Controllers\APIRequestsController())->getAllEnums());
+        //var_dump((new \App\Http\Controllers\APIRequestsController())->getAllEnums());
         //var_dump((new \App\Http\Controllers\APIRequestsController())->getPatientsByEmail('miroslav.nedelchev@dentacoin.com'));
         die();
     })->name('test');
@@ -61,6 +63,8 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
         //Route::get('/', 'PatientController@getPatientAccess')->name('patient-access');
 
         Route::get('/create-contract', 'DentistController@getCreateContractView')->name('create-contract');
+
+        Route::post('/store-and-submit-temporally-contract', 'DentistController@storeAndSubmitTemporallyContract')->middleware('HandleUserSession')->name('store-and-submit-temporally-contract');
     });
 
     Route::get('/my-profile', 'UserController@getMyProfileView')->middleware('HandleUserSession')->name('my-profile');
@@ -76,6 +80,10 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
     Route::post('/add-dcn-address', 'UserController@addDcnAddress')->middleware('HandleUserSession')->name('add-dcn-address');
 
     Route::get('/user-logout', 'UserController@userLogout')->name('user-logout');
+
+    Route::get('/forgotten-password', 'UserController@getForgottenPasswordView')->name('forgotten-password');
+
+    Route::post('/forgotten-password-submit', 'UserController@forgottenPasswordSubmit')->name('forgotten-password-submit');
 
     Route::post('/dentist-register', 'DentistController@register')->name('dentist-register');
 

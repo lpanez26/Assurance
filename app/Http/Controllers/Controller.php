@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Page;
 use App\PagesHtmlSection;
+use App\TemporallyContract;
 use Illuminate\Support\Facades\DB;
 use Request;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -199,6 +200,31 @@ div {
         $dompdf->render();
 
         $dompdf->stream("hello.pdf");
+    }
+
+    protected function encrypt($raw_text) {
+        $length = openssl_cipher_iv_length(getenv('API_ENCRYPTION_METHOD'));
+        $iv = openssl_random_pseudo_bytes($length);
+        $encrypted = openssl_encrypt($raw_text, getenv('API_ENCRYPTION_METHOD'), getenv('API_ENCRYPTION_KEY'), OPENSSL_RAW_DATA, $iv);
+        //here we append the $iv to the encrypted, because we will need it for the decryption
+        $encrypted_with_iv = base64_encode($encrypted) . '|' . base64_encode($iv);
+        return $encrypted_with_iv;
+    }
+
+    protected function decrypt($encrypted_text) {
+        list($data, $iv) = explode('|', $encrypted_text);
+        $iv = base64_decode($iv);
+        $raw_text = openssl_decrypt($data, getenv('API_ENCRYPTION_METHOD'), getenv('API_ENCRYPTION_KEY'), 0, $iv);
+        return $raw_text;
+    }
+
+    protected function getContractProposalPartly($slug) {
+        $contract = TemporallyContract::where(array('slug' => $slug))->get()->first();
+        if((new UserController())->checkDentistSession() || empty($contract)) {
+            return abort(404);
+        }else {
+            return view('pages/contract-proposal-partly', ['contract' => $contract]);
+        }
     }
 }
 
