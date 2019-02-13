@@ -240,16 +240,18 @@ class APIRequestsController extends Controller {
     //this method is not from the CoreDB, but from the IPFS NODEJS API on the website server
     public function uploadFileToIPFS() {
         $curl = curl_init();
+        $json = '{"filename":"Wine type 2"}';
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POST => 1,
             CURLOPT_URL => 'https://dev-test.dentacoin.com/upload-file-to-ipfs',
             CURLOPT_SSL_VERIFYPEER => 0,
-            CURLOPT_POSTFIELDS => array(
-                'filename' => 'http://assurance.test/assets/uploads/dentist-signature-1550045295.png'
-            )
+            CURLOPT_POSTFIELDS => $json
         ));
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(    //<--- Added this code block
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($json))
+        );
 
         $resp = curl_exec($curl);
         curl_close($curl);
