@@ -246,7 +246,7 @@ class APIRequestsController extends Controller {
             CURLOPT_URL => 'https://dev-test.dentacoin.com/upload-file-to-ipfs',
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_POSTFIELDS => array(
-                'filename' => '../assurance.dentacoin.com/assets/uploads/dentist-signature-1550045295.png'
+                'filename' => '../assurance.dentacoin.com/public/assets/uploads/dentist-signature-1550045295.png'
             )
         ));
 
