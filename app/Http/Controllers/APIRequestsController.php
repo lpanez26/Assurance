@@ -241,16 +241,14 @@ class APIRequestsController extends Controller {
     public function uploadFileToIPFS() {
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POST => 1,
             CURLOPT_URL => 'https://dev-test.dentacoin.com/upload-file-to-ipfs',
-            CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_POSTFIELDS => array(
                 'filename' => 'http://assurance.test/assets/uploads/dentist-signature-1550045295.png'
             )
         ));
 
-        $resp = json_decode(curl_exec($curl));
+        $resp = curl_exec($curl);
         curl_close($curl);
 
         if(!empty($resp))   {
