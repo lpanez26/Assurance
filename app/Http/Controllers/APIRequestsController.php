@@ -239,7 +239,7 @@ class APIRequestsController extends Controller {
 
     //this method is not from the CoreDB, but from the IPFS NODEJS API on the website server
     public function uploadFileToIPFS() {
-        var_dump(UPLOADS . 'dentist-signature-1550045295.png');
+        var_dump(UPLOADS_FRONT_END . 'dentist-signature-1550045295.png');
         die();
         $curl = curl_init();
         curl_setopt_array($curl, array(
