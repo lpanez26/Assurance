@@ -239,8 +239,6 @@ class APIRequestsController extends Controller {
 
     //this method is not from the CoreDB, but from the IPFS NODEJS API on the website server
     public function uploadFileToIPFS() {
-        var_dump(UPLOADS_FRONT_END . 'dentist-signature-1550045295.png');
-        die();
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
@@ -248,7 +246,7 @@ class APIRequestsController extends Controller {
             CURLOPT_URL => 'https://dev-test.dentacoin.com/upload-file-to-ipfs',
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_POSTFIELDS => array(
-                'filename' => UPLOADS . 'dentist-signature-1550045295.png'
+                'filename' => 'http://dev-test.dentacoin.com/assets/uploads/dentist-signature-1550045295.png'
             )
         ));
 
