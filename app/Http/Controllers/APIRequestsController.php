@@ -250,7 +250,6 @@ class APIRequestsController extends Controller {
             )
         ));
 
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 
         $resp = curl_exec($curl);
         curl_close($curl);
