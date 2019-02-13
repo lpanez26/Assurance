@@ -249,7 +249,7 @@ class APIRequestsController extends Controller {
                 'filename' => 'http://assurance.test/assets/uploads/dentist-signature-1550045295.png'
             )
         ));
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
 
         $resp = curl_exec($curl);
         curl_close($curl);
