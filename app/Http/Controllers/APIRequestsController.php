@@ -248,7 +248,7 @@ class APIRequestsController extends Controller {
             CURLOPT_SSL_VERIFYPEER => 0,
             CURLOPT_POSTFIELDS => $json
         ));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(    //<--- Added this code block
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(    //<--- Added this code block
                 'Content-Type: application/json',
                 'Content-Length: ' . strlen($json))
         );
