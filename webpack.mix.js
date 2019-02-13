@@ -38,6 +38,7 @@ mix.scripts([
     'node_modules/bootstrap-select/dist/js/bootstrap-select.min.js',
     'node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js',
     'public/assets/libs/combobox/combobox.js',
+    'public/assets/libs/signature-pad/signature-pad.js',
     'public/assets/libs/jquery-animate-number/jquery.animateNumber.min.js',
 ], 'public/dist/js/front-libs-script.js');
 

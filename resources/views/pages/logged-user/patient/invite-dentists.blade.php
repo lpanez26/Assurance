@@ -14,7 +14,7 @@
                                 <h2 class="fs-24 lato-bold inline-block">Invite Dentists</h2>
                             </div>
                             <div class="fs-18 padding-bottom-30">Help us change dentistry to the better by inviting dentists you believe could be interested. For each accepted invitation, you will receive 20,000 Dentacoin.</div>
-                            @include('partials.invite-dentists-form')
+                            @include('partials.invite-dentists-form', ['redirect' => 'invite-dentists'])
                         </div>
                         @if(!empty($invited_dentists_list))
                             <div class="invited-dentists-list">

@@ -26384,7 +26384,11 @@ if ($('body').hasClass('logged-in')) {
             create_contract_form.unbind().on('submit', function (event) {
                 var this_form = this;
                 var form_errors = false;
-                if (!$('.step.four input#terms').is(':checked')) {
+                if (signature_pad.isEmpty()) {
+                    basic.showAlert('Please sign the contract sample. Use your mouse or touch screen to sign.', '', true);
+                    event.preventDefault();
+                    form_errors = true;
+                } else if (!$('.step.four input#terms').is(':checked')) {
                     basic.showAlert('Please accept the Terms and Conditions', '', true);
                     event.preventDefault();
                     form_errors = true;
@@ -26395,6 +26399,10 @@ if ($('body').hasClass('logged-in')) {
                 }
 
                 if (!form_errors) {
+                    //save the base64 signature image in hidden value
+                    $(this_form).find('input[name="dentist_signature"]').val(signature_pad.toDataURL('image/png'));
+
+                    //delay the form submission so we can init loader animation
                     event.preventDefault();
                     $('.contract-response-success-layer').show();
                     setTimeout(function () {
@@ -26504,8 +26512,14 @@ if ($('body').hasClass('logged-in')) {
             for (var i = 0, len = $('.step.three [name="general-dentistry[]"]:checked').length; i < len; i += 1) {
                 $('.step.four input[type="checkbox"]#' + $('[name="general-dentistry[]"]:checked').eq(i).val()).prop('checked', true);
             }
+
+            if (!signature_pad_inited) {
+                initSignaturePad();
+                signature_pad_inited = true;
+            }
         };
 
+        var signature_pad_inited = false;
         styleAvatarUploadButton('.steps-body .avatar button label');
 
         $('.show-category-list a').click(function () {
@@ -26591,6 +26605,12 @@ if ($('body').hasClass('logged-in')) {
                     break;
             }
         });
+    } else if ($('body').hasClass('contract-proposal')) {
+        if ($('.terms-and-conditions-long-list').length) {
+            $('.terms-and-conditions-long-list').mCustomScrollbar();
+        }
+
+        initSignaturePad();
     }
 }
 
@@ -26601,6 +26621,18 @@ if ($('body').hasClass('logged-in')) {
     }, function () {
         $('.logged-user .hidden-box').hide();
     });
+
+    if ($('.contracts-list.slider').length) {
+        $('.contracts-list.slider').slick({
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            autoplaySpeed: 8000
+        });
+    }
+
+    if ($('section.open-new-assurance-contact-section input[type="text"].combobox').length) {
+        $('section.open-new-assurance-contact-section input[type="text"].combobox').attr('placeholder', 'Search for a clinic...');
+    }
 }
 
 function calculateLogic() {
@@ -27191,6 +27223,7 @@ function apiEventsListeners() {
                                 custom_form_obj = {
                                     token: event.response_data.token,
                                     id: event.response_data.data.id,
+                                    email: event.response_data.data.email,
                                     have_contracts: false,
                                     _token: $('meta[name="csrf-token"]').attr('content')
                                 };
@@ -27257,6 +27290,13 @@ if ($('form#invite-dentists').length) {
             }
         }
 
+        if (this_form.find('input[name="dcn_address"]').length) {
+            if (this_form.find('input[name="dcn_address"]').val().trim() == '' || !innerAddressCheck(this_form.find('input[name="dcn_address"]').val().trim())) {
+                customErrorHandle(this_form.find('input[name="dcn_address"]').parent(), 'This field is required. Please enter valid Wallet Address.');
+                errors = true;
+            }
+        }
+
         if (!errors) {
             $.ajax({
                 type: 'POST',
@@ -27308,6 +27348,40 @@ function showContractResponseLayer(time) {
     setTimeout(function () {
         $('.contract-response-layer').hide();
     }, time);
+}
+
+var signature_pad;
+function initSignaturePad() {
+    if ($('#signature-pad').length) {
+
+        // Adjust canvas coordinate space taking into account pixel ratio,
+        // to make it look crisp on mobile devices.
+        // This also causes canvas to be cleared.
+        var resizeCanvas = function resizeCanvas() {
+            // When zoomed out to less than 100%, for some very strange reason,
+            // some browsers report devicePixelRatio as less than 1
+            // and only part of the canvas is cleared then.
+            var ratio = Math.max(window.devicePixelRatio || 1, 1);
+            canvas.width = canvas.offsetWidth * ratio;
+            canvas.height = canvas.offsetHeight * ratio;
+            canvas.getContext("2d").scale(ratio, ratio);
+        };
+
+        var canvas = document.getElementById('signature-pad');
+
+        window.onresize = resizeCanvas;
+        resizeCanvas();
+
+        signature_pad = new SignaturePad(canvas, {
+            backgroundColor: 'rgb(255, 255, 255)' // necessary for saving image as JPEG; can be removed is only saving as PNG or SVG
+        });
+
+        if ($('.clear-signature').length) {
+            $('.clear-signature').click(function () {
+                signature_pad.clear();
+            });
+        }
+    }
 }
 
 /***/ }),

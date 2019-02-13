@@ -28,6 +28,28 @@
                 }
             }
             &.four {
+                .signature-and-checkboxes {
+                    width: 400px;
+                    margin: 0 auto;
+                    display: block;
+                    .checkbox-container {
+                        text-align: left;
+                        .pretty.on-white-background.p-svg .state .svg {
+                            top: 0;
+                        }
+                        .pretty.on-white-background .state label:after, .pretty.on-white-background .state label:before {
+                            top: 0;
+                        }
+                        label {
+                            a {
+                                color: $blue_green_color;
+                            }
+                        }
+                    }
+                }
+                .terms-and-conditions-long-list {
+                    height: 350px;
+                }
                 .right-extra-field {
                     label {
                         width: 100%;
@@ -75,22 +97,6 @@
                     background-color: white !important;
                     top: 5px !important;
                     @include box-shadow(rgba(0, 0, 0, 0.4) 0px 0px 3px 3px);
-                }
-                .checkbox-container {
-                    width: 100%;
-                    max-width: 360px;
-                    margin: 0 auto;
-                    .pretty.on-white-background.p-svg .state .svg {
-                        top: 0;
-                    }
-                    .pretty.on-white-background .state label:after, .pretty.on-white-background .state label:before {
-                        top: 0;
-                    }
-                    label {
-                        a {
-                            color: $blue_green_color;
-                        }
-                    }
                 }
             }
             &.three, &.four {

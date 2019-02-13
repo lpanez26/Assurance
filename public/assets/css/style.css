@@ -5179,6 +5179,94 @@ input[type='text'], .custom-input {
       -webkit-transform: translate(-50%, -50%);
       -ms-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%); }
+  .module.contract-proposal .wrapper .terms-and-conditions-long-list {
+    height: 350px; }
+  .module.contract-proposal .wrapper .mCSB_inside > .mCSB_container {
+    margin-right: 35px !important; }
+  .module.contract-proposal .wrapper .mCSB_scrollTools {
+    right: 8px !important; }
+  .module.contract-proposal .wrapper .mCSB_scrollTools .mCSB_draggerRail {
+    width: 10px !important;
+    background-color: #9dadbc !important; }
+  .module.contract-proposal .wrapper .mCSB_scrollTools .mCSB_dragger {
+    width: 30px !important;
+    height: 30px !important;
+    min-height: auto !important;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%; }
+  .module.contract-proposal .wrapper .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+    width: 20px !important;
+    height: 20px !important;
+    background-color: white !important;
+    top: 5px !important;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 3px 3px;
+    -moz-box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 3px 3px;
+    -ms-box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 3px 3px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 3px 3px; }
+  .module.contract-proposal .wrapper .checkbox-container {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto; }
+    .module.contract-proposal .wrapper .checkbox-container .pretty.on-white-background.p-svg .state .svg {
+      top: 0; }
+    .module.contract-proposal .wrapper .checkbox-container .pretty.on-white-background .state label:after, .module.contract-proposal .wrapper .checkbox-container .pretty.on-white-background .state label:before {
+      top: 0; }
+    .module.contract-proposal .wrapper .checkbox-container label a {
+      color: #126585; }
+.module.contract-tile {
+  padding-left: 10px;
+  padding-right: 10px; }
+  .module.contract-tile .tile-wrapper {
+    background-color: white;
+    padding: 15px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
+    -ms-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4); }
+    .module.contract-tile .tile-wrapper figure {
+      width: 90px;
+      overflow: hidden;
+      -webkit-border-radius: 6px;
+      -moz-border-radius: 6px;
+      -ms-border-radius: 6px;
+      border-radius: 6px; }
+      .module.contract-tile .tile-wrapper figure figcaption {
+        background-color: white;
+        display: block; }
+    .module.contract-tile .tile-wrapper .contract-info {
+      width: calc(100% - 90px);
+      padding-left: 15px; }
+      .module.contract-tile .tile-wrapper .contract-info .btn-container {
+        text-align: right; }
+        .module.contract-tile .tile-wrapper .contract-info .btn-container .white-blue-green-btn {
+          font-size: 16px;
+          padding: 0 6px; }
+  .module.contract-tile.pending .tile-wrapper {
+    background-color: #e4f0f5; }
+.module .signature-wrapper {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+  .module .signature-wrapper canvas {
+    width: 100%;
+    height: 200px;
+    background-color: white;
+    -webkit-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.5);
+    -ms-box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.5); }
 
 header {
   width: 100%;
@@ -5795,6 +5883,20 @@ body.logged-in .my-profile-page-content {
       padding: 5px 0 15px 25px; }
       .steps-body .wrapper .step.three .show-category-list ul li {
         list-style: disc inside none; }
+    .steps-body .wrapper .step.four .signature-and-checkboxes {
+      width: 400px;
+      margin: 0 auto;
+      display: block; }
+      .steps-body .wrapper .step.four .signature-and-checkboxes .checkbox-container {
+        text-align: left; }
+        .steps-body .wrapper .step.four .signature-and-checkboxes .checkbox-container .pretty.on-white-background.p-svg .state .svg {
+          top: 0; }
+        .steps-body .wrapper .step.four .signature-and-checkboxes .checkbox-container .pretty.on-white-background .state label:after, .steps-body .wrapper .step.four .signature-and-checkboxes .checkbox-container .pretty.on-white-background .state label:before {
+          top: 0; }
+        .steps-body .wrapper .step.four .signature-and-checkboxes .checkbox-container label a {
+          color: #126585; }
+    .steps-body .wrapper .step.four .terms-and-conditions-long-list {
+      height: 350px; }
     .steps-body .wrapper .step.four .right-extra-field label {
       width: 100%;
       white-space: normal;
@@ -5843,16 +5945,6 @@ body.logged-in .my-profile-page-content {
       -moz-box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 3px 3px;
       -ms-box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 3px 3px;
       box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 3px 3px; }
-    .steps-body .wrapper .step.four .checkbox-container {
-      width: 100%;
-      max-width: 360px;
-      margin: 0 auto; }
-      .steps-body .wrapper .step.four .checkbox-container .pretty.on-white-background.p-svg .state .svg {
-        top: 0; }
-      .steps-body .wrapper .step.four .checkbox-container .pretty.on-white-background .state label:after, .steps-body .wrapper .step.four .checkbox-container .pretty.on-white-background .state label:before {
-        top: 0; }
-      .steps-body .wrapper .step.four .checkbox-container label a {
-        color: #126585; }
     .steps-body .wrapper .step.three .pretty input[disabled] ~ *, .steps-body .wrapper .step.four .pretty input[disabled] ~ * {
       opacity: 1; }
     .steps-body .wrapper .step.three .pretty svg.svg, .steps-body .wrapper .step.four .pretty svg.svg {
@@ -5882,5 +5974,72 @@ body.logged-in .my-profile-page-content {
     -moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
     -ms-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4); }
+
+section.contracts-list-section {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top 0 center;
+  background-image: url(/assets/uploads/logged-patient-no-contracts-background.jpg); }
+  section.contracts-list-section h1 {
+    width: 70%;
+    margin: 0 auto; }
+
+section.open-new-assurance-contact-section .combobox-container .input-group {
+  display: block; }
+  section.open-new-assurance-contact-section .combobox-container .input-group .input-group-addon {
+    display: none; }
+  section.open-new-assurance-contact-section .combobox-container .input-group ul.dropdown-menu {
+    width: 100%; }
+
+section.invite-dentists-section {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top 0 right 0;
+  background-image: url(/assets/uploads/invite-dentists-background.svg);
+  position: relative; }
+  section.invite-dentists-section .absolute-right-side {
+    position: absolute;
+    width: 50%;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+    max-width: 700px; }
+  section.invite-dentists-section .form-container {
+    padding: 50px;
+    text-align: center;
+    background-color: white;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    border-radius: 20px;
+    -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
+    -ms-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4); }
+    section.invite-dentists-section .form-container .subtitle {
+      max-width: 80%;
+      margin: 0 auto; }
+    section.invite-dentists-section .form-container .custom-input {
+      max-width: 450px; }
+    section.invite-dentists-section .form-container .error-handle {
+      max-width: 450px;
+      margin-left: auto;
+      margin-right: auto; }
+    section.invite-dentists-section .form-container input[type="submit"].white-blue-green-btn {
+      min-width: 220px; }
+
+section.contract-proposal .wrapper .review-step.one .singatures-row {
+  padding: 0 10px 40px; }
+  section.contract-proposal .wrapper .review-step.one .singatures-row .dentist-sign {
+    width: 40%; }
+    section.contract-proposal .wrapper .review-step.one .singatures-row .dentist-sign figcaption {
+      text-align: right;
+      font-style: italic; }
+  section.contract-proposal .wrapper .review-step.one .singatures-row .signature-wrapper {
+    width: 40%;
+    margin-left: 20%;
+    text-align: right; }
+    section.contract-proposal .wrapper .review-step.one .singatures-row .signature-wrapper canvas {
+      height: 150px; }
 
 /*# sourceMappingURL=style.css.map */

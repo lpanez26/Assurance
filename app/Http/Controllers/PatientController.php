@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\InviteDentistsReward;
+use App\TemporallyContract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -18,8 +19,7 @@ class PatientController extends Controller {
     public function getPatientAccess()    {
         if((new UserController())->checkSession()) {
             if(filter_var(session('logged_user')['have_contracts'], FILTER_VALIDATE_BOOLEAN)) {
-                //IF PATIENT HAVE EXISTING CONTRACTS
-                return view('pages/logged-user/patient/have-contracts');
+                return view('pages/logged-user/patient/have-contracts', ['contracts' => TemporallyContract::where(array('patient_email' => (new APIRequestsController())->getUserData(session('logged_user')['id'])->email))->get()->all(), 'clinics' => (new APIRequestsController())->getAllClinicsByName()]);
             } else {
                 //IF PATIENT HAVE NO EXISTING CONTRACTS
                 return view('pages/logged-user/patient/start-first-contract', ['clinics' => (new APIRequestsController())->getAllClinicsByName()]);
@@ -45,7 +45,8 @@ class PatientController extends Controller {
             'have_contracts' => false
         ];
 
-        if(filter_var($request->input('have_contracts'), FILTER_VALIDATE_BOOLEAN)) {
+        //check if there is temporallycontract for this patient by email or by user_id (we fill user_id for this temporally contract once patient register - this is in case patient change his email while he still have the proposal running)
+        if(filter_var($request->input('have_contracts'), FILTER_VALIDATE_BOOLEAN) || TemporallyContract::where(array('email' => $request->input('email')))->get()->all()) {
             $session_arr['have_contracts'] = true;
         }
 
@@ -71,19 +72,32 @@ class PatientController extends Controller {
             'title' => 'required',
             'dentist-name' => 'required',
             'website' => 'required',
-            'email' => 'required'
+            'email' => 'required',
+            'redirect' => 'required',
         ], [
             'title.required' => 'Title is required.',
             'dentist-name.required' => 'Dentist name is required.',
             'website.required' => 'Website is required.',
-            'email.required' => 'Email is required.'
+            'email.required' => 'Email is required.',
+            'redirect.required' => 'Redirect is required.',
         ]);
 
         $data = $this->clearPostData($request->input());
 
         //check email validation
         if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-            return redirect()->route('invite-dentists')->with(['error' => 'Your form was not sent. Please try again with valid email.']);
+            return redirect()->route($data['redirect'])->with(['error' => 'Your form was not sent. Please try again with valid email.']);
+        }
+
+        //if user entered dcn_address for first time save it in coredb
+        if(!empty($data['dcn_address'])) {
+            $post_fields_arr = array('dcn_address' => $data['dcn_address']);
+
+            //handle the API response
+            $api_response = (new APIRequestsController())->updateUserData($post_fields_arr);
+            if(!$api_response) {
+                return redirect()->route($data['redirect'])->with(['errors_response' => $api_response['errors']]);
+            }
         }
 
         //===================================================================================
@@ -101,7 +115,7 @@ class PatientController extends Controller {
         });
 
         if(count(Mail::failures()) > 0) {
-            return redirect()->route('invite-dentists')->with(['error' => 'Email has not been sent to your dentist, please try again later.']);
+            return redirect()->route($data['redirect'])->with(['error' => 'Email has not been sent to your dentist, please try again later.']);
         } else {
             $invite_dentist_reward = new InviteDentistsReward();
             $invite_dentist_reward->patient_id = session('logged_user')['id'];
@@ -115,8 +129,29 @@ class PatientController extends Controller {
 
             //saving to DB
             $invite_dentist_reward->save();
+            return redirect()->route($data['redirect'])->with(['success' => 'Email has been sent to your dentist successfully.']);
+        }
+    }
 
-            return redirect()->route('invite-dentists')->with(['success' => 'Email has been sent to your dentist successfully.']);
+    protected function getContractProposal($slug) {
+        $contract = TemporallyContract::where(array('slug' => $slug))->get()->first();
+        if((new UserController())->checkDentistSession() || empty($contract) || ((new UserController())->checkPatientSession() && $contract->patient_email != (new APIRequestsController())->getUserData(session('logged_user')['id'])->email)) {
+            //if dentist trying to access the proposal or if there is no such contract or if different patient trying to access the proposal
+            return abort(404);
+        } else if((new UserController())->checkPatientSession() && $contract->patient_email == (new APIRequestsController())->getUserData(session('logged_user')['id'])->email) {
+            $params = array(
+                'contract' => $contract,
+                'countries' => (new APIRequestsController())->getAllCountries(),
+                'shown' => 'one'
+            );
+
+            if(!empty($contract->patient_id_number)) {
+                $params['shown'] = 'two';
+            }
+            //if patient is logged in and if the contract is about the logged patient
+            return view('pages/logged-user/patient/review-assurance-contract', $params);
+        } else {
+            return view('pages/contract-proposal-partly', ['contract' => $contract]);
         }
     }
 }

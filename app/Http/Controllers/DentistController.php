@@ -139,6 +139,7 @@ class DentistController extends Controller
             'monthly-premium.required' => 'Monthly premium is required.',
             'check-ups-per-year.required' => 'Check ups per year are is required.',
             'teeth-cleaning-per-year.required' => 'Teeth cleaning per year are required.',
+            'dentist_signature.required' => 'Dentist signature is required.',
         ];
         $this->validate($request, [
             'professional-company-number' => 'required|max:100',
@@ -149,13 +150,14 @@ class DentistController extends Controller
             'monthly-premium' => 'required',
             'check-ups-per-year' => 'required',
             'teeth-cleaning-per-year' => 'required',
+            'dentist_signature' => 'required',
         ], $customMessages);
 
         $data = $request->input();
         $files = $request->file();
 
         //check email validation
-        if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL))   {
+        if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             return redirect()->route('create-contract')->with(['error' => 'Your form was not sent. Please try again with valid email.']);
         }
 
@@ -199,16 +201,21 @@ class DentistController extends Controller
             }
         }
 
+        //create image from the base64 signature
+        $signature_filename = 'dentist-signature-'.time().'.png';
+        file_put_contents(UPLOADS . $signature_filename, $this->base64ToPng($data['dentist_signature']));
+
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $random_string = '';
         for ($i = 0; $i < 62; $i+=1) {
-            $random_string .= $characters[rand(0, $charactersLength - 1)];
+            $random_string .= $characters[mt_rand(0, $charactersLength - 1)];
         }
         $random_string = $random_string.time();
 
         $temporally_contract = new TemporallyContract();
         $temporally_contract->dentist_id = session('logged_user')['id'];
+        $temporally_contract->dentist_sign = $signature_filename;
         $temporally_contract->patient_fname = trim($data['fname']);
         $temporally_contract->patient_lname = trim($data['lname']);
         $temporally_contract->patient_email = trim($data['email']);

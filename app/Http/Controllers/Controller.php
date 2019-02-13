@@ -218,13 +218,8 @@ div {
         return $raw_text;
     }
 
-    protected function getContractProposalPartly($slug) {
-        $contract = TemporallyContract::where(array('slug' => $slug))->get()->first();
-        if((new UserController())->checkDentistSession() || empty($contract)) {
-            return abort(404);
-        }else {
-            return view('pages/contract-proposal-partly', ['contract' => $contract]);
-        }
+    protected function base64ToPng($base64_string) {
+        return base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64_string));
     }
 }
 

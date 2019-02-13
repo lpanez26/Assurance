@@ -20,11 +20,12 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
     Route::get('/support-guide', 'SupportGuideController@getView')->name('support-guide');
 
-    Route::get('/contract-proposal/{slug}', 'Controller@getContractProposalPartly')->name('contract-proposal');
+    Route::get('/contract-proposal/{slug}', 'PatientController@getContractProposal')->name('contract-proposal');
 
     Route::get('/wallet-instructions', 'WalletInstructionsController@getView')->name('wallet-instructions');
 
     Route::get('/test', function() {
+        var_dump((new \App\Http\Controllers\APIRequestsController())->uploadFileToIPFS());
         //var_dump((new \App\Http\Controllers\APIRequestsController())->getAllEnums());
         //var_dump((new \App\Http\Controllers\APIRequestsController())->getPatientsByEmail('miroslav.nedelchev@dentacoin.com'));
         die();

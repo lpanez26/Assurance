@@ -20,6 +20,7 @@
                         @include('pages.logged-user.dentist.contract-creation-step-four')
                         <div class="text-center form-btn-container padding-top-40">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <input type="hidden" name="dentist_signature" value="">
                             <a href="javascript:void(0);" data-current-step="one" class="white-blue-green-btn min-width-250 next">NEXT</a>
                         </div>
                     </form>

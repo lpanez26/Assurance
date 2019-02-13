@@ -21,7 +21,7 @@
                                 <div class="col-xs-12 col-sm-8 col-sm-offset-2">
                                     <h2 class="fs-40 lato-bold text-center">Invite Your Dentist. Earn 20,000 DCN!</h2>
                                     <h3 class="fs-20 padding-top-20 padding-bottom-40 text-center">Help us change dentistry to the better by inviting new dentists. For each accepted invitation, you will receive a reward!</h3>
-                                    @include('partials.invite-dentists-form')
+                                    @include('partials.invite-dentists-form', ['redirect' => 'patient-access'])
                                 </div>
                             </div>
                         </div>

@@ -1,0 +1,62 @@
+section.contracts-list-section {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top 0 center;
+    background-image: url(/assets/uploads/logged-patient-no-contracts-background.jpg);
+    h1 {
+        width: 70%;
+        margin: 0 auto;
+    }
+}
+
+section.open-new-assurance-contact-section {
+    .combobox-container {
+        .input-group {
+            display: block;
+            .input-group-addon {
+                display: none;
+            }
+            ul.dropdown-menu {
+                width: 100%;
+            }
+        }
+    }
+}
+
+section.invite-dentists-section {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top 0 right 0;
+    background-image: url(/assets/uploads/invite-dentists-background.svg);
+    position: relative;
+    .absolute-right-side {
+        position: absolute;
+        width: 50%;
+        left: 0;
+        bottom: 0;
+        z-index: 10;
+        max-width: 700px;
+    }
+    .form-container {
+        padding: 50px;
+        text-align: center;
+        background-color: white;
+        @include rounded(20px);
+        @include box-shadow(0 2px 6px 0 rgba(0,0,0,.4));
+        .subtitle {
+            max-width: 80%;
+            margin: 0 auto;
+        }
+        .custom-input {
+            max-width: 450px;
+        }
+        .error-handle {
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        input[type="submit"].white-blue-green-btn {
+            min-width: 220px;
+        }
+    }
+}
