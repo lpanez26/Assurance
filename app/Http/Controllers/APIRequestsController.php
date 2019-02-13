@@ -240,7 +240,7 @@ class APIRequestsController extends Controller {
     //this method is not from the CoreDB, but from the IPFS NODEJS API on the website server
     public function uploadFileToIPFS() {
         $curl = curl_init();
-        $json = '{"filename":"Wine type 2"}';
+        $json = '{"filename":"http://dev-test.dentacoin.com/assets/uploads/dentist-signature-1550045295.png"}';
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POST => 1,
