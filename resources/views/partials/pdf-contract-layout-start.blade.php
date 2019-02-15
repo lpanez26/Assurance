@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        div {
-            background-color: lightgrey;
-            width: 300px;
-            border: 25px solid green;
-            padding: 25px;
-            margin: 25px;
-        }
-    </style>
+    <style></style>
 </head>
 <body>
     <main>

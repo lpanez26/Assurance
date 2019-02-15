@@ -206,6 +206,7 @@ class Controller extends BaseController
             } else {
                 var_dump(CONTRACTS . 'vMLEEipYBUEXaVmqdpwU8umS8fXGkjfooHkpv6q0l7rHu3FSd8rGafturtJcHT1550149288/pdf-file.pdf');
                 var_dump((new \App\Http\Controllers\APIRequestsController())->uploadFileToIPFS(CONTRACTS . 'vMLEEipYBUEXaVmqdpwU8umS8fXGkjfooHkpv6q0l7rHu3FSd8rGafturtJcHT1550149288/pdf-file.pdf'));
+                die();
             }
         } else {
             return abort(404);
