@@ -212,7 +212,7 @@ class DentistController extends Controller
         //saving the dentist signature in new unique folder for this contract
         $temp_contract_folder_path = CONTRACTS . DS . $random_string;
         if (!file_exists($temp_contract_folder_path)) {
-            mkdir($temp_contract_folder_path, 0755, true);
+            mkdir($temp_contract_folder_path, 0777, true);
 
             //create image from the base64 signature
             file_put_contents($temp_contract_folder_path . DS . 'dentist-signature.png', $this->base64ToPng($data['dentist_signature']));
