@@ -141,6 +141,19 @@ class Controller extends BaseController
         return $response;
     }
 
+    public function minifyHtmlParts($html) {
+        $replace = array(
+            '/<!--[^\[](.*?)[^\]]-->/s' => '',
+            "/<\?php/"                  => '<?php ',
+            "/\n([\S])/"                => '$1',
+            "/\r/"                      => '',
+            "/\n/"                      => '',
+            "/\t/"                      => '',
+            "/ +/"                      => ' ',
+        );
+        return preg_replace(array_keys($replace), array_values($replace), $html);
+    }
+
     protected function refreshCaptcha() {
         return response()->json(['captcha' => captcha_img()]);
     }
@@ -181,7 +194,7 @@ class Controller extends BaseController
         $view_end = view('partials/pdf-contract-layout-end');
         $html_end = $view_end->render();
 
-        $encrypted_html = (new \App\Http\Controllers\APIRequestsController())->encryptFile('16590c4613e7202cf0c19fda8ffc44e0e3d01ee1c28972192420bb4fec2233e7', $this->minifyHtml($html_body));
+        $encrypted_html = (new \App\Http\Controllers\APIRequestsController())->encryptFile('16590c4613e7202cf0c19fda8ffc44e0e3d01ee1c28972192420bb4fec2233e7', $this->minifyHtmlParts($html_body));
 
         var_dump($encrypted_html);
         die();
