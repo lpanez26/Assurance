@@ -185,8 +185,15 @@ class Controller extends BaseController
 
         $dompdf->load_html($html_start . $html_body . $html_end);
         $dompdf->render();
+        $pdf_file = $dompdf->output();
 
-        $dompdf->stream('hello.pdf', array('Attachment'=>false));
+        if(!file_put_contents(CONTRACTS . DS . 'vMLEEipYBUEXaVmqdpwU8umS8fXGkjfooHkpv6q0l7rHu3FSd8rGafturtJcHT1550149288/pdf-file.pdf', $pdf_file)){
+            echo 'Not OK!';
+        }else{
+            echo 'OK';
+        }
+
+        //$dompdf->stream('hello.pdf');
     }
 
     protected function encrypt($raw_text) {
