@@ -186,7 +186,7 @@ class Controller extends BaseController
         $dompdf->load_html($html_start . $html_body . $html_end);
         $dompdf->render();
 
-        $dompdf->stream("hello.pdf");
+        $dompdf->stream('hello.pdf', array('Attachment'=>false));
     }
 
     protected function encrypt($raw_text) {
