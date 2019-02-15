@@ -206,6 +206,9 @@ class Controller extends BaseController
                 return abort(404);
             } else {
                 var_dump((new \App\Http\Controllers\APIRequestsController())->uploadFileToIPFS($pdf_file_path));
+                $dencrypted_html = (new \App\Http\Controllers\APIRequestsController())->dencryptFile('2eaa5f0ad61bcec0a130c993abb1077887bb4d62d909750a4594bc765156a4fd', $encrypted_html->response_obj->success->encrypted);
+
+                var_dump($dencrypted_html);
                 die();
             }
         } else {
