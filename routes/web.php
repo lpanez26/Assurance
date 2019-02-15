@@ -31,13 +31,6 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
         die();
     })->name('test');
 
-    Route::get('/test1', function() {
-        var_dump((new \App\Http\Controllers\APIRequestsController())->encryptFile('16590c4613e7202cf0c19fda8ffc44e0e3d01ee1c28972192420bb4fec2233e7'));
-        //var_dump((new \App\Http\Controllers\APIRequestsController())->getAllEnums());
-        //var_dump((new \App\Http\Controllers\APIRequestsController())->getPatientsByEmail('miroslav.nedelchev@dentacoin.com'));
-        die();
-    })->name('test1');
-
     Route::get('/test123', 'Controller@testingTest')->name('test123');
 
     //======================================= TEMPORALLY FOR DAPP TESTING ========================================

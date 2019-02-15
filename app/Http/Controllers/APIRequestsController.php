@@ -249,8 +249,8 @@ class APIRequestsController extends Controller {
             CURLOPT_POSTFIELDS => $json
         ));
         curl_setopt($curl, CURLOPT_HTTPHEADER, array(    //<--- Added this code block
-                'Content-Type: application/json',
-                'Content-Length: ' . strlen($json))
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($json))
         );
 
         $resp = curl_exec($curl);
@@ -264,13 +264,9 @@ class APIRequestsController extends Controller {
     }
 
     //this method is not from the CoreDB, but from the IPFS NODEJS API on the website server
-    public function encryptFile($key) {
-        //CHANGE $key TO POST PARAMETER!!!!!
-        //CHANGE $key TO POST PARAMETER!!!!!
-        //CHANGE $key TO POST PARAMETER!!!!!
-
+    public function encryptFile($key, $html) {
         $curl = curl_init();
-        $json = '{"private_key":"'.$key.'"}';
+        $json = '{"private_key":"'.$key.'", "html":"'.$html.'"}';
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POST => 1,
@@ -279,11 +275,11 @@ class APIRequestsController extends Controller {
             CURLOPT_POSTFIELDS => $json
         ));
         curl_setopt($curl, CURLOPT_HTTPHEADER, array(    //<--- Added this code block
-                'Content-Type: application/json',
-                'Content-Length: ' . strlen($json))
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen($json))
         );
 
-        $resp = curl_exec($curl);
+        $resp = json_decode(curl_exec($curl));
         curl_close($curl);
 
         if(!empty($resp))   {
