@@ -262,4 +262,34 @@ class APIRequestsController extends Controller {
             return false;
         }
     }
+
+    //this method is not from the CoreDB, but from the IPFS NODEJS API on the website server
+    public function encryptFile($key) {
+        //CHANGE $key TO POST PARAMETER!!!!!
+        //CHANGE $key TO POST PARAMETER!!!!!
+        //CHANGE $key TO POST PARAMETER!!!!!
+
+        $curl = curl_init();
+        $json = '{"private_key":"'+$key+'"}';
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_POST => 1,
+            CURLOPT_URL => 'https://dev-test.dentacoin.com/encrypt',
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_POSTFIELDS => $json
+        ));
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(    //<--- Added this code block
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($json))
+        );
+
+        $resp = curl_exec($curl);
+        curl_close($curl);
+
+        if(!empty($resp))   {
+            return $resp;
+        }else {
+            return false;
+        }
+    }
 }

@@ -6,6 +6,8 @@ $(document).ready(function() {
     App.init();
 
     fixButtonsFocus();
+
+    onDocumentReadyPageData();
 });
 
 $(window).on('load', function() {
@@ -714,12 +716,6 @@ if($('body').hasClass('logged-in')) {
             $(this).closest('.show-category-list').find('ul').slideDown(300);
         });
 
-        function customCreateContractErrorHandle(el, text) {
-            el.addClass('with-error');
-            el.closest('.single-row').addClass('row-with-error');
-            el.parent().find('> label').append('<span class="error-in-label">'+text+'</span>');
-        }
-
         var form_props_arr = ['professional-company-number', 'postal-address', 'country', 'phone', 'website', 'address', 'fname', 'lname', 'email', 'monthly-premium', 'check-ups-per-year', 'teeth-cleaning-per-year'];
         var create_contract_form = $('form#dentist-create-contract');
         create_contract_form.find('.terms-and-conditions-long-list').mCustomScrollbar();
@@ -995,6 +991,56 @@ if($('body').hasClass('logged-in')) {
         }
 
         initSignaturePad();
+
+        if($('form#dentist-update-and-sign-contract').length) {
+            $('form#dentist-update-and-sign-contract').on('submit', function(event) {
+                event.preventDefault();
+                var this_form_plain = this;
+                var this_form = $(this);
+                var fields = this_form.find('.right-field.required-field');
+                var form_errors = false;
+
+                //clear previous submits errors
+                this_form.find('.error-in-label').remove();
+                this_form.find('.single-row').removeClass('row-with-error');
+                fields.removeClass('with-error');
+
+                //checking the validation for the patient fields
+                for(var i = 0, len = fields.length; i < len; i+=1) {
+                    if(fields.eq(i).is('select')) {
+                        if(fields.eq(i).val() == null) {
+                            customCreateContractErrorHandle(fields.eq(i), 'Required field cannot be left blank.');
+                            form_errors = true;
+                        }
+                    } else if(fields.eq(i).is('input')) {
+                        if (fields.eq(i).val().trim() == '') {
+                            customCreateContractErrorHandle(fields.eq(i), 'Required field cannot be left blank.');
+                            form_errors = true;
+                        } else if(fields.eq(i).is('[name="dcn_address"]') && !innerAddressCheck(fields.eq(i).val().trim())) {
+                            customCreateContractErrorHandle(fields.eq(i), 'Please enter valid Wallet Address.');
+                            form_errors = true;
+                        }
+                    }
+                }
+
+                if(form_errors) {
+                    $('html, body').animate({scrollTop: $('.right-field.required-field.with-error').offset().top - 50}, 500);
+                } else {
+                    //check if patient signed if privacy policy and terms checkboxes are checked
+                    //save the base64 signature image in hidden value
+                    this_form.find('input[name="patient_signature"]').val(signature_pad.toDataURL('image/png'));
+                    if(signature_pad.isEmpty()) {
+                        basic.showAlert('Please sign the contract sample. Use your mouse or touch screen to sign.', '', true);
+                    }else if(!this_form.find('input#terms').is(':checked')) {
+                        basic.showAlert('Please accept the Terms and Conditions', '', true);
+                    }else if(!this_form.find('input#privacy-policy').is(':checked')) {
+                        basic.showAlert('Please accept the Privacy Policy', '', true);
+                    }else {
+                        this_form_plain.submit();
+                    }
+                }
+            });
+        }
     }
 }
 
@@ -1639,7 +1685,7 @@ function initSignaturePad() {
             canvas.getContext("2d").scale(ratio, ratio);
         }
 
-        window.onresize = resizeCanvas;
+        //window.onresize = resizeCanvas;
         resizeCanvas();
 
         signature_pad = new SignaturePad(canvas, {
@@ -1651,5 +1697,41 @@ function initSignaturePad() {
                 signature_pad.clear();
             });
         }
+    }
+}
+
+function customCreateContractErrorHandle(el, text) {
+    el.addClass('with-error');
+    el.closest('.single-row').addClass('row-with-error');
+    el.parent().find('> label').append('<span class="error-in-label">'+text+'</span>');
+}
+
+function onDocumentReadyPageData() {
+    if($('body').hasClass('logged-in')) {
+        if($('body').hasClass('congratulations')) {
+            initFlipClockTimer(parseInt($('section.congratulation-and-time-section').attr('data-time-left-next-transfer')) - new Date().getTime() / 1000, )
+        }else if($('body').hasClass('patient-contract-view')) {
+            initFlipClockTimer(parseInt($('.contract-body').attr('data-time-left-next-transfer')) - new Date().getTime() / 1000, )
+        }
+    }
+}
+
+function initFlipClockTimer(time_left) {
+    var clock;
+    if(time_left > 0) {
+        clock = jQuery('.clock').FlipClock(time_left, {
+            clockFace: 'DailyCounter',
+            autoStart: false,
+            showSeconds: false,
+            callbacks: {
+                stop: function() {
+                    jQuery('.flip-clock-message').html('You are late with payment to your dentist.')
+                }
+            }
+        });
+        clock.setCountdown(true);
+        clock.start();
+    }else {
+        jQuery('.countdown-section').hide();
     }
 }

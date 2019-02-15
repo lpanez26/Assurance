@@ -31,6 +31,13 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
         die();
     })->name('test');
 
+    Route::get('/test1', function() {
+        var_dump((new \App\Http\Controllers\APIRequestsController())->encryptFile('16590c4613e7202cf0c19fda8ffc44e0e3d01ee1c28972192420bb4fec2233e7'));
+        //var_dump((new \App\Http\Controllers\APIRequestsController())->getAllEnums());
+        //var_dump((new \App\Http\Controllers\APIRequestsController())->getPatientsByEmail('miroslav.nedelchev@dentacoin.com'));
+        die();
+    })->name('test');
+
     Route::get('/test123', 'Controller@testingTest')->name('test');
 
     //======================================= TEMPORALLY FOR DAPP TESTING ========================================
@@ -58,6 +65,12 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
         Route::get('/invite-dentists', 'PatientController@getInviteDentistsView')->name('invite-dentists');
 
         Route::post('/submit-invite-dentists', 'PatientController@inviteDentists')->middleware('HandleUserSession')->name('submit-invite-dentists');
+
+        Route::post('/update-and-sign-contract', 'PatientController@updateAndSignContract')->middleware('HandleUserSession')->name('update-and-sign-contract');
+
+        Route::get('/congratulations/{slug}', 'PatientController@getCongratulationsView')->name('congratulations');
+
+        Route::get('/contract/{slug}', 'PatientController@getPatientContractView')->name('patient-contract-view');
     });
 
     Route::group(['prefix' => 'dentist', 'middleware' => 'HandleDentistSession'], function () {

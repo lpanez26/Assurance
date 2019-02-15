@@ -16,6 +16,14 @@ class PatientController extends Controller {
         return view('pages/logged-user/patient/invite-dentists', ['invited_dentists_list' => InviteDentistsReward::where(array('patient_id' => session('logged_user')['id']))->get()->sortByDesc('created_at')->all()]);
     }
 
+    protected function getCongratulationsView($slug) {
+        return view('pages/logged-user/patient/congratulations', ['contract' => TemporallyContract::where(array('slug' => $slug))->get()->first()]);
+    }
+
+    protected function getPatientContractView($slug) {
+        return view('pages/logged-user/patient/patient-contract-view', ['contract' => TemporallyContract::where(array('slug' => $slug))->get()->first()]);
+    }
+
     public function getPatientAccess()    {
         if((new UserController())->checkSession()) {
             if(filter_var(session('logged_user')['have_contracts'], FILTER_VALIDATE_BOOLEAN)) {
@@ -153,5 +161,72 @@ class PatientController extends Controller {
         } else {
             return view('pages/contract-proposal-partly', ['contract' => $contract]);
         }
+    }
+
+    protected function updateAndSignContract(Request $request) {
+        $this->validate($request, [
+            'patient_signature' => 'required',
+            'patient-id-number' => 'required|max:20',
+            'contract' => 'required',
+        ], [
+            'patient_signature.required' => 'Patient signature is required.',
+            'patient-id-number.required' => 'Patient ID number signature is required.',
+            'contract.required' => 'Contract slug is required.',
+        ]);
+
+        $data = $this->clearPostData($request->input());
+        $logged_patient = (new APIRequestsController())->getUserData(session('logged_user')['id']);
+        $contract = TemporallyContract::where(array('slug' => $data['contract']))->get()->first();
+        if(empty($contract) || (!empty($contract) && $contract->patient_email != $logged_patient->email)) {
+            //if user trying to fake the contract slug
+            return abort(404);
+        }
+
+        //update CoreDB api data for this patient
+        if(isset($data['country']) || isset($data['dcn_address'])) {
+            $curl_arr = array();
+            if(isset($data['country'])) {
+                if(!empty($data['country'])) {
+                    $curl_arr['country_code'] = $data['country'];
+                }else {
+                    return redirect()->route('patient-access', ['slug' => $data['contract']]);
+                }
+            }
+            if(isset($data['dcn_address'])) {
+                if(!empty($data['dcn_address'])) {
+                    $curl_arr['dcn_address'] = $data['dcn_address'];
+                }else {
+                    return redirect()->route('patient-access', ['slug' => $data['contract']]);
+                }
+            }
+
+            //handle the API response
+            $api_response = (new APIRequestsController())->updateUserData($curl_arr);
+            if(!$api_response) {
+                return redirect()->route('patient-access', ['slug' => $data['contract']])->with(['errors_response' => $api_response['errors']]);
+            }
+        }
+
+        //create image from the base64 signature
+        $signature_filename = 'patient-signature.png';
+        $temp_contract_folder_path = CONTRACTS . DS . $data['contract'];
+        file_put_contents($temp_contract_folder_path . DS . $signature_filename, $this->base64ToPng($data['patient_signature']));
+
+        $contract->patient_id = $logged_patient->id;
+        $contract->patient_id_number = $data['patient-id-number'];
+        $contract->patient_sign = true;
+        $contract->contract_active_at = new \DateTime();
+
+        //GENERATE PDF
+
+        //send the patient and dentist public keys to encryption api
+
+        //now send the result to IPFS
+
+        //save the IPFS hash to database
+
+        $contract->save();
+
+        return redirect()->route('congratulations', ['slug' => $data['contract']]);
     }
 }

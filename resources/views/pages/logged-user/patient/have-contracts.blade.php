@@ -11,19 +11,23 @@
                 <div class="col-xs-12">
                     <div class="contracts-list slider">
                         @foreach($contracts as $contract)
-                            <div class="module contract-tile pending padding-bottom-10">
+                            <div class="module contract-tile padding-bottom-10 @if($contract->patient_sign) active @else pending @endif">
                                 @php($dentist = (new \App\Http\Controllers\APIRequestsController())->getUserData($contract->dentist_id))
                                 <div class="tile-wrapper  fs-0">
                                     <figure itemscope="" itemtype="http://schema.org/ImageObject" class="inline-block-top">
                                         <img alt="Dentist avatar" src="{{$dentist->avatar_url}}"/>
-                                        <figcaption class="fs-14 blue-green-color calibri-light text-center padding-left-5 padding-right-5">Pending</figcaption>
+                                        <figcaption class="fs-14 blue-green-color calibri-light text-center padding-left-5 padding-right-5">@if($contract->patient_sign) Active @else Pending @endif</figcaption>
                                     </figure>
                                     <div class="contract-info inline-block-top">
                                         <div class="calibri-bold fs-18">Dr. {{$dentist->name}}</div>
                                         <time class="display-block fs-14 calibri-light">Sent on: {{$contract->created_at->format('d.m.Y')}}</time>
                                         <div class="lato-semibold fs-24 padding-top-5 padding-bottom-5">{{$contract->monthly_premium}}$</div>
                                         <div class="btn-container">
-                                            <a href="javascript:void(0)" class="white-blue-green-btn">Details and Sign</a>
+                                            @if($contract->patient_sign)
+                                                <a href="{{route('patient-contract-view', ['slug' => $contract->slug])}}" class="white-blue-green-btn">Details</a>
+                                            @else
+                                                <a href="{{route('contract-proposal', ['slug' => $contract->slug])}}" class="white-blue-green-btn">Details and Sign</a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

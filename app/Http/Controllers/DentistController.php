@@ -201,10 +201,6 @@ class DentistController extends Controller
             }
         }
 
-        //create image from the base64 signature
-        $signature_filename = 'dentist-signature-'.time().'.png';
-        file_put_contents(UPLOADS . $signature_filename, $this->base64ToPng($data['dentist_signature']));
-
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
         $random_string = '';
@@ -213,9 +209,20 @@ class DentistController extends Controller
         }
         $random_string = $random_string.time();
 
+        //saving the dentist signature in new unique folder for this contract
+        $temp_contract_folder_path = CONTRACTS . DS . $random_string;
+        if (!file_exists($temp_contract_folder_path)) {
+            mkdir($temp_contract_folder_path, 0755, true);
+
+            //create image from the base64 signature
+            file_put_contents($temp_contract_folder_path . DS . 'dentist-signature.png', $this->base64ToPng($data['dentist_signature']));
+        } else {
+            //this should never happen, but ..
+            return redirect()->route('create-contract')->with(['error' => 'Something went wrong with contract creation. Please try again later.']);
+        }
+
         $temporally_contract = new TemporallyContract();
         $temporally_contract->dentist_id = session('logged_user')['id'];
-        $temporally_contract->dentist_sign = $signature_filename;
         $temporally_contract->patient_fname = trim($data['fname']);
         $temporally_contract->patient_lname = trim($data['lname']);
         $temporally_contract->patient_email = trim($data['email']);
@@ -230,7 +237,6 @@ class DentistController extends Controller
         if($temporally_contract->id) {
             //send email
             $sender = (new APIRequestsController())->getUserData(session('logged_user')['id']);
-
             $body = '<!DOCTYPE html><html><head></head><body style="font-size: 16px;"><div>Dear '.$temporally_contract->patient_fname.' '.$temporally_contract->patient_lname.',<br><br><br>I have created an individualized Assurance Contract for you. It entitles you to prevention-focused dental services against an affordable monthly premium in Dentacoin (DCN) currency*.<br><br>It’s very easy to start: just click on the button below, sign up, check my proposal and follow the instructions if you are interested:<br><br><br><a href="'.route('contract-proposal', ['slug' => $temporally_contract->slug]).'" style="font-size: 20px;color: #126585;background-color: white;padding: 10px 20px;text-decoration: none;font-weight: bold;border-radius: 4px;border: 2px solid #126585;" target="_blank">SEE YOUR ASSURANCE CONTRACT</a><br><br><br>Looking forward to seeing you onboard!<br><br>Regards,<br><b>'.$sender->name.'</b><br><br><br><i style="font-size: 13px;">* Dentacoin is the first dental cryptocurrency which can be earned through the Dentacoin tools, used as a means of payment for dental services and assurance fees, and exchanged to any other crypto or traditional currency.</i></div></body></html>';
 
             Mail::send(array(), array(), function($message) use ($body, $data, $sender) {

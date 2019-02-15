@@ -23,6 +23,7 @@ mix.styles([
     'node_modules/bootstrap-select/dist/css/bootstrap-select.min.css',
     'node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css',
     'public/assets/libs/combobox/combobox.css',
+    'public/assets/libs/FlipClock-master/compiled/flipclock.css',
 ], 'public/dist/css/front-libs-style.css');
 
 mix.styles([
@@ -40,6 +41,7 @@ mix.scripts([
     'public/assets/libs/combobox/combobox.js',
     'public/assets/libs/signature-pad/signature-pad.js',
     'public/assets/libs/jquery-animate-number/jquery.animateNumber.min.js',
+    'public/assets/libs/FlipClock-master/compiled/flipclock.min.js',
 ], 'public/dist/js/front-libs-script.js');
 
 mix.babel([

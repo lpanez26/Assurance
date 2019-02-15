@@ -16,12 +16,14 @@
 @import "pages/wallet-instructions";
 @import "pages/logged-in/global";
 @import "pages/logged-in/manage-privacy";
-@import "pages/logged-in/invite-dentists";
+@import "pages/logged-in/patient/invite-dentists";
 @import "pages/logged-in/my-profile";
-@import "pages/logged-in/dentist-create-contract";
+@import "pages/logged-in/dentist/dentist-create-contract";
 @import "pages/forgotten-password";
-@import "pages/logged-in/patient-have-contracts";
-@import "pages/logged-in/patient-review-assurance-contract";
+@import "pages/logged-in/patient/patient-have-contracts";
+@import "pages/logged-in/patient/patient-review-assurance-contract";
+@import "pages/logged-in/patient/patient-contratulations";
+@import "pages/logged-in/patient/contract-single-page";
 
 
 
