@@ -270,7 +270,7 @@ class APIRequestsController extends Controller {
         //CHANGE $key TO POST PARAMETER!!!!!
 
         $curl = curl_init();
-        $json = '{"private_key":"'+$key+'"}';
+        $json = '{"private_key":"'.$key.'"}';
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POST => 1,

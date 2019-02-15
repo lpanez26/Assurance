@@ -36,9 +36,9 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
         //var_dump((new \App\Http\Controllers\APIRequestsController())->getAllEnums());
         //var_dump((new \App\Http\Controllers\APIRequestsController())->getPatientsByEmail('miroslav.nedelchev@dentacoin.com'));
         die();
-    })->name('test');
+    })->name('test1');
 
-    Route::get('/test123', 'Controller@testingTest')->name('test');
+    Route::get('/test123', 'Controller@testingTest')->name('test123');
 
     //======================================= TEMPORALLY FOR DAPP TESTING ========================================
     Route::get('/dentist-test', 'HomeController@getDentistView')->name('dentist-test');
