@@ -182,6 +182,8 @@ class Controller extends BaseController
         $html_end = $view_end->render();
 
         $encrypted_html = (new \App\Http\Controllers\APIRequestsController())->encryptFile('16590c4613e7202cf0c19fda8ffc44e0e3d01ee1c28972192420bb4fec2233e7', $html_body);
+        var_dump($encrypted_html);
+        die();
 
         $dompdf->load_html($html_start . $encrypted_html . $html_end);
         $dompdf->render();
