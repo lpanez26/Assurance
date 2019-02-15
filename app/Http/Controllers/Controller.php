@@ -172,12 +172,18 @@ class Controller extends BaseController
 
     protected function testingTest() {
         $dompdf = new DOMPDF();
-        $view = view('partials/pdf-contract-container');
-        $html = $view->render();
+        $view_start = view('partials/pdf-contract-start');
+        $html_start = $view_start->render();
 
-        $encrypted_html = (new \App\Http\Controllers\APIRequestsController())->encryptFile('16590c4613e7202cf0c19fda8ffc44e0e3d01ee1c28972192420bb4fec2233e7', $html);
+        $view_body = view('partials/pdf-contract-body');
+        $html_body = $view_body->render();
 
-        $dompdf->load_html($encrypted_html);
+        $view_end = view('partials/pdf-contract-end');
+        $html_end = $view_end->render();
+
+        $encrypted_html = (new \App\Http\Controllers\APIRequestsController())->encryptFile('16590c4613e7202cf0c19fda8ffc44e0e3d01ee1c28972192420bb4fec2233e7', $html_body);
+
+        $dompdf->load_html($html_start . $encrypted_html . $html_end);
         $dompdf->render();
 
         $dompdf->stream("hello.pdf");
