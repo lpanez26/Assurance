@@ -238,9 +238,10 @@ class APIRequestsController extends Controller {
     }
 
     //this method is not from the CoreDB, but from the IPFS NODEJS API on the website server
-    public function uploadFileToIPFS() {
+    public function uploadFileToIPFS($file_path) {
         $curl = curl_init();
-        $json = '{"filename":"/../assurance.dentacoin.com/public/assets/lorem-ipsum.pdf"}';
+        //$json = '{"filename":"/../assurance.dentacoin.com/public/assets/lorem-ipsum.pdf"}';
+        $json = '{"filename":"'.$file_path.'"}';
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POST => 1,
@@ -266,9 +267,7 @@ class APIRequestsController extends Controller {
     //this method is not from the CoreDB, but from the IPFS NODEJS API on the website server
     public function encryptFile($key, $html) {
         $curl = curl_init();
-        //$json = '{"private_key":"'.$key.'", "html":"'.str_replace($html, '\"', '"').'"}';
-        $json = '{"private_key":"'.$key.'", "html":"'.html_entity_decode($html).'"}';
-        //$json = '{"private_key":"'.$key.'", "html":"LOREM IPSUM TEXT asds asdfdsfa sd fdsfas dsfasd sadfdafdfsdfdsfasfsfg sd fsgdf ajfdaj sadlk dfj kdlsf ;adlf df  dLOREM IPSUM TEXT asds asdfdsfa sd fdsfas dsfasd sadfdafdfsdfdsfasfsfg sd fsgdf ajfdaj sadlk dfj kdlsf ;adlf df  dLOREM IPSUM TEXT asds asdfdsfa sd fdsfas dsfasd sadfdafdfsdfdsfasfsfg sd fsgdf ajfdaj sadlk dfj kdlsf ;adlf df  dLOREM IPSUM TEXT asds asdfdsfa sd fdsfas dsfasd sadfdafdfsdfdsfasfsfg sd fsgdf ajfdaj sadlk dfj kdlsf ;adlf df  dLOREM IPSUM TEXT asds asdfdsfa sd fdsfas dsfasd sadfdafdfsdfdsfasfsfg sd fsgdf ajfdaj sadlk dfj kdlsf ;adlf df  dLOREM IPSUM TEXT asds asdfdsfa sd fdsfas dsfasd sadfdafdfsdfdsfasfsfg sd fsgdf ajfdaj sadlk dfj kdlsf ;adlf df  d"}';
+        $json = '{"private_key":"'.$key.'", "html":"'.$html.'"}';
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POST => 1,

@@ -196,17 +196,19 @@ class Controller extends BaseController
 
         $encrypted_html = (new \App\Http\Controllers\APIRequestsController())->encryptFile('16590c4613e7202cf0c19fda8ffc44e0e3d01ee1c28972192420bb4fec2233e7', $this->minifyHtmlParts($html_body));
 
-        var_dump($encrypted_html->response_obj->success->encrypted);
-        die();
+        if($encrypted_html) {
+            $dompdf->load_html($html_start . $encrypted_html->response_obj->success->encrypted . $html_end);
+            $dompdf->render();
+            $pdf_file = $dompdf->output();
 
-        $dompdf->load_html($html_start . $encrypted_html . $html_end);
-        $dompdf->render();
-        $pdf_file = $dompdf->output();
-
-        if(!file_put_contents(CONTRACTS . DS . 'vMLEEipYBUEXaVmqdpwU8umS8fXGkjfooHkpv6q0l7rHu3FSd8rGafturtJcHT1550149288/pdf-file.pdf', $pdf_file)){
-            echo 'Not OK!';
-        }else{
-            echo 'OK';
+            if(!file_put_contents(CONTRACTS . DS . 'vMLEEipYBUEXaVmqdpwU8umS8fXGkjfooHkpv6q0l7rHu3FSd8rGafturtJcHT1550149288/pdf-file.pdf', $pdf_file)){
+                return abort(404);
+            } else {
+                var_dump(CONTRACTS . DS . 'vMLEEipYBUEXaVmqdpwU8umS8fXGkjfooHkpv6q0l7rHu3FSd8rGafturtJcHT1550149288/pdf-file.pdf');
+                die();
+            }
+        } else {
+            return abort(404);
         }
 
         //$dompdf->stream('hello.pdf');
