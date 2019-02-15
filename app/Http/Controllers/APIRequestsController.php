@@ -268,9 +268,6 @@ class APIRequestsController extends Controller {
         $curl = curl_init();
         //$json = '{"private_key":"'.$key.'", "html":"'.$html.'"}';
         $json = '{"private_key":"'.$key.'", "html":"LOREM IPSUM TEXT asds asdfdsfa sd fdsfas dsfasd sadfdafdfsdfdsfasfsfg sd fsgdf ajfdaj sadlk dfj kdlsf ;adlf df  dLOREM IPSUM TEXT asds asdfdsfa sd fdsfas dsfasd sadfdafdfsdfdsfasfsfg sd fsgdf ajfdaj sadlk dfj kdlsf ;adlf df  dLOREM IPSUM TEXT asds asdfdsfa sd fdsfas dsfasd sadfdafdfsdfdsfasfsfg sd fsgdf ajfdaj sadlk dfj kdlsf ;adlf df  dLOREM IPSUM TEXT asds asdfdsfa sd fdsfas dsfasd sadfdafdfsdfdsfasfsfg sd fsgdf ajfdaj sadlk dfj kdlsf ;adlf df  dLOREM IPSUM TEXT asds asdfdsfa sd fdsfas dsfasd sadfdafdfsdfdsfasfsfg sd fsgdf ajfdaj sadlk dfj kdlsf ;adlf df  dLOREM IPSUM TEXT asds asdfdsfa sd fdsfas dsfasd sadfdafdfsdfdsfasfsfg sd fsgdf ajfdaj sadlk dfj kdlsf ;adlf df  d"}';
-        var_dump($json);
-        var_dump(json_decode($json));
-        die();
         curl_setopt_array($curl, array(
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_POST => 1,
