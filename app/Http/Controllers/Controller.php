@@ -196,7 +196,7 @@ class Controller extends BaseController
 
         $encrypted_html = (new \App\Http\Controllers\APIRequestsController())->encryptFile('a71b716eaecb4a8e496a21e824e44e74e7f3b36e70bf0149251f0e0e939a397fffae79ddc26c558a00cbfb9f7f206517d7c37d07f4c50607d6d964ad108efead', $this->minifyHtmlParts($html_body));
 
-        if($encrypted_html) {
+        if($encrypted_html && !isset($encrypted_html->error)) {
             $dompdf->load_html($html_start . '<div style="word-wrap: break-word;">'. $encrypted_html->response_obj->success->encrypted . '</div>' . $html_end);
             $dompdf->render();
             $pdf_file = $dompdf->output();
