@@ -196,7 +196,7 @@ class Controller extends BaseController
 
         $encrypted_html = (new \App\Http\Controllers\APIRequestsController())->encryptFile('16590c4613e7202cf0c19fda8ffc44e0e3d01ee1c28972192420bb4fec2233e7', $this->minifyHtmlParts($html_body));
 
-        var_dump($encrypted_html);
+        var_dump($encrypted_html->response_obj->success->encrypted);
         die();
 
         $dompdf->load_html($html_start . $encrypted_html . $html_end);
