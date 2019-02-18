@@ -265,7 +265,7 @@ class PatientController extends Controller {
 
             $ipfs_hash = (new \App\Http\Controllers\APIRequestsController())->uploadFileToIPFS(CONTRACTS . DS . $contract->slug . DS . $zip_name);
 
-            var_dump($ipfs_hash);
+            var_dump($ipfs_hash->response_obj->success->hash);
             die();
 
             //update the IPFS hash in the database

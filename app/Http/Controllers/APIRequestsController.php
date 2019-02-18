@@ -254,7 +254,7 @@ class APIRequestsController extends Controller {
             'Content-Length: ' . strlen($json))
         );
 
-        $resp = curl_exec($curl);
+        $resp = json_decode(curl_exec($curl));
         curl_close($curl);
 
         if(!empty($resp))   {
