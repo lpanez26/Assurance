@@ -30,6 +30,7 @@ class CreateTemporallyContractsTable extends Migration
             $table->timestamp('contract_active_at')->nullable();
             $table->string('document_hash')->nullable();
             $table->string('slug')->unique();
+            $table->enum('status', ['pending', 'awaiting-payment', 'awaiting-approval', 'active', 'cancelled'])->default('pending');
             $table->timestamps();
         });
     }

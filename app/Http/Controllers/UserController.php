@@ -87,10 +87,12 @@ class UserController extends Controller {
             'full-name' => 'required|max:250',
             'email' => 'required|max:100',
             'country' => 'required',
+            'dcn_address' => 'required',
         ], [
             'full-name.required' => 'Name is required.',
             'email.required' => 'Email address is required.',
             'country.required' => 'Country is required.',
+            'dcn_address.required' => 'Wallet Address is required.',
         ]);
 
         $data = $this->clearPostData($request->input());
@@ -127,7 +129,8 @@ class UserController extends Controller {
         $post_fields_arr = array(
             'name' => $data['full-name'],
             'email' => $data['email'],
-            'country_code' => $data['country']
+            'country_code' => $data['country'],
+            'dcn_address' => $data['dcn_address'],
         );
 
         //if user selected new avatar submit it to the api

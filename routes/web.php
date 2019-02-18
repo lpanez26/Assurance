@@ -25,7 +25,7 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
     Route::get('/wallet-instructions', 'WalletInstructionsController@getView')->name('wallet-instructions');
 
     Route::get('/test', function() {
-        var_dump((new \App\Http\Controllers\APIRequestsController())->uploadFileToIPFS());
+        var_dump((new \App\Http\Controllers\Controller())->testZipCreation());
         //var_dump((new \App\Http\Controllers\APIRequestsController())->getAllEnums());
         //var_dump((new \App\Http\Controllers\APIRequestsController())->getPatientsByEmail('miroslav.nedelchev@dentacoin.com'));
         die();

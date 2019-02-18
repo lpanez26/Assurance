@@ -36,6 +36,10 @@
                                     <button type="button"></button>
                                 </div>
                             </div>
+                            <div class="form-row padding-bottom-15 fs-0">
+                                <label class="inline-block fs-16" for="full-name">Your Wallet Address</label>
+                                <input class="inline-block fs-16 custom-input" minlength="42" maxlength="42" name="dcn_address" type="text" @if(!empty($user_data) && !empty($user_data->dcn_address)) value="{{$user_data->dcn_address}}" @endif/>
+                            </div>
                             <div class="btn-container text-center">
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <input type="submit" value="UPDATE PROFILE" class="white-blue-green-btn"/>
