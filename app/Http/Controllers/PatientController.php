@@ -257,9 +257,10 @@ class PatientController extends Controller {
             $this->storePdfFileTemporally($html_start, $encrypted_html_by_dentist->response_obj->success->encrypted, $html_end, CONTRACTS . $contract->slug . DS . 'dentist-pdf-file.pdf');
 
             //creating zip file with the both encrypted pdfs
+            $contract_folder_relative_path = 'assets' . DS . 'contracts' . DS . $contract->slug . DS;
             $zipper = new \Chumper\Zipper\Zipper;
             $zip_name = 'assurance-contracts.zip';
-            $zipper->make('assets' . DS . 'contracts' . DS . $contract->slug . DS . $zip_name)->add(CONTRACTS . $contract->slug . DS . 'patient-pdf-file.pdf', CONTRACTS . $contract->slug . DS . 'dentist-pdf-file.pdf');
+            $zipper->make($contract_folder_relative_path . $zip_name)->add($contract_folder_relative_path . 'patient-pdf-file.pdf', $contract_folder_relative_path . 'dentist-pdf-file.pdf');
             $zipper->close();
 
             $ipfs_hash = (new \App\Http\Controllers\APIRequestsController())->uploadFileToIPFS(CONTRACTS . DS . $contract->slug . DS . $zip_name);
