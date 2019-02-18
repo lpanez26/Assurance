@@ -252,10 +252,8 @@ class PatientController extends Controller {
         $encrypted_html_by_patient = (new \App\Http\Controllers\APIRequestsController())->encryptFile($patient_pub_key, $this->minifyHtmlParts($html_body));
         $encrypted_html_by_dentist = (new \App\Http\Controllers\APIRequestsController())->encryptFile($dentist_pub_key, $this->minifyHtmlParts($html_body));
 
-        var_dump($patient_pub_key);
-        var_dump($dentist_pub_key);
-        var_dump($encrypted_html_by_patient);
-        var_dump($encrypted_html_by_dentist);
+        var_dump($patient_pub_key->public_key);
+        var_dump($dentist_pub_key->public_key);
         die();
 
         if($encrypted_html_by_patient && !isset($encrypted_html_by_patient->error) && $encrypted_html_by_dentist && !isset($encrypted_html_by_dentist->error)) {
