@@ -145,6 +145,12 @@ class PatientController extends Controller {
 
     protected function getContractProposal($slug) {
         $contract = TemporallyContract::where(array('slug' => $slug))->get()->first();
+        var_dump((new UserController())->checkDentistSession());
+        var_dump(empty($contract));
+        var_dump((new UserController())->checkPatientSession());
+        var_dump($contract->patient_email);
+        var_dump((new APIRequestsController())->getUserData(session('logged_user')['id'])->email);
+        die();
         if((new UserController())->checkDentistSession() || empty($contract) || ((new UserController())->checkPatientSession() && $contract->patient_email != (new APIRequestsController())->getUserData(session('logged_user')['id'])->email)) {
             //if dentist trying to access the proposal or if there is no such contract or if different patient trying to access the proposal
             return abort(404);
