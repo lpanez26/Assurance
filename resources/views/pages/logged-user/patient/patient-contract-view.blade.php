@@ -14,7 +14,7 @@
                 <nav class="col-xs-12 text-center contract-single-page-nav module">
                     <ul itemscope="" itemtype="http://schema.org/SiteNavigationElement">
                         <li class="inline-block">
-                            <a href="javascript:void(0)" itemprop="url">
+                            <a href="//ipfs.io/ipfs/{{$contract->document_hash}}" itemprop="url" target="_blank">
                                 <span itemprop="name">Contract sample (pdf)</span>
                             </a>
                         </li>
@@ -27,7 +27,7 @@
                         <li class="inline-block">|</li>
                         <li class="inline-block">
                             <a href="javascript:void(0)" itemprop="url">
-                                <span itemprop="name"><i class="fa fa-bars" aria-hidden="true"></i> Contract sample (pdf)</span>
+                                <span itemprop="name"><i class="fa fa-bars" aria-hidden="true"></i> List view all contracts</span>
                             </a>
                         </li>
                     </ul>
