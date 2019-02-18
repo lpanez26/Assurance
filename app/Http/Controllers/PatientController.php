@@ -198,10 +198,7 @@ class PatientController extends Controller {
         if(empty($patient_pub_key)) {
             return redirect()->route('patient-access', ['slug' => $data['contract']])->with(['error' => 'No such public key in the database']);
         }
-        var_dump(empty($contract));
-        var_dump($contract->patient_email);
-        var_dump($logged_patient->email);
-        die();
+
         if(empty($contract) || (!empty($contract) && $contract->patient_email != $logged_patient->email)) {
             //if user trying to fake the contract slug
             return abort(404);
@@ -254,6 +251,12 @@ class PatientController extends Controller {
 
         $encrypted_html_by_patient = (new \App\Http\Controllers\APIRequestsController())->encryptFile($patient_pub_key, $this->minifyHtmlParts($html_body));
         $encrypted_html_by_dentist = (new \App\Http\Controllers\APIRequestsController())->encryptFile($dentist_pub_key, $this->minifyHtmlParts($html_body));
+
+        var_dump($patient_pub_key);
+        var_dump($dentist_pub_key);
+        var_dump($encrypted_html_by_patient);
+        var_dump($encrypted_html_by_dentist);
+        die();
 
         if($encrypted_html_by_patient && !isset($encrypted_html_by_patient->error) && $encrypted_html_by_dentist && !isset($encrypted_html_by_dentist->error)) {
             $this->storePdfFileTemporally($html_start, $encrypted_html_by_patient->response_obj->success->encrypted, $html_end, CONTRACTS . $contract->slug . DS . 'patient-pdf-file.pdf');
