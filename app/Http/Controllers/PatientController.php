@@ -260,7 +260,7 @@ class PatientController extends Controller {
             $contract_folder_relative_path = 'assets' . DS . 'contracts' . DS . $contract->slug . DS;
             $zipper = new \Chumper\Zipper\Zipper;
             $zip_name = 'assurance-contracts.zip';
-            $zipper->make($contract_folder_relative_path . $zip_name)->add(['patient-pdf-file.pdf', $contract_folder_relative_path], $contract_folder_relative_path);
+            $zipper->make($contract_folder_relative_path . $zip_name)->add(['patient-pdf-file.pdf', 'dentist-pdf-file.pdf'], $contract_folder_relative_path);
             $zipper->close();
 
             $ipfs_hash = (new \App\Http\Controllers\APIRequestsController())->uploadFileToIPFS(CONTRACTS . DS . $contract->slug . DS . $zip_name);
