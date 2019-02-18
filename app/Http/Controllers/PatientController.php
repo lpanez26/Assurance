@@ -249,13 +249,9 @@ class PatientController extends Controller {
         $view_end = view('partials/pdf-contract-layout-end');
         $html_end = $view_end->render();
 
-        $encrypted_html_by_patient = (new \App\Http\Controllers\APIRequestsController())->encryptFile($patient_pub_key, $this->minifyHtmlParts($html_body));
-        $encrypted_html_by_dentist = (new \App\Http\Controllers\APIRequestsController())->encryptFile($dentist_pub_key, $this->minifyHtmlParts($html_body));
-
-        var_dump($patient_pub_key->public_key);
-        var_dump($dentist_pub_key->public_key);
-        die();
-
+        $encrypted_html_by_patient = (new \App\Http\Controllers\APIRequestsController())->encryptFile($patient_pub_key->public_key, $this->minifyHtmlParts($html_body));
+        $encrypted_html_by_dentist = (new \App\Http\Controllers\APIRequestsController())->encryptFile($dentist_pub_key->public_key, $this->minifyHtmlParts($html_body));
+        
         if($encrypted_html_by_patient && !isset($encrypted_html_by_patient->error) && $encrypted_html_by_dentist && !isset($encrypted_html_by_dentist->error)) {
             $this->storePdfFileTemporally($html_start, $encrypted_html_by_patient->response_obj->success->encrypted, $html_end, CONTRACTS . $contract->slug . DS . 'patient-pdf-file.pdf');
             $this->storePdfFileTemporally($html_start, $encrypted_html_by_dentist->response_obj->success->encrypted, $html_end, CONTRACTS . $contract->slug . DS . 'dentist-pdf-file.pdf');
