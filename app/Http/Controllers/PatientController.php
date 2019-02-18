@@ -56,7 +56,7 @@ class PatientController extends Controller {
         ];
 
         //check if there is temporallycontract for this patient by email or by user_id (we fill user_id for this temporally contract once patient register - this is in case patient change his email while he still have the proposal running)
-        if(filter_var($request->input('have_contracts'), FILTER_VALIDATE_BOOLEAN) || TemporallyContract::where(array('email' => $request->input('email')))->get()->all()) {
+        if(filter_var($request->input('have_contracts'), FILTER_VALIDATE_BOOLEAN) || TemporallyContract::where(array('patient_email' => $request->input('email')))->get()->all()) {
             $session_arr['have_contracts'] = true;
         }
 
