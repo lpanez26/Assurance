@@ -167,7 +167,6 @@ class PatientController extends Controller {
 
     protected function updateAndSignContract(Request $request) {
         $logged_patient = (new APIRequestsController())->getUserData(session('logged_user')['id']);
-
         $required_fields_arr = array(
             'patient_signature' => 'required',
             'patient-id-number' => 'required|max:20',
@@ -195,8 +194,8 @@ class PatientController extends Controller {
         //getting the public key for this address stored in the assurance db (this table is getting updated by wallet.dentacoin.com)
         $patient_pub_key = PublicKey::where(array('address' => $logged_patient->dcn_address))->get()->first();
         $dentist_pub_key = PublicKey::where(array('address' => (new APIRequestsController())->getUserData($contract->dentist_id)->dcn_address))->get()->first();
-        if(empty($patient_pub_key)) {
-            return redirect()->route('patient-access', ['slug' => $data['contract']])->with(['error' => 'No such public key in the database']);
+        if(empty($patient_pub_key) || empty($dentist_pub_key)) {
+            return redirect()->route('patient-access', ['slug' => $data['contract']])->with(['error' => 'No such public keys in the database.']);
         }
 
         if(empty($contract) || (!empty($contract) && $contract->patient_email != $logged_patient->email)) {
@@ -249,9 +248,11 @@ class PatientController extends Controller {
         $view_end = view('partials/pdf-contract-layout-end');
         $html_end = $view_end->render();
 
+        //sending the pdf html to encryption nodejs api
         $encrypted_html_by_patient = (new \App\Http\Controllers\APIRequestsController())->encryptFile($patient_pub_key->public_key, $this->minifyHtmlParts($html_body));
         $encrypted_html_by_dentist = (new \App\Http\Controllers\APIRequestsController())->encryptFile($dentist_pub_key->public_key, $this->minifyHtmlParts($html_body));
-        
+
+        //if no errors from the api
         if($encrypted_html_by_patient && !isset($encrypted_html_by_patient->error) && $encrypted_html_by_dentist && !isset($encrypted_html_by_dentist->error)) {
             $this->storePdfFileTemporally($html_start, $encrypted_html_by_patient->response_obj->success->encrypted, $html_end, CONTRACTS . $contract->slug . DS . 'patient-pdf-file.pdf');
             $this->storePdfFileTemporally($html_start, $encrypted_html_by_dentist->response_obj->success->encrypted, $html_end, CONTRACTS . $contract->slug . DS . 'dentist-pdf-file.pdf');
@@ -264,27 +265,21 @@ class PatientController extends Controller {
             $zipper->close();
 
             $ipfs_hash = (new \App\Http\Controllers\APIRequestsController())->uploadFileToIPFS(CONTRACTS . DS . $contract->slug . DS . $zip_name);
+            if($ipfs_hash->response_obj && $ipfs_hash->response_obj->success) {
+                $contract->document_hash = $ipfs_hash->response_obj->success->hash;
 
-            var_dump($ipfs_hash->response_obj->success->hash);
-            die();
+                //deleting the contract folder
+                unlink(CONTRACTS . DS . $contract->slug);
 
-            //update the IPFS hash in the database
-
-            //delete the contract folder in assets
-
-            //update the status of the contract
+                //updating the status to awaiting-payment
+                $contract->status = 'awaiting-payment';
+                $contract->save();
+            } else {
+                return redirect()->route('patient-access', ['slug' => $data['contract']])->with(['error' => 'IPFS uploading is not working at the moment, please try to sign this contract later again.']);
+            }
         } else {
-            return abort(404);
+            return redirect()->route('patient-access', ['slug' => $data['contract']])->with(['error' => 'IPFS uploading is not working at the moment, please try to sign this contract later again.']);
         }
-
-        //send the patient and dentist public keys to encryption api
-
-        //now send the result to IPFS
-
-        //save the IPFS hash to database
-
-        $contract->save();
-
         return redirect()->route('congratulations', ['slug' => $data['contract']]);
     }
 
