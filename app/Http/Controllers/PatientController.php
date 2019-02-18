@@ -269,6 +269,7 @@ class PatientController extends Controller {
                 $contract->document_hash = $ipfs_hash->response_obj->success->hash;
 
                 //deleting the contract folder
+                array_map('unlink', glob(CONTRACTS . DS . $contract->slug . '/*.*'));
                 unlink(CONTRACTS . DS . $contract->slug);
 
                 //updating the status to awaiting-payment
