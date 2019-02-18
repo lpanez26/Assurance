@@ -258,8 +258,8 @@ class PatientController extends Controller {
 
             //creating zip file with the both encrypted pdfs
             $zipper = new \Chumper\Zipper\Zipper;
-            $zip_file_path = CONTRACTS . $contract->slug . DS . 'assurance-contracts.zip';
-            $zipper->make($zip_file_path)->add(CONTRACTS . $contract->slug . DS . 'patient-pdf-file.pdf', CONTRACTS . 'dentist-pdf-file.pdf');
+            $zip_file_path = DS . 'assets' . DS . $contract->slug . DS . 'assurance-contracts.zip';
+            $zipper->make($zip_file_path)->add(CONTRACTS . $contract->slug . DS . 'patient-pdf-file.pdf', CONTRACTS . $contract->slug . DS . 'dentist-pdf-file.pdf');
             $zipper->close();
 
             $ipfs_hash = (new \App\Http\Controllers\APIRequestsController())->uploadFileToIPFS($zip_file_path);
