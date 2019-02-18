@@ -145,12 +145,6 @@ class PatientController extends Controller {
 
     protected function getContractProposal($slug) {
         $contract = TemporallyContract::where(array('slug' => $slug))->get()->first();
-        var_dump((new UserController())->checkDentistSession());
-        var_dump(empty($contract));
-        var_dump((new UserController())->checkPatientSession());
-        var_dump($contract->patient_email);
-        var_dump((new APIRequestsController())->getUserData(session('logged_user')['id'])->email);
-        die();
         if((new UserController())->checkDentistSession() || empty($contract) || ((new UserController())->checkPatientSession() && $contract->patient_email != (new APIRequestsController())->getUserData(session('logged_user')['id'])->email)) {
             //if dentist trying to access the proposal or if there is no such contract or if different patient trying to access the proposal
             return abort(404);
@@ -204,6 +198,10 @@ class PatientController extends Controller {
         if(empty($patient_pub_key)) {
             return redirect()->route('patient-access', ['slug' => $data['contract']])->with(['error' => 'No such public key in the database']);
         }
+        var_dump(empty($contract));
+        var_dump($contract->patient_email);
+        var_dump($logged_patient->email);
+        die();
         if(empty($contract) || (!empty($contract) && $contract->patient_email != $logged_patient->email)) {
             //if user trying to fake the contract slug
             return abort(404);
