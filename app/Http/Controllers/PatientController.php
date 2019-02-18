@@ -270,7 +270,7 @@ class PatientController extends Controller {
 
                 //deleting the contract folder
                 array_map('unlink', glob(CONTRACTS . DS . $contract->slug . '/*.*'));
-                unlink(CONTRACTS . DS . $contract->slug);
+                rmdir(CONTRACTS . DS . $contract->slug);
 
                 //updating the status to awaiting-payment
                 $contract->status = 'awaiting-payment';
