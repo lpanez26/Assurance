@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CalculatorParameter;
 use App\Page;
 use App\PagesHtmlSection;
 use App\TemporallyContract;
@@ -30,7 +31,7 @@ class Controller extends BaseController
     const currencies = ['USD', 'EUR', 'GBP', 'RUB', 'INR', 'CNY', 'JPY'];
 
     public function __construct() {
-        if(!empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->getPrefix() == '/' && !Request::isMethod('post'))    {
+        if(!empty(Route::getCurrentRoute()) && !Request::isMethod('post'))    {
             View::share('mobile', $this->isMobile());
             View::share('meta_data', $this->getMetaData());
             View::share('sections', $this->getDbSections());
@@ -183,43 +184,33 @@ class Controller extends BaseController
         return $data;
     }
 
-    protected function testingTest() {
-        $dompdf = new DOMPDF();
-        $view_start = view('partials/pdf-contract-layout-start');
-        $html_start = $view_start->render();
-
-        $view_body = view('partials/pdf-contract-body');
-        $html_body = $view_body->render();
-
-        $view_end = view('partials/pdf-contract-layout-end');
-        $html_end = $view_end->render();
-
-        $encrypted_html = (new \App\Http\Controllers\APIRequestsController())->encryptFile('a71b716eaecb4a8e496a21e824e44e74e7f3b36e70bf0149251f0e0e939a397fffae79ddc26c558a00cbfb9f7f206517d7c37d07f4c50607d6d964ad108efead', $this->minifyHtmlParts($html_body));
-
-        if($encrypted_html && !isset($encrypted_html->error)) {
-            $dompdf->load_html($html_start . '<main style="word-wrap: break-word;" class="main-content">'. $encrypted_html->response_obj->success->encrypted . '</main>' . $html_end);
-            $dompdf->render();
-            $pdf_file = $dompdf->output();
-
-            $pdf_file_path = CONTRACTS . 'vMLEEipYBUEXaVmqdpwU8umS8fXGkjfooHkpv6q0l7rHu3FSd8rGafturtJcHT1550149288/pdf-file.pdf';
-            if(!file_put_contents($pdf_file_path, $pdf_file)){
-                return abort(404);
-            } else {
-                var_dump((new \App\Http\Controllers\APIRequestsController())->uploadFileToIPFS($pdf_file_path));
-                $dencrypted_html = (new \App\Http\Controllers\APIRequestsController())->dencryptFile('2eaa5f0ad61bcec0a130c993abb1077887bb4d62d909750a4594bc765156a4fd', $encrypted_html->response_obj->success->encrypted);
-
-                var_dump($dencrypted_html);
-                die();
+    /*public function fillCountriesFromCsv() {
+        $row = 1;
+        if (($handle = fopen(ROOT . 'public' . DS . 'assets' . DS . 'countries-test.csv', 'r')) !== FALSE) {
+            while (($data = fgetcsv($handle, 1000, "\n")) !== FALSE) {
+                $num = count($data);
+                $row++;
+                for ($c=0; $c < $num; $c+=1) {
+                    $row_data = explode('|',$data[$c]);
+                    $parameter = new CalculatorParameter();
+                    $parameter->country = $row_data[3];
+                    $parameter->code = $row_data[1];
+                    $parameter->slug = $row_data[2];
+                    $parameter->phone_code = $row_data[4];
+                    $parameter->param_gd_cd_id = $row_data[5];
+                    $parameter->param_gd_cd = $row_data[6];
+                    $parameter->param_gd_id = $row_data[7];
+                    $parameter->param_cd_id = $row_data[8];
+                    $parameter->param_gd = $row_data[9];
+                    $parameter->param_cd = $row_data[10];
+                    $parameter->param_id = $row_data[11];
+                    $parameter->save();
+                }
             }
-        } else {
-            return abort(404);
+            var_dump('done');
+            fclose($handle);
         }
-        //$dompdf->stream('hello.pdf');
-    }
-
-    function testZipCreation() {
-
-    }
+    }*/
 
     protected function encrypt($raw_text) {
         $length = openssl_cipher_iv_length(getenv('API_ENCRYPTION_METHOD'));
@@ -239,6 +230,10 @@ class Controller extends BaseController
 
     protected function base64ToPng($base64_string) {
         return base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $base64_string));
+    }
+
+    protected function getIpfsHashes() {
+        return TemporallyContract::whereNotNull('contract_active_at')->get(['document_hash', 'contract_active_at']);
     }
 }
 

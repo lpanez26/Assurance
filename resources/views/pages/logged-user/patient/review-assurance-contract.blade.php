@@ -3,6 +3,8 @@
     @php($dentist = (new \App\Http\Controllers\APIRequestsController())->getUserData($contract->dentist_id))
     @php($patient = (new \App\Http\Controllers\APIRequestsController())->getUserData(session('logged_user')['id']))
     @php($general_dentistry = unserialize($contract->general_dentistry))
+    @php($created_at = $contract->created_at->format('d-m-Y'))
+    @php($active_until = date('d/m/Y', strtotime($created_at . ' +30 days')))
     <section class="padding-top-100 padding-bottom-50 contract-proposal module">
         <div class="container">
             <div class="row">
@@ -16,7 +18,8 @@
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1">
                     <div class="wrapper padding-top-50 padding-bottom-60">
                         <div class="top-right-page-alike"></div>
-                        <h2 class="text-center blue-green-color fs-30 lato-bold padding-bottom-60">ASSURANCE CONTRACT SAMPLE</h2>
+                        <h2 class="text-center blue-green-color fs-30 lato-bold padding-bottom-20">ASSURANCE CONTRACT SAMPLE</h2>
+                        <div class="calibri-bold fs-14 padding-bottom-50 text-center blue-green-color">( This contract proposal will be active until {{$active_until}}. )</div>
                         <div class="step-fields module padding-top-20">
                             <form method="POST" enctype="multipart/form-data" action="{{route('update-and-sign-contract')}}" id="dentist-update-and-sign-contract">
                                 <h3 class="calibri-bold fs-30 dark-color">DENTIST DETAILS</h3>
@@ -195,7 +198,16 @@
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <input type="hidden" name="patient_signature"/>
                                     <input type="hidden" name="contract" value="{{$contract->slug}}"/>
-                                    <input type="submit" value="SIGN CONTRACT" class="white-blue-green-btn min-width-250"/>
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <a href="javascript:void(0)" class="white-red-btn min-width-220 reject-contract">REJECT</a>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <input type="submit" value="SIGN CONTRACT" class="white-blue-green-btn min-width-220"/>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>

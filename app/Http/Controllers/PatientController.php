@@ -19,11 +19,11 @@ class PatientController extends Controller {
     }
 
     protected function getCongratulationsView($slug) {
-        return view('pages/logged-user/patient/congratulations', ['contract' => TemporallyContract::where(array('slug' => $slug))->get()->first()]);
+        return view('pages/logged-user/patient/congratulations', ['contract' => TemporallyContract::where(array('slug' => $slug))->get()->first(), 'dcn_for_one_usd' => $this->getIndacoinPricesInUSD('DCN'), 'eth_for_one_usd' => $this->getIndacoinPricesInUSD('ETH')]);
     }
 
     protected function getPatientContractView($slug) {
-        return view('pages/logged-user/patient/patient-contract-view', ['contract' => TemporallyContract::where(array('slug' => $slug))->get()->first()]);
+        return view('pages/logged-user/patient/patient-contract-view', ['contract' => TemporallyContract::where(array('slug' => $slug))->get()->first(), 'dcn_for_one_usd' => $this->getIndacoinPricesInUSD('DCN'), 'eth_for_one_usd' => $this->getIndacoinPricesInUSD('ETH')]);
     }
 
     public function getPatientAccess()    {
@@ -292,5 +292,19 @@ class PatientController extends Controller {
 
         //saving the pdf file to the contracts folder, but this will be temporally
         file_put_contents($pdf_file_path, $pdf_file);
+    }
+
+    protected function getIndacoinPricesInUSD($currency)    {
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => 'https://indacoin.com/api/GetCoinConvertAmount/USD/'.$currency.'/100/dentacoin',
+            CURLOPT_SSL_VERIFYPEER => 0
+        ));
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        $resp = json_decode(curl_exec($curl));
+        curl_close($curl);
+        // / 100 because we need the dcns for 1USD, we cannot make API request for 1USD
+        return $resp / 100;
     }
 }

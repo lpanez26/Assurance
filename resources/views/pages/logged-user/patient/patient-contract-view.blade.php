@@ -46,7 +46,25 @@
                     </div>
                 </div>
                 <div class="col-xs-4 inline-block-bottom blue-green-color-background contract-body" data-time-left-next-transfer="{{$timestamp}}">
-                    <div class="contract-header text-center lato-bold fs-20 white-color padding-top-15 padding-bottom-15">PENDING</div>
+                    <div class="contract-header text-center lato-bold fs-20 white-color padding-top-15 padding-bottom-15 {{$contract->status}}">
+                        @switch($contract->status)
+                            @case('active')
+                                ACTIVE
+                                @break
+                            @case('pending')
+                                PENDING
+                                @break
+                            @case('awaiting-payment')
+                                ACTIVE - AWAITING PAYMENT
+                                @break
+                            @case('awaiting-approval')
+                                ACTIVE - AWAITING APPROVAL
+                                @break
+                            @case('cancelled')
+                                CANCELLED
+                                @break
+                        @endswitch
+                    </div>
                     <div class="lato-bold fs-20 white-color padding-top-25 padding-bottom-15">YOUR FIRST PAYMENT IS DUE IN:</div>
                     <div class="clock"></div>
                     <div class="flip-clock-message"></div>

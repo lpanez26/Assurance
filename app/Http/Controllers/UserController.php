@@ -2,11 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\TemporallyContract;
 use Illuminate\Http\Request;
 
 class UserController extends Controller {
     public static function instance() {
         return new UserController();
+    }
+
+    protected function getEditAccountView()   {
+        return view('pages/logged-user/edit-account', ['countries' => (new APIRequestsController())->getAllCountries(), 'user_data' => (new APIRequestsController())->getUserData(session('logged_user')['id'])]);
+    }
+
+    protected function getManagePrivacyView()   {
+        return view('pages/logged-user/manage-privacy');
+    }
+
+    protected function getMyContractsView()     {
+        return view('pages/logged-user/my-contracts');
+    }
+
+    protected function getForgottenPasswordView() {
+        return view('pages/forgotten-password');
     }
 
     protected function getMyProfileView()   {
@@ -25,18 +42,6 @@ class UserController extends Controller {
         }
 
         return view('pages/logged-user/my-profile', ['currency_arr' => $currency_arr, 'dcn_amount' => 123456]);
-    }
-
-    protected function getEditAccountView()   {
-        return view('pages/logged-user/edit-account', ['countries' => (new APIRequestsController())->getAllCountries(), 'user_data' => (new APIRequestsController())->getUserData(session('logged_user')['id'])]);
-    }
-
-    protected function getManagePrivacyView()   {
-        return view('pages/logged-user/manage-privacy');
-    }
-
-    protected function getMyContractsView()     {
-        return view('pages/logged-user/my-contracts');
     }
 
     public function checkSession()   {
@@ -162,8 +167,18 @@ class UserController extends Controller {
         }
     }
 
-    protected function getForgottenPasswordView() {
-        return view('pages/forgotten-password');
+    protected function updateContractStatus(Request $request) {
+        $data = $this->clearPostData($request->input());
+        $response = array();
+        $contract = TemporallyContract::where(array('slug' => $data['contract'], 'patient_email' => (new APIRequestsController())->getUserData(session('logged_user')['id'])->email))->get()->first();
+        if($contract) {
+            $contract->status = $data['status'];
+            $response['success'] = true;
+        } else {
+            $response['error'] = 'Cancellation failed, wrong contract.';
+        }
+        echo json_encode($response);
+        die();
     }
 
     protected function forgottenPasswordSubmit(Request $request) {

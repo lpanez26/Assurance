@@ -16,6 +16,9 @@ class CreateCalculatorParametersTable extends Migration
         Schema::create('calculator_parameters', function (Blueprint $table) {
             $table->increments('id');
             $table->string('country');
+            $table->string('code');
+            $table->string('slug');
+            $table->string('phone_code')->nullable();
             $table->integer('param_gd_cd_id');
             $table->integer('param_gd_cd');
             $table->integer('param_gd_id');

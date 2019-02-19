@@ -605,14 +605,6 @@ var _require = require('./helper'),
     getWeb3 = _require.getWeb3,
     getContractInstance = _require.getContractInstance;
 
-var EthCrypto = require('eth-crypto');
-
-var publicKey = EthCrypto.publicKeyByPrivateKey('16590c4613e7202cf0c19fda8ffc44e0e3d01ee1c28972192420bb4fec2233e7');
-var address = EthCrypto.publicKey.toAddress(publicKey);
-
-console.log(publicKey, 'publicKey');
-console.log(address, 'address');
-
 basic.init();
 
 $(document).ready(function () {
@@ -1596,6 +1588,25 @@ if ($('body').hasClass('logged-in')) {
         initSignaturePad();
 
         if ($('form#dentist-update-and-sign-contract').length) {
+            $('form#dentist-update-and-sign-contract .reject-contract').click(function () {
+                //
+                $.ajax({
+                    type: 'POST',
+                    url: '/update-contract-status',
+                    dataType: 'json',
+                    data: {
+                        contract: $('form#dentist-update-and-sign-contract input[name="contract"]').val(),
+                        status: 'cancelled'
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function success(response) {
+                        if (response.success) {}
+                    }
+                });
+            });
+
             $('form#dentist-update-and-sign-contract').on('submit', function (event) {
                 event.preventDefault();
                 var this_form_plain = this;
@@ -1665,6 +1676,109 @@ if ($('body').hasClass('logged-in')) {
 
     if ($('section.open-new-assurance-contact-section input[type="text"].combobox').length) {
         $('section.open-new-assurance-contact-section input[type="text"].combobox').attr('placeholder', 'Search for a clinic...');
+    }
+
+    if ($('section.ready-to-purchase-with-external-api').length) {
+        //currency conversion logic
+        var current_active_currency = 'dcn';
+        var dcn_for_one_usd = parseFloat($('section.ready-to-purchase-with-external-api').attr('data-dcn-for-one-usd'));
+        var eth_for_one_usd = parseFloat($('section.ready-to-purchase-with-external-api').attr('data-eth-for-one-usd'));
+        $('section.ready-to-purchase-with-external-api #crypto-amount').val(dcn_for_one_usd * parseFloat($('section.ready-to-purchase-with-external-api #usd-value').val().trim()));
+
+        $('section.ready-to-purchase-with-external-api #usd-value').on('input', function () {
+            if ($(this).val().trim() < 30) {
+                $(this).parent().addClass('error-field');
+            } else {
+                $(this).parent().removeClass('error-field');
+            }
+
+            if (parseFloat($(this).val().trim()) < 0) {
+                $(this).val(30);
+            } else if (parseFloat($(this).val().trim()) > 6000) {
+                $(this).val(6000);
+            }
+
+            if ($('section.ready-to-purchase-with-external-api nav ul li a.active').attr('data-currency') == 'dcn') {
+                $('section.ready-to-purchase-with-external-api #crypto-amount').val(dcn_for_one_usd * parseFloat($(this).val().trim()));
+            } else if ($('section.ready-to-purchase-with-external-api nav ul li a.active').attr('data-currency') == 'eth') {
+                $('section.ready-to-purchase-with-external-api #crypto-amount').val(eth_for_one_usd * parseFloat($(this).val().trim()));
+            }
+        });
+
+        $('section.ready-to-purchase-with-external-api nav ul li a').on('click', function () {
+            $('section.ready-to-purchase-with-external-api nav ul li a').removeClass('active');
+            $(this).addClass('active');
+            if (current_active_currency != $(this).attr('data-currency')) {
+                current_active_currency = $(this).attr('data-currency');
+
+                $('section.ready-to-purchase-with-external-api #usd-value').val(30);
+                $('section.ready-to-purchase-with-external-api #usd-value').parent().removeClass('error-field');
+
+                $('section.ready-to-purchase-with-external-api .crypto-label').html(current_active_currency.toUpperCase());
+
+                if (current_active_currency == 'dcn') {
+                    $('section.ready-to-purchase-with-external-api #crypto-amount').val(dcn_for_one_usd * 30);
+                } else if (current_active_currency == 'eth') {
+                    $('section.ready-to-purchase-with-external-api #crypto-amount').val(eth_for_one_usd * 30);
+                }
+            }
+        });
+
+        $('section.ready-to-purchase-with-external-api #crypto-amount').on('input', function () {
+            var divisor;
+            if ($('section.ready-to-purchase-with-external-api nav ul li a.active').attr('data-currency') == 'dcn') {
+                divisor = dcn_for_one_usd;
+            } else if ($('section.ready-to-purchase-with-external-api nav ul li a.active').attr('data-currency') == 'eth') {
+                divisor = eth_for_one_usd;
+            }
+
+            if (parseFloat($(this).val().trim()) / divisor > 6000) {
+                $(this).val(divisor * 6000);
+            }
+            $('section.ready-to-purchase-with-external-api #usd-value').val(parseFloat($(this).val().trim()) / divisor);
+        });
+
+        $('section.ready-to-purchase-with-external-api .buy-crypto-btn').click(function () {
+            var currency = $('section.ready-to-purchase-with-external-api nav ul li a.active').attr('data-currency');
+            var currency_amount_for_one_usd;
+            if (currency == 'dcn') {
+                currency_amount_for_one_usd = dcn_for_one_usd;
+            } else if (currency == 'eth') {
+                currency_amount_for_one_usd = eth_for_one_usd;
+            }
+
+            if (parseFloat($('section.ready-to-purchase-with-external-api #usd-value').val().trim()) < 30) {
+                basic.showAlert('The minimum transaction limit is 30 USD.', '', true);
+            } else if (parseFloat($('section.ready-to-purchase-with-external-api #usd-value').val().trim()) > 6000) {
+                basic.showAlert('The maximum transaction limit is 6000 USD.', '', true);
+            } else if (parseFloat($('section.ready-to-purchase-with-external-api #crypto-amount').val().trim()) < currency_amount_for_one_usd * 30) {
+                basic.showAlert('The minimum transaction limit is 30 USD in ' + currency.toUpperCase() + '.', '', true);
+            } else if (parseFloat($('section.ready-to-purchase-with-external-api #crypto-amount').val().trim()) > currency_amount_for_one_usd * 6000) {
+                basic.showAlert('The maximum transaction limit is 6000 USD in ' + currency.toUpperCase() + '.', '', true);
+            } else if (!innerAddressCheck($('section.ready-to-purchase-with-external-api input#dcn_address').val().trim())) {
+                basic.showAlert('Please enter a valid wallet address. It should start with "0x" and be followed by 40 characters (numbers and letters).', '', true);
+            } else if (!basic.validateEmail($('section.ready-to-purchase-with-external-api input#email').val().trim())) {
+                basic.showAlert('Please enter a valid email.', '', true);
+            } else if (!$('section.ready-to-purchase-with-external-api #privacy-policy-agree').is(':checked')) {
+                basic.showAlert('Please agree with our Privacy Policy.', '', true);
+            } else {
+                window.location = 'https://indacoin.com/gw/payment_form?partner=dentacoin&cur_from=USD&cur_to=' + currency.toUpperCase() + '&amount=' + $('section.ready-to-purchase-with-external-api #usd-value').val().trim() + '&address=' + $('section.ready-to-purchase-with-external-api input#dcn_address').val().trim() + '&user_id=' + $('section.ready-to-purchase-with-external-api input#email').val().trim();
+            }
+        });
+
+        //google alike style for label/placeholders
+        $('.custom-google-label-style label').on('click', function () {
+            $(this).addClass('active-label');
+        });
+
+        $('.custom-google-label-style input').on('keyup change', function () {
+            var value = $(this).val().trim();
+            if (value.length) {
+                $(this).closest('.custom-google-label-style').find('label').addClass('active-label');
+            } else {
+                $(this).closest('.custom-google-label-style').find('label').removeClass('active-label');
+            }
+        });
     }
 }
 

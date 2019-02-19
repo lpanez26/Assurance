@@ -17,6 +17,25 @@
     }
 }
 
+.white-red-btn {
+    font-size: 20px;
+    color: $cancelled;
+    background-color: white;
+    padding: 10px 20px;
+    font-family: 'Calibri-Bold';
+    border: 2px solid $cancelled;
+    display: inline-block;
+    @include rounded(4px);
+    @include simple_transition(.3s);
+    &:hover {
+        color: white;
+        background-color: $cancelled;
+    }
+    &:focus {
+        color: $cancelled;
+    }
+}
+
 .blue-green-white-btn {
     font-size: 20px;
     color: $blue_green_color;
@@ -409,7 +428,7 @@
             @include rounded(6px);
             @include box-shadow(0 2px 6px 0 rgba(0,0,0,.4));
             figure {
-                width: 90px;
+                width: 120px;
                 overflow: hidden;
                 @include rounded(6px);
                 figcaption {
@@ -418,7 +437,7 @@
                 }
             }
             .contract-info {
-                width: calc(100% - 90px);
+                width: calc(100% - 120px);
                 padding-left: 15px;
                 .btn-container {
                     text-align: right;
@@ -433,7 +452,7 @@
             .tile-wrapper {
                 figure {
                     figcaption {
-                        background-color: #2fa8c7;
+                        background-color: $pending;
                     }
                 }
             }
@@ -442,7 +461,25 @@
             .tile-wrapper {
                 figure {
                     figcaption {
-                        background-color: #1d933b;
+                        background-color: $active;
+                    }
+                }
+            }
+        }
+        &.awaiting-payment, &.awaiting-approval {
+            .tile-wrapper {
+                figure {
+                    figcaption {
+                        background-color: $awaiting_payment_awaiting_approval;
+                    }
+                }
+            }
+        }
+        &.cancelled {
+            .tile-wrapper {
+                figure {
+                    figcaption {
+                        background-color: $cancelled;
                     }
                 }
             }
@@ -562,7 +599,18 @@
         }
         &.pending {
             .contract-header {
-                background-color: #29acde;
+                &.pending {
+                    background-color: $pending;
+                }
+                &.active {
+                    background-color: $active;
+                }
+                &.awaiting-payment, &.awaiting-approval {
+                    background-color: $awaiting_payment_awaiting_approval;
+                }
+                &.cancelled {
+                    background-color: $cancelled;
+                }
             }
         }
     }

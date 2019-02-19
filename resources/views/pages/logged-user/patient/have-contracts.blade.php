@@ -11,16 +11,34 @@
                 <div class="col-xs-12">
                     <div class="contracts-list slider">
                         @foreach($contracts as $contract)
-                            <div class="module contract-tile padding-bottom-10 @if($contract->patient_sign) active @else pending @endif">
+                            <div class="module contract-tile padding-bottom-10 {{$contract->status}}">
                                 @php($dentist = (new \App\Http\Controllers\APIRequestsController())->getUserData($contract->dentist_id))
                                 <div class="tile-wrapper  fs-0">
                                     <figure itemscope="" itemtype="http://schema.org/ImageObject" class="inline-block-top">
                                         <img alt="Dentist avatar" src="{{$dentist->avatar_url}}"/>
-                                        <figcaption class="fs-14 blue-green-color calibri-light text-center padding-left-5 padding-right-5">@if($contract->patient_sign) Active @else Pending @endif</figcaption>
+                                        <figcaption class="fs-14 blue-green-color calibri-light text-center padding-left-5 padding-right-5">
+                                            @switch($contract->status)
+                                                @case('active')
+                                                    Active
+                                                    @break
+                                                @case('pending')
+                                                    Pending
+                                                    @break
+                                                @case('awaiting-payment')
+                                                    Active - Awaiting Payment
+                                                    @break
+                                                @case('awaiting-approval')
+                                                    Active - Awaiting Approval
+                                                    @break
+                                                @case('cancelled')
+                                                    Cancelled
+                                                    @break
+                                            @endswitch
+                                        </figcaption>
                                     </figure>
                                     <div class="contract-info inline-block-top">
                                         <div class="calibri-bold fs-18">Dr. {{$dentist->name}}</div>
-                                        <time class="display-block fs-14 calibri-light">Sent on: {{$contract->created_at->format('d.m.Y')}}</time>
+                                        <time class="display-block fs-14 calibri-light">Sent on: {{$contract->created_at->format('d/m/Y')}}</time>
                                         <div class="lato-semibold fs-24 padding-top-5 padding-bottom-5">{{$contract->monthly_premium}}$</div>
                                         <div class="btn-container">
                                             @if($contract->patient_sign)

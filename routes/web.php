@@ -25,7 +25,8 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
     Route::get('/wallet-instructions', 'WalletInstructionsController@getView')->name('wallet-instructions');
 
     Route::get('/test', function() {
-        var_dump((new \App\Http\Controllers\Controller())->testZipCreation());
+        //var_dump((new \App\Http\Controllers\Controller())->fillCountriesFromCsv());
+        //var_dump((new \App\Http\Controllers\Controller())->testZipCreation());
         //var_dump((new \App\Http\Controllers\APIRequestsController())->getAllEnums());
         //var_dump((new \App\Http\Controllers\APIRequestsController())->getPatientsByEmail('miroslav.nedelchev@dentacoin.com'));
         die();
@@ -84,6 +85,8 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
     Route::post('/update-account', 'UserController@updateAccount')->middleware('HandleUserSession')->name('update-account');
 
+    Route::post('/update-contract-status', 'UserController@updateContractStatus')->middleware('HandleUserSession')->name('update-account');
+
     Route::post('/add-dcn-address', 'UserController@addDcnAddress')->middleware('HandleUserSession')->name('add-dcn-address');
 
     Route::get('/user-logout', 'UserController@userLogout')->name('user-logout');
@@ -95,4 +98,6 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
     Route::post('/dentist-register', 'DentistController@register')->name('dentist-register');
 
     Route::post('/dentist-login', 'DentistController@login')->name('dentist-login');
+
+    Route::get('/ipfs-hashes', 'Controller@getIpfsHashes')->name('ipfs-hashes');
 });

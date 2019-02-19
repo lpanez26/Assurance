@@ -133,6 +133,9 @@ function openMedia(id, close_btn, type, editor)    {
         url: SITE_URL + '/media/open',
         data: data,
         dataType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         success: function (response) {
             console.log(response.success);
             if(response.success) {
@@ -213,6 +216,9 @@ function saveImageAltsEvent()   {
                 data: {
                     'alts_object' : alts_object
                 },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 dataType: 'json',
                 success: function (response) {
                     if(response.success)    {
@@ -247,6 +253,9 @@ function saveCalculatorParameters()   {
                 url: SITE_URL + '/calculator-parameters/update',
                 data: {
                     'object' : object
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 dataType: 'json',
                 success: function (response) {
