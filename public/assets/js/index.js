@@ -781,10 +781,9 @@ if($('body').hasClass('logged-in')) {
             return inner_error;
         }
 
-        $('.contract-creation-steps-container button').bind('click.validateStepsNav', function() {
+        $('.contract-creation-steps-container button').bind('click.validateStepsNav', async function() {
             var current_step_error = false;
             var this_btn = $(this);
-            console.log(this_btn.attr('data-step'));
             if(this_btn.index() > $('.contract-creation-steps-container button[data-step="'+create_contract_form.find('.next').attr('data-current-step')+'"]').index()) {
                 current_step_error = validateStepFields($('.step.'+create_contract_form.find('.next').attr('data-current-step')+' input.right-field'), create_contract_form.find('.next').attr('data-current-step'));
 
@@ -796,7 +795,8 @@ if($('body').hasClass('logged-in')) {
                         dentist_address = $('.step.one #dcn_address').html();
                     }
 
-                    $.ajax({
+
+                    var test = await $.ajax({
                         type: 'POST',
                         url: '/check-public-key',
                         dataType: 'json',
@@ -805,7 +805,7 @@ if($('body').hasClass('logged-in')) {
                         },
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
+                        }/*,
                         success: function (response) {
                             if (response.success) {
                                 $('.proof-of-address').removeClass('proof-failed');
@@ -813,8 +813,10 @@ if($('body').hasClass('logged-in')) {
                                 $('.proof-of-address').addClass('proof-failed');
                                 current_step_error = true;
                             }
-                        }
+                        }*/
                     });
+
+                    console.log(test, 'test);');
                 }else if(this_btn.attr('data-step') == 'four') {
                     if($('.step.three [name="general-dentistry[]"]:checked').val() == undefined) {
 

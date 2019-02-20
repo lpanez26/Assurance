@@ -25621,31 +25621,31 @@ var buildCurrentPatientContractHistory = function () {
 
 
 var onDocumentReadyPageData = function () {
-    var _ref12 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee12() {
+    var _ref13 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee13() {
         var next_transfer_timestamp, date_obj;
-        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee12$(_context12) {
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee13$(_context13) {
             while (1) {
-                switch (_context12.prev = _context12.next) {
+                switch (_context13.prev = _context13.next) {
                     case 0:
                         if (!$('body').hasClass('logged-in')) {
-                            _context12.next = 39;
+                            _context13.next = 39;
                             break;
                         }
 
                         if (!$('body').hasClass('congratulations')) {
-                            _context12.next = 13;
+                            _context13.next = 13;
                             break;
                         }
 
-                        _context12.t0 = parseInt($('section.congratulation-and-time-section').attr('data-time-left-next-transfer'));
-                        _context12.t1 = parseInt;
-                        _context12.next = 6;
+                        _context13.t0 = parseInt($('section.congratulation-and-time-section').attr('data-time-left-next-transfer'));
+                        _context13.t1 = parseInt;
+                        _context13.next = 6;
                         return App.assurance_state_methods.getPeriodToWithdraw();
 
                     case 6:
-                        _context12.t2 = _context12.sent;
-                        _context12.t3 = (0, _context12.t1)(_context12.t2);
-                        next_transfer_timestamp = _context12.t0 + _context12.t3;
+                        _context13.t2 = _context13.sent;
+                        _context13.t3 = (0, _context13.t1)(_context13.t2);
+                        next_transfer_timestamp = _context13.t0 + _context13.t3;
 
                         if ($('.converted-date').length > 0) {
                             date_obj = new Date(next_transfer_timestamp * 1000);
@@ -25653,24 +25653,24 @@ var onDocumentReadyPageData = function () {
                             $('.converted-date').html(date_obj.getDate() + '/' + (date_obj.getMonth() + 1) + '/' + date_obj.getFullYear());
                         }
                         initFlipClockTimer(next_transfer_timestamp - new Date().getTime() / 1000);
-                        _context12.next = 39;
+                        _context13.next = 39;
                         break;
 
                     case 13:
                         if (!$('body').hasClass('patient-contract-view')) {
-                            _context12.next = 26;
+                            _context13.next = 26;
                             break;
                         }
 
-                        _context12.t4 = parseInt($('.contract-body').attr('data-time-left-next-transfer'));
-                        _context12.t5 = parseInt;
-                        _context12.next = 18;
+                        _context13.t4 = parseInt($('.contract-body').attr('data-time-left-next-transfer'));
+                        _context13.t5 = parseInt;
+                        _context13.next = 18;
                         return App.assurance_state_methods.getPeriodToWithdraw();
 
                     case 18:
-                        _context12.t6 = _context12.sent;
-                        _context12.t7 = (0, _context12.t5)(_context12.t6);
-                        next_transfer_timestamp = _context12.t4 + _context12.t7;
+                        _context13.t6 = _context13.sent;
+                        _context13.t7 = (0, _context13.t5)(_context13.t6);
+                        next_transfer_timestamp = _context13.t4 + _context13.t7;
 
                         if ($('.converted-date').length > 0) {
                             date_obj = new Date(next_transfer_timestamp * 1000);
@@ -25680,45 +25680,45 @@ var onDocumentReadyPageData = function () {
                         initFlipClockTimer(next_transfer_timestamp - new Date().getTime() / 1000);
 
                         cancelContractEventInit();
-                        _context12.next = 39;
+                        _context13.next = 39;
                         break;
 
                     case 26:
                         if (!$('body').hasClass('contract-proposal')) {
-                            _context12.next = 39;
+                            _context13.next = 39;
                             break;
                         }
 
                         if (!($('.contract-proposal.section').length && $('.contract-proposal.section').attr('data-created-at-timestamp') != undefined)) {
-                            _context12.next = 39;
+                            _context13.next = 39;
                             break;
                         }
 
-                        _context12.t8 = Date;
-                        _context12.t9 = parseInt($('.contract-proposal.section').attr('data-created-at-timestamp'));
-                        _context12.t10 = parseInt;
-                        _context12.next = 33;
+                        _context13.t8 = Date;
+                        _context13.t9 = parseInt($('.contract-proposal.section').attr('data-created-at-timestamp'));
+                        _context13.t10 = parseInt;
+                        _context13.next = 33;
                         return App.assurance_state_methods.getPeriodToWithdraw();
 
                     case 33:
-                        _context12.t11 = _context12.sent;
-                        _context12.t12 = (0, _context12.t10)(_context12.t11);
-                        _context12.t13 = _context12.t9 + _context12.t12;
-                        _context12.t14 = _context12.t13 * 1000;
-                        date_obj = new _context12.t8(_context12.t14);
+                        _context13.t11 = _context13.sent;
+                        _context13.t12 = (0, _context13.t10)(_context13.t11);
+                        _context13.t13 = _context13.t9 + _context13.t12;
+                        _context13.t14 = _context13.t13 * 1000;
+                        date_obj = new _context13.t8(_context13.t14);
 
                         $('.active-until').html(date_obj.getDate() + '/' + (date_obj.getMonth() + 1) + '/' + date_obj.getFullYear());
 
                     case 39:
                     case 'end':
-                        return _context12.stop();
+                        return _context13.stop();
                 }
             }
-        }, _callee12, this);
+        }, _callee13, this);
     }));
 
     return function onDocumentReadyPageData() {
-        return _ref12.apply(this, arguments);
+        return _ref13.apply(this, arguments);
     };
 }();
 
@@ -26549,66 +26549,105 @@ if ($('body').hasClass('logged-in')) {
         var create_contract_form = $('form#dentist-create-contract');
         create_contract_form.find('.terms-and-conditions-long-list').mCustomScrollbar();
 
-        $('.contract-creation-steps-container button').bind('click.validateStepsNav', function () {
-            var current_step_error = false;
-            var this_btn = $(this);
-            console.log(this_btn.attr('data-step'));
-            if (this_btn.index() > $('.contract-creation-steps-container button[data-step="' + create_contract_form.find('.next').attr('data-current-step') + '"]').index()) {
-                current_step_error = validateStepFields($('.step.' + create_contract_form.find('.next').attr('data-current-step') + ' input.right-field'), create_contract_form.find('.next').attr('data-current-step'));
+        $('.contract-creation-steps-container button').bind('click.validateStepsNav', _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee6() {
+            var current_step_error, this_btn, dentist_address, test;
+            return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee6$(_context6) {
+                while (1) {
+                    switch (_context6.prev = _context6.next) {
+                        case 0:
+                            current_step_error = false;
+                            this_btn = $(this);
 
-                if (this_btn.attr('data-step') == 'two') {
-                    var dentist_address;
-                    if ($('.step.one #dcn_address').is('input')) {
-                        dentist_address = $('.step.one #dcn_address').val();
-                    } else {
-                        dentist_address = $('.step.one #dcn_address').html();
-                    }
-
-                    $.ajax({
-                        type: 'POST',
-                        url: '/check-public-key',
-                        dataType: 'json',
-                        data: {
-                            address: dentist_address
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function success(response) {
-                            if (response.success) {
-                                $('.proof-of-address').removeClass('proof-failed');
-                            } else if (response.error) {
-                                $('.proof-of-address').addClass('proof-failed');
-                                current_step_error = true;
+                            if (!(this_btn.index() > $('.contract-creation-steps-container button[data-step="' + create_contract_form.find('.next').attr('data-current-step') + '"]').index())) {
+                                _context6.next = 13;
+                                break;
                             }
-                        }
-                    });
-                } else if (this_btn.attr('data-step') == 'four') {
-                    if ($('.step.three [name="general-dentistry[]"]:checked').val() == undefined) {
 
-                        customCreateContractErrorHandle($('.step.three .checkboxes-right-container'), 'Please select at least one service.');
-                        current_step_error = true;
+                            current_step_error = validateStepFields($('.step.' + create_contract_form.find('.next').attr('data-current-step') + ' input.right-field'), create_contract_form.find('.next').attr('data-current-step'));
+
+                            if (!(this_btn.attr('data-step') == 'two')) {
+                                _context6.next = 12;
+                                break;
+                            }
+
+                            if ($('.step.one #dcn_address').is('input')) {
+                                dentist_address = $('.step.one #dcn_address').val();
+                            } else {
+                                dentist_address = $('.step.one #dcn_address').html();
+                            }
+
+                            _context6.next = 8;
+                            return $.ajax({
+                                type: 'POST',
+                                url: '/check-public-key',
+                                dataType: 'json',
+                                data: {
+                                    address: dentist_address
+                                },
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') /*,
+                                                                                                 success: function (response) {
+                                                                                                    if (response.success) {
+                                                                                                        $('.proof-of-address').removeClass('proof-failed');
+                                                                                                    } else if (response.error) {
+                                                                                                        $('.proof-of-address').addClass('proof-failed');
+                                                                                                        current_step_error = true;
+                                                                                                    }
+                                                                                                 }*/
+                                } });
+
+                        case 8:
+                            test = _context6.sent;
+
+
+                            console.log(test, 'test);');
+                            _context6.next = 13;
+                            break;
+
+                        case 12:
+                            if (this_btn.attr('data-step') == 'four') {
+                                if ($('.step.three [name="general-dentistry[]"]:checked').val() == undefined) {
+
+                                    customCreateContractErrorHandle($('.step.three .checkboxes-right-container'), 'Please select at least one service.');
+                                    current_step_error = true;
+                                }
+                            }
+
+                        case 13:
+                            if (!current_step_error) {
+                                _context6.next = 17;
+                                break;
+                            }
+
+                            this_btn.attr('data-stopper', 'true');
+                            _context6.next = 27;
+                            break;
+
+                        case 17:
+                            this_btn.attr('data-stopper', 'false');
+                            _context6.t0 = create_contract_form.find('.next').attr('data-current-step');
+                            _context6.next = _context6.t0 === 'one' ? 21 : _context6.t0 === 'two' ? 23 : _context6.t0 === 'three' ? 25 : 27;
+                            break;
+
+                        case 21:
+                            firstStepPassedSuccessfully(create_contract_form.find('.next'));
+                            return _context6.abrupt('break', 27);
+
+                        case 23:
+                            secondStepPassedSuccessfully(create_contract_form.find('.next'));
+                            return _context6.abrupt('break', 27);
+
+                        case 25:
+                            thirdStepPassedSuccessfully(create_contract_form.find('.next'), this_btn.attr('data-step'));
+                            return _context6.abrupt('break', 27);
+
+                        case 27:
+                        case 'end':
+                            return _context6.stop();
                     }
                 }
-            }
-
-            if (current_step_error) {
-                this_btn.attr('data-stopper', 'true');
-            } else {
-                this_btn.attr('data-stopper', 'false');
-                switch (create_contract_form.find('.next').attr('data-current-step')) {
-                    case 'one':
-                        firstStepPassedSuccessfully(create_contract_form.find('.next'));
-                        break;
-                    case 'two':
-                        secondStepPassedSuccessfully(create_contract_form.find('.next'));
-                        break;
-                    case 'three':
-                        thirdStepPassedSuccessfully(create_contract_form.find('.next'), this_btn.attr('data-step'));
-                        break;
-                }
-            }
-        });
+            }, _callee6, this);
+        })));
 
         $('.step.three [name="general-dentistry[]"]').on('change', function () {
             var suggested_price;
@@ -27051,13 +27090,13 @@ function bindLoginSigninPopupShow() {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function () {
-                    var _ref6 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee10(response) {
-                        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee10$(_context10) {
+                    var _ref7 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee11(response) {
+                        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee11$(_context11) {
                             while (1) {
-                                switch (_context10.prev = _context10.next) {
+                                switch (_context11.prev = _context11.next) {
                                     case 0:
                                         if (!response.success) {
-                                            _context10.next = 20;
+                                            _context11.next = 20;
                                             break;
                                         }
 
@@ -27095,33 +27134,12 @@ function bindLoginSigninPopupShow() {
                                         });
 
                                         $(document).on('civicCustomBtnClicked', function () {
-                                            var _ref7 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee6(event) {
-                                                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee6$(_context6) {
-                                                    while (1) {
-                                                        switch (_context6.prev = _context6.next) {
-                                                            case 0:
-                                                                $('.patient .form-register .step-errors-holder').html('');
-
-                                                            case 1:
-                                                            case 'end':
-                                                                return _context6.stop();
-                                                        }
-                                                    }
-                                                }, _callee6, this);
-                                            }));
-
-                                            return function (_x2) {
-                                                return _ref7.apply(this, arguments);
-                                            };
-                                        }());
-
-                                        $(document).on('civicRead', function () {
                                             var _ref8 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee7(event) {
                                                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee7$(_context7) {
                                                     while (1) {
                                                         switch (_context7.prev = _context7.next) {
                                                             case 0:
-                                                                $('.response-layer').show();
+                                                                $('.patient .form-register .step-errors-holder').html('');
 
                                                             case 1:
                                                             case 'end':
@@ -27131,18 +27149,18 @@ function bindLoginSigninPopupShow() {
                                                 }, _callee7, this);
                                             }));
 
-                                            return function (_x3) {
+                                            return function (_x2) {
                                                 return _ref8.apply(this, arguments);
                                             };
                                         }());
 
-                                        $(document).on('facebookCustomBtnClicked', function () {
+                                        $(document).on('civicRead', function () {
                                             var _ref9 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee8(event) {
                                                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee8$(_context8) {
                                                     while (1) {
                                                         switch (_context8.prev = _context8.next) {
                                                             case 0:
-                                                                $('.patient .form-register .step-errors-holder').html('');
+                                                                $('.response-layer').show();
 
                                                             case 1:
                                                             case 'end':
@@ -27152,18 +27170,18 @@ function bindLoginSigninPopupShow() {
                                                 }, _callee8, this);
                                             }));
 
-                                            return function (_x4) {
+                                            return function (_x3) {
                                                 return _ref9.apply(this, arguments);
                                             };
                                         }());
 
-                                        $(document).on('customCivicFbStopperTriggered', function () {
+                                        $(document).on('facebookCustomBtnClicked', function () {
                                             var _ref10 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee9(event) {
                                                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee9$(_context9) {
                                                     while (1) {
                                                         switch (_context9.prev = _context9.next) {
                                                             case 0:
-                                                                customErrorHandle($('.patient .form-register .step-errors-holder'), 'Please agree with our privacy policy.');
+                                                                $('.patient .form-register .step-errors-holder').html('');
 
                                                             case 1:
                                                             case 'end':
@@ -27173,8 +27191,29 @@ function bindLoginSigninPopupShow() {
                                                 }, _callee9, this);
                                             }));
 
-                                            return function (_x5) {
+                                            return function (_x4) {
                                                 return _ref10.apply(this, arguments);
+                                            };
+                                        }());
+
+                                        $(document).on('customCivicFbStopperTriggered', function () {
+                                            var _ref11 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee10(event) {
+                                                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee10$(_context10) {
+                                                    while (1) {
+                                                        switch (_context10.prev = _context10.next) {
+                                                            case 0:
+                                                                customErrorHandle($('.patient .form-register .step-errors-holder'), 'Please agree with our privacy policy.');
+
+                                                            case 1:
+                                                            case 'end':
+                                                                return _context10.stop();
+                                                        }
+                                                    }
+                                                }, _callee10, this);
+                                            }));
+
+                                            return function (_x5) {
+                                                return _ref11.apply(this, arguments);
                                             };
                                         }());
                                         // ====================== /PATIENT LOGIN/SIGNUP LOGIC ======================
@@ -27226,7 +27265,7 @@ function bindLoginSigninPopupShow() {
 
                                         //SECOND STEP INIT LOGIC
                                         //load address script
-                                        _context10.next = 16;
+                                        _context11.next = 16;
                                         return $.getScript('/assets/js/address.js', function () {});
 
                                     case 16:
@@ -27401,14 +27440,14 @@ function bindLoginSigninPopupShow() {
 
                                     case 20:
                                     case 'end':
-                                        return _context10.stop();
+                                        return _context11.stop();
                                 }
                             }
-                        }, _callee10, this);
+                        }, _callee11, this);
                     }));
 
                     function success(_x) {
-                        return _ref6.apply(this, arguments);
+                        return _ref7.apply(this, arguments);
                     }
 
                     return success;
@@ -27498,11 +27537,11 @@ function initComboboxes() {
 function apiEventsListeners() {
     //login
     $(document).on('successResponseCoreDBApi', function () {
-        var _ref11 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee11(event) {
+        var _ref12 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee12(event) {
             var custom_form_obj;
-            return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee11$(_context11) {
+            return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee12$(_context12) {
                 while (1) {
-                    switch (_context11.prev = _context11.next) {
+                    switch (_context12.prev = _context12.next) {
                         case 0:
                             if (event.response_data.token) {
                                 custom_form_obj = {
@@ -27527,14 +27566,14 @@ function apiEventsListeners() {
 
                         case 1:
                         case 'end':
-                            return _context11.stop();
+                            return _context12.stop();
                     }
                 }
-            }, _callee11, this);
+            }, _callee12, this);
         }));
 
         return function (_x6) {
-            return _ref11.apply(this, arguments);
+            return _ref12.apply(this, arguments);
         };
     }());
 
