@@ -1052,7 +1052,7 @@ if($('body').hasClass('logged-in')) {
                     var validate_dentist_address = await validateFirstStepDentistAddress();
                     console.log(validate_dentist_address, 'validate_dentist_address');
 
-                    if(!first_step_errors || validate_dentist_address) {
+                    if(!first_step_errors && !validate_dentist_address) {
                         firstStepPassedSuccessfully(this_btn);
                     }
                     break;
