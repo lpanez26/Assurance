@@ -795,8 +795,7 @@ if($('body').hasClass('logged-in')) {
                         dentist_address = $('.step.one #dcn_address').html();
                     }
 
-
-                    var test = await $.ajax({
+                    var check_public_key_ajax_result = await $.ajax({
                         type: 'POST',
                         url: '/check-public-key',
                         dataType: 'json',
@@ -805,18 +804,15 @@ if($('body').hasClass('logged-in')) {
                         },
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }/*,
-                        success: function (response) {
-                            if (response.success) {
-                                $('.proof-of-address').removeClass('proof-failed');
-                            } else if (response.error) {
-                                $('.proof-of-address').addClass('proof-failed');
-                                current_step_error = true;
-                            }
-                        }*/
+                        }
                     });
 
-                    console.log(test, 'test);');
+                    if (check_public_key_ajax_result.success) {
+                        $('.proof-of-address').removeClass('proof-failed');
+                    } else if (check_public_key_ajax_result.error) {
+                        $('.proof-of-address').addClass('proof-failed');
+                        current_step_error = true;
+                    }
                 }else if(this_btn.attr('data-step') == 'four') {
                     if($('.step.three [name="general-dentistry[]"]:checked').val() == undefined) {
 

@@ -1529,7 +1529,7 @@ if ($('body').hasClass('logged-in')) {
         create_contract_form.find('.terms-and-conditions-long-list').mCustomScrollbar();
 
         $('.contract-creation-steps-container button').bind('click.validateStepsNav', _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee6() {
-            var current_step_error, this_btn, dentist_address, test;
+            var current_step_error, this_btn, dentist_address, check_public_key_ajax_result;
             return _regeneratorRuntime.wrap(function _callee6$(_context6) {
                 while (1) {
                     switch (_context6.prev = _context6.next) {
@@ -1576,10 +1576,15 @@ if ($('body').hasClass('logged-in')) {
                                 } });
 
                         case 8:
-                            test = _context6.sent;
+                            check_public_key_ajax_result = _context6.sent;
 
 
-                            console.log(test, 'test);');
+                            if (check_public_key_ajax_result.success) {
+                                $('.proof-of-address').removeClass('proof-failed');
+                            } else if (check_public_key_ajax_result.error) {
+                                $('.proof-of-address').addClass('proof-failed');
+                                current_step_error = true;
+                            }
                             _context6.next = 13;
                             break;
 
