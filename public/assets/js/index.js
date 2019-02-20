@@ -2096,7 +2096,7 @@ function bindVerifyAddressEvent(keystore_file) {
                     url: '/assurance-import-private-key',
                     dataType: 'json',
                     data: {
-                        key: $('.proof-of-address #your-private-key').val().trim()
+                        private_key: $('.proof-of-address #your-private-key').val().trim()
                     },
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
