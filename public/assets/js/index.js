@@ -2082,7 +2082,33 @@ function bindVerifyAddressEvent(keystore_file) {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function (response) {
-                        console.log(response);
+                        //now with the address and the public key received from the nodejs api update the db
+                        if(response.success) {
+                            $.ajax({
+                                type: 'POST',
+                                url: '/update-public-keys',
+                                dataType: 'json',
+                                data: {
+                                    address: $('.proof-of-address').attr('data-address'),
+                                    public_key: response.public_key
+                                },
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                success: function (inner_response) {
+                                    $('.response-layer').hide();
+                                    if(inner_response.success) {
+                                        $('.proof-of-address').remove();
+                                        $('.proof-success').fadeIn(1500);
+                                    } else {
+                                        basic.showAlert(inner_response.error, '', true);
+                                    }
+                                }
+                            });
+                        } else if(response.error) {
+                            $('.response-layer').hide();
+                            basic.showAlert(response.error, '', true);
+                        }
                     }
                 });
             }
