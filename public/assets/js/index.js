@@ -788,7 +788,34 @@ if($('body').hasClass('logged-in')) {
             if(this_btn.index() > $('.contract-creation-steps-container button[data-step="'+create_contract_form.find('.next').attr('data-current-step')+'"]').index()) {
                 current_step_error = validateStepFields($('.step.'+create_contract_form.find('.next').attr('data-current-step')+' input.right-field'), create_contract_form.find('.next').attr('data-current-step'));
 
-                if(this_btn.attr('data-step') == 'four') {
+                if(this_btn.attr('data-step') == 'two') {
+                    var dentist_address;
+                    if($('.step.one #dcn_address').is('input')) {
+                        dentist_address = $('.step.one #dcn_address').val();
+                    } else {
+                        dentist_address = $('.step.one #dcn_address').html();
+                    }
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/check-public-key',
+                        dataType: 'json',
+                        data: {
+                            address: dentist_address
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                $('.proof-of-address').removeClass('proof-failed');
+                            } else if (response.error) {
+                                $('.proof-of-address').addClass('proof-failed');
+                                current_step_error = true;
+                            }
+                        }
+                    });
+                }else if(this_btn.attr('data-step') == 'four') {
                     if($('.step.three [name="general-dentistry[]"]:checked').val() == undefined) {
 
                         customCreateContractErrorHandle($('.step.three .checkboxes-right-container'), 'Please select at least one service.');
@@ -796,28 +823,6 @@ if($('body').hasClass('logged-in')) {
                     }
                 }
             }
-
-
-
-            /*$.ajax({
-                type: 'POST',
-                url: '/check-public-key',
-                dataType: 'json',
-                data: {
-                    address: dentist_address
-                },
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (response) {
-                    if (response.success) {
-                        $('.proof-of-address').removeClass('proof-failed');
-                    } else if (response.error) {
-                        $('.proof-of-address').addClass('proof-failed');
-                        first_step_errors = true;
-                    }
-                }
-            });*/
 
             if(current_step_error) {
                 this_btn.attr('data-stopper', 'true');
