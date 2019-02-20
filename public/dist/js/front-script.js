@@ -1531,8 +1531,7 @@ if ($('body').hasClass('logged-in')) {
         $('.contract-creation-steps-container button').bind('click.validateStepsNav', function () {
             var current_step_error = false;
             var this_btn = $(this);
-            console.log(this_btn.index(), 'this_btn.index()');
-            console.log($('.contract-creation-steps-container button[data-step="' + create_contract_form.find('.next').attr('data-current-step') + '"]').index(), '$(\'.contract-creation-steps-container button[data-step="\'+create_contract_form.find(\'.next\').attr(\'data-current-step\')+\'"]\').index()');
+            console.log(this_btn.attr('data-step'));
             if (this_btn.index() > $('.contract-creation-steps-container button[data-step="' + create_contract_form.find('.next').attr('data-current-step') + '"]').index()) {
                 current_step_error = validateStepFields($('.step.' + create_contract_form.find('.next').attr('data-current-step') + ' input.right-field'), create_contract_form.find('.next').attr('data-current-step'));
 
