@@ -788,31 +788,7 @@ if($('body').hasClass('logged-in')) {
                 current_step_error = validateStepFields($('.step.'+create_contract_form.find('.next').attr('data-current-step')+' input.right-field'), create_contract_form.find('.next').attr('data-current-step'));
 
                 if(this_btn.attr('data-step') == 'two') {
-                    var dentist_address;
-                    if($('.step.one #dcn_address').is('input')) {
-                        dentist_address = $('.step.one #dcn_address').val();
-                    } else {
-                        dentist_address = $('.step.one #dcn_address').html();
-                    }
-
-                    var check_public_key_ajax_result = await $.ajax({
-                        type: 'POST',
-                        url: '/check-public-key',
-                        dataType: 'json',
-                        data: {
-                            address: dentist_address
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-
-                    if (check_public_key_ajax_result.success) {
-                        $('.proof-of-address').removeClass('proof-failed');
-                    } else if (check_public_key_ajax_result.error) {
-                        $('.proof-of-address').addClass('proof-failed');
-                        current_step_error = true;
-                    }
+                    current_step_error = validateFirstStepDentistAddress();
                 }else if(this_btn.attr('data-step') == 'four') {
                     if($('.step.three [name="general-dentistry[]"]:checked').val() == undefined) {
 
@@ -998,6 +974,37 @@ if($('body').hasClass('logged-in')) {
             }
         }
 
+        async function validateFirstStepDentistAddress() {
+            var dentist_address;
+            var error;
+            if($('.step.one #dcn_address').is('input')) {
+                dentist_address = $('.step.one #dcn_address').val();
+            } else {
+                dentist_address = $('.step.one #dcn_address').html();
+            }
+
+            var check_public_key_ajax_result = await $.ajax({
+                type: 'POST',
+                url: '/check-public-key',
+                dataType: 'json',
+                data: {
+                    address: dentist_address
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            if (check_public_key_ajax_result.success) {
+                $('.proof-of-address').removeClass('proof-failed');
+                error = false;
+            } else if (check_public_key_ajax_result.error) {
+                $('.proof-of-address').addClass('proof-failed');
+                error = true;
+            }
+            return error;
+        }
+
         //logic for showing the suggested price based on country and calculator parameters
         $('.step.three [name="general-dentistry[]"]').on('change', function() {
             var suggested_price;
@@ -1032,39 +1039,14 @@ if($('body').hasClass('logged-in')) {
             }
         });
 
-        create_contract_form.find('.next').click(function() {
+        create_contract_form.find('.next').click(async function() {
             var this_btn = $(this);
             switch(this_btn.attr('data-current-step')) {
                 case 'one':
                     var first_step_fields = $('.step.one input.right-field');
                     var first_step_errors = validateStepFields(first_step_fields, 'one');
 
-                    var dentist_address;
-                    if($('.step.one #dcn_address').is('input')) {
-                        dentist_address = $('.step.one #dcn_address').val();
-                    } else {
-                        dentist_address = $('.step.one #dcn_address').html();
-                    }
-
-                    $.ajax({
-                        type: 'POST',
-                        url: '/check-public-key',
-                        dataType: 'json',
-                        data: {
-                            address: dentist_address
-                        },
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function (response) {
-                            if (response.success) {
-                                $('.proof-of-address').removeClass('proof-failed');
-                            } else if (response.error) {
-                                $('.proof-of-address').addClass('proof-failed');
-                                first_step_errors = true;
-                            }
-                        }
-                    });
+                    first_step_errors = validateFirstStepDentistAddress();
 
                     if(!first_step_errors) {
                         firstStepPassedSuccessfully(this_btn);
