@@ -27769,48 +27769,51 @@ function bindVerifyAddressEvent(keystore_file) {
             if ($('.proof-of-address #your-secret-key-password').val().trim() == '' || $('.proof-of-address #your-secret-key-password').val().trim().length > 100 || $('.proof-of-address #your-secret-key-password').val().trim().length < 6) {
                 basic.showAlert('Please enter valid secret key password with length between 6 and 100 symbols.', '', true);
             } else {
-                $.ajax({
-                    type: 'POST',
-                    url: '/app-import',
-                    dataType: 'json',
-                    data: {
-                        address: $('.proof-of-address').attr('data-address'),
-                        keystore: keystore_file,
-                        password: $('.proof-of-address #your-secret-key-password').val().trim()
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function success(response) {
-                        //now with the address and the public key received from the nodejs api update the db
-                        if (response.success) {
-                            $.ajax({
-                                type: 'POST',
-                                url: '/update-public-keys',
-                                dataType: 'json',
-                                data: {
-                                    address: $('.proof-of-address').attr('data-address'),
-                                    public_key: response.public_key
-                                },
-                                headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                },
-                                success: function success(inner_response) {
-                                    $('.response-layer').hide();
-                                    if (inner_response.success) {
-                                        $('.proof-of-address').remove();
-                                        $('.proof-success').fadeIn(1500);
-                                    } else {
-                                        basic.showAlert(inner_response.error, '', true);
+                $('.response-layer').show();
+                setTimeout(function () {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/app-import',
+                        dataType: 'json',
+                        data: {
+                            address: $('.proof-of-address').attr('data-address'),
+                            keystore: keystore_file,
+                            password: $('.proof-of-address #your-secret-key-password').val().trim()
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function success(response) {
+                            //now with the address and the public key received from the nodejs api update the db
+                            if (response.success) {
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/update-public-keys',
+                                    dataType: 'json',
+                                    data: {
+                                        address: $('.proof-of-address').attr('data-address'),
+                                        public_key: response.public_key
+                                    },
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    },
+                                    success: function success(inner_response) {
+                                        $('.response-layer').hide();
+                                        if (inner_response.success) {
+                                            $('.proof-of-address').remove();
+                                            $('.proof-success').fadeIn(1500);
+                                        } else {
+                                            basic.showAlert(inner_response.error, '', true);
+                                        }
                                     }
-                                }
-                            });
-                        } else if (response.error) {
-                            $('.response-layer').hide();
-                            basic.showAlert(response.error, '', true);
+                                });
+                            } else if (response.error) {
+                                $('.response-layer').hide();
+                                basic.showAlert(response.error, '', true);
+                            }
                         }
-                    }
-                });
+                    });
+                }, 1000);
             }
         } else {
             //import with private key
