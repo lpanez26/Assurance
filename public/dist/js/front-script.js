@@ -1590,14 +1590,14 @@ if ($('body').hasClass('logged-in')) {
                             this_btn = $(this);
 
                             if (!(this_btn.index() > $('.contract-creation-steps-container button[data-step="' + create_contract_form.find('.next').attr('data-current-step') + '"]').index())) {
-                                _context6.next = 12;
+                                _context6.next = 13;
                                 break;
                             }
 
                             current_step_error = validateStepFields($('.step.' + create_contract_form.find('.next').attr('data-current-step') + ' input.right-field'), create_contract_form.find('.next').attr('data-current-step'));
 
                             if (!(this_btn.attr('data-step') == 'two')) {
-                                _context6.next = 11;
+                                _context6.next = 12;
                                 break;
                             }
 
@@ -1607,13 +1607,14 @@ if ($('body').hasClass('logged-in')) {
                         case 7:
                             validate_dentist_address = _context6.sent;
 
-                            if (!validate_dentist_address) {
+                            console.log(validate_dentist_address, 'validate_dentist_address');
+                            if (validate_dentist_address) {
                                 current_step_error = true;
                             }
-                            _context6.next = 12;
+                            _context6.next = 13;
                             break;
 
-                        case 11:
+                        case 12:
                             if (this_btn.attr('data-step') == 'four') {
                                 if ($('.step.three [name="general-dentistry[]"]:checked').val() == undefined) {
 
@@ -1622,35 +1623,35 @@ if ($('body').hasClass('logged-in')) {
                                 }
                             }
 
-                        case 12:
+                        case 13:
                             if (!current_step_error) {
-                                _context6.next = 16;
+                                _context6.next = 17;
                                 break;
                             }
 
                             this_btn.attr('data-stopper', 'true');
-                            _context6.next = 26;
+                            _context6.next = 27;
                             break;
 
-                        case 16:
+                        case 17:
                             this_btn.attr('data-stopper', 'false');
                             _context6.t0 = create_contract_form.find('.next').attr('data-current-step');
-                            _context6.next = _context6.t0 === 'one' ? 20 : _context6.t0 === 'two' ? 22 : _context6.t0 === 'three' ? 24 : 26;
+                            _context6.next = _context6.t0 === 'one' ? 21 : _context6.t0 === 'two' ? 23 : _context6.t0 === 'three' ? 25 : 27;
                             break;
 
-                        case 20:
+                        case 21:
                             firstStepPassedSuccessfully(create_contract_form.find('.next'));
-                            return _context6.abrupt("break", 26);
+                            return _context6.abrupt("break", 27);
 
-                        case 22:
+                        case 23:
                             secondStepPassedSuccessfully(create_contract_form.find('.next'));
-                            return _context6.abrupt("break", 26);
+                            return _context6.abrupt("break", 27);
 
-                        case 24:
+                        case 25:
                             thirdStepPassedSuccessfully(create_contract_form.find('.next'), this_btn.attr('data-step'));
-                            return _context6.abrupt("break", 26);
+                            return _context6.abrupt("break", 27);
 
-                        case 26:
+                        case 27:
                         case "end":
                             return _context6.stop();
                     }
@@ -1699,7 +1700,7 @@ if ($('body').hasClass('logged-in')) {
                         case 0:
                             this_btn = $(this);
                             _context8.t0 = this_btn.attr('data-current-step');
-                            _context8.next = _context8.t0 === 'one' ? 4 : _context8.t0 === 'two' ? 11 : _context8.t0 === 'three' ? 15 : _context8.t0 === 'four' ? 21 : 22;
+                            _context8.next = _context8.t0 === 'one' ? 4 : _context8.t0 === 'two' ? 12 : _context8.t0 === 'three' ? 16 : _context8.t0 === 'four' ? 22 : 23;
                             break;
 
                         case 4:
@@ -1711,13 +1712,14 @@ if ($('body').hasClass('logged-in')) {
                         case 8:
                             validate_dentist_address = _context8.sent;
 
+                            console.log(validate_dentist_address, 'validate_dentist_address');
 
                             if (!first_step_errors || validate_dentist_address) {
                                 firstStepPassedSuccessfully(this_btn);
                             }
-                            return _context8.abrupt("break", 22);
+                            return _context8.abrupt("break", 23);
 
-                        case 11:
+                        case 12:
                             second_step_fields = $('.step.two input.right-field');
                             second_step_errors = validateStepFields(second_step_fields, 'two');
 
@@ -1725,9 +1727,9 @@ if ($('body').hasClass('logged-in')) {
                             if (!second_step_errors) {
                                 secondStepPassedSuccessfully(this_btn);
                             }
-                            return _context8.abrupt("break", 22);
+                            return _context8.abrupt("break", 23);
 
-                        case 15:
+                        case 16:
                             third_step_fields = $('.step.three .right-field');
                             third_step_errors = validateStepFields(third_step_fields, 'three');
 
@@ -1743,12 +1745,12 @@ if ($('body').hasClass('logged-in')) {
                             if (!third_step_errors) {
                                 thirdStepPassedSuccessfully(this_btn, 'four');
                             }
-                            return _context8.abrupt("break", 22);
-
-                        case 21:
-                            return _context8.abrupt("break", 22);
+                            return _context8.abrupt("break", 23);
 
                         case 22:
+                            return _context8.abrupt("break", 23);
+
+                        case 23:
                         case "end":
                             return _context8.stop();
                     }

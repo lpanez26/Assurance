@@ -789,10 +789,11 @@ if($('body').hasClass('logged-in')) {
 
                 if(this_btn.attr('data-step') == 'two') {
                     var validate_dentist_address = await validateFirstStepDentistAddress();
-                    if(!validate_dentist_address) {
+                    console.log(validate_dentist_address, 'validate_dentist_address');
+                    if(validate_dentist_address) {
                         current_step_error = true;
                     }
-                }else if(this_btn.attr('data-step') == 'four') {
+                } else if(this_btn.attr('data-step') == 'four') {
                     if($('.step.three [name="general-dentistry[]"]:checked').val() == undefined) {
 
                         customCreateContractErrorHandle($('.step.three .checkboxes-right-container'), 'Please select at least one service.');
@@ -1049,6 +1050,7 @@ if($('body').hasClass('logged-in')) {
                     var first_step_fields = $('.step.one input.right-field');
                     var first_step_errors = validateStepFields(first_step_fields, 'one');
                     var validate_dentist_address = await validateFirstStepDentistAddress();
+                    console.log(validate_dentist_address, 'validate_dentist_address');
 
                     if(!first_step_errors || validate_dentist_address) {
                         firstStepPassedSuccessfully(this_btn);
