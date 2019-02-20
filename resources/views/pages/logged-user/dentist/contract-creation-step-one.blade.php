@@ -71,6 +71,9 @@
                     <div class="row on-change-result"></div>
                 </div>
             </div>
+            <div class="single-row proof-success padding-top-20 padding-bottom-20 fs-20 calibri-bold text-center">
+                Successful address verification.
+            </div>
         @endif
         <div class="fs-14 calibri-light light-gray-color padding-top-10">This is the wallet where you will receive your monthly premiums. Please double-check if everything is correct.</div>
         <div class="fs-14 calibri-light light-gray-color">You don’t have a wallet? <a href="//wallet.dentacoin.com" target="_blank">Create one here.</a></div>

@@ -2102,7 +2102,30 @@ function bindVerifyAddressEvent(keystore_file) {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function (response) {
-                        console.log(response);
+                        //now with the address and the public key received from the nodejs api update the db
+                        if(response.success) {
+                            $.ajax({
+                                type: 'POST',
+                                url: '/update-public-keys',
+                                dataType: 'json',
+                                data: {
+                                    address: response.address,
+                                    public_key: response.public_key
+                                },
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                success: function (inner_response) {
+                                    if(inner_response.success) {
+                                        $('.proof-of-address').fadeOut(500);
+                                    } else {
+                                        basic.showAlert(inner_response.error, '', true);
+                                    }
+                                }
+                            });
+                        } else if(response.error) {
+                            basic.showAlert(response.error, '', true);
+                        }
                     }
                 });
             }

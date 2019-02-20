@@ -193,6 +193,33 @@ class UserController extends Controller {
         }
     }
 
+    protected function updatePublicKeys(Request $request) {
+        $this->validate($request, [
+            'address' => 'required',
+            'public_key' => 'required'
+        ], [
+            'address.required' => 'Address is required.',
+            'public_key.required' => 'Public key is required.'
+        ]);
+        $data = $this->clearPostData($request->input());
+        $response = array();
+
+        try {
+            $public_key = new PublicKey();
+            $public_key->address = $data['address'];
+            $public_key->public_key = $data['public_key'];
+            $public_key->save();
+
+            $response['success'] = true;
+            echo json_encode($response);
+            die();
+        } catch(Exception $e) {
+            $response['error'] = 'Verifying failed, please try again later.';
+            echo json_encode($response);
+            die();
+        }
+    }
+
     protected function forgottenPasswordSubmit(Request $request) {
         var_dump($request->input());
         die();

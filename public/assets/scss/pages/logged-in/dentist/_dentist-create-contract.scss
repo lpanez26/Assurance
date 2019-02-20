@@ -9,6 +9,12 @@
             display: none;
             &.one {
                 display: block;
+                .proof-success {
+                    display: none;
+                    padding-left: 15px;
+                    padding-right: 15px;
+                    color: $active;
+                }
                 .proof-of-address {
                     background-color: #eaeaea;
                     .upload-file-container {
