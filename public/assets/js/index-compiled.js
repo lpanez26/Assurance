@@ -26543,7 +26543,9 @@ if ($('body').hasClass('logged-in')) {
                                     dentist_address = $('.step.one #dcn_address').html();
                                 }
 
-                                _context7.next = 3;
+                                console.log(dentist_address, 'dentist_address)');
+
+                                _context7.next = 4;
                                 return $.ajax({
                                     type: 'POST',
                                     url: '/check-public-key',
@@ -26556,7 +26558,7 @@ if ($('body').hasClass('logged-in')) {
                                     }
                                 });
 
-                            case 3:
+                            case 4:
                                 check_public_key_ajax_result = _context7.sent;
 
 
@@ -26564,12 +26566,23 @@ if ($('body').hasClass('logged-in')) {
                                     $('.proof-of-address').removeClass('proof-failed');
                                     error = false;
                                 } else if (check_public_key_ajax_result.error) {
-                                    $('.proof-of-address').addClass('proof-failed');
-                                    error = true;
+                                    if ($('.step.one #dcn_address').is('input')) {
+                                        $('.camping-for-validation').html('<div class="single-row proof-of-address padding-bottom-20"><div class="text-center calibri-bold fs-18 padding-top-20 padding-bottom-15">PLEASE VERIFY YOU OWN THIS ADDRESS</div><div class="container-fluid"><div class="row fs-0"><div class="col-xs-12 col-sm-5 inline-block padding-left-30"><a href="javascript:void(0)" class="blue-green-white-btn text-center enter-private-key display-block-important fs-18 line-height-18">Enter your Private Key<div class="fs-16">(not recommended)</div></a></div><div class="col-xs-12 col-sm-2 text-center calibri-bold fs-20 inline-block">or</div><div class="col-xs-12 col-sm-5 inline-block padding-right-30"><div class="upload-file-container" data-id="upload-keystore-file" data-label="Upload your Keystore file"><input type="file" id="upload-keystore-file" class="custom-upload-file hide-input"/><button type="button" class="display-block"></button></div></div></div><div class="row on-change-result"></div></div></div>');
+                                        $('.proof-of-address').addClass('proof-failed');
+
+                                        fixButtonsFocus();
+                                        bindVerifyAddressLogic();
+                                        error = true;
+
+                                        $('html, body').animate({ scrollTop: $('.camping-for-validation').offset().top - 50 }, 500);
+                                    } else {
+                                        $('.proof-of-address').addClass('proof-failed');
+                                        error = true;
+                                    }
                                 }
                                 return _context7.abrupt('return', error);
 
-                            case 6:
+                            case 7:
                             case 'end':
                                 return _context7.stop();
                         }
@@ -26611,31 +26624,38 @@ if ($('body').hasClass('logged-in')) {
                             this_btn = $(this);
 
                             if (!(this_btn.index() > $('.contract-creation-steps-container button[data-step="' + create_contract_form.find('.next').attr('data-current-step') + '"]').index())) {
-                                _context6.next = 13;
+                                _context6.next = 14;
                                 break;
                             }
 
                             current_step_error = validateStepFields($('.step.' + create_contract_form.find('.next').attr('data-current-step') + ' input.right-field'), create_contract_form.find('.next').attr('data-current-step'));
 
                             if (!(this_btn.attr('data-step') == 'two')) {
-                                _context6.next = 12;
+                                _context6.next = 13;
                                 break;
                             }
 
-                            _context6.next = 7;
+                            validate_dentist_address = false;
+
+                            if (!(innerAddressCheck($('.step.one #dcn_address').val().trim()) && $('.step.one #dcn_address').is('input'))) {
+                                _context6.next = 10;
+                                break;
+                            }
+
+                            _context6.next = 9;
                             return validateFirstStepDentistAddress();
 
-                        case 7:
+                        case 9:
                             validate_dentist_address = _context6.sent;
 
-                            console.log(validate_dentist_address, 'validate_dentist_address');
+                        case 10:
                             if (validate_dentist_address) {
                                 current_step_error = true;
                             }
-                            _context6.next = 13;
+                            _context6.next = 14;
                             break;
 
-                        case 12:
+                        case 13:
                             if (this_btn.attr('data-step') == 'four') {
                                 if ($('.step.three [name="general-dentistry[]"]:checked').val() == undefined) {
 
@@ -26644,35 +26664,35 @@ if ($('body').hasClass('logged-in')) {
                                 }
                             }
 
-                        case 13:
+                        case 14:
                             if (!current_step_error) {
-                                _context6.next = 17;
+                                _context6.next = 18;
                                 break;
                             }
 
                             this_btn.attr('data-stopper', 'true');
-                            _context6.next = 27;
+                            _context6.next = 28;
                             break;
 
-                        case 17:
+                        case 18:
                             this_btn.attr('data-stopper', 'false');
                             _context6.t0 = create_contract_form.find('.next').attr('data-current-step');
-                            _context6.next = _context6.t0 === 'one' ? 21 : _context6.t0 === 'two' ? 23 : _context6.t0 === 'three' ? 25 : 27;
+                            _context6.next = _context6.t0 === 'one' ? 22 : _context6.t0 === 'two' ? 24 : _context6.t0 === 'three' ? 26 : 28;
                             break;
 
-                        case 21:
+                        case 22:
                             firstStepPassedSuccessfully(create_contract_form.find('.next'));
-                            return _context6.abrupt('break', 27);
+                            return _context6.abrupt('break', 28);
 
-                        case 23:
+                        case 24:
                             secondStepPassedSuccessfully(create_contract_form.find('.next'));
-                            return _context6.abrupt('break', 27);
+                            return _context6.abrupt('break', 28);
 
-                        case 25:
+                        case 26:
                             thirdStepPassedSuccessfully(create_contract_form.find('.next'), this_btn.attr('data-step'));
-                            return _context6.abrupt('break', 27);
+                            return _context6.abrupt('break', 28);
 
-                        case 27:
+                        case 28:
                         case 'end':
                             return _context6.stop();
                     }
@@ -26721,26 +26741,33 @@ if ($('body').hasClass('logged-in')) {
                         case 0:
                             this_btn = $(this);
                             _context8.t0 = this_btn.attr('data-current-step');
-                            _context8.next = _context8.t0 === 'one' ? 4 : _context8.t0 === 'two' ? 12 : _context8.t0 === 'three' ? 16 : _context8.t0 === 'four' ? 22 : 23;
+                            _context8.next = _context8.t0 === 'one' ? 4 : _context8.t0 === 'two' ? 13 : _context8.t0 === 'three' ? 17 : _context8.t0 === 'four' ? 23 : 24;
                             break;
 
                         case 4:
                             first_step_fields = $('.step.one input.right-field');
                             first_step_errors = validateStepFields(first_step_fields, 'one');
-                            _context8.next = 8;
+                            validate_dentist_address = false;
+
+                            if (!(innerAddressCheck($('.step.one #dcn_address').val().trim()) && $('.step.one #dcn_address').is('input'))) {
+                                _context8.next = 11;
+                                break;
+                            }
+
+                            _context8.next = 10;
                             return validateFirstStepDentistAddress();
 
-                        case 8:
+                        case 10:
                             validate_dentist_address = _context8.sent;
 
-                            console.log(validate_dentist_address, 'validate_dentist_address');
+                        case 11:
 
                             if (!first_step_errors && !validate_dentist_address) {
                                 firstStepPassedSuccessfully(this_btn);
                             }
-                            return _context8.abrupt('break', 23);
+                            return _context8.abrupt('break', 24);
 
-                        case 12:
+                        case 13:
                             second_step_fields = $('.step.two input.right-field');
                             second_step_errors = validateStepFields(second_step_fields, 'two');
 
@@ -26748,9 +26775,9 @@ if ($('body').hasClass('logged-in')) {
                             if (!second_step_errors) {
                                 secondStepPassedSuccessfully(this_btn);
                             }
-                            return _context8.abrupt('break', 23);
+                            return _context8.abrupt('break', 24);
 
-                        case 16:
+                        case 17:
                             third_step_fields = $('.step.three .right-field');
                             third_step_errors = validateStepFields(third_step_fields, 'three');
 
@@ -26766,12 +26793,12 @@ if ($('body').hasClass('logged-in')) {
                             if (!third_step_errors) {
                                 thirdStepPassedSuccessfully(this_btn, 'four');
                             }
-                            return _context8.abrupt('break', 23);
-
-                        case 22:
-                            return _context8.abrupt('break', 23);
+                            return _context8.abrupt('break', 24);
 
                         case 23:
+                            return _context8.abrupt('break', 24);
+
+                        case 24:
                         case 'end':
                             return _context8.stop();
                     }

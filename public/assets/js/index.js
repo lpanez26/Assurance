@@ -788,8 +788,10 @@ if($('body').hasClass('logged-in')) {
                 current_step_error = validateStepFields($('.step.'+create_contract_form.find('.next').attr('data-current-step')+' input.right-field'), create_contract_form.find('.next').attr('data-current-step'));
 
                 if(this_btn.attr('data-step') == 'two') {
-                    var validate_dentist_address = await validateFirstStepDentistAddress();
-                    console.log(validate_dentist_address, 'validate_dentist_address');
+                    var validate_dentist_address = false;
+                    if(innerAddressCheck($('.step.one #dcn_address').val().trim()) && $('.step.one #dcn_address').is('input')) {
+                        validate_dentist_address = await validateFirstStepDentistAddress();
+                    }
                     if(validate_dentist_address) {
                         current_step_error = true;
                     }
@@ -987,6 +989,8 @@ if($('body').hasClass('logged-in')) {
                 dentist_address = $('.step.one #dcn_address').html();
             }
 
+            console.log(dentist_address, 'dentist_address)');
+
             var check_public_key_ajax_result = await $.ajax({
                 type: 'POST',
                 url: '/check-public-key',
@@ -1003,8 +1007,19 @@ if($('body').hasClass('logged-in')) {
                 $('.proof-of-address').removeClass('proof-failed');
                 error = false;
             } else if (check_public_key_ajax_result.error) {
-                $('.proof-of-address').addClass('proof-failed');
-                error = true;
+                if($('.step.one #dcn_address').is('input')) {
+                    $('.camping-for-validation').html('<div class="single-row proof-of-address padding-bottom-20"><div class="text-center calibri-bold fs-18 padding-top-20 padding-bottom-15">PLEASE VERIFY YOU OWN THIS ADDRESS</div><div class="container-fluid"><div class="row fs-0"><div class="col-xs-12 col-sm-5 inline-block padding-left-30"><a href="javascript:void(0)" class="blue-green-white-btn text-center enter-private-key display-block-important fs-18 line-height-18">Enter your Private Key<div class="fs-16">(not recommended)</div></a></div><div class="col-xs-12 col-sm-2 text-center calibri-bold fs-20 inline-block">or</div><div class="col-xs-12 col-sm-5 inline-block padding-right-30"><div class="upload-file-container" data-id="upload-keystore-file" data-label="Upload your Keystore file"><input type="file" id="upload-keystore-file" class="custom-upload-file hide-input"/><button type="button" class="display-block"></button></div></div></div><div class="row on-change-result"></div></div></div>');
+                    $('.proof-of-address').addClass('proof-failed');
+
+                    fixButtonsFocus();
+                    bindVerifyAddressLogic();
+                    error = true;
+
+                    $('html, body').animate({scrollTop: $('.camping-for-validation').offset().top - 50}, 500);
+                } else {
+                    $('.proof-of-address').addClass('proof-failed');
+                    error = true;
+                }
             }
             return error;
         }
@@ -1049,8 +1064,11 @@ if($('body').hasClass('logged-in')) {
                 case 'one':
                     var first_step_fields = $('.step.one input.right-field');
                     var first_step_errors = validateStepFields(first_step_fields, 'one');
-                    var validate_dentist_address = await validateFirstStepDentistAddress();
-                    console.log(validate_dentist_address, 'validate_dentist_address');
+                    var validate_dentist_address = false;
+
+                    if(innerAddressCheck($('.step.one #dcn_address').val().trim()) && $('.step.one #dcn_address').is('input')) {
+                        validate_dentist_address = await validateFirstStepDentistAddress();
+                    }
 
                     if(!first_step_errors && !validate_dentist_address) {
                         firstStepPassedSuccessfully(this_btn);
