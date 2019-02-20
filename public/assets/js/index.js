@@ -788,8 +788,7 @@ if($('body').hasClass('logged-in')) {
                 current_step_error = validateStepFields($('.step.'+create_contract_form.find('.next').attr('data-current-step')+' input.right-field'), create_contract_form.find('.next').attr('data-current-step'));
 
                 if(this_btn.attr('data-step') == 'two') {
-                    current_step_error = validateFirstStepDentistAddress();
-                    console.log(current_step_error, 'current_step_error');
+                    current_step_error = await validateFirstStepDentistAddress();
                 }else if(this_btn.attr('data-step') == 'four') {
                     if($('.step.three [name="general-dentistry[]"]:checked').val() == undefined) {
 
@@ -975,16 +974,16 @@ if($('body').hasClass('logged-in')) {
             }
         }
 
-        async function validateFirstStepDentistAddress() {
+        function validateFirstStepDentistAddress() {
             var dentist_address;
-            var error = false;
+            var error;
             if($('.step.one #dcn_address').is('input')) {
                 dentist_address = $('.step.one #dcn_address').val();
             } else {
                 dentist_address = $('.step.one #dcn_address').html();
             }
 
-            var check_public_key_ajax_result = await $.ajax({
+            var check_public_key_ajax_result = $.ajax({
                 type: 'POST',
                 url: '/check-public-key',
                 dataType: 'json',
@@ -1047,8 +1046,7 @@ if($('body').hasClass('logged-in')) {
                     var first_step_fields = $('.step.one input.right-field');
                     var first_step_errors = validateStepFields(first_step_fields, 'one');
 
-                    first_step_errors = validateFirstStepDentistAddress();
-                    console.log(first_step_errors, 'first_step_errors');
+                    first_step_errors = await validateFirstStepDentistAddress();
 
                     if(!first_step_errors) {
                         firstStepPassedSuccessfully(this_btn);
