@@ -752,7 +752,7 @@ if($('body').hasClass('logged-in')) {
         function validateStepFields(step_fields, step) {
             step_fields.removeClass('with-error');
             $('.step.'+step+' .single-row').removeClass('row-with-error');
-            $('.step.'+step+' .single-row label span').remove();
+            $('.step.'+step+' .single-row > label span').remove();
 
             var inner_error = false;
             for(var i = 0, len = step_fields.length; i < len; i+=1) {
@@ -784,6 +784,8 @@ if($('body').hasClass('logged-in')) {
         $('.contract-creation-steps-container button').bind('click.validateStepsNav', function() {
             var current_step_error = false;
             var this_btn = $(this);
+            console.log(this_btn.index(), 'this_btn.index()');
+            console.log($('.contract-creation-steps-container button[data-step="'+create_contract_form.find('.next').attr('data-current-step')+'"]').index(), '$(\'.contract-creation-steps-container button[data-step="\'+create_contract_form.find(\'.next\').attr(\'data-current-step\')+\'"]\').index()');
             if(this_btn.index() > $('.contract-creation-steps-container button[data-step="'+create_contract_form.find('.next').attr('data-current-step')+'"]').index()) {
                 current_step_error = validateStepFields($('.step.'+create_contract_form.find('.next').attr('data-current-step')+' input.right-field'), create_contract_form.find('.next').attr('data-current-step'));
 
@@ -796,11 +798,32 @@ if($('body').hasClass('logged-in')) {
                 }
             }
 
+
+
+            /*$.ajax({
+                type: 'POST',
+                url: '/check-public-key',
+                dataType: 'json',
+                data: {
+                    address: dentist_address
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    if (response.success) {
+                        $('.proof-of-address').removeClass('proof-failed');
+                    } else if (response.error) {
+                        $('.proof-of-address').addClass('proof-failed');
+                        first_step_errors = true;
+                    }
+                }
+            });*/
+
             if(current_step_error) {
                 this_btn.attr('data-stopper', 'true');
             } else {
                 this_btn.attr('data-stopper', 'false');
-                console.log(create_contract_form.find('.next').attr('data-current-step'), 'data-current-step');
                 switch(create_contract_form.find('.next').attr('data-current-step')) {
                     case 'one':
                         firstStepPassedSuccessfully(create_contract_form.find('.next'));
