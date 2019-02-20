@@ -93,6 +93,8 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
     Route::post('/update-public-keys', 'UserController@updatePublicKeys')->middleware('HandleUserSession')->name('update-public-keys');
 
+    Route::post('/check-public-key', 'UserController@checkPublicKey')->middleware('HandleUserSession')->name('check-public-key');
+
     Route::post('/add-dcn-address', 'UserController@addDcnAddress')->middleware('HandleUserSession')->name('add-dcn-address');
 
     Route::get('/user-logout', 'UserController@userLogout')->name('user-logout');

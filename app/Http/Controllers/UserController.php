@@ -220,6 +220,25 @@ class UserController extends Controller {
         }
     }
 
+    protected function checkPublicKey(Request $request) {
+        $this->validate($request, [
+            'address' => 'required'
+        ], [
+            'address.required' => 'Address is required.'
+        ]);
+        $data = $this->clearPostData($request->input());
+        $response = array();
+
+        $public_key = PublicKey::where(array('address' => $data['address']))->get()->first();
+        if(!empty($public_key)) {
+            $response['success'] = true;
+        } else {
+            $response['error'] = true;
+        }
+        echo json_encode($response);
+        die();
+    }
+
     protected function forgottenPasswordSubmit(Request $request) {
         var_dump($request->input());
         die();

@@ -45,10 +45,10 @@
             <label class="calibri-light light-gray-color fs-16 padding-right-15 margin-bottom-0">Wallet Address:</label>
             @if(!empty($current_logged_dentist->dcn_address))
                 <div class="right-field calibri-regular fs-18 dark-color" name="address">
-                    <a href="//etherscan.io/address/{{$current_logged_dentist->dcn_address}}" target="_blank">{{$current_logged_dentist->dcn_address}}</a>
+                    <a href="//etherscan.io/address/{{$current_logged_dentist->dcn_address}}" target="_blank" id="dcn_address">{{$current_logged_dentist->dcn_address}}</a>
                 </div>
             @else
-                <input type="text" data-type="address" name="address" maxlength="42" class="right-field calibri-regular fs-18 dark-color inline-block pencil-background"/>
+                <input type="text" data-type="address" id="dcn_address" name="address" maxlength="42" class="right-field calibri-regular fs-18 dark-color inline-block pencil-background"/>
             @endif
         </div>
         {{--RARE CASE - if user have address, but not from wallet.dentacoin.com--}}

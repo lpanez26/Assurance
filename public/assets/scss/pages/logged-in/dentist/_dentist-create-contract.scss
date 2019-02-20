@@ -17,6 +17,9 @@
                 }
                 .proof-of-address {
                     background-color: #eaeaea;
+                    &.proof-failed {
+                        background-color: #ff8d8d;
+                    }
                     .upload-file-container {
                         button {
                             margin: 0;

@@ -6146,6 +6146,8 @@ body.logged-in .my-profile-page-content {
         color: #239234; }
       .steps-body .wrapper .step.one .proof-of-address {
         background-color: #eaeaea; }
+        .steps-body .wrapper .step.one .proof-of-address.proof-failed {
+          background-color: #ff8d8d; }
         .steps-body .wrapper .step.one .proof-of-address .upload-file-container button {
           margin: 0;
           padding: 0;

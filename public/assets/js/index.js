@@ -1014,6 +1014,33 @@ if($('body').hasClass('logged-in')) {
                     var first_step_fields = $('.step.one input.right-field');
                     var first_step_errors = validateStepFields(first_step_fields, 'one');
 
+                    var dentist_address;
+                    if($('.step.one #dcn_address').is('input')) {
+                        dentist_address = $('.step.one #dcn_address').val();
+                    } else {
+                        dentist_address = $('.step.one #dcn_address').html();
+                    }
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/patient/get-reconsider-monthly-premium',
+                        dataType: 'json',
+                        data: {
+                            address: dentist_address
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (response) {
+                            if (response.success) {
+                                $('.proof-of-address').removeClass('proof-failed');
+                            } else if (response.error) {
+                                $('.proof-of-address').addClass('proof-failed');
+                                first_step_errors = true;
+                            }
+                        }
+                    });
+
                     if(!first_step_errors) {
                         firstStepPassedSuccessfully(this_btn);
                     }
