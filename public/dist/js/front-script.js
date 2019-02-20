@@ -1611,7 +1611,7 @@ if ($('body').hasClass('logged-in')) {
 
                     $.ajax({
                         type: 'POST',
-                        url: '/patient/get-reconsider-monthly-premium',
+                        url: '/patient/check-public-key',
                         dataType: 'json',
                         data: {
                             address: dentist_address
