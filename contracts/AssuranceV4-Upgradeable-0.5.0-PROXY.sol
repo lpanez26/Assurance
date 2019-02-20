@@ -130,6 +130,8 @@ contract ProxyAssurance is SafeMath {
         require(_value_usd > 0 && _value_dcn > 0, "USD and DCN values must be valid.");
         //check if this patient is not already registered for this dentist, so there cannot be overwrite
         require(assurance.getContractNextTransfer(_patient_addr, _dentist_addr) == 0, "Only one contract is allowed per Patient - Dentist pair.");
+        //check if this patient already allowed Assurance to use his DCN in DentacoinToken
+        require(dcn.allowance(_patient_addr, assurance_address) >= assurance.getMinAllowedAmount(), "This Patient has not allowed the Assurance contract to automatically manage their Dentacoin tokens.");
 
 
         //if dentist is the one who calls the method the patient should approve the new contract
@@ -153,9 +155,6 @@ contract ProxyAssurance is SafeMath {
 
     //called by patient
     function patientApproveContract(address _dentist_addr) public validPatientDentistAddresses(msg.sender, _dentist_addr) checkIfPaused {
-        //check if this patient already allowed Assurance to use his DCN in DentacoinToken
-        require(dcn.allowance(_patient_addr, assurance_address) >= assurance.getMinAllowedAmount(), "This Patient has not allowed the Assurance contract to automatically manage their Dentacoin tokens.");
-
         assurance.patientApproveContract(msg.sender, _dentist_addr);
         emit logSuccessfulContractApproval(msg.sender, _dentist_addr);
     }

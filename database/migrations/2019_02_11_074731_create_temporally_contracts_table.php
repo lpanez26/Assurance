@@ -28,6 +28,7 @@ class CreateTemporallyContractsTable extends Migration
             $table->tinyInteger('check_ups_per_year');
             $table->tinyInteger('teeth_cleaning_per_year');
             $table->timestamp('contract_active_at')->nullable();
+            $table->timestamp('cancelled_at')->nullable();
             $table->string('document_hash')->nullable();
             $table->string('slug')->unique();
             $table->enum('status', ['pending', 'awaiting-payment', 'awaiting-approval', 'active', 'cancelled'])->default('pending');

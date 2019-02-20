@@ -77,8 +77,8 @@
             <label class="calibri-light light-gray-color fs-16 padding-right-15 padding-top-0 margin-bottom-0">Monthly Premium:</label>
             <input type="number" name="monthly-premium" maxlength="20" placeholder="The value is in USD" class="right-field calibri-regular fs-18 dark-color inline-block pencil-background" step="0.01"/>
         </div>
-        <div class="single-row fs-0">
-            <div class="fs-14 calibri-light light-gray-color padding-top-5">Based on the services covered, the average monthly rate in your country is <span class="calibri-bold blue-green-color">50 USD</span> in Dentacoin (DCN).</div>
+        <div class="single-row fs-0 show-on-services-pick no-transition">
+            <div class="fs-14 calibri-light light-gray-color padding-top-5">Based on the services covered, the average monthly rate in your country is <span class="calibri-bold blue-green-color"><span class="suggested-price"></span> USD</span> in Dentacoin (DCN).</div>
             <div class="fs-14 calibri-light light-gray-color padding-bottom-25">You are free to propose a different rate to your patient.</div>
         </div>
         <div class="single-row flex-row fs-0">

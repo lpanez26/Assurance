@@ -150,6 +150,7 @@
   font-family: 'Calibri-Bold';
   border: 2px solid #126585;
   display: inline-block;
+  cursor: pointer;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
@@ -173,6 +174,7 @@
   font-family: 'Calibri-Bold';
   border: 2px solid #e92f30;
   display: inline-block;
+  cursor: pointer;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
@@ -196,6 +198,7 @@
   font-family: 'Calibri-Bold';
   border: 2px solid #126585;
   display: inline-block;
+  cursor: pointer;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
@@ -218,6 +221,7 @@
   padding: 10px 20px;
   font-family: 'Calibri-Bold';
   border: 2px solid #c9dfe7;
+  cursor: pointer;
   display: inline-block;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -231,6 +235,7 @@
   font-family: 'Lato-Regular';
   border: 2px solid white;
   display: inline-block;
+  cursor: pointer;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
@@ -256,6 +261,7 @@
   padding: 10px 15px 10px 70px;
   max-width: 350px;
   margin: 0 auto;
+  cursor: pointer;
   background-repeat: no-repeat;
   background-size: 30px auto;
   background-position: center left 15px;
@@ -481,6 +487,12 @@
       -moz-border-radius: 0;
       -ms-border-radius: 0;
       border-radius: 0; }
+  .module.step-fields .single-row.no-transition {
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    -ms-transition: none;
+    transition: none; }
 .module.contract-proposal .wrapper {
   padding: 0 15%;
   position: relative;
@@ -722,6 +734,79 @@
   background-color: #239289; }
 .module.single-contract-tile.pending .contract-header.cancelled {
   background-color: #e92f30; }
+.module.custom-google-label-style {
+  position: relative; }
+  .module.custom-google-label-style label {
+    position: absolute;
+    font-size: 16px !important;
+    cursor: pointer;
+    margin: 0;
+    width: calc(100% - 20px) !important;
+    padding-bottom: 10px !important;
+    padding-top: 10px !important;
+    background-color: white;
+    left: 10px;
+    color: #888888;
+    font-weight: normal;
+    top: 50%;
+    font-family: 'Calibri-Regular';
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    -ms-transition: 0.3s;
+    transition: 0.3s; }
+    .module.custom-google-label-style label.active-label {
+      width: auto !important;
+      font-size: 14px !important;
+      top: -8px;
+      padding: 0 5px !important;
+      -webkit-transform: none;
+      -ms-transform: none;
+      transform: none;
+      color: #126585;
+      font-weight: bold; }
+  .module.custom-google-label-style .left-side {
+    width: calc(100% - 100px);
+    position: relative; }
+    .module.custom-google-label-style .left-side.error-field input, .module.custom-google-label-style .left-side.error-field label {
+      color: red; }
+  .module.custom-google-label-style input {
+    border: 2px solid #dddddd;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Lato-Regular';
+    width: 100%;
+    padding: 10px 15px;
+    -webkit-border-radius: 4px 0 0 4px;
+    -moz-border-radius: 4px 0 0 4px;
+    -ms-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px; }
+    .module.custom-google-label-style input.full-rounded {
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      border-radius: 4px; }
+    .module.custom-google-label-style input.blue-green-border {
+      border: 2px solid #126585; }
+  .module.custom-google-label-style span {
+    width: 100px;
+    text-align: center;
+    padding-top: 12px;
+    font-size: 18px;
+    font-family: 'Lato-Regular';
+    color: #212121;
+    background-color: #dddddd;
+    -webkit-border-radius: 0 4px 4px 0;
+    -moz-border-radius: 0 4px 4px 0;
+    -ms-border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0; }
 
 body {
   background-color: #222d32; }

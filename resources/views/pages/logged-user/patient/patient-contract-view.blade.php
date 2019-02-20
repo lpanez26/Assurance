@@ -1,8 +1,5 @@
 @extends("layout")
 @section("content")
-    {{--========= MAKE THIS DYNAMIC TO READ THE PERIOD FROM THE SMART CONTACT ==========--}}
-    @php($timestamp = 2592000 + strtotime($contract->contract_active_at))
-    {{--========= MAKE THIS DYNAMIC TO READ THE PERIOD FROM THE SMART CONTACT ==========--}}
     @php($dentist = (new \App\Http\Controllers\APIRequestsController())->getUserData($contract->dentist_id))
     @php($patient = (new \App\Http\Controllers\APIRequestsController())->getUserData(session('logged_user')['id']))
     <section class="padding-top-100 patient-contract-single-page-section">
@@ -18,12 +15,14 @@
                                 <span itemprop="name">Contract sample (pdf)</span>
                             </a>
                         </li>
-                        <li class="inline-block">|</li>
-                        <li class="inline-block">
-                            <a href="javascript:void(0)" itemprop="url">
-                                <span itemprop="name"><i class="fa fa-times" aria-hidden="true"></i> Cancel Contract</span>
-                            </a>
-                        </li>
+                        @if($contract->status != 'cancelled')
+                            <li class="inline-block">|</li>
+                            <li class="inline-block">
+                                <a href="javascript:void(0)" onclick="return confirm('Are you sure you want to cancel this contract?')"  itemprop="url" class="cancel-contract-btn" data-contract="{{$contract->slug}}">
+                                    <span itemprop="name"><i class="fa fa-times" aria-hidden="true"></i> Cancel Contract</span>
+                                </a>
+                            </li>
+                        @endif
                         <li class="inline-block">|</li>
                         <li class="inline-block">
                             <a href="javascript:void(0)" itemprop="url">
@@ -45,7 +44,7 @@
                         <a href="mailto:{{$dentist->email}}" class="light-gray-color">{{$dentist->email}}</a>
                     </div>
                 </div>
-                <div class="col-xs-4 inline-block-bottom blue-green-color-background contract-body" data-time-left-next-transfer="{{$timestamp}}">
+                <div class="col-xs-4 inline-block-bottom blue-green-color-background contract-body" data-time-left-next-transfer="{{strtotime($contract->contract_active_at)}}">
                     <div class="contract-header text-center lato-bold fs-20 white-color padding-top-15 padding-bottom-15 {{$contract->status}}">
                         @switch($contract->status)
                             @case('active')
@@ -78,7 +77,7 @@
                 </div>
             </div>
             <div class="row contract-footer">
-                <div class="col-xs-12 col-sm-8 col-sm-offset-2 padding-top-30 padding-bottom-40 padding-left-50 padding-right-50 text-center white-color blue-green-color-background fs-20 wrapper">You should charge your wallet with <span class="calibri-bold">{{$contract->monthly_premium}} USD in DCN</span> (the monthly premium amount) <span class="calibri-bold">until {{date('d/m/Y', $timestamp)}}</span>. (one day before the due date)</div>
+                <div class="col-xs-12 col-sm-8 col-sm-offset-2 padding-top-30 padding-bottom-40 padding-left-50 padding-right-50 text-center white-color blue-green-color-background fs-20 wrapper">You should charge your wallet with <span class="calibri-bold">{{$contract->monthly_premium}} USD in DCN</span> (the monthly premium amount) <span class="calibri-bold">until <span class="converted-date"></span></span>. (one day before the due date)</div>
             </div>
         </div>
     </section>

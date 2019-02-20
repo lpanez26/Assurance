@@ -165,108 +165,108 @@ contract Assurance is ownerSettings {
     }
 
     function registerContract(address _patient_addr, address _dentist_addr, uint256 _date_start_contract, bool _approved_by_dentist, bool _approved_by_patient, bool _validation_checked, uint256 _value_usd, uint256 _value_dcn, string calldata _contract_ipfs_hash) external onlyApprovedProxy checkIfPaused {
-    dentists[_dentist_addr].contracts[_patient_addr] = contractStruct(_date_start_contract, _approved_by_dentist, _approved_by_patient, _validation_checked, _value_usd, _value_dcn, _contract_ipfs_hash, dentists[_dentist_addr].patients_addresses.push(_patient_addr) - 1);
-    }
+dentists[_dentist_addr].contracts[_patient_addr] = contractStruct(_date_start_contract, _approved_by_dentist, _approved_by_patient, _validation_checked, _value_usd, _value_dcn, _contract_ipfs_hash, dentists[_dentist_addr].patients_addresses.push(_patient_addr) - 1);
+}
 
-    function updateNextTransferTime(address _patient_addr, address _dentist_addr, uint256 _next_transfer) external onlyApprovedProxy checkIfPaused {
-        dentists[_dentist_addr].contracts[_patient_addr].next_transfer = _next_transfer;
-    }
+function updateNextTransferTime(address _patient_addr, address _dentist_addr, uint256 _next_transfer) external onlyApprovedProxy checkIfPaused {
+dentists[_dentist_addr].contracts[_patient_addr].next_transfer = _next_transfer;
+}
 
-    function dentistApproveContract(address _patient_addr, address _dentist_addr) external onlyApprovedProxy checkIfPaused {
-        dentists[_dentist_addr].contracts[_patient_addr].approved_by_dentist = true;
-    }
+function dentistApproveContract(address _patient_addr, address _dentist_addr) external onlyApprovedProxy checkIfPaused {
+dentists[_dentist_addr].contracts[_patient_addr].approved_by_dentist = true;
+}
 
-    function patientApproveContract(address _patient_addr, address _dentist_addr, string _contract_ipfs_hash) external onlyApprovedProxy checkIfPaused {
-        dentists[_dentist_addr].contracts[_patient_addr].approved_by_patient = true;
-    }
+function patientApproveContract(address _patient_addr, address _dentist_addr) external onlyApprovedProxy checkIfPaused {
+dentists[_dentist_addr].contracts[_patient_addr].approved_by_patient = true;
+}
 
-    function insertPatientContractHistory(address _patient_addr, address _dentist_addr) external onlyApprovedProxy checkIfPaused {
-        patient_contract_history[_patient_addr].dentists[_dentist_addr] = dentistSentProposal(patient_contract_history[_patient_addr].dentists_addresses.push(_dentist_addr) - 1, true);
-    }
+function insertPatientContractHistory(address _patient_addr, address _dentist_addr) external onlyApprovedProxy checkIfPaused {
+patient_contract_history[_patient_addr].dentists[_dentist_addr] = dentistSentProposal(patient_contract_history[_patient_addr].dentists_addresses.push(_dentist_addr) - 1, true);
+}
 
-    function updateValidationCheck(address _patient_addr, address _dentist_addr) external onlyApprovedProxy checkIfPaused {
-        dentists[_dentist_addr].contracts[_patient_addr].validation_checked = true;
-    }
+function updateValidationCheck(address _patient_addr, address _dentist_addr) external onlyApprovedProxy checkIfPaused {
+dentists[_dentist_addr].contracts[_patient_addr].validation_checked = true;
+}
 
-    function dcnTransferFrom(address _patient_addr, address _dentist_addr, uint256 _amount) external onlyApprovedProxy checkIfPaused {
-        require(dcn.transferFrom(_patient_addr, _dentist_addr, _amount));
-    }
+function dcnTransferFrom(address _patient_addr, address _dentist_addr, uint256 _amount) external onlyApprovedProxy checkIfPaused {
+require(dcn.transferFrom(_patient_addr, _dentist_addr, _amount));
+}
 
-    //can be called from patient and dentist
-    function breakContract(address _patient_addr, address _dentist_addr) public onlyApprovedProxy checkIfPaused {
-        //if there is proposal recorded from this dentist for this patient ----> delete it
-        if(patient_contract_history[_patient_addr].dentists[_dentist_addr].exists) {
-            //deleting the dentist address from the dentists_addresses array for the current patient
-            uint256 proposal_row_to_delete = patient_contract_history[_patient_addr].dentists[_dentist_addr].index_in_dentists_addresses;
-            address proposal_key_to_move = patient_contract_history[_patient_addr].dentists_addresses[patient_contract_history[_patient_addr].dentists_addresses.length-1];
-            patient_contract_history[_patient_addr].dentists_addresses[proposal_row_to_delete] = proposal_key_to_move;
-            patient_contract_history[_patient_addr].dentists[proposal_key_to_move].index_in_dentists_addresses = proposal_row_to_delete;
-            patient_contract_history[_patient_addr].dentists_addresses.length--;
+//can be called from patient and dentist
+function breakContract(address _patient_addr, address _dentist_addr) public onlyApprovedProxy checkIfPaused {
+//if there is proposal recorded from this dentist for this patient ----> delete it
+if(patient_contract_history[_patient_addr].dentists[_dentist_addr].exists) {
+//deleting the dentist address from the dentists_addresses array for the current patient
+uint256 proposal_row_to_delete = patient_contract_history[_patient_addr].dentists[_dentist_addr].index_in_dentists_addresses;
+address proposal_key_to_move = patient_contract_history[_patient_addr].dentists_addresses[patient_contract_history[_patient_addr].dentists_addresses.length-1];
+patient_contract_history[_patient_addr].dentists_addresses[proposal_row_to_delete] = proposal_key_to_move;
+patient_contract_history[_patient_addr].dentists[proposal_key_to_move].index_in_dentists_addresses = proposal_row_to_delete;
+patient_contract_history[_patient_addr].dentists_addresses.length--;
 
-            //deleting the struct
-            delete patient_contract_history[_patient_addr].dentists[_dentist_addr];
-        }
+//deleting the struct
+delete patient_contract_history[_patient_addr].dentists[_dentist_addr];
+}
 
-        //deleting the patient address from the patients_addresses array for the current dentist
-        uint256 row_to_delete = dentists[_dentist_addr].contracts[_patient_addr].index_in_patients_addresses;
-        address key_to_move = dentists[_dentist_addr].patients_addresses[dentists[_dentist_addr].patients_addresses.length-1];
-        dentists[_dentist_addr].patients_addresses[row_to_delete] = key_to_move;
-        dentists[key_to_move].contracts[_patient_addr].index_in_patients_addresses = row_to_delete;
-        dentists[_dentist_addr].patients_addresses.length--;
+//deleting the patient address from the patients_addresses array for the current dentist
+uint256 row_to_delete = dentists[_dentist_addr].contracts[_patient_addr].index_in_patients_addresses;
+address key_to_move = dentists[_dentist_addr].patients_addresses[dentists[_dentist_addr].patients_addresses.length-1];
+dentists[_dentist_addr].patients_addresses[row_to_delete] = key_to_move;
+dentists[key_to_move].contracts[_patient_addr].index_in_patients_addresses = row_to_delete;
+dentists[_dentist_addr].patients_addresses.length--;
 
-        //deleting the patient struct from the dentist patients mapping
-        delete dentists[_dentist_addr].contracts[_patient_addr];
-    }
+//deleting the patient struct from the dentist patients mapping
+delete dentists[_dentist_addr].contracts[_patient_addr];
+}
 
-    // ====== GETTERS ======
-    function getDentist(address _dentist_addr) public view returns(bool, address[] memory) {
-        return (dentists[_dentist_addr].exists, dentists[_dentist_addr].patients_addresses);
-    }
+// ====== GETTERS ======
+function getDentist(address _dentist_addr) public view returns(bool, address[] memory) {
+return (dentists[_dentist_addr].exists, dentists[_dentist_addr].patients_addresses);
+}
 
-    function getDentistsArr() public view returns(address[] memory) {
-        return dentists_addresses;
-    }
+function getDentistsArr() public view returns(address[] memory) {
+return dentists_addresses;
+}
 
-    function getPatient(address _patient_addr, address _dentist_addr) public view returns(uint256, bool, bool, bool, uint256, uint256, string memory) {
-        contractStruct memory patient = dentists[_dentist_addr].contracts[_patient_addr];
-        return (patient.next_transfer, patient.approved_by_dentist, patient.approved_by_patient, patient.validation_checked, patient.value_usd, patient.value_dcn, patient.contract_ipfs_hash);
-    }
+function getPatient(address _patient_addr, address _dentist_addr) public view returns(uint256, bool, bool, bool, uint256, uint256, string memory) {
+contractStruct memory patient = dentists[_dentist_addr].contracts[_patient_addr];
+return (patient.next_transfer, patient.approved_by_dentist, patient.approved_by_patient, patient.validation_checked, patient.value_usd, patient.value_dcn, patient.contract_ipfs_hash);
+}
 
-    function getContractNextTransfer(address _patient_addr, address _dentist_addr) public view returns(uint256) {
-        return dentists[_dentist_addr].contracts[_patient_addr].next_transfer;
-    }
+function getContractNextTransfer(address _patient_addr, address _dentist_addr) public view returns(uint256) {
+return dentists[_dentist_addr].contracts[_patient_addr].next_transfer;
+}
 
-    function getContractApprovedByDentist(address _patient_addr, address _dentist_addr) public view returns(bool) {
-        return dentists[_dentist_addr].contracts[_patient_addr].approved_by_dentist;
-    }
+function getContractApprovedByDentist(address _patient_addr, address _dentist_addr) public view returns(bool) {
+return dentists[_dentist_addr].contracts[_patient_addr].approved_by_dentist;
+}
 
-    function getContractApprovedByPatient(address _patient_addr, address _dentist_addr) public view returns(bool) {
-        return dentists[_dentist_addr].contracts[_patient_addr].approved_by_patient;
-    }
+function getContractApprovedByPatient(address _patient_addr, address _dentist_addr) public view returns(bool) {
+return dentists[_dentist_addr].contracts[_patient_addr].approved_by_patient;
+}
 
-    function getContractValidationChecked(address _patient_addr, address _dentist_addr) public view returns(bool) {
-        return dentists[_dentist_addr].contracts[_patient_addr].validation_checked;
-    }
+function getContractValidationChecked(address _patient_addr, address _dentist_addr) public view returns(bool) {
+return dentists[_dentist_addr].contracts[_patient_addr].validation_checked;
+}
 
-    function getContractUsdValue(address _patient_addr, address _dentist_addr) public view returns(uint256) {
-        return dentists[_dentist_addr].contracts[_patient_addr].value_usd;
-    }
+function getContractUsdValue(address _patient_addr, address _dentist_addr) public view returns(uint256) {
+return dentists[_dentist_addr].contracts[_patient_addr].value_usd;
+}
 
-    function getContractDcnValue(address _patient_addr, address _dentist_addr) public view returns(uint256) {
-        return dentists[_dentist_addr].contracts[_patient_addr].value_dcn;
-    }
+function getContractDcnValue(address _patient_addr, address _dentist_addr) public view returns(uint256) {
+return dentists[_dentist_addr].contracts[_patient_addr].value_dcn;
+}
 
-    function getWaitingContractsForPatient(address _patient_addr) public view returns(address[] memory) {
-        return patient_contract_history[_patient_addr].dentists_addresses;
-    }
-    // ====== /GETTERS ======
-    // ==================================== /LOGIC ====================================
+function getWaitingContractsForPatient(address _patient_addr) public view returns(address[] memory) {
+return patient_contract_history[_patient_addr].dentists_addresses;
+}
+// ====== /GETTERS ======
+// ==================================== /LOGIC ====================================
 }
 
 interface DentacoinToken {
-    function balanceOf(address _owner) view external returns (uint256);
-    function transferFrom(address _from, address _to, uint256 _value) external returns (bool success);
-    function transfer(address _to, uint256 _value) external returns (bool success);
-    function allowance(address _owner, address _spender) external view returns (uint256);
-    function approve(address _spender, uint256 _value) external returns (bool success);
+function balanceOf(address _owner) view external returns (uint256);
+function transferFrom(address _from, address _to, uint256 _value) external returns (bool success);
+function transfer(address _to, uint256 _value) external returns (bool success);
+function allowance(address _owner, address _spender) external view returns (uint256);
+function approve(address _spender, uint256 _value) external returns (bool success);
 }

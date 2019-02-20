@@ -865,9 +865,37 @@ fieldset {
             }
         }
     }
+    &.reconsider-monthly-premium {
+        .bootbox-close-button {
+            font-size: 45px;
+            opacity: 1;
+            color: #424242;
+            right: 15px;
+            position: absolute;
+            float: none;
+        }
+        .modal-dialog {
+            width: 95%;
+            max-width: 800px;
+            .modal-body {
+                padding: 10px 10% 40px;
+                #new-usd-proposal-to-dentist {
+                    margin-right: 5px;
+                    margin-left: 5px;
+                    width: 60px;
+                    border: 0;
+                    border-bottom: 1px dashed black;
+                    text-align: center;
+                }
+                .border-bottom {
+                    border-bottom: 1px solid $light_gray;
+                }
+            }
+        }
+    }
 }
 
-input[type='text'], .custom-input {
+.custom-input {
     width: 100%;
     padding: 12px 15px;
     background-color: white;
@@ -984,6 +1012,14 @@ input[type='text'], .custom-input {
 
 .display-block {
     display: block;
+}
+
+input[type='file'].hide-input {
+    display: none;
+}
+
+.display-block-important {
+    display: block !important;
 }
 
 .response-layer, .contract-response-layer, .contract-response-success-layer {

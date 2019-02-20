@@ -41,10 +41,10 @@
                                         <time class="display-block fs-14 calibri-light">Sent on: {{$contract->created_at->format('d/m/Y')}}</time>
                                         <div class="lato-semibold fs-24 padding-top-5 padding-bottom-5">{{$contract->monthly_premium}}$</div>
                                         <div class="btn-container">
-                                            @if($contract->patient_sign)
-                                                <a href="{{route('patient-contract-view', ['slug' => $contract->slug])}}" class="white-blue-green-btn">Details</a>
-                                            @else
+                                            @if($contract->status == 'pending')
                                                 <a href="{{route('contract-proposal', ['slug' => $contract->slug])}}" class="white-blue-green-btn">Details and Sign</a>
+                                            @else
+                                                <a href="{{route('patient-contract-view', ['slug' => $contract->slug])}}" class="white-blue-green-btn">Details</a>
                                             @endif
                                         </div>
                                     </div>

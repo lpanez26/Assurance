@@ -4,8 +4,7 @@
     @php($patient = (new \App\Http\Controllers\APIRequestsController())->getUserData(session('logged_user')['id']))
     @php($general_dentistry = unserialize($contract->general_dentistry))
     @php($created_at = $contract->created_at->format('d-m-Y'))
-    @php($active_until = date('d/m/Y', strtotime($created_at . ' +30 days')))
-    <section class="padding-top-100 padding-bottom-50 contract-proposal module">
+    <section class="padding-top-100 padding-bottom-50 contract-proposal section module" data-created-at-timestamp="{{strtotime($created_at)}}">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
@@ -19,7 +18,7 @@
                     <div class="wrapper padding-top-50 padding-bottom-60">
                         <div class="top-right-page-alike"></div>
                         <h2 class="text-center blue-green-color fs-30 lato-bold padding-bottom-20">ASSURANCE CONTRACT SAMPLE</h2>
-                        <div class="calibri-bold fs-14 padding-bottom-50 text-center blue-green-color">( This contract proposal will be active until {{$active_until}}. )</div>
+                        <div class="calibri-bold fs-14 padding-bottom-50 text-center blue-green-color">( This contract proposal will be active until <span class="active-until"></span>. )</div>
                         <div class="step-fields module padding-top-20">
                             <form method="POST" enctype="multipart/form-data" action="{{route('update-and-sign-contract')}}" id="dentist-update-and-sign-contract">
                                 <h3 class="calibri-bold fs-30 dark-color">DENTIST DETAILS</h3>
@@ -141,7 +140,7 @@
                                     <label class="calibri-light inline-block light-gray-color fs-16 padding-right-15 margin-bottom-0">Monthly Premium:</label>
                                     <div class="right-extra-field calibri-bold fs-25 dark-color inline-block">{{$contract->monthly_premium}} USD</div>
                                 </div>
-                                <div class="single-row fs-14 light-gray-color calibri-light padding-top-10 padding-bottom-40">You are not satisfied with the rate offered? <a href="" class="calibri-bold blue-green-color">Contact your dentist.</a> </div>
+                                <div class="single-row fs-14 light-gray-color calibri-light padding-top-10 padding-bottom-40">You are not satisfied with the rate offered? <a href="javascript:void(0)" class="calibri-bold blue-green-color contact-your-dentist">Contact your dentist.</a> </div>
                                 <div class="single-row flex-row fs-0">
                                     <label class="calibri-light light-gray-color fs-16 padding-right-15 margin-bottom-0">Required Check-ups per Year:</label>
                                     <div class="right-extra-field calibri-regular fs-18 dark-color inline-block">{{$contract->check_ups_per_year}}</div>
@@ -201,7 +200,7 @@
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-xs-6">
-                                                <a href="javascript:void(0)" class="white-red-btn min-width-220 reject-contract">REJECT</a>
+                                                <a href="javascript:void(0)" class="white-red-btn min-width-220 cancel-contract-btn" data-contract="{{$contract->slug}}">REJECT</a>
                                             </div>
                                             <div class="col-xs-6">
                                                 <input type="submit" value="SIGN CONTRACT" class="white-blue-green-btn min-width-220"/>

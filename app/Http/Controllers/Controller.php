@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\CalculatorParameter;
 use App\Page;
 use App\PagesHtmlSection;
 use App\TemporallyContract;

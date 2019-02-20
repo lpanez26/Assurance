@@ -51,6 +51,27 @@
                 <input type="text" data-type="address" name="address" maxlength="42" class="right-field calibri-regular fs-18 dark-color inline-block pencil-background"/>
             @endif
         </div>
+        {{--RARE CASE - if user have address, but not from wallet.dentacoin.com--}}
+        @if(!empty($current_logged_dentist->dcn_address) && !(new \App\Http\Controllers\UserController())->checkIfWeHavePublicKeyOfAddress($current_logged_dentist->dcn_address))
+            <div class="single-row proof-of-address padding-bottom-20" data-address="{{$current_logged_dentist->dcn_address}}">
+                <div class="text-center calibri-bold fs-18 padding-top-20 padding-bottom-15">PLEASE VERIFY YOU OWN THIS ADDRESS</div>
+                <div class="container-fluid">
+                    <div class="row fs-0">
+                        <div class="col-xs-12 col-sm-5 inline-block padding-left-30">
+                            <a href="javascript:void(0)" class="blue-green-white-btn text-center enter-private-key display-block-important fs-18 line-height-18">Enter your Private Key<div class="fs-16">(not recommended)</div></a>
+                        </div>
+                        <div class="col-xs-12 col-sm-2 text-center calibri-bold fs-20 inline-block">or</div>
+                        <div class="col-xs-12 col-sm-5 inline-block padding-right-30">
+                            <div class="upload-file-container" data-id="upload-keystore-file" data-label="Upload your Keystore file">
+                                <input type="file" id="upload-keystore-file" class="custom-upload-file hide-input"/>
+                                <button type="button" class="display-block"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row on-change-result"></div>
+                </div>
+            </div>
+        @endif
         <div class="fs-14 calibri-light light-gray-color padding-top-10">This is the wallet where you will receive your monthly premiums. Please double-check if everything is correct.</div>
         <div class="fs-14 calibri-light light-gray-color">You don’t have a wallet? <a href="//wallet.dentacoin.com" target="_blank">Create one here.</a></div>
     </div>

@@ -21,7 +21,7 @@
         <div class="container padding-top-40">
             <div class="row">
                 <div class="col-xs-12 col-sm-5 col-sm-offset-1 col-md-4 col-md-offset-2 padding-right-50">
-                    <div class="custom-google-label-style fs-0 flex">
+                    <div class="custom-google-label-style module fs-0 flex">
                         <div class="inline-block left-side">
                             <label class="active-label" for="usd-value">Pay with:</label>
                             <input type="number" id="usd-value" value="30"/>
@@ -31,7 +31,7 @@
                     <div class="fs-16 padding-left-15 calibri-light light-gray-color">Transaction limit: 30 - 6000 USD</div>
                 </div>
                 <div class="col-xs-12 col-sm-5 col-md-4 padding-left-50">
-                    <div class="custom-google-label-style fs-0 flex">
+                    <div class="custom-google-label-style module fs-0 flex">
                         <div class="inline-block left-side">
                             <label for="crypto-amount" class="active-label">You get:</label>
                             <input type="number" id="crypto-amount"/>
@@ -43,7 +43,7 @@
             </div>
             <div class="row padding-top-50 padding-bottom-20">
                 <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-                    <div class="custom-google-label-style">
+                    <div class="custom-google-label-style module" data-input-blue-green-border="true">
                         <label for="dcn_address" class="active-label">Address to receive DCN:</label>
                         <input type="url" id="dcn_address" maxlength="42" class="full-rounded" @if(!empty($user_data) && !empty($user_data->dcn_address)) value="{{$user_data->dcn_address}}" @endif/>
                     </div>
@@ -51,7 +51,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-                    <div class="custom-google-label-style">
+                    <div class="custom-google-label-style module" data-input-blue-green-border="true">
                         <label for="email" class="active-label">Email:</label>
                         <input type="email" id="email" maxlength="100" class="full-rounded" @if(!empty($user_data) && !empty($user_data->email)) value="{{$user_data->email}}" @endif/>
                     </div>

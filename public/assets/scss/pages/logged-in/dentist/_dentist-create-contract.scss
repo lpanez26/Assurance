@@ -9,12 +9,55 @@
             display: none;
             &.one {
                 display: block;
+                .proof-of-address {
+                    background-color: #eaeaea;
+                    .upload-file-container {
+                        button {
+                            margin: 0;
+                            padding: 0;
+                            border: 0;
+                            width: 100%;
+                            background: transparent;
+                            label {
+                                width: 100%;
+                                display: block;
+                                padding: 0;
+                                margin: 0;
+                            }
+                        }
+                    }
+                    .file-name {
+                        word-break: break-word;
+                    }
+                    .checkbox-container {
+                        padding-top: 10px;
+                        input[type="checkbox"] {
+                            width: auto;
+                            height: auto;
+                        }
+                        .pretty {
+                            label {
+                                padding-top: 3px;
+                                padding-left: 5px;
+                                cursor: pointer;
+                                width: 100%;
+                                i {
+                                    display: inline;
+                                    padding-left: 5px;
+                                }
+                            }
+                        }
+                    }
+                }
                 .avatar {
                     width: 150px;
                     margin: 0 auto;
                 }
             }
             &.three {
+                .show-on-services-pick {
+                    display: none;
+                }
                 .show-category-list {
                     ul {
                         display: none;
@@ -99,24 +142,23 @@
                     @include box-shadow(rgba(0, 0, 0, 0.4) 0px 0px 3px 3px);
                 }
             }
-            &.three, &.four {
-                .pretty input[disabled]~* {
-                    opacity: 1;
-                }
-                .pretty {
-                    svg.svg {
-                        top: 0;
-                    }
-                }
-                .pretty.on-white-background .state label:after, .pretty.on-white-background .state label:before {
+
+            .pretty input[disabled]~* {
+                opacity: 1;
+            }
+            .pretty {
+                svg.svg {
                     top: 0;
                 }
-                .pretty label {
-                    padding-top: 0;
-                }
-                .pretty.on-white-background.p-svg .state .svg {
-                    border-color: $blue_green_color !important;
-                }
+            }
+            .pretty.on-white-background .state label:after, .pretty.on-white-background .state label:before {
+                top: 0;
+            }
+            .pretty label {
+                padding-top: 0;
+            }
+            .pretty.on-white-background.p-svg .state .svg {
+                border-color: $blue_green_color !important;
             }
         }
     }

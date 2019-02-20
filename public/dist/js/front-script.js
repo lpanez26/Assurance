@@ -1,25 +1,25 @@
 import _regeneratorRuntime from "babel-runtime/regenerator";
 
 var pagesDataOnContractInit = function () {
-    var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee5() {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee3() {
         var check_dentist_account;
-        return _regeneratorRuntime.wrap(function _callee5$(_context5) {
+        return _regeneratorRuntime.wrap(function _callee3$(_context3) {
             while (1) {
-                switch (_context5.prev = _context5.next) {
+                switch (_context3.prev = _context3.next) {
                     case 0:
                         if (!$('body').hasClass('dentist')) {
-                            _context5.next = 16;
+                            _context3.next = 16;
                             break;
                         }
 
                         $('.additional-info .current-account a').html(global_state.account).attr('href', 'https://rinkeby.etherscan.io/address/' + global_state.account);
                         $('.additional-info .assurance-account a').html(App.assurance_address).attr('href', 'https://rinkeby.etherscan.io/address/' + App.assurance_address);
                         $('.additional-info .dentacointoken-account a').html(App.dentacoin_token_address).attr('href', 'https://rinkeby.etherscan.io/address/' + App.dentacoin_token_address);
-                        _context5.next = 6;
+                        _context3.next = 6;
                         return App.assurance_methods.getDentist(global_state.account);
 
                     case 6:
-                        check_dentist_account = _context5.sent;
+                        check_dentist_account = _context3.sent;
 
                         if (check_dentist_account.toLowerCase() == global_state.account.toLowerCase()) {
                             $('.additional-info .is-dentist span').addClass('yes').html('YES');
@@ -49,12 +49,12 @@ var pagesDataOnContractInit = function () {
                         $('.break-contract').click(function () {
                             App.assurance_methods.breakContract($('.breakContract .patient-address').val().trim(), global_state.account);
                         });
-                        _context5.next = 35;
+                        _context3.next = 35;
                         break;
 
                     case 16:
                         if (!$('body').hasClass('patient')) {
-                            _context5.next = 35;
+                            _context3.next = 35;
                             break;
                         }
 
@@ -63,21 +63,21 @@ var pagesDataOnContractInit = function () {
                         $('.additional-info .dentacointoken-account a').html(App.dentacoin_token_address).attr('href', 'https://rinkeby.etherscan.io/address/' + App.dentacoin_token_address);
 
                         //we check greater than 0 or more?????? ASK JEREMIAS
-                        _context5.t0 = parseInt;
-                        _context5.next = 23;
+                        _context3.t0 = parseInt;
+                        _context3.next = 23;
                         return App.dentacoin_token_methods.allowance(global_state.account, App.assurance_address);
 
                     case 23:
-                        _context5.t1 = _context5.sent;
-                        _context5.t2 = (0, _context5.t0)(_context5.t1);
+                        _context3.t1 = _context3.sent;
+                        _context3.t2 = (0, _context3.t0)(_context3.t1);
 
-                        if (!(_context5.t2 > 0)) {
-                            _context5.next = 29;
+                        if (!(_context3.t2 > 0)) {
+                            _context3.next = 29;
                             break;
                         }
 
                         $('.is-allowance-given span').addClass('yes').html('YES');
-                        _context5.next = 30;
+                        _context3.next = 30;
                         break;
 
                     case 29:
@@ -106,32 +106,32 @@ var pagesDataOnContractInit = function () {
 
                     case 35:
                     case "end":
-                        return _context5.stop();
+                        return _context3.stop();
                 }
             }
-        }, _callee5, this);
+        }, _callee3, this);
     }));
 
     return function pagesDataOnContractInit() {
-        return _ref5.apply(this, arguments);
+        return _ref3.apply(this, arguments);
     };
 }();
 
 var buildCurrentDentistContractHistory = function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee6() {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee4() {
         var current_patients_for_dentist, pending_approval_from_this_dentist_bool, pending_approval_from_patient, running_contacts_bool, i, len, patient, single_patient_body;
-        return _regeneratorRuntime.wrap(function _callee6$(_context6) {
+        return _regeneratorRuntime.wrap(function _callee4$(_context4) {
             while (1) {
-                switch (_context6.prev = _context6.next) {
+                switch (_context4.prev = _context4.next) {
                     case 0:
-                        _context6.next = 2;
+                        _context4.next = 2;
                         return App.assurance_methods.getPatientsArrForDentist(global_state.account);
 
                     case 2:
-                        current_patients_for_dentist = _context6.sent;
+                        current_patients_for_dentist = _context4.sent;
 
                         if (!(current_patients_for_dentist.length > 0)) {
-                            _context6.next = 17;
+                            _context4.next = 17;
                             break;
                         }
 
@@ -142,15 +142,15 @@ var buildCurrentDentistContractHistory = function () {
 
                     case 8:
                         if (!(i < len)) {
-                            _context6.next = 17;
+                            _context4.next = 17;
                             break;
                         }
 
-                        _context6.next = 11;
+                        _context4.next = 11;
                         return App.assurance_methods.getPatient(current_patients_for_dentist[i], global_state.account);
 
                     case 11:
-                        patient = _context6.sent;
+                        patient = _context4.sent;
                         single_patient_body = '<div class="single"><div><label>Patient address:</label> <a href="https://rinkeby.etherscan.io/address/' + patient[1] + '" target="_blank" class="etherscan-hash">' + patient[1] + '</a></div><div><label>USD value:</label> ' + patient[6] + '</div><div><label>DCN value:</label> ' + patient[7] + '</div><div><label>IPFS link: (this is where patient and dentist can see the real contract (pdf) signed between them) <a href="https://gateway.ipfs.io/ipfs/' + patient[8] + '" target="_blank">https://gateway.ipfs.io/ipfs/' + patient[8] + '</a></label></div>';
 
                         if (patient[3] == true && patient[4] == true) {
@@ -178,37 +178,37 @@ var buildCurrentDentistContractHistory = function () {
 
                     case 14:
                         i += 1;
-                        _context6.next = 8;
+                        _context4.next = 8;
                         break;
 
                     case 17:
                     case "end":
-                        return _context6.stop();
+                        return _context4.stop();
                 }
             }
-        }, _callee6, this);
+        }, _callee4, this);
     }));
 
     return function buildCurrentDentistContractHistory() {
-        return _ref6.apply(this, arguments);
+        return _ref4.apply(this, arguments);
     };
 }();
 
 var buildCurrentPatientContractHistory = function () {
-    var _ref7 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee7() {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee5() {
         var current_dentists_for_patient, pending_approval_from_this_dentist_bool, pending_approval_from_patient, running_contacts_bool, i, len, patient, single_patient_body;
-        return _regeneratorRuntime.wrap(function _callee7$(_context7) {
+        return _regeneratorRuntime.wrap(function _callee5$(_context5) {
             while (1) {
-                switch (_context7.prev = _context7.next) {
+                switch (_context5.prev = _context5.next) {
                     case 0:
-                        _context7.next = 2;
+                        _context5.next = 2;
                         return App.assurance_methods.getWaitingContractsForPatient(global_state.account);
 
                     case 2:
-                        current_dentists_for_patient = _context7.sent;
+                        current_dentists_for_patient = _context5.sent;
 
                         if (!(current_dentists_for_patient.length > 0)) {
-                            _context7.next = 17;
+                            _context5.next = 17;
                             break;
                         }
 
@@ -219,15 +219,15 @@ var buildCurrentPatientContractHistory = function () {
 
                     case 8:
                         if (!(i < len)) {
-                            _context7.next = 17;
+                            _context5.next = 17;
                             break;
                         }
 
-                        _context7.next = 11;
+                        _context5.next = 11;
                         return App.assurance_methods.getPatient(global_state.account, current_dentists_for_patient[i]);
 
                     case 11:
-                        patient = _context7.sent;
+                        patient = _context5.sent;
                         single_patient_body = '<div class="single"><div><label>Dentist address:</label> <a href="https://rinkeby.etherscan.io/address/' + patient[0] + '" target="_blank" class="etherscan-hash">' + patient[0] + '</a></div><div><label>USD value:</label> ' + patient[6] + '</div><div><label>DCN value:</label> ' + patient[7] + '</div><div><label>IPFS link:  (this is where patient and dentist can see the real contract (pdf) signed between them) <a href="https://gateway.ipfs.io/ipfs/' + patient[8] + '" target="_blank">https://gateway.ipfs.io/ipfs/' + patient[8] + '</a></label></div>';
 
                         if (patient[3] == true && patient[4] == true) {
@@ -255,24 +255,126 @@ var buildCurrentPatientContractHistory = function () {
 
                     case 14:
                         i += 1;
-                        _context7.next = 8;
+                        _context5.next = 8;
                         break;
 
                     case 17:
                     case "end":
-                        return _context7.stop();
+                        return _context5.stop();
                 }
             }
-        }, _callee7, this);
+        }, _callee5, this);
     }));
 
     return function buildCurrentPatientContractHistory() {
-        return _ref7.apply(this, arguments);
+        return _ref5.apply(this, arguments);
     };
 }();
 
 // ================== PAGES ==================
 
+
+var onDocumentReadyPageData = function () {
+    var _ref12 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee12() {
+        var next_transfer_timestamp, date_obj;
+        return _regeneratorRuntime.wrap(function _callee12$(_context12) {
+            while (1) {
+                switch (_context12.prev = _context12.next) {
+                    case 0:
+                        if (!$('body').hasClass('logged-in')) {
+                            _context12.next = 39;
+                            break;
+                        }
+
+                        if (!$('body').hasClass('congratulations')) {
+                            _context12.next = 13;
+                            break;
+                        }
+
+                        _context12.t0 = parseInt($('section.congratulation-and-time-section').attr('data-time-left-next-transfer'));
+                        _context12.t1 = parseInt;
+                        _context12.next = 6;
+                        return App.assurance_state_methods.getPeriodToWithdraw();
+
+                    case 6:
+                        _context12.t2 = _context12.sent;
+                        _context12.t3 = (0, _context12.t1)(_context12.t2);
+                        next_transfer_timestamp = _context12.t0 + _context12.t3;
+
+                        if ($('.converted-date').length > 0) {
+                            date_obj = new Date(next_transfer_timestamp * 1000);
+
+                            $('.converted-date').html(date_obj.getDate() + '/' + (date_obj.getMonth() + 1) + '/' + date_obj.getFullYear());
+                        }
+                        initFlipClockTimer(next_transfer_timestamp - new Date().getTime() / 1000);
+                        _context12.next = 39;
+                        break;
+
+                    case 13:
+                        if (!$('body').hasClass('patient-contract-view')) {
+                            _context12.next = 26;
+                            break;
+                        }
+
+                        _context12.t4 = parseInt($('.contract-body').attr('data-time-left-next-transfer'));
+                        _context12.t5 = parseInt;
+                        _context12.next = 18;
+                        return App.assurance_state_methods.getPeriodToWithdraw();
+
+                    case 18:
+                        _context12.t6 = _context12.sent;
+                        _context12.t7 = (0, _context12.t5)(_context12.t6);
+                        next_transfer_timestamp = _context12.t4 + _context12.t7;
+
+                        if ($('.converted-date').length > 0) {
+                            date_obj = new Date(next_transfer_timestamp * 1000);
+
+                            $('.converted-date').html(date_obj.getDate() + '/' + (date_obj.getMonth() + 1) + '/' + date_obj.getFullYear());
+                        }
+                        initFlipClockTimer(next_transfer_timestamp - new Date().getTime() / 1000);
+
+                        cancelContractEventInit();
+                        _context12.next = 39;
+                        break;
+
+                    case 26:
+                        if (!$('body').hasClass('contract-proposal')) {
+                            _context12.next = 39;
+                            break;
+                        }
+
+                        if (!($('.contract-proposal.section').length && $('.contract-proposal.section').attr('data-created-at-timestamp') != undefined)) {
+                            _context12.next = 39;
+                            break;
+                        }
+
+                        _context12.t8 = Date;
+                        _context12.t9 = parseInt($('.contract-proposal.section').attr('data-created-at-timestamp'));
+                        _context12.t10 = parseInt;
+                        _context12.next = 33;
+                        return App.assurance_state_methods.getPeriodToWithdraw();
+
+                    case 33:
+                        _context12.t11 = _context12.sent;
+                        _context12.t12 = (0, _context12.t10)(_context12.t11);
+                        _context12.t13 = _context12.t9 + _context12.t12;
+                        _context12.t14 = _context12.t13 * 1000;
+                        date_obj = new _context12.t8(_context12.t14);
+
+                        $('.active-until').html(date_obj.getDate() + '/' + (date_obj.getMonth() + 1) + '/' + date_obj.getFullYear());
+
+                    case 39:
+                    case "end":
+                        return _context12.stop();
+                }
+            }
+        }, _callee12, this);
+    }));
+
+    return function onDocumentReadyPageData() {
+        return _ref12.apply(this, arguments);
+    };
+}();
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
@@ -685,9 +787,12 @@ function initCaptchaRefreshEvent() {
 var global_state = {};
 var temporally_timestamp = 0;
 var App = {
-    assurance_address: "0x7d0278788bedc4767bb469ea7d143787a133c4a0",
-    assurance_abi: [{ "constant": false, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }], "name": "breakContract", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_api_decimals", "type": "uint256" }], "name": "changeApiDecimals", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_api_result_dcn_usd_price", "type": "uint256" }], "name": "changeApiResultDcnUsdPrice", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_min_allowed_amount", "type": "uint256" }], "name": "changeMinimumAllowedAmount", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_period_to_withdraw", "type": "uint256" }], "name": "changePeriodToWithdraw", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_usd_over_dcn", "type": "bool" }], "name": "changeUsdOverDcn", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [], "name": "circuitBreaker", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_patient_addr", "type": "address" }], "name": "dentistApproveContract", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_dentist_addr", "type": "address" }], "name": "patientApproveContract", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }, { "name": "_value_usd", "type": "uint256" }, { "name": "_value_dcn", "type": "uint256" }, { "name": "_date_start_contract", "type": "uint256" }, { "name": "_contract_ipfs_hash", "type": "string" }], "name": "registerContract", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [], "name": "registerDentist", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_new_admin", "type": "address" }], "name": "transferAdmin", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_new_owner", "type": "address" }], "name": "transferOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_array", "type": "address[]" }], "name": "withdrawToDentist", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "anonymous": false, "inputs": [{ "indexed": true, "name": "_dentist_addr", "type": "address" }, { "indexed": true, "name": "_patient_addr", "type": "address" }, { "indexed": false, "name": "_value", "type": "uint256" }, { "indexed": false, "name": "_date", "type": "uint256" }], "name": "logSuccessfulWithdraw", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "name": "_dentist_addr", "type": "address" }, { "indexed": false, "name": "_date", "type": "uint256" }], "name": "logSuccessfulDentistRegistration", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "name": "_dentist_addr", "type": "address" }, { "indexed": true, "name": "_patient_addr", "type": "address" }, { "indexed": false, "name": "_date", "type": "uint256" }, { "indexed": false, "name": "_value_usd", "type": "uint256" }, { "indexed": false, "name": "_value_dcn", "type": "uint256" }], "name": "logSuccessfulContractRegistration", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "name": "_dentist_addr", "type": "address" }, { "indexed": true, "name": "_patient_addr", "type": "address" }, { "indexed": false, "name": "_date", "type": "uint256" }], "name": "logSuccessfulContractBreak", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "name": "_patient_addr", "type": "address" }, { "indexed": true, "name": "_dentist_addr", "type": "address" }], "name": "logSuccessfulContractApproval", "type": "event" }, { "constant": true, "inputs": [], "name": "admin", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "api_decimals", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "api_result_dcn_usd_price", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "AssuranceContract", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "contract_paused", "outputs": [{ "name": "", "type": "bool" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "_dentist_addr", "type": "address" }], "name": "getDentist", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getDentistsArr", "outputs": [{ "name": "", "type": "address[]" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }], "name": "getPatient", "outputs": [{ "name": "", "type": "address" }, { "name": "", "type": "address" }, { "name": "", "type": "uint256" }, { "name": "", "type": "bool" }, { "name": "", "type": "bool" }, { "name": "", "type": "bool" }, { "name": "", "type": "uint256" }, { "name": "", "type": "uint256" }, { "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "_dentist_addr", "type": "address" }], "name": "getPatientsArrForDentist", "outputs": [{ "name": "", "type": "address[]" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "_patient_addr", "type": "address" }], "name": "getWaitingContractsForPatient", "outputs": [{ "name": "", "type": "address[]" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "min_allowed_amount", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "period_to_withdraw", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "usd_over_dcn", "outputs": [{ "name": "", "type": "bool" }], "payable": false, "stateMutability": "view", "type": "function" }],
-    assurance_instance: null,
+    assurance_state_address: '0xb5f910da40782a5261b9809eefb3a8e183abd025',
+    assurance_state_abi: [{ "constant": false, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }, { "name": "_next_transfer", "type": "uint256" }], "name": "updateNextTransferTime", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getPeriodToWithdraw", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }], "name": "getContractUsdValue", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "circuitBreaker", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_period_to_withdraw", "type": "uint256" }], "name": "changePeriodToWithdraw", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_api_decimals", "type": "uint256" }], "name": "changeApiDecimals", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_dentist_addr", "type": "address" }], "name": "registerDentist", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_api_result_dcn_usd_price", "type": "uint256" }], "name": "changeApiResultDcnUsdPrice", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }], "name": "dentistApproveContract", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }], "name": "breakContract", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "_patient_addr", "type": "address" }], "name": "getWaitingContractsForPatient", "outputs": [{ "name": "", "type": "address[]" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }], "name": "getContractNextTransfer", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getApiResultDcnUsdPrice", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "_dentacoin_token_address", "type": "address" }], "name": "changeDentacoinTokenAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getApiDecimals", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "api_result_dcn_usd_price", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }], "name": "getContractApprovedByDentist", "outputs": [{ "name": "", "type": "bool" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "dentacoin_token_address", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "_new_admin", "type": "address" }], "name": "transferAdmin", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }], "name": "getContractDcnValue", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }, { "name": "_amount", "type": "uint256" }], "name": "dcnTransferFrom", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "AssuranceContract", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "usd_over_dcn", "outputs": [{ "name": "", "type": "bool" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getUsdOverDcn", "outputs": [{ "name": "", "type": "bool" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }], "name": "updateValidationCheck", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_min_allowed_amount", "type": "uint256" }], "name": "changeMinimumAllowedAmount", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }, { "name": "_date_start_contract", "type": "uint256" }, { "name": "_approved_by_dentist", "type": "bool" }, { "name": "_approved_by_patient", "type": "bool" }, { "name": "_validation_checked", "type": "bool" }, { "name": "_value_usd", "type": "uint256" }, { "name": "_value_dcn", "type": "uint256" }, { "name": "_contract_ipfs_hash", "type": "string" }], "name": "registerContract", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }], "name": "insertPatientContractHistory", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }], "name": "getContractApprovedByPatient", "outputs": [{ "name": "", "type": "bool" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "api_decimals", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "min_allowed_amount", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "_proxy_contract", "type": "address" }], "name": "changeProxyAddress", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getDentistsArr", "outputs": [{ "name": "", "type": "address[]" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "contract_paused", "outputs": [{ "name": "", "type": "bool" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }], "name": "patientApproveContract", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }], "name": "getPatient", "outputs": [{ "name": "", "type": "uint256" }, { "name": "", "type": "bool" }, { "name": "", "type": "bool" }, { "name": "", "type": "bool" }, { "name": "", "type": "uint256" }, { "name": "", "type": "uint256" }, { "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "period_to_withdraw", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "proxy_contract", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "_dentist_addr", "type": "address" }], "name": "getDentist", "outputs": [{ "name": "", "type": "bool" }, { "name": "", "type": "address[]" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getContractPaused", "outputs": [{ "name": "", "type": "bool" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "_usd_over_dcn", "type": "bool" }], "name": "changeUsdOverDcn", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }], "name": "getContractValidationChecked", "outputs": [{ "name": "", "type": "bool" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getMinAllowedAmount", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "_new_owner", "type": "address" }], "name": "transferOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "admin", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }],
+    assurance_state_instance: null,
+    assurance_proxy_address: '0x0379f43679c3b0520a1165dccc9e5cd9649d8893',
+    assurance_proxy_abi: [{ "constant": false, "inputs": [], "name": "registerDentist", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }], "name": "breakContract", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_dentist_addr", "type": "address" }], "name": "patientApproveContract", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "dentacoin_token_address", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "_patient_addr", "type": "address" }], "name": "dentistApproveContract", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "assurance_address", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "_patient_addr", "type": "address" }, { "name": "_dentist_addr", "type": "address" }, { "name": "_value_usd", "type": "uint256" }, { "name": "_value_dcn", "type": "uint256" }, { "name": "_date_start_contract", "type": "uint256" }, { "name": "_contract_ipfs_hash", "type": "string" }], "name": "registerContract", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_array", "type": "address[]" }], "name": "multipleWithdraw", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_patient_addr", "type": "address" }], "name": "singleWithdraw", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "name": "_assurance_address", "type": "address" }], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": true, "name": "_dentist_addr", "type": "address" }, { "indexed": true, "name": "_patient_addr", "type": "address" }, { "indexed": false, "name": "_value", "type": "uint256" }, { "indexed": false, "name": "_date", "type": "uint256" }], "name": "logSuccessfulWithdraw", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "name": "_dentist_addr", "type": "address" }, { "indexed": false, "name": "_date", "type": "uint256" }], "name": "logSuccessfulDentistRegistration", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "name": "_dentist_addr", "type": "address" }, { "indexed": true, "name": "_patient_addr", "type": "address" }, { "indexed": false, "name": "_date", "type": "uint256" }, { "indexed": false, "name": "_value_usd", "type": "uint256" }, { "indexed": false, "name": "_value_dcn", "type": "uint256" }], "name": "logSuccessfulContractRegistration", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "name": "_dentist_addr", "type": "address" }, { "indexed": true, "name": "_patient_addr", "type": "address" }, { "indexed": false, "name": "_date", "type": "uint256" }], "name": "logSuccessfulContractBreak", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "name": "_patient_addr", "type": "address" }, { "indexed": true, "name": "_dentist_addr", "type": "address" }], "name": "logSuccessfulContractApproval", "type": "event" }],
+    assurance_proxy_instance: null,
     dentacoin_token_address: "0x19f49a24c7cb0ca1cbf38436a86656c2f30ab362",
     dentacoin_token_abi: [{ "constant": false, "inputs": [{ "name": "_spender", "type": "address" }, { "name": "_value", "type": "uint256" }], "name": "approve", "outputs": [{ "name": "success", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [], "name": "buyDentacoinsAgainstEther", "outputs": [{ "name": "amount", "type": "uint256" }], "payable": true, "stateMutability": "payable", "type": "function" }, { "constant": false, "inputs": [], "name": "haltDirectTrade", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "amountOfEth", "type": "uint256" }, { "name": "dcn", "type": "uint256" }], "name": "refundToOwner", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "amount", "type": "uint256" }], "name": "sellDentacoinsAgainstEther", "outputs": [{ "name": "revenue", "type": "uint256" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "newDCNAmount", "type": "uint256" }], "name": "setDCNForGas", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "newBuyPriceEth", "type": "uint256" }, { "name": "newSellPriceEth", "type": "uint256" }], "name": "setEtherPrices", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "newGasAmountInWei", "type": "uint256" }], "name": "setGasForDCN", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "newGasReserveInWei", "type": "uint256" }], "name": "setGasReserve", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "minimumBalanceInWei", "type": "uint256" }], "name": "setMinBalance", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_to", "type": "address" }, { "name": "_value", "type": "uint256" }], "name": "transfer", "outputs": [{ "name": "success", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "_from", "type": "address" }, { "name": "_to", "type": "address" }, { "name": "_value", "type": "uint256" }], "name": "transferFrom", "outputs": [{ "name": "success", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [], "name": "unhaltDirectTrade", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "payable": true, "stateMutability": "payable", "type": "fallback" }, { "anonymous": false, "inputs": [{ "indexed": true, "name": "_from", "type": "address" }, { "indexed": true, "name": "_to", "type": "address" }, { "indexed": false, "name": "_value", "type": "uint256" }], "name": "Transfer", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "name": "_owner", "type": "address" }, { "indexed": true, "name": "_spender", "type": "address" }, { "indexed": false, "name": "_value", "type": "uint256" }], "name": "Approval", "type": "event" }, { "constant": true, "inputs": [{ "name": "_owner", "type": "address" }, { "name": "_spender", "type": "address" }], "name": "allowance", "outputs": [{ "name": "remaining", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "name": "_owner", "type": "address" }], "name": "balanceOf", "outputs": [{ "name": "balance", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "buyPriceEth", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "DCNForGas", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "decimals", "outputs": [{ "name": "", "type": "uint8" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "DentacoinAddress", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "directTradeAllowed", "outputs": [{ "name": "", "type": "bool" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "gasForDCN", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "gasReserve", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "minBalanceForAccounts", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "name", "outputs": [{ "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [{ "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "sellPriceEth", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "symbol", "outputs": [{ "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalSupply", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }],
     dentacoin_instance: null,
@@ -724,15 +829,10 @@ var App = {
                             }
 
                             //if user is not logged in with metamask or custom stop here
-
-                            if (!(typeof global_state.account != 'undefined')) {
-                                _context.next = 3;
-                                break;
-                            }
-
+                            //if(typeof(global_state.account) != 'undefined') {
                             return _context.abrupt("return", App.initContract());
 
-                        case 3:
+                        case 2:
                         case "end":
                             return _context.stop();
                     }
@@ -753,20 +853,14 @@ var App = {
                     switch (_context2.prev = _context2.next) {
                         case 0:
                             //Assurance
-                            App.assurance_instance = new App.web3_1_0.eth.Contract(App.assurance_abi, App.assurance_address);
+                            App.assurance_state_instance = new App.web3_1_0.eth.Contract(App.assurance_state_abi, App.assurance_state_address);
                             //DentacoinToken
                             App.dentacoin_token_instance = new App.web3_1_0.eth.Contract(App.dentacoin_token_abi, App.dentacoin_token_address);
-
-                            //save current block number into state
-                            _context2.next = 4;
-                            return App.helper.getBlockNum();
-
-                        case 4:
 
                             //init pages logic
                             pagesDataOnContractInit();
 
-                        case 5:
+                        case 3:
                         case "end":
                             return _context2.stop();
                     }
@@ -791,7 +885,7 @@ var App = {
             });
         },
         approve: function approve() {
-            return App.dentacoin_token_instance.methods.approve(App.assurance_address, 9000000000000).send({
+            return App.dentacoin_token_instance.methods.approve(App.assurance_state_address, 9000000000000).send({
                 from: global_state.account,
                 gas: 65000
             }).on('transactionHash', function (hash) {
@@ -801,269 +895,175 @@ var App = {
             });
         }
     },
-    assurance_methods: {
-        getDentist: function getDentist(dentist_addr) {
-            return App.assurance_instance.methods.getDentist(dentist_addr).call({ from: global_state.account }, function (error, result) {
+    assurance_state_methods: {
+        getPeriodToWithdraw: function getPeriodToWithdraw() {
+            return App.assurance_state_instance.methods.getPeriodToWithdraw().call({}, function (error, result) {
                 if (!error) {
                     return result;
                 } else {
                     console.error(error);
                 }
             });
-        },
-        getPatient: function getPatient(patient_addr, dentist_addr) {
-            return App.assurance_instance.methods.getPatient(patient_addr, dentist_addr).call({ from: global_state.account }, function (error, result) {
-                if (!error) {
+        }
+        /*getDentist: function(dentist_addr)  {
+            return App.assurance_state_instance.methods.getDentist(dentist_addr).call({ from: global_state.account }, function(error, result)   {
+                if(!error)  {
                     return result;
-                } else {
+                }else {
                     console.error(error);
                 }
             });
         },
-        getDentistsArr: function getDentistsArr() {
-            return App.assurance_instance.methods.getDentistsArr().call({ from: global_state.account }, function (error, result) {
-                if (!error) {
+        getPatient: function(patient_addr, dentist_addr)  {
+            return App.assurance_state_instance.methods.getPatient(patient_addr, dentist_addr).call({ from: global_state.account }, function(error, result)   {
+                if(!error)  {
+                    return result;
+                }else {
+                    console.error(error);
+                }
+            });
+        },
+        getDentistsArr: function()  {
+            return App.assurance_state_instance.methods.getDentistsArr().call({ from: global_state.account }, function(error, result)   {
+                if(!error)  {
                     console.log(result);
-                } else {
+                }else {
                     console.error(error);
                 }
             });
         },
-        getPatientsArrForDentist: function getPatientsArrForDentist(dentist_addr) {
-            return App.assurance_instance.methods.getPatientsArrForDentist(dentist_addr).call({ from: global_state.account }, function (error, result) {
-                if (!error) {
+        getPatientsArrForDentist: function(dentist_addr)  {
+            return App.assurance_state_instance.methods.getPatientsArrForDentist(dentist_addr).call({ from: global_state.account }, function(error, result)   {
+                if(!error)  {
                     return result;
-                } else {
+                }else {
                     console.error(error);
                 }
             });
         },
-        getWaitingContractsForPatient: function getWaitingContractsForPatient(patient_addr) {
-            return App.assurance_instance.methods.getWaitingContractsForPatient(patient_addr).call({ from: global_state.account }, function (error, result) {
-                if (!error) {
+        getWaitingContractsForPatient: function(patient_addr)  {
+            return App.assurance_state_instance.methods.getWaitingContractsForPatient(patient_addr).call({ from: global_state.account }, function(error, result)   {
+                if(!error)  {
                     return result;
-                } else {
+                }else {
                     console.error(error);
                 }
             });
         },
-        breakContract: function breakContract(patient_addr, dentist_addr) {
+        breakContract: function(patient_addr, dentist_addr)  {
             //check if patient and dentist addresses are valid
-            if (!innerAddressCheck(patient_addr) || !innerAddressCheck(dentist_addr)) {
+            if(!innerAddressCheck(patient_addr) || !innerAddressCheck(dentist_addr)) {
                 basic.showAlert('Patient and dentist addresses must be valid.');
                 return false;
             }
             //CHECK IF THERE IS CONTRACT BETWEEN THEM?????
-            return App.assurance_instance.methods.breakContract(patient_addr, dentist_addr).send({
+            return App.assurance_state_instance.methods.breakContract(patient_addr, dentist_addr).send({
                 from: global_state.account,
                 gas: 130000
-            }).on('transactionHash', function (hash) {
-                basic.showAlert('Your transaction is now pending. Give it a minute and check for confirmation on <a href="https://rinkeby.etherscan.io/tx/' + hash + '" target="_blank" class="etherscan-hash">Etherscan</a>.', '', true);
-            }).catch(function (err) {
+            }).on('transactionHash', function(hash){
+                basic.showAlert('Your transaction is now pending. Give it a minute and check for confirmation on <a href="https://rinkeby.etherscan.io/tx/'+hash+'" target="_blank" class="etherscan-hash">Etherscan</a>.', '', true);
+            }).catch(function(err) {
                 console.error(err);
             });
         },
-        dentistApproveContract: function dentistApproveContract(patient_addr) {
+        dentistApproveContract: function(patient_addr)  {
             //check if patient address is valid
-            if (!innerAddressCheck(patient_addr)) {
+            if(!innerAddressCheck(patient_addr)) {
                 basic.showAlert('Patient address must be valid.');
                 return false;
             }
-            return App.assurance_instance.methods.dentistApproveContract(patient_addr).send({
+            return App.assurance_state_instance.methods.dentistApproveContract(patient_addr).send({
                 from: global_state.account,
                 gas: 65000
-            }).on('transactionHash', function (hash) {
-                basic.showAlert('Your transaction is now pending. Give it a minute and check for confirmation on <a href="https://rinkeby.etherscan.io/tx/' + hash + '" target="_blank" class="etherscan-hash">Etherscan</a>.', '', true);
-            }).catch(function (err) {
+            }).on('transactionHash', function(hash){
+                basic.showAlert('Your transaction is now pending. Give it a minute and check for confirmation on <a href="https://rinkeby.etherscan.io/tx/'+hash+'" target="_blank" class="etherscan-hash">Etherscan</a>.', '', true);
+            }).catch(function(err) {
                 console.error(err);
             });
         },
-        patientApproveContract: function patientApproveContract(dentist_addr) {
-            return App.assurance_instance.methods.patientApproveContract(dentist_addr).send({
+        patientApproveContract: function(dentist_addr)  {
+            return App.assurance_state_instance.methods.patientApproveContract(dentist_addr).send({
                 from: global_state.account,
                 gas: 65000
-            }).on('transactionHash', function (hash) {
-                basic.showAlert('Your transaction is now pending. Give it a minute and check for confirmation on <a href="https://rinkeby.etherscan.io/tx/' + hash + '" target="_blank" class="etherscan-hash">Etherscan</a>.', '', true);
-            }).catch(function (err) {
+            }).on('transactionHash', function(hash){
+                basic.showAlert('Your transaction is now pending. Give it a minute and check for confirmation on <a href="https://rinkeby.etherscan.io/tx/'+hash+'" target="_blank" class="etherscan-hash">Etherscan</a>.', '', true);
+            }).catch(function(err) {
                 console.error(err);
             });
         },
-        registerContract: function () {
-            var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee3(patient_addr, dentist_addr, value_usd, value_dcn, date_start_contract, contract_ipfs_hash) {
-                var check_if_dentist_registered;
-                return _regeneratorRuntime.wrap(function _callee3$(_context3) {
-                    while (1) {
-                        switch (_context3.prev = _context3.next) {
-                            case 0:
-                                _context3.next = 2;
-                                return App.assurance_methods.getDentist(dentist_addr);
-
-                            case 2:
-                                check_if_dentist_registered = _context3.sent;
-
-                                if (!(!innerAddressCheck(patient_addr) || !innerAddressCheck(dentist_addr))) {
-                                    _context3.next = 6;
-                                    break;
-                                }
-
-                                basic.showAlert('Patient and dentist addresses must be valid.');
-                                return _context3.abrupt("return", false);
-
-                            case 6:
-                                if (!(check_if_dentist_registered.toLowerCase() != dentist_addr.toLowerCase())) {
-                                    _context3.next = 9;
-                                    break;
-                                }
-
-                                basic.showAlert('You are not registered dentist on the Assurance contract. In order to init contracts you must first register your self.');
-                                return _context3.abrupt("return", false);
-
-                            case 9:
-                                _context3.t0 = parseInt;
-                                _context3.next = 12;
-                                return App.dentacoin_token_methods.allowance(patient_addr, App.assurance_address);
-
-                            case 12:
-                                _context3.t1 = _context3.sent;
-                                _context3.t2 = (0, _context3.t0)(_context3.t1);
-
-                                if (!(_context3.t2 <= 0)) {
-                                    _context3.next = 17;
-                                    break;
-                                }
-
-                                basic.showAlert('This patient didn\'t give allowance to Assurance contract to manage his Dentacoins.');
-                                return _context3.abrupt("return", false);
-
-                            case 17:
-                                if (!(parseInt(value_usd) <= 0 || parseInt(value_dcn) <= 0)) {
-                                    _context3.next = 20;
-                                    break;
-                                }
-
-                                basic.showAlert('Both USD and DCN values must be greater than 0.');
-                                return _context3.abrupt("return", false);
-
-                            case 20:
-                                if (!(date_start_contract < 0)) {
-                                    _context3.next = 23;
-                                    break;
-                                }
-
-                                basic.showAlert('Please enter valid date.');
-                                return _context3.abrupt("return", false);
-
-                            case 23:
-                                return _context3.abrupt("return", App.assurance_instance.methods.registerContract(patient_addr, dentist_addr, value_usd, value_dcn, date_start_contract, contract_ipfs_hash).send({
-                                    from: global_state.account,
-                                    gas: 330000
-                                }).on('transactionHash', function (hash) {
-                                    basic.showAlert('Your transaction is now pending. Give it a minute and check for confirmation on <a href="https://rinkeby.etherscan.io/tx/' + hash + '" target="_blank" class="etherscan-hash">Etherscan</a>.', '', true);
-                                }).catch(function (err) {
-                                    console.error(err);
-                                }));
-
-                            case 24:
-                            case "end":
-                                return _context3.stop();
-                        }
-                    }
-                }, _callee3, this);
-            }));
-
-            function registerContract(_x, _x2, _x3, _x4, _x5, _x6) {
-                return _ref3.apply(this, arguments);
+        registerContract: async function(patient_addr, dentist_addr, value_usd, value_dcn, date_start_contract, contract_ipfs_hash)  {
+            var check_if_dentist_registered = await App.assurance_methods.getDentist(dentist_addr);
+            //check if patient and dentist addresses are valid
+            if(!innerAddressCheck(patient_addr) || !innerAddressCheck(dentist_addr)) {
+                basic.showAlert('Patient and dentist addresses must be valid.');
+                return false;
             }
-
-            return registerContract;
-        }(),
-        registerDentist: function registerDentist() {
-            return App.assurance_instance.methods.registerDentist().send({
+            //check if dentist is registered on Assurance contract
+            if(check_if_dentist_registered.toLowerCase() != dentist_addr.toLowerCase()) {
+                basic.showAlert('You are not registered dentist on the Assurance contract. In order to init contracts you must first register your self.');
+                return false;
+            }
+            //(talk with Jeremias about this check) check if patient gave allowance to Assurance contract to manage his Dentacoins
+            if(parseInt(await App.dentacoin_token_methods.allowance(patient_addr, App.assurance_address)) <= 0) {
+                basic.showAlert('This patient didn\'t give allowance to Assurance contract to manage his Dentacoins.');
+                return false;
+            }
+            //check if USD and DCN values are valid
+            if(parseInt(value_usd) <= 0 || parseInt(value_dcn) <= 0) {
+                basic.showAlert('Both USD and DCN values must be greater than 0.');
+                return false;
+            }
+            //check if valid timestamp
+            if(date_start_contract < 0) {
+                basic.showAlert('Please enter valid date.');
+                return false;
+            }
+            return App.assurance_state_instance.methods.registerContract(patient_addr, dentist_addr, value_usd, value_dcn, date_start_contract, contract_ipfs_hash).send({
+                from: global_state.account,
+                gas: 330000
+            }).on('transactionHash', function(hash){
+                basic.showAlert('Your transaction is now pending. Give it a minute and check for confirmation on <a href="https://rinkeby.etherscan.io/tx/'+hash+'" target="_blank" class="etherscan-hash">Etherscan</a>.', '', true);
+            }).catch(function(err) {
+                console.error(err);
+            });
+        },
+        registerDentist: function()  {
+            return App.assurance_state_instance.methods.registerDentist().send({
                 from: global_state.account,
                 gas: 100000
-            }).on('transactionHash', function (hash) {
-                basic.showAlert('Your transaction is now pending. Give it a minute and check for confirmation on <a href="https://rinkeby.etherscan.io/tx/' + hash + '" target="_blank" class="etherscan-hash">Etherscan</a>.', '', true);
-            }).catch(function (err) {
+            }).on('transactionHash', function(hash){
+                basic.showAlert('Your transaction is now pending. Give it a minute and check for confirmation on <a href="https://rinkeby.etherscan.io/tx/'+hash+'" target="_blank" class="etherscan-hash">Etherscan</a>.', '', true);
+            }).catch(function(err) {
                 console.error(err);
             });
         },
-        withdrawToDentist: function () {
-            var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee4() {
-                var ready_to_withdraw_arr, current_patients_for_dentist, i, len, patient;
-                return _regeneratorRuntime.wrap(function _callee4$(_context4) {
-                    while (1) {
-                        switch (_context4.prev = _context4.next) {
-                            case 0:
-                                ready_to_withdraw_arr = [];
-                                _context4.next = 3;
-                                return App.assurance_methods.getPatientsArrForDentist(global_state.account);
-
-                            case 3:
-                                current_patients_for_dentist = _context4.sent;
-
-                                if (!(current_patients_for_dentist.length > 0)) {
-                                    _context4.next = 15;
-                                    break;
-                                }
-
-                                i = 0, len = current_patients_for_dentist.length;
-
-                            case 6:
-                                if (!(i < len)) {
-                                    _context4.next = 15;
-                                    break;
-                                }
-
-                                _context4.next = 9;
-                                return App.assurance_methods.getPatient(current_patients_for_dentist[i], global_state.account);
-
-                            case 9:
-                                patient = _context4.sent;
-
-                                //if time passed for next_transfer of contract and if the contract is approved by both patient and dentist and then dentist can withdraw from patient legit
-                                console.log(patient);
-                                if (Math.round(new Date().getTime() / 1000) > parseInt(patient[2]) && patient[3] && patient[4]) {
-                                    ready_to_withdraw_arr.push(patient[1]);
-                                }
-
-                            case 12:
-                                i += 1;
-                                _context4.next = 6;
-                                break;
-
-                            case 15:
-                                if (!(ready_to_withdraw_arr.length > 0)) {
-                                    _context4.next = 19;
-                                    break;
-                                }
-
-                                return _context4.abrupt("return", App.assurance_instance.methods.withdrawToDentist(ready_to_withdraw_arr).send({
-                                    from: global_state.account,
-                                    gas: ready_to_withdraw_arr.length * 60000
-                                }).on('transactionHash', function (hash) {
-                                    basic.showAlert('Your transaction is now pending. Give it a minute and check for confirmation on <a href="https://rinkeby.etherscan.io/tx/' + hash + '" target="_blank" class="etherscan-hash">Etherscan</a>.', '', true);
-                                }).catch(function (err) {
-                                    console.error(err);
-                                }));
-
-                            case 19:
-                                basic.showAlert('At this moment you don\'t have any possible withdraws (no running contracts or not ready to withdraw contracts).');
-                                return _context4.abrupt("return", false);
-
-                            case 21:
-                            case "end":
-                                return _context4.stop();
-                        }
+        withdrawToDentist: async function()  {
+            var ready_to_withdraw_arr = [];
+            var current_patients_for_dentist = await App.assurance_methods.getPatientsArrForDentist(global_state.account);
+            if(current_patients_for_dentist.length > 0) {
+                for (var i = 0, len = current_patients_for_dentist.length; i < len; i += 1) {
+                    var patient = await App.assurance_methods.getPatient(current_patients_for_dentist[i], global_state.account);
+                    //if time passed for next_transfer of contract and if the contract is approved by both patient and dentist and then dentist can withdraw from patient legit
+                    console.log(patient);
+                    if(Math.round(new Date().getTime() / 1000) > parseInt(patient[2]) && patient[3] && patient[4]) {
+                        ready_to_withdraw_arr.push(patient[1]);
                     }
-                }, _callee4, this);
-            }));
-
-            function withdrawToDentist() {
-                return _ref4.apply(this, arguments);
+                }
             }
-
-            return withdrawToDentist;
-        }()
+              if(ready_to_withdraw_arr.length > 0) {
+                return App.assurance_state_instance.methods.withdrawToDentist(ready_to_withdraw_arr).send({
+                    from: global_state.account,
+                    gas: ready_to_withdraw_arr.length * 60000
+                }).on('transactionHash', function(hash){
+                    basic.showAlert('Your transaction is now pending. Give it a minute and check for confirmation on <a href="https://rinkeby.etherscan.io/tx/'+hash+'" target="_blank" class="etherscan-hash">Etherscan</a>.', '', true);
+                }).catch(function(err) {
+                    console.error(err);
+                });
+            }else {
+                basic.showAlert('At this moment you don\'t have any possible withdraws (no running contracts or not ready to withdraw contracts).');
+                return false;
+            }
+        }*/
     },
     events: {},
     helper: {
@@ -1304,6 +1304,22 @@ if ($('body').hasClass('logged-in')) {
             });
         }
     } else if ($('body').hasClass('create-contract')) {
+        var bindVerifyAddressLogic = function bindVerifyAddressLogic() {
+            styleUploadFileButton();
+
+            $('.enter-private-key').unbind().click(function () {
+                $('.proof-of-address .on-change-result').html('<div class="col-xs-12 col-sm-5 padding-left-30 padding-top-20"><div class="custom-google-label-style module" data-input-blue-green-border="true"><label for="your-private-key">Your Private Key:</label><input type="text" id="your-private-key" maxlength="64" class="full-rounded"/></div><div class="checkbox-container"><div class="pretty p-svg p-curve on-white-background margin-bottom-0 inline-block-important"><input type="checkbox" id="remember-my-private-key"/><div class="state p-success"><svg class="svg svg-icon" viewBox="0 0 20 20"><path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path></svg><label class="fs-14 calibri-bold" for="remember-my-private-key">Remember my private key <i class="fa fa-info-circle" aria-hidden="true"  data-toggle="tooltip" data-placement="top" title="Remembering your key allows for easier and faster transactions. It is stored only in your browser and nobody else has access to it."></i></label></div></div></div><div class="text-center padding-top-15"><a href="javascript:void(0)" class="white-blue-green-btn verify-address-btn">VERIFY</a></div></div>');
+                initTooltips();
+                $('.proof-of-address #upload-keystore-file').val('');
+                bindGoogleAlikeButtonsEvents();
+                bindVerifyAddressEvent();
+            });
+
+            $('.upload-file-container button').unbind().click(function () {
+                $('.proof-of-address .on-change-result').html('');
+            });
+        };
+
         var validateStepFields = function validateStepFields(step_fields, step) {
             step_fields.removeClass('with-error');
             $('.step.' + step + ' .single-row').removeClass('row-with-error');
@@ -1382,8 +1398,7 @@ if ($('body').hasClass('logged-in')) {
                     $('.contract-response-success-layer').show();
                     setTimeout(function () {
                         this_form.submit();
-                        $('.contract-response-success-layer').hide();
-                    }, 3000);
+                    }, 2000);
                 }
             });
         };
@@ -1494,8 +1509,15 @@ if ($('body').hasClass('logged-in')) {
             }
         };
 
+        //logic for showing the suggested price based on country and calculator parameters
+
+
         var signature_pad_inited = false;
         styleAvatarUploadButton('.steps-body .avatar button label');
+
+        if ($('.single-row.proof-of-address').length) {
+            bindVerifyAddressLogic();
+        }
 
         $('.show-category-list a').click(function () {
             $(this).slideUp(300);
@@ -1537,6 +1559,39 @@ if ($('body').hasClass('logged-in')) {
                         thirdStepPassedSuccessfully(create_contract_form.find('.next'), this_btn.attr('data-step'));
                         break;
                 }
+            }
+        });
+
+        $('.step.three [name="general-dentistry[]"]').on('change', function () {
+            var suggested_price;
+            var checked_services = $('.step.three [name="general-dentistry[]"]:checked');
+            if (checked_services.length) {
+                $('.show-on-services-pick').fadeIn(1000);
+
+                var checked_services_arr = [];
+                for (var i = 0, len = checked_services.length; i < len; i += 1) {
+                    checked_services_arr.push(checked_services.eq(i).val());
+                }
+
+                if ($.inArray('param_gd', checked_services_arr) != -1 && $.inArray('param_cd', checked_services_arr) != -1 && $.inArray('param_id', checked_services_arr) != -1) {
+                    suggested_price = create_contract_form.attr('data-param-gd-cd-id');
+                } else if ($.inArray('param_gd', checked_services_arr) != -1 && $.inArray('param_cd', checked_services_arr) != -1) {
+                    suggested_price = create_contract_form.attr('data-param-gd-cd');
+                } else if ($.inArray('param_gd', checked_services_arr) != -1 && $.inArray('param_id', checked_services_arr) != -1) {
+                    suggested_price = create_contract_form.attr('data-param-gd-id');
+                } else if ($.inArray('param_cd', checked_services_arr) != -1 && $.inArray('param_id', checked_services_arr) != -1) {
+                    suggested_price = create_contract_form.attr('data-param-cd-id');
+                } else if ($.inArray('param_gd', checked_services_arr) != -1) {
+                    suggested_price = create_contract_form.attr('data-param-gd');
+                } else if ($.inArray('param_cd', checked_services_arr) != -1) {
+                    suggested_price = create_contract_form.attr('data-param-cd');
+                } else if ($.inArray('param_id', checked_services_arr) != -1) {
+                    suggested_price = create_contract_form.attr('data-param-id');
+                }
+
+                create_contract_form.find('.suggested-price').html(suggested_price);
+            } else {
+                $('.show-on-services-pick').fadeOut(500);
             }
         });
 
@@ -1587,25 +1642,45 @@ if ($('body').hasClass('logged-in')) {
 
         initSignaturePad();
 
-        if ($('form#dentist-update-and-sign-contract').length) {
-            $('form#dentist-update-and-sign-contract .reject-contract').click(function () {
-                //
+        if ($('.contract-proposal.section .contact-your-dentist').length) {
+            $('.contact-your-dentist').click(function () {
+                var this_btn = $(this);
                 $.ajax({
                     type: 'POST',
-                    url: '/update-contract-status',
+                    url: '/patient/get-reconsider-monthly-premium',
                     dataType: 'json',
                     data: {
-                        contract: $('form#dentist-update-and-sign-contract input[name="contract"]').val(),
-                        status: 'cancelled'
+                        contract: this_btn.closest('form').find('input[type="hidden"][name="contract"]').val().trim()
                     },
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function success(response) {
-                        if (response.success) {}
+                        if (response.success) {
+                            basic.showDialog(response.success, 'reconsider-monthly-premium', true);
+                            fixButtonsFocus();
+
+                            $('.bootbox.reconsider-monthly-premium #new-usd-proposal-to-dentist').focus();
+
+                            $('.bootbox.reconsider-monthly-premium form#submit-reconsider-monthly-premium').on('submit', function (event) {
+                                var this_form = $(this);
+                                if (this_form.find('#new-usd-proposal-to-dentist').val().trim() == '' || parseFloat(this_form.find('#new-usd-proposal-to-dentist').val().trim()) <= 0) {
+                                    basic.showAlert('Please enter valid monthly premium proposal', '', true);
+                                    event.preventDefault();
+                                } else {
+                                    $('.response-layer').show();
+                                }
+                            });
+                        } else if (response.error) {
+                            basic.showAlert(response.success, '', true);
+                        }
                     }
                 });
             });
+        }
+
+        if ($('form#dentist-update-and-sign-contract').length) {
+            cancelContractEventInit();
 
             $('form#dentist-update-and-sign-contract').on('submit', function (event) {
                 event.preventDefault();
@@ -1766,19 +1841,7 @@ if ($('body').hasClass('logged-in')) {
             }
         });
 
-        //google alike style for label/placeholders
-        $('.custom-google-label-style label').on('click', function () {
-            $(this).addClass('active-label');
-        });
-
-        $('.custom-google-label-style input').on('keyup change', function () {
-            var value = $(this).val().trim();
-            if (value.length) {
-                $(this).closest('.custom-google-label-style').find('label').addClass('active-label');
-            } else {
-                $(this).closest('.custom-google-label-style').find('label').removeClass('active-label');
-            }
-        });
+        bindGoogleAlikeButtonsEvents();
     }
 }
 
@@ -1913,13 +1976,13 @@ function bindLoginSigninPopupShow() {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function () {
-                    var _ref8 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee12(response) {
-                        return _regeneratorRuntime.wrap(function _callee12$(_context12) {
+                    var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee10(response) {
+                        return _regeneratorRuntime.wrap(function _callee10$(_context10) {
                             while (1) {
-                                switch (_context12.prev = _context12.next) {
+                                switch (_context10.prev = _context10.next) {
                                     case 0:
                                         if (!response.success) {
-                                            _context12.next = 20;
+                                            _context10.next = 20;
                                             break;
                                         }
 
@@ -1957,6 +2020,48 @@ function bindLoginSigninPopupShow() {
                                         });
 
                                         $(document).on('civicCustomBtnClicked', function () {
+                                            var _ref7 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee6(event) {
+                                                return _regeneratorRuntime.wrap(function _callee6$(_context6) {
+                                                    while (1) {
+                                                        switch (_context6.prev = _context6.next) {
+                                                            case 0:
+                                                                $('.patient .form-register .step-errors-holder').html('');
+
+                                                            case 1:
+                                                            case "end":
+                                                                return _context6.stop();
+                                                        }
+                                                    }
+                                                }, _callee6, this);
+                                            }));
+
+                                            return function (_x2) {
+                                                return _ref7.apply(this, arguments);
+                                            };
+                                        }());
+
+                                        $(document).on('civicRead', function () {
+                                            var _ref8 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee7(event) {
+                                                return _regeneratorRuntime.wrap(function _callee7$(_context7) {
+                                                    while (1) {
+                                                        switch (_context7.prev = _context7.next) {
+                                                            case 0:
+                                                                $('.response-layer').show();
+
+                                                            case 1:
+                                                            case "end":
+                                                                return _context7.stop();
+                                                        }
+                                                    }
+                                                }, _callee7, this);
+                                            }));
+
+                                            return function (_x3) {
+                                                return _ref8.apply(this, arguments);
+                                            };
+                                        }());
+
+                                        $(document).on('facebookCustomBtnClicked', function () {
                                             var _ref9 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee8(event) {
                                                 return _regeneratorRuntime.wrap(function _callee8$(_context8) {
                                                     while (1) {
@@ -1972,18 +2077,18 @@ function bindLoginSigninPopupShow() {
                                                 }, _callee8, this);
                                             }));
 
-                                            return function (_x8) {
+                                            return function (_x4) {
                                                 return _ref9.apply(this, arguments);
                                             };
                                         }());
 
-                                        $(document).on('civicRead', function () {
+                                        $(document).on('customCivicFbStopperTriggered', function () {
                                             var _ref10 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee9(event) {
                                                 return _regeneratorRuntime.wrap(function _callee9$(_context9) {
                                                     while (1) {
                                                         switch (_context9.prev = _context9.next) {
                                                             case 0:
-                                                                $('.response-layer').show();
+                                                                customErrorHandle($('.patient .form-register .step-errors-holder'), 'Please agree with our privacy policy.');
 
                                                             case 1:
                                                             case "end":
@@ -1993,50 +2098,8 @@ function bindLoginSigninPopupShow() {
                                                 }, _callee9, this);
                                             }));
 
-                                            return function (_x9) {
+                                            return function (_x5) {
                                                 return _ref10.apply(this, arguments);
-                                            };
-                                        }());
-
-                                        $(document).on('facebookCustomBtnClicked', function () {
-                                            var _ref11 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee10(event) {
-                                                return _regeneratorRuntime.wrap(function _callee10$(_context10) {
-                                                    while (1) {
-                                                        switch (_context10.prev = _context10.next) {
-                                                            case 0:
-                                                                $('.patient .form-register .step-errors-holder').html('');
-
-                                                            case 1:
-                                                            case "end":
-                                                                return _context10.stop();
-                                                        }
-                                                    }
-                                                }, _callee10, this);
-                                            }));
-
-                                            return function (_x10) {
-                                                return _ref11.apply(this, arguments);
-                                            };
-                                        }());
-
-                                        $(document).on('customCivicFbStopperTriggered', function () {
-                                            var _ref12 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee11(event) {
-                                                return _regeneratorRuntime.wrap(function _callee11$(_context11) {
-                                                    while (1) {
-                                                        switch (_context11.prev = _context11.next) {
-                                                            case 0:
-                                                                customErrorHandle($('.patient .form-register .step-errors-holder'), 'Please agree with our privacy policy.');
-
-                                                            case 1:
-                                                            case "end":
-                                                                return _context11.stop();
-                                                        }
-                                                    }
-                                                }, _callee11, this);
-                                            }));
-
-                                            return function (_x11) {
-                                                return _ref12.apply(this, arguments);
                                             };
                                         }());
                                         // ====================== /PATIENT LOGIN/SIGNUP LOGIC ======================
@@ -2088,7 +2151,7 @@ function bindLoginSigninPopupShow() {
 
                                         //SECOND STEP INIT LOGIC
                                         //load address script
-                                        _context12.next = 16;
+                                        _context10.next = 16;
                                         return $.getScript('/assets/js/address.js', function () {});
 
                                     case 16:
@@ -2263,14 +2326,14 @@ function bindLoginSigninPopupShow() {
 
                                     case 20:
                                     case "end":
-                                        return _context12.stop();
+                                        return _context10.stop();
                                 }
                             }
-                        }, _callee12, this);
+                        }, _callee10, this);
                     }));
 
-                    function success(_x7) {
-                        return _ref8.apply(this, arguments);
+                    function success(_x) {
+                        return _ref6.apply(this, arguments);
                     }
 
                     return success;
@@ -2360,11 +2423,11 @@ function initComboboxes() {
 function apiEventsListeners() {
     //login
     $(document).on('successResponseCoreDBApi', function () {
-        var _ref13 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee13(event) {
+        var _ref11 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee11(event) {
             var custom_form_obj;
-            return _regeneratorRuntime.wrap(function _callee13$(_context13) {
+            return _regeneratorRuntime.wrap(function _callee11$(_context11) {
                 while (1) {
-                    switch (_context13.prev = _context13.next) {
+                    switch (_context11.prev = _context11.next) {
                         case 0:
                             if (event.response_data.token) {
                                 custom_form_obj = {
@@ -2389,14 +2452,14 @@ function apiEventsListeners() {
 
                         case 1:
                         case "end":
-                            return _context13.stop();
+                            return _context11.stop();
                     }
                 }
-            }, _callee13, this);
+            }, _callee11, this);
         }));
 
-        return function (_x12) {
-            return _ref13.apply(this, arguments);
+        return function (_x6) {
+            return _ref11.apply(this, arguments);
         };
     }());
 
@@ -2537,16 +2600,6 @@ function customCreateContractErrorHandle(el, text) {
     el.parent().find('> label').append('<span class="error-in-label">' + text + '</span>');
 }
 
-function onDocumentReadyPageData() {
-    if ($('body').hasClass('logged-in')) {
-        if ($('body').hasClass('congratulations')) {
-            initFlipClockTimer(parseInt($('section.congratulation-and-time-section').attr('data-time-left-next-transfer')) - new Date().getTime() / 1000);
-        } else if ($('body').hasClass('patient-contract-view')) {
-            initFlipClockTimer(parseInt($('.contract-body').attr('data-time-left-next-transfer')) - new Date().getTime() / 1000);
-        }
-    }
-}
-
 function initFlipClockTimer(time_left) {
     var clock;
     if (time_left > 0) {
@@ -2564,5 +2617,154 @@ function initFlipClockTimer(time_left) {
         clock.start();
     } else {
         jQuery('.countdown-section').hide();
+    }
+}
+
+//if cancel contract button exist add the event for it
+function cancelContractEventInit() {
+    if ($('.cancel-contract-btn').length) {
+        $('.cancel-contract-btn').click(function () {
+            var this_btn = $(this);
+            $.ajax({
+                type: 'POST',
+                url: '/update-contract-status',
+                dataType: 'json',
+                data: {
+                    contract: this_btn.attr('data-contract'),
+                    status: 'cancelled'
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function success(response) {
+                    if (response.success) {
+                        window.location = '/contract/' + this_btn.attr('data-contract');
+                    } else if (response.error) {
+                        basic.showAlert(response.error, '', true);
+                    }
+                }
+            });
+        });
+    }
+}
+
+function styleUploadFileButton() {
+    $('.custom-upload-file').each(function (key, form) {
+        var this_btn = $(this);
+        var this_btn_parent = this_btn.closest('.upload-file-container');
+        this_btn_parent.find('button').append("<label for='" + this_btn_parent.attr('data-id') + "' class='display-block'><span class='white-blue-green-btn display-block-important fs-18'>" + this_btn_parent.attr('data-label') + "</span></label>");
+
+        var inputs = document.querySelectorAll('.custom-upload-file');
+        Array.prototype.forEach.call(inputs, function (input) {
+            var label = input.nextElementSibling,
+                labelVal = label.innerHTML;
+
+            input.addEventListener('change', function (e) {
+                var fileName = '';
+                if (this.files && this.files.length > 1) {
+                    fileName = (this.getAttribute('data-multiple-caption') || '').replace('{count}', this.files.length);
+                } else {
+                    fileName = e.target.value.split('\\').pop();
+                }
+
+                if (this_btn.attr('id') == 'upload-keystore-file') {
+                    var uploaded_file = this.files[0];
+                    var reader = new FileReader();
+                    reader.addEventListener('load', function (e) {
+                        if (isJsonString(e.target.result) && has(JSON.parse(e.target.result), 'address')) {
+                            var keystore_string = e.target.result;
+                            $('.proof-of-address .on-change-result').html('<div class="col-xs-12 col-sm-5 col-sm-offset-7 padding-right-30 padding-top-5"><div class="fs-14 light-gray-color text-center padding-bottom-10 file-name">' + fileName + '</div><div class="custom-google-label-style module" data-input-blue-green-border="true"><label for="your-secret-key-password">Enter your secret key password:</label><input type="text" id="your-secret-key-password" maxlength="100" class="full-rounded"/></div><div class="checkbox-container"><div class="pretty p-svg p-curve on-white-background margin-bottom-0"><input type="checkbox" id="remember-my-keystore-file"/><div class="state p-success"><svg class="svg svg-icon" viewBox="0 0 20 20"><path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z" style="stroke: white;fill:white;"></path></svg><label class="fs-14 calibri-bold" for="remember-my-keystore-file">Remember my keystore file <i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Remembering your keystore file allows for easier and faster transactions. It is stored only in your browser and nobody else has access to it."></i></label></div></div></div><div class="text-center padding-top-15"><a href="javascript:void(0)" class="white-blue-green-btn verify-address-btn">VERIFY</a></div></div>');
+                            initTooltips();
+                            bindGoogleAlikeButtonsEvents();
+                            bindVerifyAddressEvent(keystore_string);
+                        } else {
+                            $('#upload-keystore-file').val('');
+                            basic.showAlert('Please upload valid keystore file.', '', true);
+                        }
+                    });
+                    reader.readAsBinaryString(uploaded_file);
+                }
+            });
+            // Firefox bug fix
+            input.addEventListener('focus', function () {
+                input.classList.add('has-focus');
+            });
+            input.addEventListener('blur', function () {
+                input.classList.remove('has-focus');
+            });
+        });
+    });
+}
+
+function bindGoogleAlikeButtonsEvents() {
+    //google alike style for label/placeholders
+    if ($('.custom-google-label-style').length) {
+        $('.custom-google-label-style label').unbind('click').on('click', function () {
+            $(this).addClass('active-label');
+            if ($('.custom-google-label-style').attr('data-input-blue-green-border') == 'true') {
+                $(this).parent().find('input').addClass('blue-green-border');
+            }
+        });
+
+        $('.custom-google-label-style input').unbind('keyup change').on('keyup change', function () {
+            var value = $(this).val().trim();
+            if (value.length) {
+                $(this).closest('.custom-google-label-style').find('label').addClass('active-label');
+                if ($('.custom-google-label-style').attr('data-input-blue-green-border') == 'true') {
+                    $(this).addClass('blue-green-border');
+                }
+            } else {
+                $(this).closest('.custom-google-label-style').find('label').removeClass('active-label');
+                if ($('.custom-google-label-style').attr('data-input-blue-green-border') == 'true') {
+                    $(this).removeClass('blue-green-border');
+                }
+            }
+        });
+    }
+}
+
+//check if object has property
+function has(object, key) {
+    return object ? hasOwnProperty.call(object, key) : false;
+}
+
+//checking if string is valid json
+function isJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
+function bindVerifyAddressEvent(keystore_file) {
+    if (keystore_file === undefined) {
+        keystore_file = null;
+    }
+    $('.proof-of-address .verify-address-btn').click(function () {
+        if (keystore_file != null) {
+            //import with keystore
+            if ($('.proof-of-address #your-secret-key-password').val().trim() == '' || $('.proof-of-address #your-secret-key-password').val().trim().length > 100 || $('.proof-of-address #your-secret-key-password').val().trim().length < 6) {
+                basic.showAlert('Please enter valid secret key password with length between 6 and 100 symbols.', '', true);
+            } else {
+                console.log($('.proof-of-address').attr('data-address'));
+                console.log($('.proof-of-address #your-secret-key-password').val().trim());
+                console.log(keystore_file);
+            }
+        } else {
+            //import with private key
+            if ($('.proof-of-address #your-private-key').val().trim() == '' || $('.proof-of-address #your-private-key').val().trim().length > 64) {
+                basic.showAlert('Please enter valid private key.', '', true);
+            } else {
+                console.log($('.proof-of-address #your-private-key').val().trim());
+            }
+        }
+    });
+}
+
+function initTooltips() {
+    if ($('[data-toggle="tooltip"]')) {
+        $('[data-toggle="tooltip"]').tooltip();
     }
 }

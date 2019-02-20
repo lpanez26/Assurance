@@ -62,6 +62,10 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
         Route::post('/update-and-sign-contract', 'PatientController@updateAndSignContract')->middleware('HandleUserSession')->name('update-and-sign-contract');
 
+        Route::post('/get-reconsider-monthly-premium', 'PatientController@getReconsiderMonthlyPremium')->middleware('HandleUserSession')->name('get-reconsider-monthly-premium');
+
+        Route::post('/submit-reconsider-monthly-premium', 'PatientController@submitReconsiderMonthlyPremium')->middleware('HandleUserSession')->name('submit-reconsider-monthly-premium');
+
         Route::get('/congratulations/{slug}', 'PatientController@getCongratulationsView')->name('congratulations');
 
         Route::get('/contract/{slug}', 'PatientController@getPatientContractView')->name('patient-contract-view');
@@ -85,7 +89,7 @@ Route::group(['prefix' => '/', 'middleware' => 'frontEndMiddleware'], function (
 
     Route::post('/update-account', 'UserController@updateAccount')->middleware('HandleUserSession')->name('update-account');
 
-    Route::post('/update-contract-status', 'UserController@updateContractStatus')->middleware('HandleUserSession')->name('update-account');
+    Route::post('/update-contract-status', 'UserController@updateContractStatus')->middleware('HandleUserSession')->name('update-contract-status');
 
     Route::post('/add-dcn-address', 'UserController@addDcnAddress')->middleware('HandleUserSession')->name('add-dcn-address');
 

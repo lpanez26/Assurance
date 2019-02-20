@@ -19,17 +19,38 @@ class PatientController extends Controller {
     }
 
     protected function getCongratulationsView($slug) {
-        return view('pages/logged-user/patient/congratulations', ['contract' => TemporallyContract::where(array('slug' => $slug))->get()->first(), 'dcn_for_one_usd' => $this->getIndacoinPricesInUSD('DCN'), 'eth_for_one_usd' => $this->getIndacoinPricesInUSD('ETH')]);
+        $contract = TemporallyContract::where(array('slug' => $slug, 'status' => 'awaiting-payment'))->get()->first();
+        if(!empty($contract)) {
+            return view('pages/logged-user/patient/congratulations', ['contract' => $contract, 'dcn_for_one_usd' => $this->getIndacoinPricesInUSD('DCN'), 'eth_for_one_usd' => $this->getIndacoinPricesInUSD('ETH')]);
+        } else {
+            return abort(404);
+        }
     }
 
     protected function getPatientContractView($slug) {
-        return view('pages/logged-user/patient/patient-contract-view', ['contract' => TemporallyContract::where(array('slug' => $slug))->get()->first(), 'dcn_for_one_usd' => $this->getIndacoinPricesInUSD('DCN'), 'eth_for_one_usd' => $this->getIndacoinPricesInUSD('ETH')]);
+        $contract = TemporallyContract::where(array('slug' => $slug))->get()->first();
+        if($contract->status == 'pending') {
+            return abort(404);
+        } else {
+            return view('pages/logged-user/patient/patient-contract-view', ['contract' => $contract, 'dcn_for_one_usd' => $this->getIndacoinPricesInUSD('DCN'), 'eth_for_one_usd' => $this->getIndacoinPricesInUSD('ETH')]);
+        }
+    }
+
+    protected function getReconsiderMonthlyPremium(Request $request) {
+        $contract = TemporallyContract::where(array('slug' => $request->input('contract'), 'status' => 'pending'))->get()->first();
+        if($contract && (new APIRequestsController())->getUserData(session('logged_user')['id'])->email == $contract->patient_email) {
+            $view = view('partials/reconsider-monthly-premium', ['dentist' => (new APIRequestsController())->getUserData($contract->dentist_id), 'contract' => $contract]);
+            $view = $view->render();
+            return response()->json(['success' => $view]);
+        } else {
+            return response()->json(['error' => 'Wrong data passed.']);
+        }
     }
 
     public function getPatientAccess()    {
         if((new UserController())->checkSession()) {
             if(filter_var(session('logged_user')['have_contracts'], FILTER_VALIDATE_BOOLEAN)) {
-                return view('pages/logged-user/patient/have-contracts', ['contracts' => TemporallyContract::where(array('patient_email' => (new APIRequestsController())->getUserData(session('logged_user')['id'])->email))->get()->all(), 'clinics' => (new APIRequestsController())->getAllClinicsByName()]);
+                return view('pages/logged-user/patient/have-contracts', ['contracts' => TemporallyContract::where(array('patient_email' => (new APIRequestsController())->getUserData(session('logged_user')['id'])->email))->get()->sortByDesc('created_at'), 'clinics' => (new APIRequestsController())->getAllClinicsByName()]);
             } else {
                 //IF PATIENT HAVE NO EXISTING CONTRACTS
                 return view('pages/logged-user/patient/start-first-contract', ['clinics' => (new APIRequestsController())->getAllClinicsByName()]);
@@ -144,7 +165,7 @@ class PatientController extends Controller {
     }
 
     protected function getContractProposal($slug) {
-        $contract = TemporallyContract::where(array('slug' => $slug))->get()->first();
+        $contract = TemporallyContract::where(array('slug' => $slug, 'status' => 'pending'))->get()->first();
         if((new UserController())->checkDentistSession() || empty($contract) || ((new UserController())->checkPatientSession() && $contract->patient_email != (new APIRequestsController())->getUserData(session('logged_user')['id'])->email)) {
             //if dentist trying to access the proposal or if there is no such contract or if different patient trying to access the proposal
             return abort(404);
@@ -306,5 +327,36 @@ class PatientController extends Controller {
         curl_close($curl);
         // / 100 because we need the dcns for 1USD, we cannot make API request for 1USD
         return $resp / 100;
+    }
+
+    protected function submitReconsiderMonthlyPremium(Request $request) {
+        $data = $this->clearPostData($request->input());
+        $this->validate($request, [
+            'dentist-email' => 'required',
+            'dentist-name' => 'required',
+            'contract' => 'required',
+            'new-usd-proposal-to-dentist' => 'required'
+        ], [
+            'dentist-email.required' => 'Dentist email is required.',
+            'dentist-name.required' => 'Dentist name is required.',
+            'contract.required' => 'Contract is required.',
+            'new-usd-proposal-to-dentist.required' => 'Monthly premium proposal is required.',
+        ]);
+
+        $sender = (new APIRequestsController())->getUserData(session('logged_user')['id']);
+
+        $body = '<!DOCTYPE html><html><head></head><body><div style="font-size: 16px;">Dear Dr. '.$data['dentist-name'].',<br><br><br>My name is <b>'.$sender->name.'</b> and I have successfully received my Assurance Contract Sample, but I’d like to suggest a monthly premium of '.$data['new-usd-proposal-to-dentist'].' USD in Dentacoin (DCN).<br><br>I hope you will reconsider your proposal.<br><br>Regards,<br><b>'.$sender->name.'</div></body></html>';
+
+        Mail::send(array(), array(), function($message) use ($body, $data, $sender) {
+            $message->to($data['dentist-email'])->subject('Reconsider Monthly Premium Proposal');
+            $message->from($sender->email, $sender->name)->replyTo($sender->email, $sender->name);
+            $message->setBody($body, 'text/html');
+        });
+
+        if(count(Mail::failures()) > 0) {
+            return redirect()->route('contract-proposal', ['slug' => $data['contract']])->with(['error' => 'Email has not been sent to your dentist, please try again later.']);
+        } else {
+            return redirect()->route('contract-proposal', ['slug' => $data['contract']])->with(['success' => 'Your monthly premium proposal has been sent successfully to your dentist.']);
+        }
     }
 }

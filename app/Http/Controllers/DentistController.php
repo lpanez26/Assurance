@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CalculatorParameter;
 use App\TemporallyContract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -13,7 +14,9 @@ class DentistController extends Controller
     }
 
     protected function getCreateContractView()   {
-        return view('pages/logged-user/dentist/create-contract', ['countries' => (new APIRequestsController())->getAllCountries()]);
+        $current_logged_dentist = (new \App\Http\Controllers\APIRequestsController())->getUserData(session('logged_user')['id']);
+        $calculator_proposals = CalculatorParameter::where(array('code' => (new APIRequestsController())->getAllCountries()[$current_logged_dentist->country_id - 1]->code))->get(['param_gd_cd_id', 'param_gd_cd', 'param_gd_id', 'param_cd_id', 'param_gd', 'param_cd', 'param_id'])->first()->toArray();
+        return view('pages/logged-user/dentist/create-contract', ['countries' => (new APIRequestsController())->getAllCountries(), 'current_logged_dentist' => $current_logged_dentist, 'calculator_proposals' => $calculator_proposals]);
     }
 
     protected function register(Request $request) {

@@ -6,6 +6,7 @@
     font-family: 'Calibri-Bold';
     border: 2px solid $blue_green_color;
     display: inline-block;
+    cursor: pointer;
     @include rounded(4px);
     @include simple_transition(.3s);
     &:hover {
@@ -25,6 +26,7 @@
     font-family: 'Calibri-Bold';
     border: 2px solid $cancelled;
     display: inline-block;
+    cursor: pointer;
     @include rounded(4px);
     @include simple_transition(.3s);
     &:hover {
@@ -44,6 +46,7 @@
     font-family: 'Calibri-Bold';
     border: 2px solid $blue_green_color;
     display: inline-block;
+    cursor: pointer;
     @include rounded(4px);
     @include simple_transition(.3s);
     &:hover {
@@ -62,6 +65,7 @@
     padding: 10px 20px;
     font-family: 'Calibri-Bold';
     border: 2px solid $light_blue_green_color;
+    cursor: pointer;
     display: inline-block;
     @include rounded(4px);
 }
@@ -73,6 +77,7 @@
     font-family: 'Lato-Regular';
     border: 2px solid white;
     display: inline-block;
+    cursor: pointer;
     @include rounded(4px);
     @include simple_transition(.3s);
     &:hover {
@@ -94,6 +99,7 @@
     padding: 10px 15px 10px 70px;
     max-width: 350px;
     margin: 0 auto;
+    cursor: pointer;
     background-repeat: no-repeat;
     background-size: 30px auto;
     background-position: center left 15px;
@@ -316,6 +322,9 @@
                     background-image: none;
                     @include rounded(0);
                 }
+            }
+            &.no-transition {
+                @include simple_transition(none);
             }
         }
     }
@@ -612,6 +621,74 @@
                     background-color: $cancelled;
                 }
             }
+        }
+    }
+    &.custom-google-label-style {
+        position: relative;
+        label {
+            position: absolute;
+            font-size: 16px !important;
+            cursor: pointer;
+            margin: 0;
+            width: calc(100% - 20px) !important;
+            padding-bottom: 10px !important;
+            padding-top: 10px !important;
+            background-color: white;
+            left: 10px;
+            color: #888888;
+            font-weight: normal;
+            top: 50%;
+            font-family: 'Calibri-Regular';
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+            @include rounded(4px);
+            @include simple_transition(.3s);
+            &.active-label {
+                width: auto !important;
+                font-size: 14px !important;
+                top: -8px;
+                padding: 0 5px !important;
+                -webkit-transform: none;
+                -ms-transform: none;
+                transform: none;
+                color: #126585;
+                font-weight: bold;
+            }
+        }
+        .left-side {
+            width: calc(100% - 100px);
+            position: relative;
+            &.error-field {
+                input, label {
+                    color: red;
+                }
+            }
+        }
+        input {
+            border: 2px solid #dddddd;
+            cursor: pointer;
+            font-size: 16px;
+            font-family: 'Lato-Regular';
+            width: 100%;
+            padding: 10px 15px;
+            @include rounded(4px 0 0 4px);
+            &.full-rounded {
+                @include rounded(4px);
+            }
+            &.blue-green-border {
+                border: 2px solid $blue_green_color;
+            }
+        }
+        span {
+            width: 100px;
+            text-align: center;
+            padding-top: 12px;
+            font-size: 18px;
+            font-family: 'Lato-Regular';
+            color: $dark_color;
+            background-color: #dddddd;
+            @include rounded(0 4px 4px 0);
         }
     }
 }

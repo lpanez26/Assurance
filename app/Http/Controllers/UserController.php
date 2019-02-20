@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\PublicKey;
 use App\TemporallyContract;
 use Illuminate\Http\Request;
 
@@ -173,12 +174,23 @@ class UserController extends Controller {
         $contract = TemporallyContract::where(array('slug' => $data['contract'], 'patient_email' => (new APIRequestsController())->getUserData(session('logged_user')['id'])->email))->get()->first();
         if($contract) {
             $contract->status = $data['status'];
+            $contract->cancelled_at = new \DateTime();
+            $contract->save();
             $response['success'] = true;
         } else {
             $response['error'] = 'Cancellation failed, wrong contract.';
         }
         echo json_encode($response);
         die();
+    }
+
+    public function checkIfWeHavePublicKeyOfAddress($address) {
+        $public_key = PublicKey::where(array('address' => $address))->get(['public_key'])->first();
+        if($public_key) {
+            return $public_key->public_key;
+        } else {
+            return false;
+        }
     }
 
     protected function forgottenPasswordSubmit(Request $request) {
