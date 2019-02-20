@@ -26602,7 +26602,7 @@ if ($('body').hasClass('logged-in')) {
         create_contract_form.find('.terms-and-conditions-long-list').mCustomScrollbar();
 
         $('.contract-creation-steps-container button').bind('click.validateStepsNav', _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee6() {
-            var current_step_error, this_btn;
+            var current_step_error, this_btn, validate_dentist_address;
             return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee6$(_context6) {
                 while (1) {
                     switch (_context6.prev = _context6.next) {
@@ -26611,14 +26611,14 @@ if ($('body').hasClass('logged-in')) {
                             this_btn = $(this);
 
                             if (!(this_btn.index() > $('.contract-creation-steps-container button[data-step="' + create_contract_form.find('.next').attr('data-current-step') + '"]').index())) {
-                                _context6.next = 11;
+                                _context6.next = 12;
                                 break;
                             }
 
                             current_step_error = validateStepFields($('.step.' + create_contract_form.find('.next').attr('data-current-step') + ' input.right-field'), create_contract_form.find('.next').attr('data-current-step'));
 
                             if (!(this_btn.attr('data-step') == 'two')) {
-                                _context6.next = 10;
+                                _context6.next = 11;
                                 break;
                             }
 
@@ -26626,11 +26626,15 @@ if ($('body').hasClass('logged-in')) {
                             return validateFirstStepDentistAddress();
 
                         case 7:
-                            current_step_error = _context6.sent;
-                            _context6.next = 11;
+                            validate_dentist_address = _context6.sent;
+
+                            if (!validate_dentist_address) {
+                                current_step_error = true;
+                            }
+                            _context6.next = 12;
                             break;
 
-                        case 10:
+                        case 11:
                             if (this_btn.attr('data-step') == 'four') {
                                 if ($('.step.three [name="general-dentistry[]"]:checked').val() == undefined) {
 
@@ -26639,35 +26643,35 @@ if ($('body').hasClass('logged-in')) {
                                 }
                             }
 
-                        case 11:
+                        case 12:
                             if (!current_step_error) {
-                                _context6.next = 15;
+                                _context6.next = 16;
                                 break;
                             }
 
                             this_btn.attr('data-stopper', 'true');
-                            _context6.next = 25;
+                            _context6.next = 26;
                             break;
 
-                        case 15:
+                        case 16:
                             this_btn.attr('data-stopper', 'false');
                             _context6.t0 = create_contract_form.find('.next').attr('data-current-step');
-                            _context6.next = _context6.t0 === 'one' ? 19 : _context6.t0 === 'two' ? 21 : _context6.t0 === 'three' ? 23 : 25;
+                            _context6.next = _context6.t0 === 'one' ? 20 : _context6.t0 === 'two' ? 22 : _context6.t0 === 'three' ? 24 : 26;
                             break;
 
-                        case 19:
+                        case 20:
                             firstStepPassedSuccessfully(create_contract_form.find('.next'));
-                            return _context6.abrupt('break', 25);
+                            return _context6.abrupt('break', 26);
 
-                        case 21:
+                        case 22:
                             secondStepPassedSuccessfully(create_contract_form.find('.next'));
-                            return _context6.abrupt('break', 25);
+                            return _context6.abrupt('break', 26);
 
-                        case 23:
+                        case 24:
                             thirdStepPassedSuccessfully(create_contract_form.find('.next'), this_btn.attr('data-step'));
-                            return _context6.abrupt('break', 25);
+                            return _context6.abrupt('break', 26);
 
-                        case 25:
+                        case 26:
                         case 'end':
                             return _context6.stop();
                     }
@@ -26709,7 +26713,7 @@ if ($('body').hasClass('logged-in')) {
         });
 
         create_contract_form.find('.next').click(_asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee8() {
-            var this_btn, first_step_fields, first_step_errors, second_step_fields, second_step_errors, third_step_fields, third_step_errors;
+            var this_btn, first_step_fields, first_step_errors, validate_dentist_address, second_step_fields, second_step_errors, third_step_fields, third_step_errors;
             return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee8$(_context8) {
                 while (1) {
                     switch (_context8.prev = _context8.next) {
@@ -26726,10 +26730,10 @@ if ($('body').hasClass('logged-in')) {
                             return validateFirstStepDentistAddress();
 
                         case 8:
-                            first_step_errors = _context8.sent;
+                            validate_dentist_address = _context8.sent;
 
 
-                            if (!first_step_errors) {
+                            if (!first_step_errors || validate_dentist_address) {
                                 firstStepPassedSuccessfully(this_btn);
                             }
                             return _context8.abrupt('break', 22);
