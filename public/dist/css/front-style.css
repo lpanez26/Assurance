@@ -6139,6 +6139,11 @@ body.logged-in .my-profile-page-content {
     display: none; }
     .steps-body .wrapper .step.one {
       display: block; }
+      .steps-body .wrapper .step.one .proof-success {
+        display: none;
+        padding-left: 15px;
+        padding-right: 15px;
+        color: #239234; }
       .steps-body .wrapper .step.one .proof-of-address {
         background-color: #eaeaea; }
         .steps-body .wrapper .step.one .proof-of-address .upload-file-container button {

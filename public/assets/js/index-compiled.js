@@ -27791,20 +27791,49 @@ function bindVerifyAddressEvent(keystore_file) {
             if ($('.proof-of-address #your-private-key').val().trim() == '' || $('.proof-of-address #your-private-key').val().trim().length > 64) {
                 basic.showAlert('Please enter valid private key.', '', true);
             } else {
-                $.ajax({
-                    type: 'POST',
-                    url: '/assurance-import-private-key',
-                    dataType: 'json',
-                    data: {
-                        private_key: $('.proof-of-address #your-private-key').val().trim()
-                    },
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function success(response) {
-                        console.log(response);
-                    }
-                });
+                $('.response-layer').show();
+                setTimeout(function () {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/assurance-import-private-key',
+                        dataType: 'json',
+                        data: {
+                            private_key: $('.proof-of-address #your-private-key').val().trim()
+                        },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function success(response) {
+                            //now with the address and the public key received from the nodejs api update the db
+                            if (response.success) {
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '/update-public-keys',
+                                    dataType: 'json',
+                                    data: {
+                                        address: response.address,
+                                        public_key: response.public_key
+                                    },
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    },
+                                    success: function success(inner_response) {
+                                        $('.response-layer').hide();
+                                        if (inner_response.success) {
+                                            $('.proof-of-address').remove();
+                                            $('.proof-success').fadeIn(1500);
+                                        } else {
+                                            basic.showAlert(inner_response.error, '', true);
+                                        }
+                                    }
+                                });
+                            } else if (response.error) {
+                                $('.response-layer').hide();
+                                basic.showAlert(response.error, '', true);
+                            }
+                        }
+                    });
+                }, 1000);
             }
         }
     });

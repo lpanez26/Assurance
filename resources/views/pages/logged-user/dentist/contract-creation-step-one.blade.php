@@ -71,7 +71,7 @@
                     <div class="row on-change-result"></div>
                 </div>
             </div>
-            <div class="single-row proof-success padding-top-20 padding-bottom-20 fs-20 calibri-bold text-center">
+            <div class="single-row proof-success no-transition padding-top-20 padding-bottom-20 fs-20 calibri-bold text-center">
                 Successful address verification.
             </div>
         @endif
