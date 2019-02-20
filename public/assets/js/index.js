@@ -974,7 +974,7 @@ if($('body').hasClass('logged-in')) {
             }
         }
 
-        function validateFirstStepDentistAddress() {
+        async function validateFirstStepDentistAddress() {
             var dentist_address;
             var error;
             if($('.step.one #dcn_address').is('input')) {
@@ -983,7 +983,7 @@ if($('body').hasClass('logged-in')) {
                 dentist_address = $('.step.one #dcn_address').html();
             }
 
-            var check_public_key_ajax_result = $.ajax({
+            var check_public_key_ajax_result = await $.ajax({
                 type: 'POST',
                 url: '/check-public-key',
                 dataType: 'json',

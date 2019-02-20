@@ -275,31 +275,31 @@ var buildCurrentPatientContractHistory = function () {
 
 
 var onDocumentReadyPageData = function () {
-    var _ref14 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee14() {
+    var _ref15 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee15() {
         var next_transfer_timestamp, date_obj;
-        return _regeneratorRuntime.wrap(function _callee14$(_context14) {
+        return _regeneratorRuntime.wrap(function _callee15$(_context15) {
             while (1) {
-                switch (_context14.prev = _context14.next) {
+                switch (_context15.prev = _context15.next) {
                     case 0:
                         if (!$('body').hasClass('logged-in')) {
-                            _context14.next = 39;
+                            _context15.next = 39;
                             break;
                         }
 
                         if (!$('body').hasClass('congratulations')) {
-                            _context14.next = 13;
+                            _context15.next = 13;
                             break;
                         }
 
-                        _context14.t0 = parseInt($('section.congratulation-and-time-section').attr('data-time-left-next-transfer'));
-                        _context14.t1 = parseInt;
-                        _context14.next = 6;
+                        _context15.t0 = parseInt($('section.congratulation-and-time-section').attr('data-time-left-next-transfer'));
+                        _context15.t1 = parseInt;
+                        _context15.next = 6;
                         return App.assurance_state_methods.getPeriodToWithdraw();
 
                     case 6:
-                        _context14.t2 = _context14.sent;
-                        _context14.t3 = (0, _context14.t1)(_context14.t2);
-                        next_transfer_timestamp = _context14.t0 + _context14.t3;
+                        _context15.t2 = _context15.sent;
+                        _context15.t3 = (0, _context15.t1)(_context15.t2);
+                        next_transfer_timestamp = _context15.t0 + _context15.t3;
 
                         if ($('.converted-date').length > 0) {
                             date_obj = new Date(next_transfer_timestamp * 1000);
@@ -307,24 +307,24 @@ var onDocumentReadyPageData = function () {
                             $('.converted-date').html(date_obj.getDate() + '/' + (date_obj.getMonth() + 1) + '/' + date_obj.getFullYear());
                         }
                         initFlipClockTimer(next_transfer_timestamp - new Date().getTime() / 1000);
-                        _context14.next = 39;
+                        _context15.next = 39;
                         break;
 
                     case 13:
                         if (!$('body').hasClass('patient-contract-view')) {
-                            _context14.next = 26;
+                            _context15.next = 26;
                             break;
                         }
 
-                        _context14.t4 = parseInt($('.contract-body').attr('data-time-left-next-transfer'));
-                        _context14.t5 = parseInt;
-                        _context14.next = 18;
+                        _context15.t4 = parseInt($('.contract-body').attr('data-time-left-next-transfer'));
+                        _context15.t5 = parseInt;
+                        _context15.next = 18;
                         return App.assurance_state_methods.getPeriodToWithdraw();
 
                     case 18:
-                        _context14.t6 = _context14.sent;
-                        _context14.t7 = (0, _context14.t5)(_context14.t6);
-                        next_transfer_timestamp = _context14.t4 + _context14.t7;
+                        _context15.t6 = _context15.sent;
+                        _context15.t7 = (0, _context15.t5)(_context15.t6);
+                        next_transfer_timestamp = _context15.t4 + _context15.t7;
 
                         if ($('.converted-date').length > 0) {
                             date_obj = new Date(next_transfer_timestamp * 1000);
@@ -334,45 +334,45 @@ var onDocumentReadyPageData = function () {
                         initFlipClockTimer(next_transfer_timestamp - new Date().getTime() / 1000);
 
                         cancelContractEventInit();
-                        _context14.next = 39;
+                        _context15.next = 39;
                         break;
 
                     case 26:
                         if (!$('body').hasClass('contract-proposal')) {
-                            _context14.next = 39;
+                            _context15.next = 39;
                             break;
                         }
 
                         if (!($('.contract-proposal.section').length && $('.contract-proposal.section').attr('data-created-at-timestamp') != undefined)) {
-                            _context14.next = 39;
+                            _context15.next = 39;
                             break;
                         }
 
-                        _context14.t8 = Date;
-                        _context14.t9 = parseInt($('.contract-proposal.section').attr('data-created-at-timestamp'));
-                        _context14.t10 = parseInt;
-                        _context14.next = 33;
+                        _context15.t8 = Date;
+                        _context15.t9 = parseInt($('.contract-proposal.section').attr('data-created-at-timestamp'));
+                        _context15.t10 = parseInt;
+                        _context15.next = 33;
                         return App.assurance_state_methods.getPeriodToWithdraw();
 
                     case 33:
-                        _context14.t11 = _context14.sent;
-                        _context14.t12 = (0, _context14.t10)(_context14.t11);
-                        _context14.t13 = _context14.t9 + _context14.t12;
-                        _context14.t14 = _context14.t13 * 1000;
-                        date_obj = new _context14.t8(_context14.t14);
+                        _context15.t11 = _context15.sent;
+                        _context15.t12 = (0, _context15.t10)(_context15.t11);
+                        _context15.t13 = _context15.t9 + _context15.t12;
+                        _context15.t14 = _context15.t13 * 1000;
+                        date_obj = new _context15.t8(_context15.t14);
 
                         $('.active-until').html(date_obj.getDate() + '/' + (date_obj.getMonth() + 1) + '/' + date_obj.getFullYear());
 
                     case 39:
                     case "end":
-                        return _context14.stop();
+                        return _context15.stop();
                 }
             }
-        }, _callee14, this);
+        }, _callee15, this);
     }));
 
     return function onDocumentReadyPageData() {
-        return _ref14.apply(this, arguments);
+        return _ref15.apply(this, arguments);
     };
 }();
 
@@ -1509,36 +1509,57 @@ if ($('body').hasClass('logged-in')) {
             }
         };
 
-        var validateFirstStepDentistAddress = function validateFirstStepDentistAddress() {
-            var dentist_address;
-            var error;
-            if ($('.step.one #dcn_address').is('input')) {
-                dentist_address = $('.step.one #dcn_address').val();
-            } else {
-                dentist_address = $('.step.one #dcn_address').html();
-            }
+        var validateFirstStepDentistAddress = function () {
+            var _ref7 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee7() {
+                var dentist_address, error, check_public_key_ajax_result;
+                return _regeneratorRuntime.wrap(function _callee7$(_context7) {
+                    while (1) {
+                        switch (_context7.prev = _context7.next) {
+                            case 0:
+                                if ($('.step.one #dcn_address').is('input')) {
+                                    dentist_address = $('.step.one #dcn_address').val();
+                                } else {
+                                    dentist_address = $('.step.one #dcn_address').html();
+                                }
 
-            var check_public_key_ajax_result = $.ajax({
-                type: 'POST',
-                url: '/check-public-key',
-                dataType: 'json',
-                data: {
-                    address: dentist_address
-                },
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+                                _context7.next = 3;
+                                return $.ajax({
+                                    type: 'POST',
+                                    url: '/check-public-key',
+                                    dataType: 'json',
+                                    data: {
+                                        address: dentist_address
+                                    },
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                                });
 
-            if (check_public_key_ajax_result.success) {
-                $('.proof-of-address').removeClass('proof-failed');
-                error = false;
-            } else if (check_public_key_ajax_result.error) {
-                $('.proof-of-address').addClass('proof-failed');
-                error = true;
-            }
-            return error;
-        };
+                            case 3:
+                                check_public_key_ajax_result = _context7.sent;
+
+
+                                if (check_public_key_ajax_result.success) {
+                                    $('.proof-of-address').removeClass('proof-failed');
+                                    error = false;
+                                } else if (check_public_key_ajax_result.error) {
+                                    $('.proof-of-address').addClass('proof-failed');
+                                    error = true;
+                                }
+                                return _context7.abrupt("return", error);
+
+                            case 6:
+                            case "end":
+                                return _context7.stop();
+                        }
+                    }
+                }, _callee7, this);
+            }));
+
+            return function validateFirstStepDentistAddress() {
+                return _ref7.apply(this, arguments);
+            };
+        }();
 
         //logic for showing the suggested price based on country and calculator parameters
 
@@ -1666,31 +1687,31 @@ if ($('body').hasClass('logged-in')) {
             }
         });
 
-        create_contract_form.find('.next').click(_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee7() {
+        create_contract_form.find('.next').click(_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee8() {
             var this_btn, first_step_fields, first_step_errors, second_step_fields, second_step_errors, third_step_fields, third_step_errors;
-            return _regeneratorRuntime.wrap(function _callee7$(_context7) {
+            return _regeneratorRuntime.wrap(function _callee8$(_context8) {
                 while (1) {
-                    switch (_context7.prev = _context7.next) {
+                    switch (_context8.prev = _context8.next) {
                         case 0:
                             this_btn = $(this);
-                            _context7.t0 = this_btn.attr('data-current-step');
-                            _context7.next = _context7.t0 === 'one' ? 4 : _context7.t0 === 'two' ? 11 : _context7.t0 === 'three' ? 15 : _context7.t0 === 'four' ? 21 : 22;
+                            _context8.t0 = this_btn.attr('data-current-step');
+                            _context8.next = _context8.t0 === 'one' ? 4 : _context8.t0 === 'two' ? 11 : _context8.t0 === 'three' ? 15 : _context8.t0 === 'four' ? 21 : 22;
                             break;
 
                         case 4:
                             first_step_fields = $('.step.one input.right-field');
                             first_step_errors = validateStepFields(first_step_fields, 'one');
-                            _context7.next = 8;
+                            _context8.next = 8;
                             return validateFirstStepDentistAddress();
 
                         case 8:
-                            first_step_errors = _context7.sent;
+                            first_step_errors = _context8.sent;
 
 
                             if (!first_step_errors) {
                                 firstStepPassedSuccessfully(this_btn);
                             }
-                            return _context7.abrupt("break", 22);
+                            return _context8.abrupt("break", 22);
 
                         case 11:
                             second_step_fields = $('.step.two input.right-field');
@@ -1700,7 +1721,7 @@ if ($('body').hasClass('logged-in')) {
                             if (!second_step_errors) {
                                 secondStepPassedSuccessfully(this_btn);
                             }
-                            return _context7.abrupt("break", 22);
+                            return _context8.abrupt("break", 22);
 
                         case 15:
                             third_step_fields = $('.step.three .right-field');
@@ -1718,17 +1739,17 @@ if ($('body').hasClass('logged-in')) {
                             if (!third_step_errors) {
                                 thirdStepPassedSuccessfully(this_btn, 'four');
                             }
-                            return _context7.abrupt("break", 22);
+                            return _context8.abrupt("break", 22);
 
                         case 21:
-                            return _context7.abrupt("break", 22);
+                            return _context8.abrupt("break", 22);
 
                         case 22:
                         case "end":
-                            return _context7.stop();
+                            return _context8.stop();
                     }
                 }
-            }, _callee7, this);
+            }, _callee8, this);
         })));
     } else if ($('body').hasClass('contract-proposal')) {
         if ($('.terms-and-conditions-long-list').length) {
@@ -2071,13 +2092,13 @@ function bindLoginSigninPopupShow() {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function () {
-                    var _ref8 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee12(response) {
-                        return _regeneratorRuntime.wrap(function _callee12$(_context12) {
+                    var _ref9 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee13(response) {
+                        return _regeneratorRuntime.wrap(function _callee13$(_context13) {
                             while (1) {
-                                switch (_context12.prev = _context12.next) {
+                                switch (_context13.prev = _context13.next) {
                                     case 0:
                                         if (!response.success) {
-                                            _context12.next = 20;
+                                            _context13.next = 20;
                                             break;
                                         }
 
@@ -2115,33 +2136,12 @@ function bindLoginSigninPopupShow() {
                                         });
 
                                         $(document).on('civicCustomBtnClicked', function () {
-                                            var _ref9 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee8(event) {
-                                                return _regeneratorRuntime.wrap(function _callee8$(_context8) {
-                                                    while (1) {
-                                                        switch (_context8.prev = _context8.next) {
-                                                            case 0:
-                                                                $('.patient .form-register .step-errors-holder').html('');
-
-                                                            case 1:
-                                                            case "end":
-                                                                return _context8.stop();
-                                                        }
-                                                    }
-                                                }, _callee8, this);
-                                            }));
-
-                                            return function (_x2) {
-                                                return _ref9.apply(this, arguments);
-                                            };
-                                        }());
-
-                                        $(document).on('civicRead', function () {
                                             var _ref10 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee9(event) {
                                                 return _regeneratorRuntime.wrap(function _callee9$(_context9) {
                                                     while (1) {
                                                         switch (_context9.prev = _context9.next) {
                                                             case 0:
-                                                                $('.response-layer').show();
+                                                                $('.patient .form-register .step-errors-holder').html('');
 
                                                             case 1:
                                                             case "end":
@@ -2151,18 +2151,18 @@ function bindLoginSigninPopupShow() {
                                                 }, _callee9, this);
                                             }));
 
-                                            return function (_x3) {
+                                            return function (_x2) {
                                                 return _ref10.apply(this, arguments);
                                             };
                                         }());
 
-                                        $(document).on('facebookCustomBtnClicked', function () {
+                                        $(document).on('civicRead', function () {
                                             var _ref11 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee10(event) {
                                                 return _regeneratorRuntime.wrap(function _callee10$(_context10) {
                                                     while (1) {
                                                         switch (_context10.prev = _context10.next) {
                                                             case 0:
-                                                                $('.patient .form-register .step-errors-holder').html('');
+                                                                $('.response-layer').show();
 
                                                             case 1:
                                                             case "end":
@@ -2172,18 +2172,18 @@ function bindLoginSigninPopupShow() {
                                                 }, _callee10, this);
                                             }));
 
-                                            return function (_x4) {
+                                            return function (_x3) {
                                                 return _ref11.apply(this, arguments);
                                             };
                                         }());
 
-                                        $(document).on('customCivicFbStopperTriggered', function () {
+                                        $(document).on('facebookCustomBtnClicked', function () {
                                             var _ref12 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee11(event) {
                                                 return _regeneratorRuntime.wrap(function _callee11$(_context11) {
                                                     while (1) {
                                                         switch (_context11.prev = _context11.next) {
                                                             case 0:
-                                                                customErrorHandle($('.patient .form-register .step-errors-holder'), 'Please agree with our privacy policy.');
+                                                                $('.patient .form-register .step-errors-holder').html('');
 
                                                             case 1:
                                                             case "end":
@@ -2193,8 +2193,29 @@ function bindLoginSigninPopupShow() {
                                                 }, _callee11, this);
                                             }));
 
-                                            return function (_x5) {
+                                            return function (_x4) {
                                                 return _ref12.apply(this, arguments);
+                                            };
+                                        }());
+
+                                        $(document).on('customCivicFbStopperTriggered', function () {
+                                            var _ref13 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee12(event) {
+                                                return _regeneratorRuntime.wrap(function _callee12$(_context12) {
+                                                    while (1) {
+                                                        switch (_context12.prev = _context12.next) {
+                                                            case 0:
+                                                                customErrorHandle($('.patient .form-register .step-errors-holder'), 'Please agree with our privacy policy.');
+
+                                                            case 1:
+                                                            case "end":
+                                                                return _context12.stop();
+                                                        }
+                                                    }
+                                                }, _callee12, this);
+                                            }));
+
+                                            return function (_x5) {
+                                                return _ref13.apply(this, arguments);
                                             };
                                         }());
                                         // ====================== /PATIENT LOGIN/SIGNUP LOGIC ======================
@@ -2246,7 +2267,7 @@ function bindLoginSigninPopupShow() {
 
                                         //SECOND STEP INIT LOGIC
                                         //load address script
-                                        _context12.next = 16;
+                                        _context13.next = 16;
                                         return $.getScript('/assets/js/address.js', function () {});
 
                                     case 16:
@@ -2421,14 +2442,14 @@ function bindLoginSigninPopupShow() {
 
                                     case 20:
                                     case "end":
-                                        return _context12.stop();
+                                        return _context13.stop();
                                 }
                             }
-                        }, _callee12, this);
+                        }, _callee13, this);
                     }));
 
                     function success(_x) {
-                        return _ref8.apply(this, arguments);
+                        return _ref9.apply(this, arguments);
                     }
 
                     return success;
@@ -2518,11 +2539,11 @@ function initComboboxes() {
 function apiEventsListeners() {
     //login
     $(document).on('successResponseCoreDBApi', function () {
-        var _ref13 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee13(event) {
+        var _ref14 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee14(event) {
             var custom_form_obj;
-            return _regeneratorRuntime.wrap(function _callee13$(_context13) {
+            return _regeneratorRuntime.wrap(function _callee14$(_context14) {
                 while (1) {
-                    switch (_context13.prev = _context13.next) {
+                    switch (_context14.prev = _context14.next) {
                         case 0:
                             if (event.response_data.token) {
                                 custom_form_obj = {
@@ -2547,14 +2568,14 @@ function apiEventsListeners() {
 
                         case 1:
                         case "end":
-                            return _context13.stop();
+                            return _context14.stop();
                     }
                 }
-            }, _callee13, this);
+            }, _callee14, this);
         }));
 
         return function (_x6) {
-            return _ref13.apply(this, arguments);
+            return _ref14.apply(this, arguments);
         };
     }());
 
