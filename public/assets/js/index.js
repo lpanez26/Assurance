@@ -789,6 +789,7 @@ if($('body').hasClass('logged-in')) {
 
                 if(this_btn.attr('data-step') == 'two') {
                     current_step_error = validateFirstStepDentistAddress();
+                    console.log(current_step_error, 'current_step_error');
                 }else if(this_btn.attr('data-step') == 'four') {
                     if($('.step.three [name="general-dentistry[]"]:checked').val() == undefined) {
 
@@ -976,7 +977,7 @@ if($('body').hasClass('logged-in')) {
 
         async function validateFirstStepDentistAddress() {
             var dentist_address;
-            var error;
+            var error = false;
             if($('.step.one #dcn_address').is('input')) {
                 dentist_address = $('.step.one #dcn_address').val();
             } else {
@@ -1047,6 +1048,7 @@ if($('body').hasClass('logged-in')) {
                     var first_step_errors = validateStepFields(first_step_fields, 'one');
 
                     first_step_errors = validateFirstStepDentistAddress();
+                    console.log(first_step_errors, 'first_step_errors');
 
                     if(!first_step_errors) {
                         firstStepPassedSuccessfully(this_btn);

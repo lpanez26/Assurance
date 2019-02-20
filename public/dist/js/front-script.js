@@ -1516,13 +1516,15 @@ if ($('body').hasClass('logged-in')) {
                     while (1) {
                         switch (_context7.prev = _context7.next) {
                             case 0:
+                                error = false;
+
                                 if ($('.step.one #dcn_address').is('input')) {
                                     dentist_address = $('.step.one #dcn_address').val();
                                 } else {
                                     dentist_address = $('.step.one #dcn_address').html();
                                 }
 
-                                _context7.next = 3;
+                                _context7.next = 4;
                                 return $.ajax({
                                     type: 'POST',
                                     url: '/check-public-key',
@@ -1535,7 +1537,7 @@ if ($('body').hasClass('logged-in')) {
                                     }
                                 });
 
-                            case 3:
+                            case 4:
                                 check_public_key_ajax_result = _context7.sent;
 
 
@@ -1548,7 +1550,7 @@ if ($('body').hasClass('logged-in')) {
                                 }
                                 return _context7.abrupt("return", error);
 
-                            case 6:
+                            case 7:
                             case "end":
                                 return _context7.stop();
                         }
@@ -1594,6 +1596,7 @@ if ($('body').hasClass('logged-in')) {
 
                                 if (this_btn.attr('data-step') == 'two') {
                                     current_step_error = validateFirstStepDentistAddress();
+                                    console.log(current_step_error, 'current_step_error');
                                 } else if (this_btn.attr('data-step') == 'four') {
                                     if ($('.step.three [name="general-dentistry[]"]:checked').val() == undefined) {
 
@@ -1679,7 +1682,7 @@ if ($('body').hasClass('logged-in')) {
                         case 0:
                             this_btn = $(this);
                             _context8.t0 = this_btn.attr('data-current-step');
-                            _context8.next = _context8.t0 === 'one' ? 4 : _context8.t0 === 'two' ? 9 : _context8.t0 === 'three' ? 13 : _context8.t0 === 'four' ? 19 : 20;
+                            _context8.next = _context8.t0 === 'one' ? 4 : _context8.t0 === 'two' ? 10 : _context8.t0 === 'three' ? 14 : _context8.t0 === 'four' ? 20 : 21;
                             break;
 
                         case 4:
@@ -1688,13 +1691,14 @@ if ($('body').hasClass('logged-in')) {
 
 
                             first_step_errors = validateFirstStepDentistAddress();
+                            console.log(first_step_errors, 'first_step_errors');
 
                             if (!first_step_errors) {
                                 firstStepPassedSuccessfully(this_btn);
                             }
-                            return _context8.abrupt("break", 20);
+                            return _context8.abrupt("break", 21);
 
-                        case 9:
+                        case 10:
                             second_step_fields = $('.step.two input.right-field');
                             second_step_errors = validateStepFields(second_step_fields, 'two');
 
@@ -1702,9 +1706,9 @@ if ($('body').hasClass('logged-in')) {
                             if (!second_step_errors) {
                                 secondStepPassedSuccessfully(this_btn);
                             }
-                            return _context8.abrupt("break", 20);
+                            return _context8.abrupt("break", 21);
 
-                        case 13:
+                        case 14:
                             third_step_fields = $('.step.three .right-field');
                             third_step_errors = validateStepFields(third_step_fields, 'three');
 
@@ -1720,12 +1724,12 @@ if ($('body').hasClass('logged-in')) {
                             if (!third_step_errors) {
                                 thirdStepPassedSuccessfully(this_btn, 'four');
                             }
-                            return _context8.abrupt("break", 20);
-
-                        case 19:
-                            return _context8.abrupt("break", 20);
+                            return _context8.abrupt("break", 21);
 
                         case 20:
+                            return _context8.abrupt("break", 21);
+
+                        case 21:
                         case "end":
                             return _context8.stop();
                     }
